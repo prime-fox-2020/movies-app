@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('./partials/boostrap.ejs') %>
+        <title>Movies</title>
+    </head>
+    <body>
+        <%- include('./partials/navbar.ejs') %>
+        <div class="jumbotron">
+            <a href="/movies/add" class="btn btn-outline-success my-2 my-sm-0" type="submit">Add Movie</a>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Released year</th>
+                    <th scope="col">Genre</th>
+                    <th scope="col">Production House</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <% for(let i =0; i < movies.length; i++) { %>
+                <tbody>
+                <tr>
+                    <td><%= movies[i].name %></td>
+                    <td><%= movies[i].released_year %></td>
+                    <td><%= movies[i].genre %></td>
+                    <td><%= movies[i].genre %></td>
+                    <td><a href="/movies/<%= movies[i].id %>/edit" type="button" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="/movies/<%= movies[i].id %>/delete" type="button" class="btn btn-danger btn-sm">Delete</a></td>
+                </tr>
+                </tbody>
+                <% } %>
+            </table>
+        </div>
+    </body>
+</html>

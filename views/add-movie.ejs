@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('./partials/boostrap.ejs') %>
+        <title>Add Student</title>
+    </head>
+    <body>
+        <%- include('./partials/navbar.ejs') %>
+        
+        <div class="jumbotron">
+            <form action="/movies/add" method="POST">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Name</label>
+                    <input type="text" name="name" class="form-control" id="exampleInputEmail1" autofocus placeholder="e.g: 12 Angry Men" aria-describedby="emailHelp">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Released Year</label>
+                    <input type="text" name="released_year" class="form-control" id="exampleInputEmail1" placeholder="e.g: 1957" aria-describedby="emailHelp">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Genre</label>
+                    <select class="form-control" id="exampleFormControlSelect1" name="genre">
+                        <option selected disabled>Select Genre</option>
+                        <option value="Animation">animation</option>
+                        <option value="Comedy">comedy</option>
+                        <option value="Drama">drama</option>
+                        <option value="Horor">horor</option>
+                        <option value="Religious">religious</option>
+                        <option value="Thriller">thriller</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button> <a href="/movies" class="btn btn-danger">Cancel</a href="/movies">
+            </form>
+        </div>
+    </body>
+</html>

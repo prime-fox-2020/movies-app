@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('./partials/boostrap.ejs') %>
+        <title>Production House</title>
+    </head>
+    <body>
+        <%- include('./partials/navbar.ejs') %>
+        <div class="jumbotron">
+            <!-- <a href="/students/add" class="btn btn-outline-primary my-2 my-sm-0" type="submit">Add Movie</a> -->
+            <table class="table">
+                <thead>
+                <tr>
+                    <!-- <th scope="col">ID</th> -->
+                    <th scope="col">Name Production House</th>
+                    <th scope="col">Headquarters</th>
+                    <!-- <th scope="col">Options</th> -->
+                </tr>
+                </thead>
+                <% for(let i =0; i < prodHouse.length; i++) { %>
+                <tbody>
+                <tr>
+                    <!-- <th scope="row"><%= prodHouse[i].id %></th> -->
+                    <td><%= prodHouse[i].name_prodHouse %></td>
+                    <td><%= prodHouse[i].headquarters %></td>
+                    <!-- <td><a href="/prodHouse/<%= prodHouse[i].id %>/edit" type="button" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="/prodHouse/<%= prodHouse[i].id %>/delete" type="button" class="btn btn-danger btn-sm">Delete</a>
+                    </td> -->
+                </tr>
+                </tbody>
+                <% } %>
+            </table>
+        </div>
+    </body>
+</html>

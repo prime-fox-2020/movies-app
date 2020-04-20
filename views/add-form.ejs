@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+
+<form action="/movies/add" method="POST">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" placeholder="e.g.: 12 Angry Men" name="name" required>
+  </div>
+  <div class="form-group">
+    <label for="released_year">Released Year</label>
+    <input type="number" class="form-control" id="released_year" placeholder="e.g.: 1957" name="released_year" required>
+  </div>
+  <div class="form-group">
+    <label for="genre">Genre</label>
+    <select class="custom-select" id="genre" name="genre" required>
+        <option disabled selected>Open this select menu</option>
+        <option value="animation">animation</option>
+        <option value="comedy">comedy</option>
+        <option value="drama">drama</option>
+        <option value="horror">horror</option>
+        <option value="religious">religious</option>
+        <option value="thriller">thriller</option>
+      </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>  <a class="btn btn-danger" href="/movies" role="button">Cancel</a>
+</form>
+
+<%- include('partials/footer') %>

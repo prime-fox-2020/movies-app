@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+
+<a class="btn btn-success" href="/movies/add" role="button">Add Movie</a>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+        <th scope="col">Movie</th>
+        <th scope="col">Released Year</th>
+        <th scope="col">Genre</th>
+        <th scope="col">Production House</th>
+        <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for( let i = 0; i < data.length; i++ ) { %>
+            <tr>
+                <td><%= data[i].name %></td>
+                <td><%= data[i].released_year %></td>
+                <td><%= data[i].genre %></td>
+                <td><% if(!data[i].ProductionHouseId){ %> <%= 'unknown' %> <% }else{ %> <%= data[i].ProductionHouseId %> <% } %></td>
+                <td><a class="btn btn-primary" href="/movies/edit/<%= data[i].id %>" role="button">Edit</a> <a class="btn btn-primary" href="/movies/delete/<%= data[i].id %>" role="button">Delete</a></td>
+                </tr>
+        <% } %>
+    </tbody>
+</table>
+
+<%- include('partials/footer') %>

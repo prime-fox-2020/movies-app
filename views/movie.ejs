@@ -19,7 +19,7 @@
         <td><%= item.name %></td>
         <td><%= item.released_year %></td>
         <td><%= item.genre %></td>
-        <td><%= item.ProductionHouseId == null? 'unknown' : item.productionHouse.name_prodHouse %></td>
+        <td><%= item.ProductionHouseId == null? 'unknown' : item.ProductionHouse.name_prodHouse %></td>
         <td>
           <a class="btn btn-primary btn-sm" href="/movie/edit/<%= item.id %>" role="button">Edit</a>
           <a class="btn btn-danger btn-sm" href="/movie/delete/<%= item.id %>" role="button">Delete</a>

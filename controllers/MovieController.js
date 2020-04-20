@@ -30,26 +30,39 @@ class MovieController {
     }
 
     static edit(req, res) {
-        Movie.findOne({
-            where: { id: Number(req.params.id) }
-        })
-            .then(data => {
-                // return res.send({object: data})
-                return res.render('editMovie', { object: data });
+        let movie;
+        Movie.findByPk(req.params.id)
+            .then((data) => {
+                movie = data
+                return ProductionHouse.findAll()
             })
-            .catch(err => {
+            .then((data) => {
+                return res.render('editMovie', { object: movie, object2: data });
+            })
+            .catch((err) => {
                 return res.render('error', { err: err })
-            })
+            });
+        // Movie.findOne({
+        //     where: { id: Number(req.params.id) }
+        // })
+        //     .then(data => {
+        //         // return res.send({object: data})
+        //         return res.render('editMovie', { object: data });
+        //     })
+        //     .catch(err => {
+        //         return res.render('error', { err: err })
+        //     })
     }
 
     static editPost(req, res) {
-        Movie.update({
-            name: req.body.name,
-            released_year: req.body.released_year,
-            genre: req.body.genre
-        }, {
-            where: { id: Number(req.params.id) }
-        })
+        Movie.update(req.body,
+            // name: req.body.name,
+            // released_year: req.body.released_year,
+            // genre: req.body.genre,
+            // ProductionHouseId: req.body.ProductionHouseId
+            {
+                where: { id: Number(req.params.id) }
+            })
             .then(data => {
                 return res.redirect('/movie');
             })

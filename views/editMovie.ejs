@@ -1,0 +1,31 @@
+<%- include('partials/header', { title: 'Add Movie' }) %>
+
+<a class="btn btn-primary btn-lg" href="/" role="button">Go back to Home Page</a>
+<a class="btn btn-primary btn-lg" href="/movie" role="button">Go back to Movie List</a> 
+<br><br>
+<form action="/movie/edit/<%= object.id %>" method="POST">
+    <div class="form-group">
+      <label for="Name">Name</label>
+      <input type="text" class="form-control" id="Name" placeholder="e.g: 12 Angry Men" name="name" value="<%= object.name %>">
+    </div>
+    <div class="form-group">
+        <label for="Released">Released Year</label>
+        <input type="text" class="form-control" id="Released" placeholder="e.g: 1957" name="released_year" value="<%= object.released_year %>">
+      </div>
+    <div class="form-group">
+      <label for="Genre">Genre</label>
+      <select class="form-control" id="Genre" name="genre">
+        <option> </option>
+        <option <%= object.genre == 'animation' ? 'selected' : '' %> >animation</option>
+        <option <%= object.genre == 'comedy' ? 'selected' : '' %> >comedy</option>
+        <option <%= object.genre == 'drama' ? 'selected' : '' %> >drama</option>
+        <option <%= object.genre == 'horror' ? 'selected' : '' %> >horror</option>
+        <option <%= object.genre == 'thriller' ? 'selected' : '' %> >thriller</option>
+        <option <%= object.genre == 'religious' ? 'selected' : '' %> >religious</option>
+      </select>
+    </div>
+    <button class="btn btn-primary" type="submit"> Save </button>
+    <a class="btn btn-danger" href="/movie" role="button">Cancel</a>
+  </form>
+
+<%- include('partials/footer') %>

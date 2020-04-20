@@ -1,14 +1,14 @@
 'use strict';
-const fs = require('fs')
+let fs = require ('fs')
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    let moviesdata = JSON.parse(fs.readFileSync('./data/movies.json',"utf8"));
-    for(let i = 0 ; i < moviesdata.length ; i ++){
-      moviesdata[i].createdAt = new Date()
-      moviesdata[i].updatedAt = new Date()
+    let data = JSON.parse(fs.readFileSync('./data/movies.json',"utf8"));
+    for(let i = 0 ; i < data.length ; i ++){
+      data[i].createdAt = new Date()
+      data[i].updatedAt = new Date()
     } 
-    return queryInterface.bulkInsert('Movies', moviesdata , {});
+    return queryInterface.bulkInsert('Movies', data , {});
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.

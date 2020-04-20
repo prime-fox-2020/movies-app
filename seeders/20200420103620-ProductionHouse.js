@@ -1,31 +1,14 @@
 'use strict';
+let fs = require ('fs')
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('MovieCasts', 
-    [
-      {
-        MovieId: 1,
-        CastId: 1,
-        role: "supporting cast",
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        MovieId: 1,
-        CastId: 2,
-        role: "asian lead",
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        MovieId: 1,
-        CastId: 3,
-        role: "rear cast",
-        createdAt: new Date(),
-        updatedAt: new Date()
-      }
-    ], {});
+    let data = JSON.parse(fs.readFileSync('./data/productionhouses.json',"utf8"));
+    for(let i = 0 ; i < data.length ; i ++){
+      data[i].createdAt = new Date()
+      data[i].updatedAt = new Date()
+    } 
+    return queryInterface.bulkInsert('ProductionHouses', data , {});
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
@@ -39,6 +22,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
+    return queryInterface.bulkDelete('ProductionHouses', null, {});
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.

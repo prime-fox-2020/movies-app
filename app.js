@@ -1,13 +1,11 @@
 const express = require('express');
 const app = express();
+const router = require('./router');
 
 const port = 3000;
-const {ProductionHouse, Movie} = require('./models');
 
-app.get('/', (req, res) => {
-  ProductionHouse.findAll()
-  .then(data => res.send(data))
-  .catch(err => res.send(err))
-})
+app.set('view engine', 'ejs');
+
+app.use(router);
 
 app.listen(port, () => console.log(`App running on port ${port}`));

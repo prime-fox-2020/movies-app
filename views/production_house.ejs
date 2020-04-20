@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Production House</title>
+    <%- include('partial/bootstrap') %> 
+</head>
+<body>
+    <%- include('partial/navbar') %> 
+    <h1>Production Houses</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Headquater</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach(el => { %>
+                <tr>
+                    <td><%= el.name_prodHouse %> </td>
+                    <td><%= el.headquarter %> </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

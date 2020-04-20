@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Movie</title>
+    <%- include('partial/bootstrap') %> 
+</head>
+<body>
+    <%- include('partial/navbar') %> 
+    <h1>List Movies</h1>
+
+    <button>
+        <a href="movies/add">ADD MOVIE</a>
+    </button>
+    <table>
+        <thead>
+            <tr>
+                <th>Movie</th>
+                <th>Released Year</th>
+                <th>Genre</th>
+                <th>Production House</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach(el => { %>
+                <tr>
+                    <td><%= el.name %> </td>
+                    <td><%= el.released_year %> </td>
+                    <td><%= el.genre %> </td>
+                    <td><%= el.ProductionHouse.name_prodHouse %> </td>
+                    <td>
+                        <button><a href="movies/<%= el.id %>/edit">EDIT</a></button>
+                        <button><a href="movies/<%= el.id %>/delete">DELETE</a></button>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EDIT</title>
+</head>
+<body>
+    <h1>EDIT MOVIE</h1>
+
+    <form action="edit" method="post">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" value="<%= data.name %>">
+        
+        <label for="released_year">Released Year</label>
+        <input type="number" name="released_year" id="released_year" value="<%= data.released_year %>">
+
+        <label for="genre">Genre</label>
+        <select name="genre" id="genre">
+            <option value="animation" <%= data.genre === 'animation' ? 'selected' : '' %> >Animation</option>
+            <option value="comedy" <%= data.genre === 'comedy' ? 'selected' : '' %>>Comedy</option>
+            <option value="drama" <%= data.genre === 'drama' ? 'selected' : '' %>>Drama</option>
+            <option value="horor" <%= data.genre === 'horor' ? 'selected' : '' %>>Horor</option>
+            <option value="religious" <%= data.genre === 'religious' ? 'selected' : '' %>>Religious</option>
+            <option value="thriller" <%= data.genre === 'thriller' ? 'selected' : '' %>>Thriller</option>
+        </select>
+
+        <label for="ProductionHouseId">Production Houses</label>
+        <select name="ProductionHouseId" id="ProductionHouseId">
+            <option value=1 <%= data.ProductionHouseId === 1 ? 'selected' : '' %>>Walt Disney Studio</option>
+            <option value=2 <%= data.ProductionHouseId === 2 ? 'selected' : '' %>>Pixar</option>
+            <option value=3 <%= data.ProductionHouseId === 1 ? 'selected' : '' %>>Warner Bros</option>
+            <option value=4 <%= data.ProductionHouseId === 1 ? 'selected' : '' %>>Universal Pictures</option>
+            <option value=5 <%= data.ProductionHouseId === 1 ? 'selected' : '' %>>Paramount Pictures</option>
+        </select>
+
+        <button type="submit">EDIT</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<%- include('./partials/header') %>
+
+<div class="container" style="max-width: 1000px;">
+  <h1 class="display-4 mt-5">Production Houses</h1>
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Headquarters</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(let prodHouse of prodHouses) { %>
+      <tr>
+        <td><%= prodHouse.name_prodHouse %></td>
+        <td><%= prodHouse.headquarters %></td>
+      </tr>
+      <%}%>
+    </tbody>
+  </table>
+</div>
+
+<%- include('./partials/footer') %>

@@ -1,0 +1,34 @@
+<%- include('./partials/header') %> 
+
+<div class="container" style="max-width: 1000px;">
+  <h1 class="display-4 mt-5">Movies</h1>
+  <a href="/movies/add" class="btn btn-info my-3">Add Movie</a>
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Released Year</th>
+        <th scope="col">Genre</th>
+        <th scope="col">Production House</th>
+        <th scope="col">Option</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(let movie of movies) { %>
+      <tr>
+        <td><%= movie.name %></td>
+        <td><%= movie.released_year %></td>
+        <td><%= movie.genre %></td>
+        <td><%= movie.ProductionHouse.name_prodHouse %> </td>
+        <td>
+          <a href="/movies/<%= movie.id %> /edit" class="btn btn-info">Edit</a>
+          <a href="/movies/<%= movie.id %> /delete" class="btn btn-danger">Delete</a>
+        </td>
+      </tr>
+      <%}%>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<%- include('./partials/footer') %> 

@@ -1,0 +1,29 @@
+<%- include ('./partials/header', {title: 'Add Movie'}) %>
+
+
+<body>
+    <h2>Movie List</h2>
+    <table>
+        <th>Name</th>
+        <th>Released Year</th>
+        <th>Genre</th>
+        <th>Production House</th>
+        <th>Action</th>
+        <% for (let i = 0; i < data.length; i++) { %>
+            <tr>
+                <!-- <%= data[i].id %> -->
+                <td><%= data[i].name %></td>
+                <td><%= data[i].released_year %></td>
+                <td><%= data[i].genre %></td>
+                <% if (data[i].ProductionHouse === null) { %>
+                    <td>Unknown</td>
+                <% } else { %>
+                    <td><%= data[i].ProductionHouse.name_prodHouse %></td>
+                <% } %>
+                <td><a href="/movies/editMovie/<%= data[i].id %>">Edit</a> <a href="/movies/delete/<%= data[i].id %>">Delete</a></td>
+            </tr>
+        <% } %>
+    </table>
+    <a href="/movies/addMovie" class="link">Add Movie</a>
+</body>
+</html>

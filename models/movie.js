@@ -7,10 +7,12 @@ module.exports = (sequelize, DataTypes) => {
   Movie.init({
     name: DataTypes.STRING,
     released_year: DataTypes.INTEGER,
-    genre: DataTypes.STRING
+    genre: DataTypes.STRING,
+    ProductionHouseId: DataTypes.INTEGER
   }, {sequelize});
   Movie.associate = function(models) {
     // associations can be defined here
+    Movie.belongsTo(models.ProductionHouse)
   };
   return Movie;
 };

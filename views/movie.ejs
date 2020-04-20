@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Production House</title>
+  </head>
+  <body>
+    <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Movie</th>
+        <th scope="col">Released Year</th>
+        <th scope="col">Genre</th>
+        <th scope="col">Production House</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <% for(let i = 0; i < data.length; i++) {%>
+      <tr>
+        <th ><%=data[i].id%></th>
+        <th ><%=data[i].name%></th>
+        <th ><%=data[i].released_year%></th>
+        <th ><%=data[i].genre%></th>
+        <% if(!data[i].ProductionHouseId){ %>
+            <td>unknown</td>
+            <% } else { %>
+              <td><%= data[i].ProductionHouse.name_prodHouse %></td>
+            <% } %>
+            <td><a href="/movies/edit/<%= data[i].id %>">Edit</a> <a href="/movies/delete/<%= data[i].id %>">Delete</a></td>
+      </tr>
+    <% } %>
+  </body>
+</html>

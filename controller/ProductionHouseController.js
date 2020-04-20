@@ -1,9 +1,9 @@
-const PHM = require('../models').productionHouses;
+const PHM = require('../models').ProductionHouse;
 
 
 class ProductionHouseController {
   static show(req, res) {
-    PHM.findAll()
+    PHM.findAll({order: [['name_prodHouse', 'ASC']]})
     .then(data => {
       res.render('productionHouse' , {data})
     })

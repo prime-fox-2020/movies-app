@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <style>
+    thead {
+      background-color: aqua;
+    }
+  </style>
+  <title>Production House</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="/">Home</a>
+      <a class="nav-item nav-link active" href="/productionhouses">Production Houses</a>
+      <a class="nav-item nav-link active" href="/movies">Movies</a>
+      <a class="nav-item nav-link active" href="/casts">Casts</a>
+    </div>
+  </nav>
+  <h2>Production Houses</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Headquarter</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(let i = 0; i < data.length; i++) { %>
+      <tr>
+        <th scope="row"><%= data[i].dataValues.name_prodHouse %></th>
+        <td><%= data[i].dataValues.headquarter %></td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+</body>
+
+</html>

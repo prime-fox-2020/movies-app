@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Add</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="/">Home</a>
+            <a class="nav-item nav-link active" href="/productionhouses">Production Houses</a>
+            <a class="nav-item nav-link active" href="/movies">Movies</a>
+            <a class="nav-item nav-link active" href="/casts">Casts</a>
+        </div>
+    </nav>
+    <div class="container" style="max-width: 50%;">
+        <h1>Edit Movie</h1>
+        <form action="/movies/edit/<%= selected.id %> " method="POST">
+            <div class="form-group">
+                <label for="formGroupExampleInput">Name</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" name="name" value="<%= selected.name %>"
+                    placeholder="e.g: 12 Angry Men">
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">Released Year</label>
+                <input type="text" class="form-control" id="formGroupExampleInput2" name="released_year" value=<%= selected.released_year %>
+                    placeholder="e.g: 1957">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Genre:</label>
+                <select class="form-control" id="exampleFormControlSelect1" name='genre'>
+                    <option value="Action" <%if(selected.genre === "Action"){%> selected <% } %>>Action</option>
+                    <option value="Adventure" <%if(selected.genre === "Adventure"){%> selected <% } %>>Adventure</option>
+                    <option value="Animation" <%if(selected.genre === "Animation"){%> selected <% } %>>Animation</option>
+                    <option value="Comedy" <%if(selected.genre === "Comedy"){%> selected <% } %>>Comedy</option>
+                    <option value="Drama" <%if(selected.genre === "Drama"){%> selected <% } %>>Drama</option>
+                    <option value="Fantasy" <%if(selected.genre === "Fantasy"){%> selected <% } %>>Fantasy</option>
+                    <option value="Horror" <%if(selected.genre === "Horror"){%> selected <% } %>>Horror</option>
+                    <option value="Musical" <%if(selected.genre === "Musical"){%> selected <% } %>>Musical</option>
+                    <option value="Mystery" <%if(selected.genre === "Mystery"){%> selected <% } %>>Mystery</option>
+                    <option value="Political" <%if(selected.genre === "Political"){%> selected <% } %>>Political</option>
+                    <option value="Romance" <%if(selected.genre === "Romance"){%> selected <% } %>>Romance</option>
+                    <option value="Sci-fi" <%if(selected.genre === "Sci-fi"){%> selected <% } %>>Sci-fi</option>
+                    <option value="Thriller" <%if(selected.genre === "Thriller"){%> selected <% } %>>Thriller</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Production Houses</label>
+                <select class="form-control" id="exampleFormControlSelect1" name='prodHouseId'>
+                    <option value="">---SELECT---</option>
+                    <% for (let i = 0; i < data.length; i++) { %>
+                    <option value="<%= data[i].dataValues.id %>"<%if(selected.ProductionHouseId === data[i].dataValues.id){%> selected <% } %>><%= data[i].dataValues.name_prodHouse %></option>
+                     <% } %>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-danger"><a href="/movies" style="color: white; text-decoration: none;">Cancel</a></button>
+        </form>
+    </div>
+</body>
+
+</html>

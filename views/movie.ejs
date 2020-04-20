@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        thead {
+            background-color: aqua;
+        }
+    </style>
+    <title>Movies</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="/">Home</a>
+            <a class="nav-item nav-link active" href="/productionhouses">Production Houses</a>
+            <a class="nav-item nav-link active" href="/movies">Movies</a>
+            <a class="nav-item nav-link active" href="/casts">Casts</a>
+        </div>
+    </nav>
+    <div class="container" style="max-width: 90%;">
+        <h2>List Movies</h2>
+        <a class="btn btn-success float-right" href="movies/add" role="button">Add Movie</a>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Released Year</th>
+                    <th scope="col">Genre</th>
+                    <th scope="col">Production House</th>
+                    <th scope="col">Option</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i = 0; i < data.length; i++) { %>
+                <tr>
+                    <th scope="row"><%= data[i].dataValues.name %></th>
+                    <td><%= data[i].dataValues.released_year %></td>
+                    <td><%= data[i].dataValues.genre %></td>
+                    <td><%= data[i].dataValues.ProductionHouse.name_prodHouse %></td>
+                    <td><a href="/movies/edit/<%= data[i].dataValues.id %>">Edit</a> | <a
+                            href="/movies/delete/<%= data[i].dataValues.id %>">Delete</a></td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

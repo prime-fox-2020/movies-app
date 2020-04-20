@@ -7,18 +7,18 @@
     </head>
 
     <body>
-        <h1>Add Movie</h1>
-        <form action='/mv/add' method='post'>
+        <h1>Edit Movie</h1>
+        <form action='/mv/<%=data.id%>/edit' method='post'>
             <br>
             <label for = "">Name</label>
             <br>
-            <input type="text" name="name" value="eg : Boogle 1"> 
+            <input type="text" name="name" value="<%= data.name %>"> 
             <br> 
             <label for = "">Released Year</label>
             <br>
-            <input type="text" name="released_year" value="eg : 1995"> 
+            <input type="text" name="released_year" value="<%= data.released_year %>"> 
             <br> 
-            <label for="genre">Genre</label><br>
+            <label for="genre">Genre : Default : <%= data.genre %> </label><br>
                 <select name="genre">
                   <% const listgenres =['','Animation','Comedy','Drama','Horror','Religious','Thriller'] %>
                   <% for(let i =0; i < listgenres.length ; i++) { %>
@@ -26,7 +26,7 @@
                     <% } %>
                 </select>
             <br>
-            <label for="production_house">Production House</label><br>
+            <label for="production_house">Production House : Default : <%= data.ProductionHouse.name_prodHouse %></label><br>
                 <select name="ph">
                     <% const listPH =['','Walt Disney Studios','Pixar','Warner Bros','Universal Pictures','Paramount Picture'] %>
                     <% for(let i =0; i<listPH.length;i++){ %>

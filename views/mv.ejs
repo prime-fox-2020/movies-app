@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang=eng>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width , initial-scale=1.0">
-        <title>Movies</title>
-    </head>
-
+</select>
     <body>
         <h1>Movies</h1>
-        <a href='/mv/add'><button>ADD</button></a>
+        <%- include('../partials/navbar.ejs') %>
+        
         <table border = "2">
             <thead>
                 <tr>
@@ -37,19 +31,8 @@
                 <% }) %>
             </tbody>
         </table>
-
-
-
-
-
+        <a href='/mv/add'><button>ADD more Movie</button></a>
     </body>
-
-
-
-
-
-
-
 
 
 

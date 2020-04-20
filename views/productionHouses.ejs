@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>list production houses</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/movies">List Movies</a></li>
+            <li><a href="/phouses">List Production Houses</a></li>
+            <li><a href="/">Home</a></li>
+        </ul>
+    </nav>
+    <h1>LIST PRODUCTION HOUSES</h1>
+    <button><a href="/phouses/add">Add new PH</a></button>
+    <table border="1">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>PRODUCTION HOUSE</td>
+                <td>HEADQUARTER</td>
+                <td colspan="2">ACTION</td>
+            </tr>
+        </thead>
+        <tbody>
+            <%for (let i in data) {%>
+                <tr>
+                    <td><%=data[i].id%></td>
+                    <td><%=data[i].name_prodHouse%></td>
+                    <td><%=data[i].headquarters%></td>
+                    <td><button><a href="/phouses/edit/<%=data[i].id%>">EDIT</a></button></td>
+                    <td><button><a href="/phouses/delete/<%=data[i].id%>">DELETE</a></button></td>
+                </tr>
+            <%}%>
+        </tbody>
+    </table>
+</body>
+</html>

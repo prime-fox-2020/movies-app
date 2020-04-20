@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edit movie page</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/phouses">List Production Houses</a></li>
+            <li><a href="/">Home</a></li>
+        </ul>
+    </nav>
+    <h1>EDIT MOVIE</h1>
+    <form action="/movies/edit/<%=id%>" method="post">
+        <label>Movie:</label><br>
+        <input type="text" name="name" value="<%=dataMovie.name%>"><br><br>
+
+        <label>Released Year:</label><br>
+        <input type="number" name="released_year"value="<%=dataMovie.released_year%>"><br><br>
+
+        <label>Genre:</label><br>
+        <select name="genre">
+            <option value="unknown" <%=dataMovie.genre === 'unknown' ? 'selected' : 'dataMovie.genre'%>>--SELECT--</option> 
+            <option value="animasi" <%=dataMovie.genre === 'animasi' ? 'selected' : 'unknown'%>>Animation</option> 
+            <option value="comedy" <%=dataMovie.genre === 'comedy' ? 'selected' : 'unknown'%>>Comedy</option> 
+            <option value="drama" <%=dataMovie.genre === 'drama' ? 'selected' : 'unknown'%>>Drama</option> 
+            <option value="horor" <%=dataMovie.genre === 'horor' ? 'selected' : 'unknown'%>>Horror</option> 
+            <option value="religi" <%=dataMovie.genre === 'religious' ? 'selected' : 'unknown'%>>Religious</option> 
+            <option value="thriller" <%=dataMovie.genre === 'thriller' ? 'selected' : 'unknown'%>>Thriller</option> 
+        </select><br><br>
+
+        <label>Production House:</label><br>
+        <select name="ProductionHouseId">
+            <% for (let i in dataProdHouse) {%>
+                <option value="<%=dataProdHouse[i].id%>" <%=dataProdHouse[i].id === dataMovie.ProductionHouseId ? 'selected' : 'unknown'%>><%=dataProdHouse[i].name_prodHouse%></option>
+            <%}%>
+        </select><br><br>
+        <button type="submit">Save</button>
+        <button><a href="/movies">Cancel</a></button>
+    </form>
+    
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add new movie page</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/phouses">List Production Houses</a></li>
+            <li><a href="/">Home</a></li>
+        </ul>
+    </nav>
+    <h1>ADD NEW MOVIE</h1>
+    <form action="/movies/add" method="post">
+        <label>Movie:</label><br>
+        <input type="text" name="name"><br><br>
+
+        <label>Released Year:</label><br>
+        <input type="number" name="released_year"><br><br>
+
+        <label>Genre:</label><br>
+        <select name="genre">
+            <option value="unknown" selected>--SELECT--</option> 
+            <option value="animasi">Animation</option> 
+            <option value="comedy">Comedy</option> 
+            <option value="drama">Drama</option> 
+            <option value="horor">Horror</option> 
+            <option value="religi">Religious</option> 
+            <option value="thriller">Thriller</option> 
+        </select><br><br>
+
+        <label>Production House:</label><br>
+        <select name="ProductionHouseId">
+            <option value="unknown">--SELECT--</option> 
+            <% for (let i in dataProdHouse) {%>
+                <option value="<%=dataProdHouse[i].id%>"><%=dataProdHouse[i].name_prodHouse%></option>
+            <%}%>
+        </select><br><br>
+        <button type="submit">Add</button>
+        <button><a href="/movies">Cancel</a></button>
+    </form>
+    
+</body>
+</html>
+

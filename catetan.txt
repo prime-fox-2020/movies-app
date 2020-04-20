@@ -1,0 +1,15 @@
+Production House
+id
+nama_prodHouse
+location
+
+Movies
+id
+name
+released_year
+genre
+ProductionHouseId
+
+One to Many
+1 PH hasMany Movies
+

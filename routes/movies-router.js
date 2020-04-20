@@ -7,6 +7,7 @@ router.post('/add', MoviesController.postAdd)
 router.get('/edit/:id', MoviesController.getEditForm)
 router.post('/edit/:id', MoviesController.postEdit)
 router.get('/delete/:id', MoviesController.delete)
+router.post('/:id', MoviesController.searchMovieById)
 
 
 module.exports = router

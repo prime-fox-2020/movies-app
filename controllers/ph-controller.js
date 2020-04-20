@@ -2,7 +2,7 @@ const {ProductionHouse} = require('../models')
 
 class ProductionHousesController {
     static showPh(req, res) {
-        ProductionHouse.findAll()
+        ProductionHouse.findAll({order: [['name_prodHouse', 'DESC']]})
         .then(data => {
             let pesan = req.query.pesan
             let id = req.params.id

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>movie by id page</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/movies">List Movies</a></li>
+            <li><a href="/phouses">List Production Houses</a></li>
+            <li><a href="/">Home</a></li>
+        </ul>
+    </nav>
+    
+    <h1>MOVIE BY ID</h1>
+    
+    <% if (pesan) {%>
+        <h4><%=pesan%></h4>
+    <%}%>
+    <table border="1">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>MOVIES</td>
+                <td>RELEASED YEAR</td>
+                <td>GENRE</td>
+                <td>PRODUCTION HOUSE</td>
+                <td colspan="2">ACTION</td>
+            </tr>
+        </thead>
+        <tbody>
+            <%for (let i in dataById) {%>
+                <tr>
+                    <td><%=dataById[i].id%></td>
+                    <td><%=dataById[i].name%></td>
+                    <td><%=dataById[i].released_year%></td>
+                    <td><%=dataById[i].genre%></td>
+                    <% if (dataById[i].ProductionHouseId === null) {%>
+                        <td>Unknown</td>
+                    <%}%>
+
+                    <% if (dataById[i].ProductionHouseId !== null) {%>
+                        <td><%=dataById[i].ProductionHouse.name_prodHouse%></td>
+                    <%}%>
+
+                    <td><button><a href="/movies/edit/<%=dataById[i].id%>">EDIT</a></button></td>
+                    <td><button><a href="/movies/delete/<%=dataById[i].id%>">DELETE</a></button></td>
+                </tr>
+            <%}%>
+        </tbody>
+    </table>
+</body>
+</html>

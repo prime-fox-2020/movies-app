@@ -19,15 +19,23 @@
     </nav>
     <h1>ADD NEW MOVIE</h1>
     <form action="/movies/add" method="post">
+        <%if (error === 'Judul movie harus diisi') {%>
+            <p><%= error %></p>
+        <%}%>
         <label>Movie:</label><br>
         <input type="text" name="name"><br><br>
 
-        <label>Released Year:</label><br>
+        <%if (error === 'Released Year harus diisi') {%>
+            <p><%= error %></p>
+        <%} else if (error === 'Released Year Tidak Valid') {%>
+            <p><%= error %></p>
+        <%}%>
+        <label>Released Year: (1000 s/d 2021)</label><br>
         <input type="number" name="released_year"><br><br>
 
         <label>Genre:</label><br>
         <select name="genre">
-            <option value="unknown" selected>--SELECT--</option> 
+            <option value="Unknown" selected>--SELECT--</option> 
             <option value="animasi">Animation</option> 
             <option value="comedy">Comedy</option> 
             <option value="drama">Drama</option> 
@@ -38,7 +46,7 @@
 
         <label>Production House:</label><br>
         <select name="ProductionHouseId">
-            <option value="unknown">--SELECT--</option> 
+            <option value="unknown" selected>--SELECT--</option> 
             <% for (let i in dataProdHouse) {%>
                 <option value="<%=dataProdHouse[i].id%>"><%=dataProdHouse[i].name_prodHouse%></option>
             <%}%>

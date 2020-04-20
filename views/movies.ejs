@@ -13,14 +13,21 @@
 <body>
     <nav>
         <ul>
-            <li><a href="/movies">List Movies</a></li>
             <li><a href="/phouses">List Production Houses</a></li>
             <li><a href="/">Home</a></li>
         </ul>
     </nav>
     
     <h1>LIST MOVIES</h1>
+
+    <form action="/movies/:id" method="post">
+        <label>Search Movie by Id</label> <br>
+        <input type="text" name="movie_by_id"><br>
+        <button type="submit">Search</button> <br><br>
+    </form>
+
     <button><a href="/movies/add">Add new movie</a></button>
+
     <%if(pesan){%>
         <%=pesan%>
     <%}%>
@@ -36,18 +43,22 @@
             </tr>
         </thead>
         <tbody>
-            <%for (let i in data) {%>
+            <%for (let i in dataMovies) {%>
                 <tr>
-                    <td><%=data[i].id%></td>
-                    <td><%=data[i].name%></td>
-                    <td><%=data[i].released_year%></td>
-                    <td><%=data[i].genre%></td>
-                    <%if (data[i].ProductionHouseId == 'unknown') {%>
-                        <td>unknown</td>
+                    <td><%=dataMovies[i].id%></td>
+                    <td><%=dataMovies[i].name%></td>
+                    <td><%=dataMovies[i].released_year%></td>
+                    <td><%=dataMovies[i].genre%></td>
+                    <% if (dataMovies[i].ProductionHouseId === null) {%>
+                        <td>Unknown</td>
                     <%}%>
-                    <td><%=data[i].ProductionHouse.name_prodHouse</td>
-                    <td><button><a href="/movies/edit/<%=data[i].id%>">EDIT</a></button></td>
-                    <td><button><a href="/movies/delete/<%=data[i].id%>">DELETE</a></button></td>
+
+                    <% if (dataMovies[i].ProductionHouseId !== null) {%>
+                        <td><%=dataMovies[i].ProductionHouse.name_prodHouse%></td>
+                    <%}%>
+
+                    <td><button><a href="/movies/edit/<%=dataMovies[i].id%>">EDIT</a></button></td>
+                    <td><button><a href="/movies/delete/<%=dataMovies[i].id%>">DELETE</a></button></td>
                 </tr>
             <%}%>
         </tbody>

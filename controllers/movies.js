@@ -28,7 +28,7 @@ class MovieController{
                 error.push('Invalid released year')
             }
             else {
-                if(data.released_year < 1000 || data.released_year > 9999){
+                if(data.released_year < 1000 || data.released_year > (new Date().getFullYear())){
                     error.push('Invalid released year')
                 }
             }

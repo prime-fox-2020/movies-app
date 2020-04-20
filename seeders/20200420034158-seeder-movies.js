@@ -7,7 +7,7 @@ module.exports = {
         name: 'Mr.Bean',
         released_year: 2000,
         genre: 'comedy',
-        ProductionHouse_id: 1,
+        ProductionHouseId: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -15,7 +15,7 @@ module.exports = {
         name: 'Avengers',
         released_year: 2001,
         genre: 'action',
-        ProductionHouse_id: 2,
+        ProductionHouseId: 2,
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -23,7 +23,7 @@ module.exports = {
         name: 'Jaws',
         released_year: 2002,
         genre: 'horror',
-        ProductionHouse_id: 3,
+        ProductionHouseId: 3,
         createdAt: new Date(),
         updatedAt: new Date()
       }

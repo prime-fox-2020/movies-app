@@ -13,7 +13,7 @@ class MovieController {
         )
         .then( data => {
             // res.send('Finally in Movies from Controller')
-            res.render('movie', {data, list})
+            res.render('movie', {data})
         })
         .catch( err => {
             res.render('error')

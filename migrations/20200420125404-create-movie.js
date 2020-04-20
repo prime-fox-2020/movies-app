@@ -5,7 +5,7 @@ module.exports = {
       id: {
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true,
+        primaryKey: true, 
         type: Sequelize.INTEGER
       },
       name: {
@@ -16,9 +16,6 @@ module.exports = {
       },
       genre: {
         type: Sequelize.STRING
-      },
-      ProductionHouse_id: {
-        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

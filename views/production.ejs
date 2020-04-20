@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<head>
+    <title> Production Houses</title>
+</head>
+<body>
+    <h1>List of Production Houses</h1>
+    <a href="/"><button>Back</button></a>
+    <table border = 1>
+        <tr>
+            <th>Name</th>
+            <th>Headquarters</th>
+        </tr>
+        <% for(let i = 0; i < data.length; i++) { %>
+            <tr>
+                <td><%=data[i].prodHouse_name %></td>
+                <td><%=data[i].headquarters %>  </td>
+            </tr>
+        <% } %>
+    </table>
+</body>

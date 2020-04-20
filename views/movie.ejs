@@ -1,0 +1,42 @@
+<%- include('partials/header')%>
+
+    <div class="container-fluid p-5">
+        <h1>Movie List</h1>
+        <% if(alert.msg){ %>
+            <div class="alert alert-success" role="alert">
+                <%= alert.msg %>
+            </div>
+        <% } %>
+        <div class="container-fluid text-right mb-1">
+            <a href="/movies/add"><button type="button" class="btn btn-success">Add Movie</button></a>
+        </div>
+        <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">Movie</th>
+                <th scope="col">Released Year</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Production House</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% for(let i = 0; i < data.length; i++){ %>
+                    <tr>
+                        <td><%= data[i].name %></td>
+                        <td><%= data[i].released_year %></td>
+                        <td><%= data[i].genre %></td>
+                        <% if(!data[i].ProductionHouseId){ %>
+                            <td>unknown</td>
+                        <% } else { %>
+                            <td><%= data[i].ProductionHouse.name_prodHouse %></td>
+                        <% } %>
+                        <td><a href="/movies/edit/<%=data[i].id%>"><button type="button" class="btn btn-primary">Edit</button></a>  <a href="/movies/delete/<%=data[i].id%>"><button type="button" class="btn btn-primary">Delete</button></a></td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+
+<%- include('partials/footer')%>
+

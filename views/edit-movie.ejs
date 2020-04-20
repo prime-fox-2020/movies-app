@@ -2,12 +2,17 @@
 <html lang="en">
     <head>
         <%- include('./partials/boostrap.ejs') %>
-        <title>Add Student</title>
+        <title>Edit Movie</title>
     </head>
     <body>
         <%- include('./partials/navbar.ejs') %>
         
         <div class="jumbotron">
+            <% if (error) { %>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
+                </div>
+            <% }%>
             <form action="/movies/:id/edit" method="POST">
                 <div class="form-group">
                     <label hidden for="exampleInputEmail1">ID</label>
@@ -37,11 +42,9 @@
                     <label for="exampleFormControlSelect1">Production Houses</label>
                     <select class="form-control" id="exampleFormControlSelect1" name="productionHouse">
                         <option selected disabled>Select PH</option>
-                        <option value="5" <%= movies.ProductionHouseId == "5" ? "selected" : "" %>>Paramount Pictures</option>
-                        <option value="2" <%= movies.ProductionHouseId == "2" ? "selected" : "" %>>Pixar</option>
-                        <option value="4" <%= movies.ProductionHouseId == "4" ? "selected" : "" %>>Universal Pictures</option>
-                        <option value="1" <%= movies.ProductionHouseId == "1" ? "selected" : "" %>>Walt Disney Studios</option>
-                        <option value="3" <%= movies.ProductionHouseId == "3" ? "selected" : "" %>>Warner Bros</option>
+                        <% for (let i in prodHouse) {%>
+                            <option value="<%= prodHouse[i].id %>" <%= prodHouse[i].id === movies.ProductionHouseId ? "selected" : "unknown" %>><%= prodHouse[i].name_prodHouse %></option>
+                        <%}%>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button> <a href="/movies" class="btn btn-danger">Cancel</a href="/movies">

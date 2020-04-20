@@ -2,12 +2,17 @@
 <html lang="en">
     <head>
         <%- include('./partials/boostrap.ejs') %>
-        <title>Add Student</title>
+        <title>Add Movie</title>
     </head>
     <body>
         <%- include('./partials/navbar.ejs') %>
         
         <div class="jumbotron">
+            <% if (error) { %>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
+                </div>
+            <% }%>
             <form action="/movies/add" method="POST">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Name</label>

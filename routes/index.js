@@ -1,13 +1,9 @@
 const express = require('express');
 const routes = express.Router();
+const productionHousesRoutes = require('./productionHouseRoutes');
+const DefaultController = require('../controller/DefaultController');
 
-const HomeController = require('../controller/homeController');
-const productionHouseController = require('../controller/productionHouseController');
-
-const productionHouse = require('../routes/productionHouse');
-//const movies = require('../routes/movies');
-
-routes.get('/', homeController.getHome);
-routes.get('/productionHouses', productionHouse);
+routes.get('/', DefaultController.getHome);
+routes.use('/productionHouses', productionHousesRoutes);
 
 module.exports = routes;

@@ -1,12 +1,14 @@
 const express = require('express');
 const routes = require('./routes');
 const app = express();
+
 const port = 3000;
 
 app.set('view engine', 'ejs');
-app.use(express.urlencoded({extended : true}))
-app.use('/', routes)
+app.use(express.urlencoded({extended: true}));
+app.get('/', routes);
+
 
 app.listen(port, () => {
-  console.log(`This app running in port ${port}`);
+  console.log(`This app running in port : ${port}`);
 })

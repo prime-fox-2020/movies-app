@@ -6,7 +6,7 @@ class MovieController{
         Movie.findAll({
             include:[{model: ProductionHouse}],
             order:[
-                ['name','ASC'],
+                ['released_year','DESC'],
             ],
         })
         .then(data=>{
@@ -39,30 +39,23 @@ class MovieController{
                 id:Number(req.params.id)
             },
         }).then(data=>{
-            res.render('edit',{data})
+            ProductionHouse.findAll()
+            .then(dataPro=>{
+                res.render('edit',{data,dataPro})
+            }).catch(err=>{
+                res.send(err)
+            })
         }).catch(err=>{
             res.send(err)
         })
     }
 
     static editPost(req,res){
-        let angka
-        if(req.body.prodhouse=='Walt Disney Studios'){
-            angka=1
-        }else if(req.body.prodhouse=='Pixar'){
-            angka=2
-        }else if(req.body.prodhouse=='Warner Bros'){
-            angka=3
-        }else if(req.body.prodhouse=='Universal Pictures'){
-            angka=4
-        }else if(req.body.prodhouse=='Paramount Pictures'){
-            angka=5
-        }
         Movie.update({
             name:req.body.name,
             released_year:req.body.releasedyear,
             genre:req.body.genre,
-            ProductionHouseId:angka
+            ProductionHouseId:req.body.prodhouse
         },{
             where:{
                 id:Number(req.params.id)
@@ -80,6 +73,7 @@ class MovieController{
                 id:Number(req.params.id)
             }
         }).then(data=>{
+            console.log(req.body)
             res.redirect('/movies')
         }).catch(err=>{
             res.send(err)

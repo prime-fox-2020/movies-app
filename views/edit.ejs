@@ -28,11 +28,9 @@
             <br>
             <select name="prodhouse">
                 <option value="">SELECT GENRE</option>
-                <option value="Walt Disney Studios" <%= data.ProductionHouseId===1 ? 'selected' : '' %>>Walt Disney Studios</option>
-                <option value="Pixar" <%= data.ProductionHouseId===2 ? 'selected' : '' %>>Pixar</option>
-                <option value="Warner Bros" <%= data.ProductionHouseId===3 ? 'selected' : '' %>>Warner Bros</option>
-                <option value="Universal Pictures" <%= data.ProductionHouseId===4 ? 'selected' : '' %>>Universal Pictures</option>
-                <option value="Paramount Pictures" <%= data.ProductionHouseId===5 ? 'selected' : '' %>>Paramount Pictures</option>
+                <% for(let i = 0; i < dataPro.length; i++){ %>
+                  <option value="<%= dataPro[i].id %>" <%= data.ProductionHouseId === dataPro[i].id ? 'selected' : '' %>><%= dataPro[i].name_prodHouse %></option>
+                <% } %>
               </select>
           </div>
       <button type="submit">Update</button>

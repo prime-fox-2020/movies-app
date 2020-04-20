@@ -1,0 +1,9 @@
+<%- include('./parts/header', {title: "Cast List"}) %>
+<br>
+<button type="button" onclick="location.href='/cast/add'" class="btn btn-danger navbar mx-auto">Add Cast</button></a>
+
+<br>
+<%- include('./parts/alerts', {msg}) %>
+<%- include('./parts/table', {list, content:'cast'}) %>
+
+<%- include('./parts/footer') %>

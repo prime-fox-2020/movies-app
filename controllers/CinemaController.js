@@ -42,7 +42,7 @@ class CinemaController {
     static addMovieGet(req, res) {
         const msg = req.query.msg;
         const type = req.query.type;
-        res.render('add_movie', {msg, type, command:'add', list:null});
+        res.render('add_edit_movie', {msg, type, command:'add', list:null});
     }
     static addMoviePost(req, res) {
         if (req.body.name && req.body.released_year && req.body.genre && req.body.name_prodHouse) {
@@ -72,7 +72,7 @@ class CinemaController {
             include:[{model:ProductionHouse, attributes:['name_prodHouse']}]
         })
         .then(list => {
-            res.render('edit_movie', {list:list[0], command:'edit', msg, type});
+            res.render('add_edit_movie', {list:list[0], command:'edit', msg, type});
         })
         .catch(err => res.render('error', {msg: err, type:"error"}));
     }

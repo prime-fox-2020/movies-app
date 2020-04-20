@@ -1,0 +1,36 @@
+<div class="container w-25 p-3 text-center">
+    <form action="" method="POST">
+        <div class="form-group"> 
+            <label>Your Name</label>
+            <input type="text" class="form-control" name="first_name" placeholder="First Name"
+                value="<%= (list) ? list.first_name : '' %>"
+            >
+            <input type="text" class="form-control" name="last_name" placeholder="Last Name"
+                value="<%= (list) ? list.last_name : '' %>"
+            >
+        </div>
+        <div class="form-group">
+            <label>Birth Year</label>
+            <input type="number" name="birth_year" placeholder="e.g. 2000"
+                value="<%= (list) ? list.birth_year : '' %>"
+            >
+        </div>
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="number" name="phone_number" placeholder="08123456789"
+                value="<%= (list) ? list.phone_number : '' %>"
+            >
+        </div>
+        <div class="form-group">
+            <label>Gender</label><br>
+            <input type="radio" name="gender" id="female" value="female" <%= (list && list.gender == 'female') ? 'checked' : '' %>>
+            <label for="female">Female</label>
+            <input type="radio" name="gender" id="male" value="male" <%= (list && list.gender == 'male') ? 'checked' : '' %>>
+            <label for="male">Male</label> 
+        </div>
+        <div class="form-group">
+            <br><button type="menu" class="btn btn-danger">Submit</button>
+            <a href="/cast" class="btn btn-warning" role="button" aria-pressed="true">Cancel</a>
+        </div>
+    </form>
+</div>

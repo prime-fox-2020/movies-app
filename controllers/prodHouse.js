@@ -11,7 +11,7 @@ class ProductionHouseController{
             res.render('prodHouse', {prodHouse: data})
         })
         .catch(err => {
-            res.send(err)
+            res.render('error', {error: err})
         })
     }
 }

@@ -1,5 +1,4 @@
-const { Movie } = require('../models');
-const { ProductionHouse } = require('../models');
+const { Movie, ProductionHouse } = require('../models');
 
 class MovieController{
     static show(req, res){
@@ -23,15 +22,10 @@ class MovieController{
         if(!data.name){
             error.push('Fill in your movie name!')
         }
-        if(data.released_year){
-            if(!data.released_year){
-                error.push('Invalid released year')
-            }
-            else {
-                if(data.released_year < 1000 || data.released_year > (new Date().getFullYear())){
-                    error.push('Invalid released year')
-                }
-            }
+        if(!data.released_year){
+            error.push('Invalid released year')
+        }else if(data.released_year < 1000 || data.released_year > (new Date().getFullYear())){
+            error.push('Invalid released year')
         }
         if(!data.genre){
             error.push('Movie genre is required')
@@ -48,7 +42,7 @@ class MovieController{
         const error = MovieController.validation(req.body)
 
         if (error.length > 0) {
-            res.redirect(`/movies/add?error=${error.join(', ')}`)
+            res.redirect(`/movies/add?error=${error.join(' , ')}`)
         } else {
             Movie.create({
                 name: req.body.name,
@@ -67,15 +61,14 @@ class MovieController{
 
     static getEdit(req, res){
         const error = req.query.error
-        let dataMovie = null
-        let id = req.params.id
-        Movie.findByPk(id, {include: {model: ProductionHouse}})
+        let dataMovie
+        Movie.findByPk(Number(req.params.id), {include: {model: ProductionHouse}})
         .then(data => {
-            dataMovie = data.dataValues
-            return ProductionHouse.findAll()              
+            dataMovie = data
+            return ProductionHouse.findAll()
         })
         .then(prodHouse => {
-            res.render('edit-movie', {id, movies: dataMovie, prodHouse, error})
+            res.render('edit-movie', {movies: dataMovie, prodHouse, error})
         })
         .catch(err => {
             console.log(err)
@@ -87,7 +80,7 @@ class MovieController{
         const error = MovieController.validation(req.body)
         
         if (error.length > 0) {
-            res.redirect(`/movies/${req.body.movieId}/edit?error=${error.join(' ')}`)
+            res.redirect(`/movies/${req.body.movieId}/edit?error=${error.join(' , ')}`)
         } else {
             Movie.update(
             {
@@ -118,7 +111,7 @@ class MovieController{
         })
         .then(data => {
             console.log(data)
-            const message = `Movie with id ${data} has been deleted.`
+            const message = `Movie with id ${req.params.id} has been deleted.`
             res.redirect(`/movies?message=${message}&type=danger`)
         })
         .catch(err => {

@@ -43,7 +43,7 @@
                     <select class="form-control" id="exampleFormControlSelect1" name="productionHouse">
                         <option selected disabled>Select PH</option>
                         <% for (let i in prodHouse) {%>
-                            <option value="<%= prodHouse[i].id %>" <%= prodHouse[i].id === movies.ProductionHouseId ? "selected" : "unknown" %>><%= prodHouse[i].name_prodHouse %></option>
+                            <option value="<%= prodHouse[i].id %>" <%= prodHouse[i].id === movies.ProductionHouseId ? "selected" : "" %>><%= prodHouse[i].name_prodHouse %></option>
                         <%}%>
                     </select>
                 </div>

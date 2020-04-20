@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('./partials/boostrap.ejs') %>
+        <title>Add Student</title>
+    </head>
+    <body>
+        <%- include('./partials/navbar.ejs') %>
+        
+        <div class="jumbotron">
+            <form action="/movies/:id/edit" method="POST">
+                <div class="form-group">
+                    <label hidden for="exampleInputEmail1">ID</label>
+                    <input type="text" name="movieId" class="form-control" id="exampleInputEmail1" autofocus aria-describedby="emailHelp" hidden readonly value="<%= movies.id %>" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Name</label>
+                    <input type="text" name="name" class="form-control" id="exampleInputEmail1" autofocus placeholder="e.g: 12 Angry Men" aria-describedby="emailHelp" value="<%= movies.name %>" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Released Year</label>
+                    <input type="text" name="released_year" class="form-control" id="exampleInputEmail1" placeholder="e.g: 1957" aria-describedby="emailHelp" value="<%= movies.released_year %>">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Genre</label>
+                    <select class="form-control" id="exampleFormControlSelect1" name="genre" v>
+                        <option selected disabled>Select Genre</option>
+                        <option value="Animation" <%= movies.genre === "Animation" ? "selected" : "" %>>animation</option>
+                        <option value="Comedy" <%= movies.genre === "Comedy" ? "selected" : "" %>>comedy</option>
+                        <option value="Drama" <%= movies.genre === "Drama" ? "selected" : "" %>>drama</option>
+                        <option value="Horor" <%= movies.genre === "Horor" ? "selected" : "" %>>horor</option>
+                        <option value="Religious" <%= movies.genre === "Religious" ? "selected" : "" %>>religious</option>
+                        <option value="Thriller" <%= movies.genre === "Thriller" ? "selected" : "" %>>thriller</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Production Houses</label>
+                    <select class="form-control" id="exampleFormControlSelect1" name="productionHouse">
+                        <option selected disabled>Select PH</option>
+                        <option value="5" <%= movies.ProductionHouseId == "5" ? "selected" : "" %>>Paramount Pictures</option>
+                        <option value="2" <%= movies.ProductionHouseId == "2" ? "selected" : "" %>>Pixar</option>
+                        <option value="4" <%= movies.ProductionHouseId == "4" ? "selected" : "" %>>Universal Pictures</option>
+                        <option value="1" <%= movies.ProductionHouseId == "1" ? "selected" : "" %>>Walt Disney Studios</option>
+                        <option value="3" <%= movies.ProductionHouseId == "3" ? "selected" : "" %>>Warner Bros</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button> <a href="/movies" class="btn btn-danger">Cancel</a href="/movies">
+            </form>
+        </div>
+    </body>
+</html>

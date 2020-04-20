@@ -18,13 +18,13 @@
                     <th scope="col">Action</th>
                 </tr>
                 </thead>
-                <% for(let i =0; i < movies.length; i++) { %>
+                <% for(let i = 0; i < movies.length; i++) { %>
                 <tbody>
                 <tr>
                     <td><%= movies[i].name %></td>
                     <td><%= movies[i].released_year %></td>
                     <td><%= movies[i].genre %></td>
-                    <td><%= movies[i].genre %></td>
+                    <td><%= movies[i].ProductionHouseId == null ? "unknown" : movies[i].ProductionHouse.name_prodHouse %></td>
                     <td><a href="/movies/<%= movies[i].id %>/edit" type="button" class="btn btn-primary btn-sm">Edit</a>
                         <a href="/movies/<%= movies[i].id %>/delete" type="button" class="btn btn-danger btn-sm">Delete</a></td>
                 </tr>

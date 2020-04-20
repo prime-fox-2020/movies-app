@@ -1,0 +1,13 @@
+ProductionHouse
+id
+name_prodHouse
+headquarters
+MoviesId
+
+Movie
+id
+name
+released_year
+genre
+
+one-to-many

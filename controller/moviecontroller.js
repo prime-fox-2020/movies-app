@@ -21,7 +21,6 @@ class MovieController{
     }
 
     static addPost(req,res){
-        // res.send(req.body)
         Movie.create({
             name:req.body.name,
             released_year:req.body.releasedyear,
@@ -73,7 +72,6 @@ class MovieController{
                 id:Number(req.params.id)
             }
         }).then(data=>{
-            console.log(req.body)
             res.redirect('/movies')
         }).catch(err=>{
             res.send(err)

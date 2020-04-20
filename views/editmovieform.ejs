@@ -1,6 +1,6 @@
 <%- include('partials/header') %>
 
-<form action="/movies/:id?/edit" method="post">
+<form action="/movies/<%= data.id %>/edit" method="post">
     <div class="form-group">
         <label for="exampleInputEmail1">Name</label>
         <input type="text" class="form-control" name="name" placeholder="Movie Title" value="<%= data.name %>">
@@ -21,8 +21,20 @@
             <option <%= data.genre == 'Thriller'  ? 'selected' : '' %> >Thriller</option>
           </select>
       </div>
+      
+      <div class="form-group">
+        <label for="exampleInputEmail1">Production House</label>
+        <select class="form-control" name="ProductionHouseId">
+            <option value="" selected disabled>-- Please select --</option>
+            <option value="1" <%= data.ProductionHouseId == '1'  ? 'selected' : '' %> >Walt Disney Studios</option>
+            <option value="2" <%= data.ProductionHouseId == '2'  ? 'selected' : '' %> >Pixar</option>
+            <option value="3" <%= data.ProductionHouseId == '3'  ? 'selected' : '' %> >Warner Bros</option>
+            <option value="4" <%= data.ProductionHouseId == '4'  ? 'selected' : '' %> >Universal Pictures</option>
+            <option value="5" <%= data.ProductionHouseId == '5'  ? 'selected' : '' %> >Paramount Pictures</option>
+          </select>
+      </div>
 
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary">Save Edit</button>
 </form>   
 
 <%- include('partials/footer') %>

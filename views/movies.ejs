@@ -19,10 +19,10 @@
                 <td><%= data.released_year %></td>
                 <td><%= data.genre %></td>
 
-                <% if(data.name_prodHouse == undefined || data.name_prodHouse == null) { %>
+                <% if(data.ProductionHouseId == undefined || data.ProductionHouseId == null) { %>
                 <td>unknown</td>
                 <% } else {%>
-                <td><%= data.name_prodHouse %></td>  
+                <td><%= data.ProductionHouse.name_prodHouse %></td>  
                 <% } %>
                 
                 <td><a href="movies/<%= data.id %>/edit">Edit</a> | <a href="movies/<%= data.id %>/delete">Delete</a></td>

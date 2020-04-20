@@ -14,9 +14,6 @@ module.exports = {
       headquarters: {
         type: Sequelize.STRING
       },
-      MovieId: {
-        type: Sequelize.INTEGER
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

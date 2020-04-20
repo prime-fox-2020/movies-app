@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     released_year: DataTypes.INTEGER,
     genre: DataTypes.STRING,
+    ProductionHouseId: DataTypes.INTEGER,
     createdAt: new Date(),
     updatedAt: new Date()
   }, {sequelize});
@@ -21,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   // }, {});
   Movie.associate = function(models) {
     // associations can be defined here
+    Movie.belongsTo(models.ProductionHouse)
   };
   return Movie;
 };

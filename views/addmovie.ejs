@@ -1,0 +1,36 @@
+<%- include('./partials/head')%>
+<style>
+  form {
+    margin: 0 auto;
+    width:250px;
+  }
+</style>
+<% if(error) {%>
+  <div class="alert alert-danger" role="alert">
+    <%= error %>
+  </div>
+  <% } %>
+<form action="/movies/add" method="POST">
+  <div class="form-group mb-2">
+      <label for="exampleFormControlInput1">Name</label>
+      <input type="text" name='name' class="form-control" id="exampleFormControlInput1" placeholder="e.g: Stranger Things"><br>
+
+      <label for="exampleFormControlInput1">Released Year</label>
+      <input type="text" name='released_year' class="form-control" id="exampleFormControlInput1" placeholder="e.g: 2016"><br>
+
+      <label for="exampleFormControlInput1">Genre</label>
+      <select name='genre' class="form-control" id="exampleFormControlInput1">
+        <option selected="true" disabled> -- Choose Genre -- </option>
+        <option value='animation'>animation</option>
+        <option value='comedy'>comedy</option>
+        <option value='drama'>drama</option>
+        <option value='horror'>horror</option>
+        <option value='religious'>religious</option>
+        <option value='thriller'>thriller</option>
+      </select>
+      <br>
+      <button type="submit" class="btn btn-primary">Submit</button>    <a href="/movies" type="submit" class="btn btn-danger">Cancel</a>
+    </div>
+</form>
+
+<%- include('./partials/foot')%>

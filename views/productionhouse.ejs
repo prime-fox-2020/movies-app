@@ -1,0 +1,20 @@
+<%- include('./partials/head')%>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Headquarters</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(let i = 0; i < data.length;i++){%>
+      <tr>
+        <td><%= data[i].name_prodHouse %></td>
+        <td><%= data[i].headquarters %></td>
+      <% } %>
+  </tbody>
+</table>
+
+
+<%- include('./partials/foot')%>

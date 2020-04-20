@@ -1,0 +1,44 @@
+<%- include('./partials/head')%>
+<style>
+  form {
+    margin: 0 auto;
+    width:250px;
+  }
+</style>
+<% if(error) {%>
+  <div class="alert alert-danger" role="alert">
+    <%= error %>
+  </div>
+  <% } %>
+
+<form action="/movies/<%= data.id %>/edit" method="POST">
+  <div class="form-group mb-2">
+    <label for="exampleFormControlInput1">Name</label>
+    <input type="text" name='name' class="form-control" id="exampleFormControlInput1" value='<%= data.name %>'><br>
+
+    <label for="exampleFormControlInput1">Released Year</label>
+    <input type="text" name='released_year' class="form-control" id="exampleFormControlInput1" value='<%= data.released_year %>'><br>
+
+    <label for="exampleFormControlInput1">Genre</label>
+    <select name='genre' class="form-control" id="exampleFormControlInput1">
+      <option value='animation' <%= data.genre == 'animation' ? "selected" : '' %>>animation</option>
+      <option value='comedy' <%= data.genre == 'comedy' ? "selected" : '' %>>comedy</option>
+      <option value='drama' <%= data.genre == 'drama' ? "selected" : '' %>>drama</option>
+      <option value='horror' <%= data.genre == 'horror' ? "selected" : '' %>>horror</option>
+      <option value='religious' <%= data.genre == 'religious' ? "selected" : '' %>>religious</option>
+      <option value='thriller' <%= data.genre == 'thriller' ? "selected" : '' %>>thriller</option>
+    </select>
+    <br>
+    <label>Production House</label>
+    <select name="listProductionHouseId" class="form-control" id="exampleFormControlInput1">
+    <option selected disabled>Select Production House</option>
+      <% for(let i = 0; i < listProductionHouse.length; i++){ %>
+      <option value="<%= listProductionHouse[i].id %>" <%= data.ProductionHouseId === listProductionHouse[i].id ? 'selected' : '' %>><%= listProductionHouse[i].name_prodHouse %></option>
+      <% } %>
+    </select>
+    <br>
+      <button type="submit" class="btn btn-primary">Update</button>    <a href="/movies" type="submit" class="btn btn-danger">Cancel</a>
+    </div>
+</form>
+
+<%- include('./partials/foot')%>

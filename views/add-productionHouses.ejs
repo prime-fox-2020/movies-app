@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add new ph page</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/movies">List Movies</a></li>
+            <li><a href="/">Home</a></li>
+        </ul>
+    </nav>
+    <h1>ADD NEW PRODUCTION HOUSE</h1>
+    <form action="/phouses/add" method="post">
+        <%if (error === 'Nama PH harus diisi') {%>
+            <p><%= error %></p>
+        <%}%>
+        <label>Production House:</label><br>
+        <input type="text" name="name_prodHouse"><br><br>
+
+
+        <%if (error === 'Headquarter harus diisi') {%>
+            <p><%= error %></p>
+        <%}%>
+        <label>Headquarter:</label><br>
+        <input type="text" name="headquarters"><br><br>
+
+        <button type="submit">Add</button>
+        <button><a href="/phouses">Cancel</a></button>
+    </form>
+</body>
+</html>
+

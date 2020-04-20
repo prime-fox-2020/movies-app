@@ -18,7 +18,19 @@
         </ul>
     </nav>
     <h1>LIST PRODUCTION HOUSES</h1>
+
+    <form action="/phouses/:id" method="post">
+        <label>Search PH by Id</label> <br>
+        <input type="text" name="ph_by_id"><br>
+        <button type="submit">Search</button> <br><br>
+    </form>
+
     <button><a href="/phouses/add">Add new PH</a></button>
+
+    <%if(pesan){%>
+        <%=pesan%>
+    <%}%>
+    
     <table border="1">
         <thead>
             <tr>

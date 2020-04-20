@@ -1,0 +1,36 @@
+<%- include ('./partials/header', {title: 'Movie'}) %>
+
+
+<form action="/movies/<%= movies.id%>/edit" method = 'POST'>
+  <h1>Movie Name</h1>
+<input type="text" name = 'name' value="<%=movies.name%>"> <br>
+<h1>Released Year</h1>
+<input type="text" name = 'released_year' value="<%=movies.released_year%>">  <br>
+
+<select name="genre">
+  <option value="">Choose</option>
+  <option value="animation"  <% if(movies.genre === 'animation'){%> selected <%}%>  >animation</option>
+  <option value="comedy"   <% if(movies.genre === 'comedy'){%> selected <%}%>  >comedy</option>
+  <option value="drama"   <% if(movies.genre === 'drama'){%> selected <%}%> >drama</option>
+  <option value="horor"  <% if(movies.genre === 'horor'){%> selected <%}%>  >horor</option>
+  <option value="religious" <% if(movies.genre === 'religious'){%> selected <%}%>  >religious</option>
+  <option value="thriller"  <% if(movies.genre === 'thriller'){%> selected <%}%> >thriller</option>
+</select>
+<h1>Production House</h1>
+<select name="productionHouse" id="">
+  <option value="">--- choose ----</option>
+  <% for(let i = 0; i < productionHouse.length; i++){ %>
+   <option value="<%= productionHouse[i].id%>"   <% if(movies.ProductionHouseId === productionHouse[i].id){%> selected <%}%>   ><%= productionHouse[i].name_prodHouse%></option>
+ <% } %>
+</select> 
+
+<br>
+<button type="submit">Click</button>
+</form>
+
+
+
+
+
+
+<%- include ('./partials/footer') %>

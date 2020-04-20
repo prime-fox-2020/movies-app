@@ -17,9 +17,6 @@ module.exports = {
       genre: {
         type: Sequelize.STRING
       },
-      ProductionHouseId: {
-        type: Sequelize.INTEGER
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

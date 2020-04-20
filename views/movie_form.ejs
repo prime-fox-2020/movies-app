@@ -1,0 +1,32 @@
+<%- include('partials/header', {title: title + ' Movie'}) %>
+
+<div class="container">
+  <h1><%= title %> Movie</h1>
+
+  <form action="" method="POST" class="mt-5">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="e.g: 12 Angry Men" value="<%= data ? data.name : null %>">
+    </div>
+    <div class="form-group">
+      <label for="released_year">Released Year</label>
+      <input type="text" class="form-control" id="released_year" name="released_year" placeholder="e.g: 1957" value="<%= data ? data.released_year : null %>">
+    </div>
+    <div class="form-group">
+      <label for="genre">Genre</label>
+      <select name="genre" id="genre" class="form-control">
+        <option value="" selected disabled>Choose:</option>
+        <option value="animation" <%= data ? data.genre == 'animation' ? 'selected' : null : null %>>animation</option>
+        <option value="comedy" <%= data ? data.genre == 'comedy' ? 'selected' : null : null %>>comedy</option>
+        <option value="drama" <%= data ? data.genre == 'drama' ? 'selected' : null : null %>>drama</option>
+        <option value="horor" <%= data ? data.genre == 'horor' ? 'selected' : null : null %>>horor</option>
+        <option value="religious" <%= data ? data.genre == 'religious' ? 'selected' : null : null %>>religious</option>
+        <option value="thriller" <%= data ? data.genre == 'thriller' ? 'selected' : null : null %>>thriller</option>
+      </select>
+    </div>
+    <button class="btn btn-primary" type="submit">Save</button>
+    <a href="/movies"><button class="btn btn-danger" type="button">Cancel</button></a>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

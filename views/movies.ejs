@@ -1,0 +1,38 @@
+<%- include('partials/header', {title: 'List Movies'}) %>
+
+<div class="container">
+  <h1>List Movies</h1>
+  <div class="d-flex flex-row-reverse bd-highlight">
+    <div class="p-2 bd-highlight">
+      <a href="/movies/add"><button class="btn btn-primary">Add</button></a>
+    </div>
+  </div>
+  
+  <table class="table mt-3">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Movie</th>
+        <th scope="col">Released Year</th>
+        <th scope="col">Genre</th>
+        <th scope="col">Production House</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% data.forEach(el => { %>
+        <tr>
+          <td><%= el.name %></td>
+          <td><%= el.released_year %></td>
+          <td><%= el.genre %></td>
+          <td><%= el.ProdHouseId ? el.ProdHouseId : 'unknown' %></td>
+          <td>
+            <a href="/movies/<%= el.id %>/edit"><button class="btn btn-success">Edit</button></a> | 
+            <a href="/movies/<%= el.id %>/delete"><button class="btn btn-danger">Delete</button></a>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/footer') %>

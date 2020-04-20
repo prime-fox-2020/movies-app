@@ -9,11 +9,11 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     released_year: DataTypes.INTEGER,
     genre: DataTypes.STRING,
-    prodHouseId: DataTypes.INTEGER
+    ProdHouseId: DataTypes.INTEGER
   }, {sequelize});
   Movie.associate = function(models) {
     // associations can be defined here
-    Movie.belongsTo(models.ProductionHouse)
+    Movie.belongsTo(models.ProductionHouse, {foreignKey: 'ProdHouseId'})
   };
   return Movie;
 };

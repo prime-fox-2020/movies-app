@@ -12,4 +12,11 @@ router.get('/', (req, res) => {
 
 router.get('/productionhouses', ProductionHouses.getData);
 
+router.get('/movies', Movies.getData);
+router.get('/movies/add', Movies.addData);
+router.post('/movies/add', Movies.add);
+router.get('/movies/:id/edit', Movies.editData);
+router.post('/movies/:id/edit', Movies.edit);
+router.get('/movies/:id/delete', Movies.delete);
+
 module.exports = router;

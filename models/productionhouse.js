@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {sequelize});
   ProductionHouse.associate = function(models) {
     // associations can be defined here
-    ProductionHouse.hasMany(models.Movie);
+    ProductionHouse.hasMany(models.Movie, {foreignKey: 'ProdHouseId'});
   };
   return ProductionHouse;
 };

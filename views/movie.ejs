@@ -2,11 +2,13 @@
 
 <body>
     
-    <div class="container mt-5"><a href="/">Home</a></div>
-    <div class="container-fluid p-5">
+    <div class="container mt-5">
+        <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
+    </div>
+    <div class="container mt-5">
         <h1 class="text-center">Movies</h1>
-    
-        <div class="container-fluid text-right mb-1">
+        
+        <div class="container-fluid text-right">
             <a href="/movies/add"><button type="button" class="btn btn-success">Add Movie</button></a>
         </div>
         <table class="table">
@@ -20,15 +22,19 @@
             </tr>
             </thead>
             <tbody>
-                <% for(let i = 0; i < data.length; i++){ %>
+                <% data.forEach(list => { %>
                     <tr>
-                        <td><%= data[i].name %></td>
-                        <td><%= data[i].released_year %></td>
-                        <td><%= data[i].genre %></td>
-                        <td><%= data[i].ProductionHouseId.name_prodHouse %></td>
-                        <td><a href="/movies/edit/<%=data[i].id%>"><button type="button" class="btn btn-primary">Edit</button></a>  <a href="/movies/delete/<%=data[i].id%>"><button type="button" class="btn btn-primary">Delete</button></a></td>
+                        <td><%= list.name %></td>
+                        <td><%= list.released_year %></td>
+                        <td><%= list.genre %></td>
+                        <% if(list.ProductionHouseId) {%>
+                            <td><%= list.ProductionHouse.name_prodHouse %></td>
+                        <% }else {%>
+                            <td>unknown</td>
+                        <% } %>
+                        <td><a href="/movies/edit/<%=list.id%>"><button type="button" class="btn btn-primary">Edit</button></a>  <a href="/movies/delete/<%=list.id%>"><button type="button" class="btn btn-danger">Delete</button></a></td>
                     </tr>
-                <% } %>
+                <% }) %>
             </tbody>
         </table>
     </div>

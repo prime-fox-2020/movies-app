@@ -24,7 +24,7 @@
           <td><%= el.name %></td>
           <td><%= el.released_year %></td>
           <td><%= el.genre %></td>
-          <td><%= el.ProdHouseId ? el.ProdHouseId : 'unknown' %></td>
+          <td><%= el.ProdHouseId ? el.ProductionHouse.name_prodHouse : 'unknown' %></td>
           <td>
             <a href="/movies/<%= el.id %>/edit"><button class="btn btn-success">Edit</button></a> | 
             <a href="/movies/<%= el.id %>/delete"><button class="btn btn-danger">Delete</button></a>

@@ -3,6 +3,13 @@
 <div class="container">
   <h1><%= title %> Movie</h1>
 
+  <% if (validation) { %>
+    <div class="alert alert-danger">
+      Warning! <br>
+      <%= validation %>
+    </div>
+  <% } %>
+
   <form action="" method="POST" class="mt-5">
     <div class="form-group">
       <label for="name">Name</label>
@@ -22,6 +29,15 @@
         <option value="horor" <%= data ? data.genre == 'horor' ? 'selected' : null : null %>>horor</option>
         <option value="religious" <%= data ? data.genre == 'religious' ? 'selected' : null : null %>>religious</option>
         <option value="thriller" <%= data ? data.genre == 'thriller' ? 'selected' : null : null %>>thriller</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="ProdHouseId">Production Houses</label>
+      <select name="ProdHouseId" id="ProdHouseId" class="form-control">
+        <option value="" selected disabled>---SELECT---</option>
+        <% prodHouse.forEach(el => { %>
+          <option value="<%= el.id %>" <%= data ? el.id == data.ProdHouseId ? 'selected' : null : null %>><%= el.name_prodHouse %></option>
+        <% }) %>
       </select>
     </div>
     <button class="btn btn-primary" type="submit">Save</button>

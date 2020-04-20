@@ -1,50 +1,95 @@
 const Movie = require('../models').Movie;
+const ProductionHouse = require('../models').ProductionHouse;
 
 class MoviesController {
   static getData(req, res) {
-    Movie.findAll({order: [['released_year', 'DESC']]})
+    Movie.findAll({
+      order: [['released_year', 'DESC']],
+      include: ProductionHouse
+    })
     .then(data => {
+      // res.send(data);
       res.render('movies', {data});
     })
     .catch(err => res.send(err));
   }
 
   static addData(req, res) {
-    res.render('movie_form', {title: 'Add', data: null});
+    ProductionHouse.findAll()
+    .then(data => {
+      res.render('movie_form', {title: 'Add', prodHouse: data, data: null, validation: null});
+      // res.send(data);
+    })
+    .catch(err => res.send(err))
   }
 
   static add(req, res) {
-    Movie.create({
+    const validation = MoviesController.validate(req.body.name, Number(req.body.released_year), req.body.genre, req.body.ProdHouseId);
+
+    const value = {
       name: req.body.name,
       released_year: req.body.released_year,
       genre: req.body.genre,
-      ProdHouseId: 0
-    })
-    .then(() => {
-      res.redirect('/movies');
-    })
-    .catch(err => res.send(err));
+      ProdHouseId: req.body.ProdHouseId
+    }
+
+    if (validation.length) {
+      ProductionHouse.findAll()
+      .then(data2 => {
+        res.render('movie_form', {data: value, title: 'Edit', prodHouse: data2, validation});
+      })
+      .catch(err => res.send(err))
+    } else {
+      Movie.create(value)
+      .then(() => {
+        res.redirect('/movies');
+      })
+      .catch(err => res.send(err));
+    }
   }
 
   static editData(req, res) {
     Movie.findAll({where: {id: req.params.id}})
     .then(data => {
-      res.render('movie_form', {data: data[0], title: 'Edit'});
+      ProductionHouse.findAll()
+      .then(data2 => {
+        res.render('movie_form', {data: data[0], title: 'Edit', prodHouse: data2, validation: null});
+
+      })
+      .catch(err => res.send(err))
     })
     .catch(err => res.send(err));
   }
 
   static edit(req, res) {
-    Movie.update({
+    const validation = MoviesController.validate(req.body.name, Number(req.body.released_year), req.body.genre, req.body.ProdHouseId);
+
+    const value = {
       name: req.body.name,
       released_year: req.body.released_year,
       genre: req.body.genre,
-      ProdHouseId: 0
-    }, {where: {id: req.params.id}})
-    .then(() => {
-      res.redirect('/movies');
-    })
-    .catch(err => res.send(err))
+      ProdHouseId: req.body.ProdHouseId
+    }
+
+    if (validation.length) {
+      ProductionHouse.findAll()
+      .then(data2 => {
+        res.render('movie_form', {data: value, title: 'Edit', prodHouse: data2, validation});
+
+      })
+      .catch(err => res.send(err))
+    } else {
+      Movie.update({
+        name: req.body.name,
+        released_year: req.body.released_year,
+        genre: req.body.genre,
+        ProdHouseId: req.body.ProdHouseId
+      }, {where: {id: req.params.id}})
+      .then(() => {
+        res.redirect('/movies');
+      })
+      .catch(err => res.send(err))
+    }
   }
 
   static delete(req, res) {
@@ -53,6 +98,20 @@ class MoviesController {
       res.redirect('/movies');
     })
     .catch(err => res.send(err));
+  }
+
+  static validate(name, released, genre, PHId) {
+    let msg = [];
+    if (!name) msg.push('name cannot be empty');
+    if (!released) {
+      msg.push('released year cannot be empty');
+    } else if (typeof released != 'number') {
+      msg.push('wrong release year')
+    }
+    if (!genre) msg.push('genre cannot be empty');
+    if (!PHId) msg.push('Production House cannot be empty');
+
+    return msg.join(', ');
   }
 }
 

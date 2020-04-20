@@ -1,0 +1,48 @@
+<%- include('../template/head', {title}); %>
+
+<form action="/movies/<%=title[0] == 'A'? 'add': 'edit/'+data.id%>" method="POST" style="padding: 2% 35%;">
+    <% if(alert) {%>
+    <div class="alert alert-danger" role="alert">
+        <%=alert%>
+    </div>
+    <%}%>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Name</label>
+        <input value="<%=data.name%>" name="name" type="text" class="form-control" id="exampleFormControlInput1"
+            placeholder="e.g: JS In Love">
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Released Year</label>
+        <input value="<%=data.released_year%>" name="released_year" type="number" class="form-control"
+            id="exampleFormControlInput1" placeholder="e.g: 2016">
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Genre</label>
+        <select name="genre" class="form-control" id="exampleFormControlSelect1">
+            <option value="">--Select Genre--</option>
+            <option <%=data.genre == 'animation'? 'selected': ''%>>animation</option>
+            <option <%=data.genre == 'comedy'? 'selected': ''%>>comedy</option>
+            <option <%=data.genre == 'drama'? 'selected': ''%>>drama</option>
+            <option <%=data.genre == 'horor'? 'selected': ''%>>horor</option>
+            <option <%=data.genre == 'religious'? 'selected': ''%>>religious</option>
+            <option <%=data.genre == 'thriller'? 'selected': ''%>>thriller</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Production House</label>
+        <select name="ProductionHouseId" class="form-control" id="exampleFormControlSelect1">
+            <option value="0" <%=data.ProductionHouseId == null? 'selected': ''%>>--Select Production House--</option>
+            <% for(let i in data2) {%>
+            <option value="<%=data2[i].id%>" <%=data.ProductionHouseId == data2[i].id? 'selected': ''%>><%=data2[i].name_prodHouse%></option>
+            <%}%>    
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary"><%=title[0] == 'A'? 'Save': 'Update'%></button> &nbsp;
+    <a href="/movies" type="button" class="btn btn-danger">Cancel</a>
+    <input style="visibility: hidden;" value="<%=title%>" name="act" type="text">
+    <input style="visibility: hidden;" value="<%=data.id? data.id: ''%>" name="id" type="text">
+</form>
+
+</body>
+
+</html>

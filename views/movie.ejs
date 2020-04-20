@@ -1,0 +1,37 @@
+<%- include('../template/head', {title: 'Movies'}); %>
+<%- include('../template/navbar', {title: 'Movies'}); %>
+
+<% if(alert) {%>
+<div class="alert alert-success" role="alert">
+    <%=alert%>
+</div>
+<%}%>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Movie</th>
+            <th scope="col">Released Year</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Production House</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(let i in data) {%>
+<tr>
+    <th scope="row"><%=data[i].name%></th>
+    <td><%=data[i].released_year%></td>
+    <td><%=data[i].genre%></td>
+    <td><%=data[i].ProductionHouseId == null || data[i].ProductionHouseId == 0? 'unknown': data[i].ProductionHouse.name_prodHouse%></td>
+    <td>
+        <a href="movies/edit/<%=data[i].id%>" type="button" class="btn btn-primary">Edit</a> &nbsp;
+        <a href="movies/delete/<%=data[i].id%>" type="button" class="btn btn-danger">Delete</a>
+    </td>
+</tr>
+<%}%>
+    </tbody>
+</table>
+
+</body>
+
+</html>

@@ -2,7 +2,7 @@ const { ProductionHouse } = require('../models');
 
 class Controller {
     static showData(req, res) {
-        ProductionHouse.findAll()
+        ProductionHouse.findAll({order: [['name_prodHouse', 'ASC']]})
         .then(data => {
             res.render('prodHouse', {data});
         })

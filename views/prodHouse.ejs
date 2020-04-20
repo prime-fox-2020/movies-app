@@ -4,22 +4,15 @@
 <table class="table">
     <thead class="thead-dark">
         <tr>
-            <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Headquarters</th>
-            <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
         <% for(let i in data) {%>
         <tr>
-            <th scope="row"><%=data[i].id%></th>
-            <td><%=data[i].name_prodHouse%></td>
-            <td>headquartes</td>
-            <td>
-                <a href="prodhouses/edit/<%=data[i].id%>" type="button" class="btn btn-primary">Edit</a> &nbsp;
-                <a href="prodhouses/delete/<%=data[i].id%>" type="button" class="btn btn-danger">Delete</a>
-            </td>
+            <th scope="row"><%=data[i].name_prodHouse%></th>
+            <td><%=data[i].headquarters%></td>
         </tr>
         <%}%>
     </tbody>

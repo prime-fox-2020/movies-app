@@ -5,11 +5,19 @@ class CinemaController {
     static showMovie(req, res) {
         const msg = req.query.msg;
         Movie.findAll({
-            attributes:['id', 'name', 'released_year', 'genre', 'ProductionHouseId'],
+            attributes:['id', 'name', 'released_year', 'genre'],
+            include:[{model:ProductionHouse, attributes:['name_prodHouse']}],
             order: [['released_year', 'DESC']]
         })
-        .then(list => res.render('movie', {list, msg, type:"success", action:'true'}))
-        .catch(err => res.render('error', {msg:err}));
+        .then(list => {
+            for (let entry of list) {
+                entry.ProductionHouse = entry.ProductionHouse.name_prodHouse;
+            }
+            res.render('movie', {list, msg, type:"success", action:'true'})
+        })
+        .catch(err => {
+            res.render('error', {msg:err})
+        });
     }
 
     static showProductionHouse(req, res) {
@@ -25,13 +33,18 @@ class CinemaController {
         res.render('add_movie', {msg, type, command:'add', list:null});
     }
     static addMoviePost(req, res) {
-        if (req.body.name && req.body.released_year && req.body.genre) {
-            Movie.create({
-                name: req.body.name,
-                released_year: req.body.released_year,  
-                genre: req.body.genre
+        if (req.body.name && req.body.released_year && req.body.genre && req.body.name_prodHouse) {
+            ProductionHouse.findAll({attributes:['id'], where:{name_prodHouse:req.body.name_prodHouse}})
+            .then(prodHouse => {
+                Movie.create({
+                    name: req.body.name,
+                    released_year: req.body.released_year,  
+                    genre: req.body.genre,
+                    ProductionHouseId: prodHouse[0].id
+                })
+                .then(() => res.redirect('/movie?msg=New movie successfully added to the list'))
+                .catch(err => res.render('error', {msg:err, type:"error"}));
             })
-            .then(() => res.redirect('/movie?msg=New movie successfully added to the list'))
             .catch(err => res.render('error', {msg:err, type:"error"}));
         } else {
             res.redirect('/movie/add?msg=All movie details must be filled&type=error');
@@ -41,18 +54,34 @@ class CinemaController {
     static editMovieGet(req, res) {
         const msg = req.query.msg;
         const type = req.query.type;
-        Movie.findByPk(req.params.id)
-        .then(list => res.render('edit_movie', {list, command:'edit', msg, type}))
+        Movie.findAll({
+            where:{id:req.params.id},
+            attributes:['id', 'name', 'released_year', 'genre'],
+            include:[{model:ProductionHouse, attributes:['name_prodHouse']}]
+        })
+        .then(list => {
+            // console.log(list[0].ProductionHouse.name_prodHouse);
+            // list[0].ProductionHouse = list[0].ProductionHouse.name_prodHouse;
+            // res.send(list);
+            // list = list[0];
+            // console.log(list);
+            res.render('edit_movie', {list:list[0], command:'edit', msg, type});
+        })
         .catch(err => res.render('error', {msg: err, type:"error"}));
     }
     static editMoviePost(req, res) {
-        if (req.body.name && req.body.released_year && req.body.genre) {
-            Movie.update({
-                name: req.body.name,
-                released_year: req.body.released_year,  
-                genre: req.body.genre
-            }, {where:{id:req.params.id}})
-            .then(() => res.redirect(`/movie?msg=Successfully update movie data with id ${req.params.id}`))
+        if (req.body.name && req.body.released_year && req.body.genre && req.body.name_prodHouse) {
+            ProductionHouse.findAll({attributes:['id'], where:{name_prodHouse:req.body.name_prodHouse}})
+            .then(prodHouse => {
+                Movie.update({
+                    name: req.body.name,
+                    released_year: req.body.released_year,  
+                    genre: req.body.genre,
+                    ProductionHouseId: prodHouse[0].id
+                }, {where:{id:req.params.id}})
+                .then(() => res.redirect(`/movie?msg=Successfully update movie data with id ${req.params.id}`))
+                .catch(() => res.render('error', {msg:err, type:"error"}));
+            })
             .catch(() => res.render('error', {msg:err, type:"error"}));
         } else {
             res.redirect(`/movie/edit/${req.params.id}?msg=All movie details must be filled&type=error`);

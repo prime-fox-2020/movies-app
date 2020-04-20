@@ -10,9 +10,15 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       }, {
-        name: "Azab Instruktur Yang Mendzalimi Student",
+        name: "Azab Instruktur Karena Mendzalimi Student",
         released_year: "2000",
-        genre: "religi",
+        genre: "religious",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }, {
+        name: "Mysteri Gedung Aquarius",
+        released_year: "1995",
+        genre: "horror",
         createdAt: new Date(),
         updatedAt: new Date()
       }

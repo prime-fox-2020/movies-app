@@ -20,7 +20,7 @@
             <label for="genre">Genre</label><br>
             <select name="genre">
                 <option value="" <%= (list && list.genre == '') ? 'selected' : '' %>
-                    >-- Choose Genre --</option>
+                    >-- Select --</option>
                 <option value="animation" <%= (list && list.genre == 'animation') ? 'selected' : '' %>
                     >Animation</option>
                 <option value="comedy" <%= (list && list.genre == 'comedy') ? 'selected' : '' %>
@@ -33,6 +33,23 @@
                     >Religious</option>
                 <option value="thriller" <%= (list && list.genre == 'thriller') ? 'selected' : '' %>
                     >Thriller</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="genre">Production House</label><br>
+            <select name="name_prodHouse">
+                <option value="" <%= (list && list.ProductionHouse.name_prodHouse == '') ? 'selected' : '' %>
+                    >-- Select --</option>
+                <option value="Walt Disney Studios" <%= (list && list.ProductionHouse.name_prodHouse == 'Walt Disney Studios') ? 'selected' : '' %>
+                    >Walt Disney Studios</option>
+                <option value="Pixar" <%= (list && list.ProductionHouse.name_prodHouse == 'Pixar') ? 'selected' : '' %>
+                    >Pixar</option>
+                <option value="Warner Bros" <%= (list && list.ProductionHouse.name_prodHouse == 'Warner Bros') ? 'selected' : '' %>
+                    >Warner Bros</option>
+                <option value="Universal Pictures" <%= (list && list.ProductionHouse.name_prodHouse == 'Universal Pictures') ? 'selected' : '' %>
+                    >Universal Pictures</option>
+                <option value="Paramount Pictures" <%= (list && list.ProductionHouse.name_prodHouse == 'Paramount Pictures') ? 'selected' : '' %>
+                    >Paramount Pictures</option>
             </select>
         </div>
         <div class="form-group">

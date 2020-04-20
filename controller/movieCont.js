@@ -5,7 +5,8 @@ class MovieCont {
         Movie.findAll({ include: [ProductionHouse] })
             .then((data) => {
                 // res.send (data)
-                res.render('movies', { data })
+                let msg = req.query.msg
+                res.render('movies', { data, msg })
             }).catch((err) => {
                 res.send(err)
             });

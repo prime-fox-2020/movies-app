@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class Movie extends Model {}
 
   Movie.init({
-    name: DataTypes.STRING,
+    title: DataTypes.STRING,
     released_year: DataTypes.INTEGER,
     genre: DataTypes.STRING,
     ProductionHouseId: DataTypes.INTEGER
@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
 
   Movie.associate = function(models) {
     // associations can be defined here
-    Movie.belongsTo(Model.ProductionHouse)
+    Movie.belongsTo(models.ProductionHouse)
   };
-  
+
   return Movie;
 };

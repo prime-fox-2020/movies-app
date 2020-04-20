@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
 
   ProductionHouse.associate = function(models) {
     // associations can be defined here
-    ProductionHouse.hasMany(Model.Movie)
+    ProductionHouse.hasMany(models.Movie)
   };
 
   return ProductionHouse;

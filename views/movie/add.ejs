@@ -1,0 +1,53 @@
+<%- include('../partials/header') %>
+
+  <h3 class="d-inline-block"><%= title %></h3>
+  <a href="/movies" class="btn btn-primary float-right">Show All Movies</a>
+  
+<% if (alert.type) { %>
+  <%- include('../partials/alert') %>
+<% } %>
+
+  <form action="/movies/<%= method === 'edit' ? `edit/${data.id}` : 'add'%>" method="post">
+    <div class="form-group">
+      <label for="title">Movie Name</label>
+      <input type="text" name="title" class="form-control" value="<%= data ? data.title : '' %>" placeholder="e.g: 12 Angry Man">
+    </div>
+    
+    <div class="form-group">
+      <label for="released_year">Released Year</label>
+      <input type="number" name="released_year" class="form-control" value="<%= data ? data.released_year : '' %>" placeholder="e.g: 2010">
+    </div>
+    
+    <div class="form-group">
+      <label for="genre">Genre</label>
+      <select name="genre" id="renre" class="form-control">
+        <% if (data) { %>
+        <option value="" <%= data.genre === '' ? 'selected' : '' %> disabled>Select genre</option>
+        <option value="Action" <%= data.genre === 'Action' ? 'selected' : '' %>>Action</option>
+        <option value="Animation" <%= data.genre === 'Animation' ? 'selected' : '' %>>Animation</option>
+        <option value="Drama" <%= data.genre === 'Drama' ? 'selected' : '' %>>Drama</option>
+        <option value="Comedy" <%= data.genre === 'Comedy' ? 'selected' : '' %>>Comedy</option>
+        <option value="Horror" <%= data.genre === 'Horror' ? 'selected' : '' %>>Horror</option>
+        <option value="Religius" <%= data.genre === 'Religius' ? 'selected' : '' %>>Religius</option>
+        <option value="Thriller" <%= data.genre === 'Thriller' ? 'selected' : '' %>>Thriller</option>
+        
+        <% } else { %>
+        <option value="" selected disabled>Select genre</option>
+        <option value="Action" >Action</option>
+        <option value="Animation" >Animation</option>
+        <option value="Drama" >Drama</option>
+        <option value="Comedy" >Comedy</option>
+        <option value="Horror" >Horror</option>
+        <option value="Religius">Religius</option>
+        <option value="Thriller" >Thriller</option>
+        <% } %>
+
+      </select>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit"><%= method === 'edit' ? `Update Data` : 'Submit Data'%></button>
+    </div>
+  </form>
+</main>
+
+<%- include('../partials/footer') %>

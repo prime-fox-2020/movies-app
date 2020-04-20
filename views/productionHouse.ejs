@@ -1,0 +1,26 @@
+<%- include('./partial/header') %>
+<h1>Production Houses</h1><br>
+<% if(data.length) {%>
+<table class="table">
+  <thead class="table-primary">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Headquarters</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%for(let i = 0; i < data.length; i++) {%>
+      <tr>
+        <td><%=data[i].name_prodHouse%></td>
+        <td><%=data[i].headquarters %></td>
+      </tr>
+        <%}%>
+  </tbody>
+</table>
+<%} else {%>
+  <div class="alert alert-danger" role="alert">
+    Production House Not Found!
+  </div>
+  <%}%>
+</body>
+</html>

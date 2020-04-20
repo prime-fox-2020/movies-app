@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+
+<form action="/movies/:id?/edit" method="post">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Name</label>
+        <input type="text" class="form-control" name="name" placeholder="Movie Title" value="<%= data.name %>">
+      </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Release Year</label>
+        <input type="number" class="form-control" name="released_year" placeholder="Release Date" value="<%= data.released_year %>">
+      </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Genre</label>
+        <select class="form-control" name="genre">
+            <option value="" selected disabled>-- Please select --</option>
+            <option <%= data.genre == 'Animation'  ? 'selected' : '' %> >Animation</option>
+            <option <%= data.genre == 'Comedy'  ? 'selected' : '' %> >Comedy</option>
+            <option <%= data.genre == 'Drama'  ? 'selected' : '' %> >Drama</option>
+            <option <%= data.genre == 'Horror'  ? 'selected' : '' %> >Horror</option>
+            <option <%= data.genre == 'Religious'  ? 'selected' : '' %> >Religious</option>
+            <option <%= data.genre == 'Thriller'  ? 'selected' : '' %> >Thriller</option>
+          </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+</form>   
+
+<%- include('partials/footer') %>

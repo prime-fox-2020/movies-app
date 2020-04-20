@@ -4,7 +4,7 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Movies', [
       {
-        name: "Cintaku Kepentok Sudoku",
+        name: "Cintaku Kepentok Susumu",
         released_year: "2016",
         genre: "comedy",
         createdAt: new Date(),

@@ -8,10 +8,11 @@ module.exports = (sequelize, DataTypes) => {
 
   }
 
-  ProductionHouse.init = ({
+  ProductionHouse.init({
     name_prodHouse: DataTypes.STRING,
     headquarters: DataTypes.STRING
   }, { sequelize });
+  
   ProductionHouse.associate = function (models) {
     // associations can be defined here
     ProductionHouse.hasMany(models.Movie)

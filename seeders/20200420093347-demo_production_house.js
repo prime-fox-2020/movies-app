@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    
+
     const prodHouse = [
       {
         name_prodHouse: 'Walt Disney Studios',
@@ -11,7 +11,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        name_prodHouse: 'Pxar',
+        name_prodHouse: 'Pixar',
         headquarters: 'Emeryville, California, United States',
         createdAt: new Date(),
         updatedAt: new Date()
@@ -35,11 +35,11 @@ module.exports = {
         updatedAt: new Date()
       }
     ]
-      return queryInterface.bulkInsert('ProductionHouses', prodHouse, {});
+    return queryInterface.bulkInsert('ProductionHouses', prodHouse, {});
   },
 
   down: (queryInterface, Sequelize) => {
-    
-      return queryInterface.bulkDelete('ProductionHouses', null, {});
+
+    return queryInterface.bulkDelete('ProductionHouses', null, {});
   }
 };

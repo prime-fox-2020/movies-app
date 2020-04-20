@@ -6,13 +6,13 @@ module.exports = (sequelize, DataTypes) => {
 
   class Movie extends Model {}
 
-
-  Movie.init = ({
+  Movie.init({
     name: DataTypes.STRING,
     released_year: DataTypes.INTEGER,
     genre: DataTypes.STRING,
     ProductionHouseId: DataTypes.INTEGER
   }, {sequelize});
+  
   Movie.associate = function(models) {
     // associations can be defined here
     Movie.belongsTo(models.ProductionHouse)

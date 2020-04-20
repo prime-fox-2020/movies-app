@@ -1,4 +1,4 @@
-const { Movie } = require('../models');
+const { Movie, ProductionHouse } = require('../models');
 
 class MovieController {
     static showAll(req, res){
@@ -6,7 +6,8 @@ class MovieController {
             attributes: ['id', 'name', 'released_year', 'genre', 'ProductionHouseId'],
             order: [
                 ['released_year', 'DESC']
-            ]
+            ],
+            include: ProductionHouse
         })
         .then(data => {
             res.render('list-of-movies', {data, title: 'List of Movies', nav: 'movie'})
@@ -49,9 +50,20 @@ class MovieController {
     }
 
     static showEdit(req, res){
-        Movie.findByPk(req.params.id)
+        let ph, movie
+        ProductionHouse.findAll()
         .then((data) => {
-            res.render('edit-form', { data, title: 'Edit Movie', nav: 'movie' })
+            ph = data
+            return Movie.findOne({
+                where: {
+                  id: req.params.id
+                },
+                include: ProductionHouse
+            })
+        })
+        .then((data) => {
+            movie = data
+            res.render('edit-form', { movie, ph, title: 'Edit Movie', nav: 'movie' })
         })
         .catch(err => {
             res.send(err)   
@@ -63,7 +75,8 @@ class MovieController {
             { 
                 name: req.body.name,
                 released_year: req.body.released_year,
-                genre: req.body.genre                
+                genre: req.body.genre,       
+                ProductionHouseId: req.body.ph    
             }, 
             {
                 where: {

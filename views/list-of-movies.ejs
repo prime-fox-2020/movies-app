@@ -17,7 +17,7 @@
                 <td><%= data[i].name %></td>
                 <td><%= data[i].released_year %></td>
                 <td><%= data[i].genre %></td>
-                <td><% if(!data[i].ProductionHouseId){ %> <%= 'unknown' %> <% }else{ %> <%= data[i].ProductionHouseId %> <% } %></td>
+                <td><% if(!data[i].ProductionHouseId){ %> <%= 'unknown' %> <% }else{ %> <%= data[i].ProductionHouse.name_prodHouse %> <% } %></td>
                 <td><a class="btn btn-primary" href="/movies/edit/<%= data[i].id %>" role="button">Edit</a> <a class="btn btn-primary" href="/movies/delete/<%= data[i].id %>" role="button">Delete</a></td>
                 </tr>
         <% } %>

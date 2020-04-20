@@ -1,24 +1,38 @@
 <%- include('partials/header') %>
 
-<form action="/movies/edit/<%= data.id %> " method="POST">
+<% let selectedph = '' %> 
+<% if(movie.ProductionHouseId){ %> 
+  <% selectedph = JSON.stringify(movie.ProductionHouse.name_prodHouse) %> 
+<% } %>
+
+<form action="/movies/edit/<%= movie.id %> " method="POST">
   <div class="form-group">
     <label for="name">Name</label>
-    <input type="text" class="form-control" id="name" placeholder="e.g.: 12 Angry Men" name="name" value="<%= data.name %>" required>
+    <input type="text" class="form-control" id="name" placeholder="e.g.: 12 Angry Men" name="name" value="<%= movie.name %>" required>
   </div>
   <div class="form-group">
     <label for="released_year">Released Year</label>
-    <input type="number" class="form-control" id="released_year" placeholder="e.g.: 1957" name="released_year" value="<%= data.released_year %>" required>
+    <input type="number" class="form-control" id="released_year" placeholder="e.g.: 1957" name="released_year" value="<%= movie.released_year %>" required>
   </div>
   <div class="form-group">
     <label for="genre">Genre</label>
     <select class="custom-select" id="genre" name="genre" required>
-        <option disabled selected>Open this select menu</option>
-        <option value="animation" <% if(data.genre === 'animation'){ %> <%= 'selected' %> <% } %>>animation</option>
-        <option value="comedy" <% if(data.genre === 'comedy'){ %> <%= 'selected' %> <% } %>>comedy</option>
-        <option value="drama" <% if(data.genre === 'drama'){ %> <%= 'selected' %> <% } %>>drama</option>
-        <option value="horror" <% if(data.genre === 'horror'){ %> <%= 'selected' %> <% } %>>horror</option>
-        <option value="religious" <% if(data.genre === 'religious'){ %> <%= 'selected' %> <% } %>>religious</option>
-        <option value="thriller" <% if(data.genre === 'thriller'){ %> <%= 'selected' %> <% } %>>thriller</option>
+        <option disabled selected>---SELECT---</option>
+        <option value="animation" <% if(movie.genre === 'animation'){ %> <%= 'selected' %> <% } %>>animation</option>
+        <option value="comedy" <% if(movie.genre === 'comedy'){ %> <%= 'selected' %> <% } %>>comedy</option>
+        <option value="drama" <% if(movie.genre === 'drama'){ %> <%= 'selected' %> <% } %>>drama</option>
+        <option value="horror" <% if(movie.genre === 'horror'){ %> <%= 'selected' %> <% } %>>horror</option>
+        <option value="religious" <% if(movie.genre === 'religious'){ %> <%= 'selected' %> <% } %>>religious</option>
+        <option value="thriller" <% if(movie.genre === 'thriller'){ %> <%= 'selected' %> <% } %>>thriller</option>
+      </select>
+  </div>
+  <div class="form-group">
+    <label for="ph">Production Houses</label>
+    <select class="custom-select" id="ph" name="ph" required>
+        <option disabled <% if(selectedph === ''){ %> <%= 'selected' %> <% } %>>---SELECT---</option>
+        <% for( let i = 0; i < ph.length; i++ ) { %>
+        <option value="<%= ph[i].id %>" <% if(ph === ph[i].name_prodHouse){ %><%= 'selected' %><% } %>> <%= ph[i].name_prodHouse %></option>
+        <% } %>
       </select>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>  <a class="btn btn-danger" href="/movies" role="button">Cancel</a>

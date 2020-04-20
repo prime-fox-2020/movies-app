@@ -27,8 +27,8 @@
           <td><%= movie.title %></td>
           <td><%= movie.released_year %></td>
           <td><%= movie.genre %></td>
-          <td><%= movie.ProductionHouseId ? '' : 'Unknown' %></td>
-          <td><a href="/movies/edit/<%= movie.id %>" class="btn btn-info">Edit</a> &nbsp; <a href="/movies/delete/<%= movie.id %>" class="btn btn-danger">Delete</a></td>
+          <td><%= movie.ProductionHouse ? movie.ProductionHouse.name_prodHouse : 'Unknown' %></td>
+          <td><a href="/movies/edit/<%= movie.id %>" class="btn btn-info">Edit</a> &nbsp; <a onclick="return alert('Are you sure want to delete this movie?')" href="/movies/delete/<%= movie.id %>" class="btn btn-danger">Delete</a></td>
         </tr>
       <% }) %>
     </tbody>

@@ -20,7 +20,7 @@
     
     <div class="form-group">
       <label for="genre">Genre</label>
-      <select name="genre" id="renre" class="form-control">
+      <select name="genre" class="form-control">
         <% if (data) { %>
         <option value="" <%= data.genre === '' ? 'selected' : '' %> disabled>Select genre</option>
         <option value="Action" <%= data.genre === 'Action' ? 'selected' : '' %>>Action</option>
@@ -32,7 +32,7 @@
         <option value="Thriller" <%= data.genre === 'Thriller' ? 'selected' : '' %>>Thriller</option>
         
         <% } else { %>
-        <option value="" selected disabled>Select genre</option>
+        <option value="" >Select genre</option>
         <option value="Action" >Action</option>
         <option value="Animation" >Animation</option>
         <option value="Drama" >Drama</option>

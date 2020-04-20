@@ -1,4 +1,4 @@
-const {Movie} = require('../models')
+const {Movie, ProductionHouse} = require('../models')
 
 class MovieController {
 
@@ -8,11 +8,13 @@ class MovieController {
     locals.alert = { message: [req.query.message], type: req.query.type }
 
     Movie.findAll({
-      order: [['released_year', 'DESC']]
+      order: [['released_year', 'DESC']],
+      include: [{model: ProductionHouse}]
     })
     .then(results => {
       if (results.length) {
         locals.data = results
+        console.log(locals.data)
         res.render('movie', locals)
       } else {
         locals.alert.message = [`You dont have any movie data in database.`]
@@ -76,10 +78,16 @@ class MovieController {
       .then(results => {
         if (results !== null) {
           locals.data = results
-          res.render('movie/edit', locals)
+          return ProductionHouse.findAll({
+            order: [['name_prodHouse', 'ASC']]
+          })
         } else {
           res.redirect(`/movies?message=${fail}&type=danger`)
         }
+      })
+      .then(results => {
+        locals.prodHouse = results
+        res.render('movie/edit', locals)
       })
       .catch(err => {
         res.redirect(`/movies?message=${err}&type=danger`)
@@ -101,11 +109,12 @@ class MovieController {
     if (error.length) {
       res.render('movie/edit', locals)
     } else {
-      const {title, released_year, genre} = req.body
+      const {title, released_year, genre, ProductionHouseId} = req.body
       Movie.update({
         title,
         released_year,
-        genre
+        genre,
+        ProductionHouseId
       }, {
         where: {id: req.params.id}
       })

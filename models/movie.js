@@ -12,8 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     released_year: DataTypes.INTEGER,
     genre: DataTypes.STRING
   }, {sequelize});
+
   Movie.associate = function(models) {
     // associations can be defined here
+    Movie.belongsTo(models.ProductionHouse,{ foreignKey: 'productionHouseId' })
   };
   return Movie;
 };

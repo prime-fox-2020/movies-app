@@ -11,8 +11,10 @@ module.exports = (sequelize, DataTypes) => {
     name_prodHouse: DataTypes.STRING,
     headquarters: DataTypes.STRING
   }, {sequelize});
+
   ProductionHouse.associate = function(models) {
     // associations can be defined here
+    ProductionHouse.hasMany(models.Movie,{ foreignKey: 'productionHouseId' })
   };
   return ProductionHouse;
 };

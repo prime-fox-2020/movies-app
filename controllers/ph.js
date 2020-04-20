@@ -4,6 +4,8 @@ class Controller{
 
     static findAll(req,res){
         ProductionHouse.findAll({
+            // order: [['name', 'asc']],
+            // include: [{ model: Movie }]
         })
         .then(data => {
             // res.render('',{data : Movie})
@@ -14,6 +16,8 @@ class Controller{
             res.send(err)
         })
     }
+
+    
 
 }
 

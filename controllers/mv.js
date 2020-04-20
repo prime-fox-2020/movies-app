@@ -4,6 +4,8 @@ class Controller{
 
     static findAll(req,res){
         Movie.findAll({
+            order: [['name', 'asc']],
+            include: [{ model: ProductionHouse }]
         })
         .then(data => {
             // res.render('',{data : Movie})

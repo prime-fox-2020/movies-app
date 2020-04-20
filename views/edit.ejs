@@ -1,0 +1,40 @@
+<%- include('./partial/header') %>
+<body>
+  <%- include('./partial/navbar') %>
+  <br><br>
+  <form action="/movies/edit/<%=data[0].id%>" method="POST">
+    <form>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="name" class="form-control" name="name" value="<%=data[0].name%>">
+      </div>
+      <div class="form-group">
+        <label for="released year">Released Year</label>
+        <input type="released year" class="form-control" name="released_year" value="<%=data[0].released_year%>">
+      </div>
+      <div>
+        <label for="genre">Genre</label>
+        <select name="genre" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+          <option value="animation" <%= data[0].genre === 'animation' ? 'selected' : '' %>>animation</option>
+          <option value="comedy" <%= data[0].genre === 'comedy' ? 'selected' : '' %>>comedy</option>
+          <option value="drama" <%= data[0].genre === 'drama' ? 'selected' : '' %>>drama</option>
+          <option value="horor" <%= data[0].genre === 'horor' ? 'selected' : '' %>>horor</option>
+          <option value="religious" <%= data[0].genre === 'religious' ? 'selected' : '' %>>religious</option>
+          <option value="thriller" <%= data[0].genre === 'thriller' ? 'selected' : '' %>>thriller</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Production House</label>
+        <select name="ProductionHouseId" class="form-control">
+          <option selected disabled>--SELECT--</option>
+          <% for(let i = 0; i < temp.length; i++){ %>
+            <option value="<%= temp[i].id %>" <%= data[0].ProductionHouseId === temp[i].id ? 'selected' : '' %>><%= temp[i].name_ProdHouse %></option>
+          <% } %>
+        </select>
+      </div>
+      <br>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </form>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<div class="container">
+    <% if (list.length >0) { %>
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                <% let keys = Object.keys(list[0].dataValues) %>
+                <% keys = keys.slice(0, keys.length-2) %>
+                <% for (let key of keys) { %>
+                    <% key = key.split('_').join(' ') %>
+                    <th scope="col"><%= key %></th>
+                <% } %>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (let entry of list) { %>
+                    <tr>
+                        <% delete entry.dataValues.createdAt %>
+                        <% delete entry.dataValues.updatedAt %>
+                        <% for (let property in entry.dataValues) { %>
+                        <td><%= entry[property] %></td>
+                        <% } %>
+                        <td>
+                            <a href="/students/edit/<%= entry.id %>" class="btn btn-primary" role="button" aria-pressed="true">Edit</a>
+                            <a href="/students/delete/<%= entry.id %>" class="btn btn-warning" role="button" aria-pressed="true">delete</a>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    <% } %>
+</div>

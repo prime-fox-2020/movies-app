@@ -1,0 +1,9 @@
+<%- include('./parts/header', {title: "Movie List"}) %>
+    
+<%- include('./parts/alerts', {msg}) %>
+
+<br><button type="button" onclick="location.href='/add'" class="btn btn-danger navbar mx-auto">Add Movie</button></a>
+
+<%- include('./parts/table', {list}) %>
+
+<%- include('./parts/footer') %>

@@ -22,8 +22,20 @@ class CinemaController {
 
     static showProductionHouse(req, res) {
         const msg = req.query.msg;
-        ProductionHouse.findAll({attributes:['id', 'name_prodHouse', 'headquarters']})
-        .then(list => res.render('productionHouse', {list, msg, type:"success", action:null}))
+        ProductionHouse.findAll({
+            attributes:['id', 'name_prodHouse', 'headquarters'],
+            include:[{model:Movie, attributes:['name']}]
+        })
+        .then(list => {
+            for (let [i, entry] of list.entries()) {
+                const movies = [];
+                for (let movie of entry.Movies){
+                    movies.push(movie.name);
+                }
+                list[i].Movies = movies.join(', ');
+            }
+            res.render('productionHouse', {list, msg, type:"success", action:null});
+        })
         .catch(err => res.render('error', {msg:err}));
     }
 
@@ -60,11 +72,6 @@ class CinemaController {
             include:[{model:ProductionHouse, attributes:['name_prodHouse']}]
         })
         .then(list => {
-            // console.log(list[0].ProductionHouse.name_prodHouse);
-            // list[0].ProductionHouse = list[0].ProductionHouse.name_prodHouse;
-            // res.send(list);
-            // list = list[0];
-            // console.log(list);
             res.render('edit_movie', {list:list[0], command:'edit', msg, type});
         })
         .catch(err => res.render('error', {msg: err, type:"error"}));

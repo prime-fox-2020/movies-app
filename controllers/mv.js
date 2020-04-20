@@ -9,7 +9,9 @@ class Controller{
         })
         .then(data => {
             // res.render('',{data : Movie})
-            res.send(data)
+            res.render('mv',{data})
+            console.log(data[0].ProductionHouse)
+            // res.send(data)
         })
         .catch(err =>{
             console.log(err)

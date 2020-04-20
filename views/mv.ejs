@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang=eng>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width , initial-scale=1.0">
+        <title>Movies</title>
+    </head>
+
+    <body>
+        <h1>Movies</h1>
+        <a href='/mv/add'><button>ADD</button></a>
+        <table border = "2">
+            <thead>
+                <tr>
+                    <th>ID </th>
+                    <th>Movie</th>
+                    <th>Released Year</th>
+                    <th>Genre</th>
+                    <th>Production House</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% data.forEach(el=>{ %>
+                <tr>
+                    <td><%= el.id %></td>
+                    <td><%= el.name %></td>
+                    <td><%= el.released_year %></td>
+                    <td><%= el.genre %></td>
+                    <td><%= el.productionHouseId %>. <%=el.ProductionHouse.name_prodHouse %></td>
+                    <td>
+                    <a href="/mv/<%= el.id %>/edit"><button>Edit</button></a>
+                    <a href="/mv/<%= el.id %>/delete"><Button>Delete</Button></a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+
+
+
+
+    </body>
+
+
+
+
+
+
+
+
+
+
+</html>

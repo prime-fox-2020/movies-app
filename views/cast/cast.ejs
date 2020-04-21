@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cast</title>
+    <link href= "/public/assets/style.css" rel="stylesheet" type="text/css" />
+    <%- include('../partial/bootstrap') %> 
+</head>
+<body>
+    <%- include('../partial/navbar') %> 
+    <h1>List Cast</h1>
+
+    <button>
+        <a href="casts/add">ADD CAST</a>
+    </button>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Birth Year</th>
+                <th>Phone Number</th>
+                <th>Gender</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach(el => { %>
+                <tr>
+                    <td><%= el.getFullName() %></td>
+                    <td><%= el.birth_year %></td>
+                    <td><%= el.phone_number %></td>
+                    <td><%= el.gender %></td>
+                    <td>
+                        <div class="popup" onclick="myFunction()">
+                            <button><a href="casts/<%= el.id %>/edit">EDIT</a></button>
+                            <button>
+                                    DELETE
+                                    <span class="popuptext" id="delete">Are You Sure Wanna Delete? <a href="casts/<%= el.id %>/delete">Yes</a></span>
+                            </button>
+                            <button><a href="casts/movies/<%= el.id %>?name=<%= el.getFullName() %>">SEE MOVIES</a></button>
+                        </div>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+    <script>
+        function myFunction() {
+          var popup = document.getElementById("delete");
+          popup.classList.toggle("show");
+        }
+    </script> 
+</body>
+</html>

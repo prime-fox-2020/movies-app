@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Movie</title>
-    <%- include('partial/bootstrap') %> 
+    <%- include('../partial/bootstrap') %> 
 </head>
 <body>
-    <%- include('partial/navbar') %> 
+    <%- include('../partial/navbar') %> 
     <h1>List Movies</h1>
 
     <button>
@@ -34,6 +34,7 @@
                     <td>
                         <button><a href="movies/<%= el.id %>/edit">EDIT</a></button>
                         <button><a href="movies/<%= el.id %>/delete">DELETE</a></button>
+                        <button><a href="movies/casts/<%= el.id %>?name=<%= el.name %>">ADD CAST</a></button>
                     </td>
                 </tr>
             <% }) %>

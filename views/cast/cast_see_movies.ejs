@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1><%= castName %></h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Movie</th>
+                <th>Released Year</th>
+                <th>Age when Movie Released</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach(el => { %>
+             <tr>
+                 <td><%= el.Movie.name %> </td>
+                 <td><%= el.Movie.released_year %> </td>
+                 <td><%= calculateAge(Number(el.Movie.released_year), Number(el.Cast.birth_year)) %> </td>
+                 <td><%= el.role %> </td>
+             </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

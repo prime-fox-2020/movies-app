@@ -10,10 +10,21 @@ class CastController {
             // order: [['released_year', 'DESC']]
         })
         .then(list => {
-            // for (let entry of list) {
-            //     entry.ProductionHouse = entry.ProductionHouse.name_prodHouse;
-            // }
-            res.render('cast', {list, msg, type:"success", action:'true'})
+            // const showList = []
+            for (let i in list) {
+                // showList.push({
+                //         ID: list[i].id,
+                //         Name: list[i].fullName(),
+                //         Phone_Number: list[i].phone_number,
+                //         Birth_Year: list[i].birth_year,
+                //         Gender: list[i].birth_year
+                //      })
+                list[i].dataValues.name = list[i].fullName();
+                list[i].name = list[i].dataValues.name;
+                delete list[i].dataValues.first_name;
+                delete list[i].dataValues.last_name;
+            };
+            res.render('cast', {list, msg, type:"success", action:'true'});
         })
         .catch(err => {
             res.render('error', {msg:err})
@@ -26,12 +37,12 @@ class CastController {
     }
     static addCastPost(req, res) {
         console.log(req.body);
-        if (req.body.first_name && req.body.last_name && req.body.phone_number && req.body.birth_year && req.body.gender) {
+        if (req.body.first_name && req.body.phone_number && req.body.birth_year && req.body.gender) {
             // Cast.findAll({attributes:['id'], where:{name_prodHouse:req.body.name_prodHouse}})
             // .then(prodHouse => {
                 Cast.create({
                     first_name: req.body.first_name,
-                    last_name: req.body.last_name,  
+                    last_name: Cast.last_name,  
                     phone_number: req.body.phone_number,
                     birth_year: req.body.birth_year,
                     gender: req.body.gender,
@@ -58,7 +69,7 @@ class CastController {
         .catch(err => res.render('error', {msg: err, type:"error"}));
     }
     static editCastPost(req, res) {
-        if (req.body.first_name && req.body.last_name && req.body.phone_number && req.body.birth_year && req.body.gender) {
+        if (req.body.first_name && req.body.phone_number && req.body.birth_year && req.body.gender) {
             // ProductionHouse.findAll({attributes:['id'], where:{name_prodHouse:req.body.name_prodHouse}})
             // .then(prodHouse => {
                 Cast.update({

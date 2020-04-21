@@ -1,0 +1,33 @@
+<%- include('./partial/header') %>
+<body>
+    <form action="/cast/<%= data.id %>/edit" method="POST">
+      <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input type="text" class="form-control" id="first_name" name="first_name" value="<%= data.first_name %>" placeholder="Enter First Name">
+      </div>
+      <div class="form-group">
+        <label for="last_name">Last Name</label>
+        <input type="text" class="form-control" id="last_name" name="last_name" value="<%= data.last_name %>" placeholder="Enter Last Name">
+      </div>
+      <div class="form-group">
+        <label for="birth_year">Birth Year</label>
+        <input type="text" class="form-control" id="birth_year" name="birth_year" value="<%= data.birth_year %>" placeholder="Birth Year">
+      </div>
+      <div class="form-group">
+        <label for="phone_number">Phone Number</label>
+        <input type="text" class="form-control" id="phone_number" name="phone_number" value="<%= data.phone_number %>" placeholder="Phone Number">
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male" <%= data.gender == 'male' ? 'checked' : '' %>>
+        <label class="form-check-label" for="gender">Male</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female" <%= data.gender == 'female' ? 'checked' : '' %>>
+        <label class="form-check-label" for="gender">Female</label>
+      </div>
+      <div>
+        <br><button type="submit" class="btn btn-primary">Save</button>
+        <a class="btn btn-danger" href="/cast" role="button">Cancel</a>
+      </div>
+    </form>
+<%- include('./partial/footer') %>

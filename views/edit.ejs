@@ -1,0 +1,37 @@
+<%- include('./partial/header') %>
+<body>
+    <form action="/movies/<%= data.id%>/edit" method="POST">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" name="name" value="<%= data.name%>" placeholder="Enter Movie Name">
+      </div>
+    </div>
+      <div class="form-group">
+        <label for="released_year">Released Year</label>
+        <input type="text" class="form-control" id="released_year" name="released_year" value="<%= data.released_year%>" placeholder="Released Year">
+      </div>
+      <div>
+        <label for="genre">Genre</label>
+        <select name="genre" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+          <option selected disabled>-- Choose Genre --</option>
+          <option value="Animation" <%= data.genre === 'Animation' ? 'selected' : '' %>>Animation</option>
+          <option value="Comedy" <%= data.genre === 'Comedy' ? 'selected' : '' %>>Comedy</option>
+          <option value="Drama" <%= data.genre === 'Drama' ? 'selected' : '' %>>Drama</option>
+          <option value="Horror" <%= data.genre === 'Horror' ? 'selected' : '' %>>Horror</option>
+          <option value="Religious" <%= data.genre === 'Religious' ? 'selected' : '' %>>Religious</option>
+          <option value="Thriller" <%= data.genre === 'Thriller' ? 'selected' : '' %>>Thriller</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Production House</label>
+        <select name="ProductionHouseId" class="form-control">
+          <option selected disabled>-- Choose Production House --</option>
+          <% for(let i = 0; i < dataPh.length; i++){ %>
+            <option value="<%= dataPh[i].id %>" <%= data.ProductionHouseId === dataPh[i].id ? 'selected' : '' %>><%= dataPh[i].name_prodHouse %></option>
+          <% } %>
+        </select>
+      </div>
+      <br><button type="submit" class="btn btn-primary">Submit</button>
+      <a class="btn btn-danger" href="/movies" role="button">Cancel</a>
+    </form>
+<%- include('./partial/footer') %>

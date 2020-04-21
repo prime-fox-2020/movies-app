@@ -1,0 +1,42 @@
+<%- include('./partial/header') %>
+<h1>List Cast</h1><br>
+<% if(alert.message) {%>
+  <div class="alert alert-success" role="alert">
+    <%= alert.message%>
+  </div>
+<%}%>
+<a href="/cast/add" class="btn btn-success">Add Cast</a><br><br>
+
+<% if(data.length) {%>
+<table class="table">
+  <thead class="table-primary">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Birth Year</th>
+      <th scope="col">Phone Number</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%for(let i = 0; i < data.length; i++) {%>
+      <tr>
+        <td><%= data[i].full_name %></td>
+        <td><%= data[i].birth_year %></td>
+        <td><%= data[i].phone_number %></td>
+        <td><%= data[i].gender %></td>
+        <td>
+          <a class="btn btn-info" href="/cast/<%= data[i].id %>/edit" role="button">Edit</a>
+          <a class="btn btn-info" href="/cast/<%= data[i].id %>/delete" role="button" onclick="return confirm('delete this cast?')">Delete</a>
+          <a class="btn btn-info" href="/cast/<%= data[i].id %>/movies" role="button">See Movies</a>
+        </td>
+      </tr>
+        <%}%>
+  </tbody>
+</table>
+<%} else {%>
+  <div class="alert alert-danger" role="alert">
+    Cast Not Found!
+  </div>
+  <%}%>
+<%- include('./partial/footer') %>

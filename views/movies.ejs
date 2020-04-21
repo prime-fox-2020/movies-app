@@ -1,0 +1,45 @@
+<%- include('./partial/header') %>
+<h1>List Movie</h1><br>
+<% if(alert.message) {%>
+  <div class="alert alert-success" role="alert">
+    <%= alert.message%>
+  </div>
+<%}%>
+<a href="/movies/add" class="btn btn-success">Add Movies</a><br><br>
+<% if(data.length) {%>
+<table class="table">
+  <thead class="table-primary">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Released Year</th>
+      <th scope="col">Genre</th>
+      <th scope="col">Production House</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%for(let i = 0; i < data.length; i++) {%>
+      <tr>
+        <td><%=data[i].name%></td>
+        <td><%=data[i].released_year %></td>
+        <td><%=data[i].genre%></td>
+        <%if(data[i].ProductionHouse === null) {%>
+          <td>Unknown</td>
+          <%} else {%>
+        <td><%=data[i].ProductionHouse.name_prodHouse%></td>
+        <%}%>
+        <td>
+          <a class="btn btn-info" href="/movies/<%= data[i].id %>/edit" role="button">Edit</a>
+          <a class="btn btn-info" href="/movies/<%= data[i].id %>/delete" role="button" onclick="return confirm('delete this movie?')">Delete</a>
+          <a class="btn btn-info" href="/movies/<%= data[i].id %>/addCast" role="button">Add Cast</a>
+        </td>
+      </tr>
+        <%}%>
+  </tbody>
+</table>
+<%} else {%>
+  <div class="alert alert-danger" role="alert">
+    Movies Not Found!
+  </div>
+  <%}%>
+<%- include('./partial/footer') %>

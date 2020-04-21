@@ -1,0 +1,55 @@
+<%- include('./partial/header') %>
+<body>
+  <%- include('./partial/navbar') %>
+  <br>
+  <div>
+    <h2><%= listMovie.name %></h2>
+  </div>
+  <br>
+  <div>
+    <form action="/movies/addcast/<%= listMovie.id %>" method="POST">
+      <input name="MovieId" value="<%= listMovie.id %>" hidden>
+      <div class="form-group">
+        <label>Actor</label>
+        <select name="CastId" class="form-control">
+          <option selected disabled>Select Cast</option>
+          <% listCast.forEach(list=>{ %>
+            <option value="<%= list.id %>"><%= list.full_name %></option>
+          <% }) %>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Role</label>
+        <input name="role" type="text" class="form-control" placeholder="e.g: Pemeran Utama Wanita">
+      </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="reset" class="btn btn-secondary">Reset</button>
+    </form>
+  </div>
+  <br>
+  <div>
+    <h1>List Cast</h1>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Actor</th>
+          <th scope="col">Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(let i = 0; i < data.length; i++){ %>
+          <% for(let j = 0; j < listCast.length; j++){ %>
+            <% if(listCast[j].id === data[i].CastId){ %>
+          <tr>
+                <td><%= listCast[j].full_name %></td>
+                <%break%>
+                <% } %>
+                <% } %>
+            <td><%= data[i].role %></td>
+          </tr>
+          <% } %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

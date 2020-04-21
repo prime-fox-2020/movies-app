@@ -19,7 +19,7 @@
           <th scope="col">Released Year</th>
           <th scope="col">Genre</th>
           <th scope="col">Production House</th>
-          <th scope="col">Action</th>
+          <th scope="col" style="text-align: center;">Action</th>
         </tr>
     </thead>
     <tbody class="table table-sm table-light">
@@ -33,13 +33,17 @@
           <% } else { %>
             <td><%= data[i].ProductionHouse.name_ProdHouse %></td>
           <% } %>
-          <td><a href="/movies/edit/<%=data[i].id%>"><button type="button" class="btn btn-primary">Edit</button></a>  <a href="/movies/delete/<%=data[i].id%>"><button type="button" class="btn btn-primary">Delete</button></td>
+          <td style="text-align: right;">
+            <a href="/movies/edit/<%=data[i].id%>"><button type="button" class="btn btn-primary">Edit</button></a>  
+            <a href="/movies/delete/<%=data[i].id%>" onclick="return confirm('Delete this?')"><button type="button" class="btn btn-primary">Delete</button></a>  
+            <a href="/movies/addcast/<%=data[i].id%>"><button type="button" class="btn btn-primary">Add Cast</button></a>  
+          </td>
       <% } %>
     </tbody>
   </table>
   <% }else{ %>
     <div class="alert alert-dark" role="alert">
-      Production  not found!!
+      <h3 style="text-align: center;">List not found!!</h3>
     </div>
     <%}%>
     </tbody>

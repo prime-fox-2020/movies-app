@@ -9,9 +9,22 @@ module.exports = (sequelize, DataTypes) => {
 
   Movie.init({
     name: DataTypes.STRING,
-    released_year: DataTypes.INTEGER,
+    released_year: {
+      type : Sequelize.INTEGER,
+      validate : {
+        kabisatCheck(value){
+          const year = Number(value)
+          if(year % 4 === 0 && year % 100 !== 0){
+            throw error
+          } else if( year % 4 === 0 && year % 100 === 0 && year % 400 === 0){
+            throw error
+          }
+        }
+      }
+    },
     genre: DataTypes.STRING,
-    ProductionHouseId: DataTypes.INTEGER
+    ProductionHouseId: DataTypes.INTEGER,
+    rating: DataTypes.INTEGER
   }, {
     sequelize
   });
@@ -19,6 +32,8 @@ module.exports = (sequelize, DataTypes) => {
   Movie.associate = function(models) {
     // associations can be defined here
     Movie.belongsTo(models.ProductionHouse)
+    Movie.belongsToMany(models.Cast, {through:models.MovieCast})
+
   };
   return Movie;
 };

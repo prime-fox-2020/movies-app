@@ -1,5 +1,5 @@
-const { Movie } = require('../models')
-const { ProductionHouse } = require('../models')
+const { Movie, ProductionHouse, Cast, MovieCast } = require('../models')
+// const { ProductionHouse } = require('../models')
 
 class MovieController {
 
@@ -14,7 +14,8 @@ class MovieController {
   }
 
   static addGet(req, res){
-    res.render('add')
+    let alert = req.query
+    res.render('add', {alert})
   }
 
   static addPost(req,res){
@@ -27,8 +28,8 @@ class MovieController {
       .then(()=>{
         let msg = `${req.body.name} has been success add to list movies`
         res.redirect(`/movies?message=${msg}&type=success`)
-      }).catch(error=>{
-        res.render('error', {error})
+      }).catch(()=>{
+        res.redirect(`/movies/add?message=This is leap year, can't add movies&type=success`)
       })
   }
 
@@ -71,7 +72,39 @@ class MovieController {
     })
   }
 
-}
+  static addCastGet(req,res){
+    let listCast
+    let listMovie  
+    Cast.findAll()
+    .then(data=>{
+      listCast = data
+      return Movie.findByPk(req.params.id, {include: {model: Cast}})
+    })
+    .then(dataMovie=>{
+      listMovie = dataMovie
+      return MovieCast.findAll({where: {MovieId : req.params.id}})
+    })
+    .then(data=>{
+      res.render('addCastMovie', {data, listMovie, listCast})
+    })
+    .catch(error=>{
+      res.render('error', {error})
+    })
+  }
 
+  static addCastPost(req,res){
+    MovieCast.create({
+      role: req.body.role,
+      MovieId: req.body.MovieId,
+      CastId: req.body.CastId
+    })
+    .then(()=>{
+      res.redirect(`/movies/addcast/${req.params.id}?message=Cast has been added to movie&type=success`)
+    })
+    .catch(error=>{
+      res.render('error', {error})
+    })
+  }
+}
 
 module.exports = MovieController

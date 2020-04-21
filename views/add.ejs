@@ -2,6 +2,12 @@
 <body>
   <%- include('./partial/navbar') %>
   <br><br>
+  <h1 align="left">List Movies</h1>
+  <% if(alert.message){ %>
+    <div class="alert alert-danger" role="alert">
+        <%= alert.message %>
+    </div>
+<% } %>
   <form action="/movies/add" method="POST">
     <form>
       <div class="form-group">
@@ -25,7 +31,7 @@
         </select>
       </div>
       <br>
-      <button type="submit" class="btn btn-primary">Submit</button>  <button type="reset" class="btn btn-secondary">Cancel</button>
+      <button type="submit" class="btn btn-primary">Submit</button>  <button type="reset" class="btn btn-secondary">Reset</button>
     </form>
   </form>
 </body>

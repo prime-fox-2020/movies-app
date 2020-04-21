@@ -1,0 +1,35 @@
+<%- include('./partial/header') %>
+<body>
+  <%- include('./partial/navbar') %>
+  <br>
+  <h1 align="left"><%= data.full_name %></h1>
+  <% if (data.Movies.length) { %>
+    <table class="table table-sm table-dark">
+      <thead class="table table-sm table-dark">
+        <tr>
+          <th scope="col">Movie</th>
+          <th scope="col">Released Year</th>
+          <th scope="col">Age When Movie Released</th>
+          <th scope="col">Role</th>
+        </tr>
+    </thead>
+    <tbody class="table table-sm table-light">
+      <% data.Movies.forEach(list=>{ %>
+        <tr>
+          <td><%= list.name %></td>
+          <td><%= list.released_year %></td>
+          <td><%= getAge(data.birth_year, list.released_year) %></td>
+          <td><%= list.MovieCast.role %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  <% }else{ %>
+    <div class="alert alert-dark" role="alert">
+      <h3 style="text-align: center;">Movie not found</h3>
+    </div>
+    <%}%>
+    </tbody>
+  </table>
+</body>
+</html>

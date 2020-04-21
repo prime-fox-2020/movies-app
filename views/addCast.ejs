@@ -1,0 +1,33 @@
+<%- include('./partial/header') %>
+<body>
+  <%- include('./partial/navbar') %>
+  <br><br>
+  <form action="/casts/add" method="POST">
+    <form>
+      <div class="form-group">
+        <label for="first name">First Name</label>
+        <input type="name" class="form-control" name="first_name" placeholder="e.g: John">
+      </div>
+      <div class="form-group">
+        <label for="released year">Last Name</label>
+        <input type="last name" class="form-control" name="last_name" placeholder="e.g: Doe">
+      </div>
+      <div class="form-group">
+        <label for="birth year">Birth Year</label>
+        <input type="birth year" class="form-control" name="birth_year" placeholder="e.g: 1972">
+      </div>
+      <div class="form-group">
+        <label for="phone number">Phone Number</label>
+        <input type="phone number" class="form-control" name="phone_number" placeholder="e.g: 08123456789">
+      </div>
+      <div>
+        <label for="gender">Gender</label><br>
+        <input type="radio" name="gender" value="male" > Male
+        <input type="radio" name="gender" value="female" > Female
+      </div>
+      <br>
+      <button type="submit" class="btn btn-primary">Submit</button>  <button type="reset" class="btn btn-secondary">Reset</button>
+    </form>
+  </form>
+</body>
+</html>

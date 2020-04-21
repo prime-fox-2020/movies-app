@@ -1,0 +1,48 @@
+<%- include('./partial/header') %>
+<body>
+  <%- include('./partial/navbar') %>
+  <br>
+  <h1 align="left">List Casts</h1>
+  <% if(alert.message){ %>
+    <div class="alert alert-success" role="alert">
+        <%= alert.message %>
+    </div>
+<% } %>
+  <div class="container-fluid text-right mb-1">
+    <a href="/casts/add"><button type="button" class="btn btn-success">Add Cast</button></a>
+  </div>
+  <% if (data.length) { %>
+    <table  class="table table-sm table-dark">
+      <thead class="table table-sm table-dark">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Birth Year</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Gender</th>
+          <th style="text-align: center;" scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody class="table table-sm table-light">
+      <% for(let i = 0; i < data.length; i++){ %>
+        <tr>
+          <td><%= data[i].full_name %></td>
+          <td><%= data[i].birth_year %></td>
+          <td><%= data[i].phone_number %></td>
+          <td><%= data[i].gender %></td>
+          <td style="text-align: right;">
+            <a href="/casts/edit/<%=data[i].id%>"><button type="button" class="btn btn-primary">Edit</button></a>  
+            <a href="/casts/delete/<%=data[i].id%>" onclick="return confirm('Delete this?')"><button type="button" class="btn btn-primary">Delete</button>  
+            <a href="/casts/movies/<%=data[i].id%>"><button type="button" class="btn btn-primary">See Movies</button>
+          </td>
+      <% } %>
+    </tbody>
+  </table>
+  <% }else{ %>
+    <div class="alert alert-light" role="alert">
+      <h3 style="text-align: center;">List not found!!</h3>
+    </div>
+    <%}%>
+    </tbody>
+  </table>
+</body>
+</html>

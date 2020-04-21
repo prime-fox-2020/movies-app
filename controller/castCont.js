@@ -1,4 +1,5 @@
 const { Movie, Cast, ProductionHouse } = require('../models');
+const getAgeCast = require('../helpers/getAgeCast');
 
 class CastCont {
     static show(req, res) {
@@ -79,6 +80,16 @@ class CastCont {
             }).catch((err) => {
                 res, send(err)
             });
+    }
+
+    static showMovie(req, res) {
+        Cast.findByPk(req.params.id, {include: [Movie]})
+        .then((data) => {
+            // res.send(data)
+            res.render('./cast/seeMovie', {data, getAgeCast})
+        }).catch((err) => {
+            res.send(err)
+        });
     }
 }
 

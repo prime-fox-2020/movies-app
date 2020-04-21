@@ -38,62 +38,38 @@
             </div>
         </div>
     </nav>
-
     <div class="jumbotron jumbotron-fluid mt-5">
         <div class="container">
-            <div class="d-inline-flex" style="width: 100%;">
-                <div class="col-6 ">
-                    <h1><%= movie.name%></h1>
-                </div>
-                <div class="col-6">
-                    <form action="/movies/<%= movie.id %>/addCast" method="post">
-                        <h4>Add Cast To Movie</h4>
-                        <% if (err) { %>
-                        <div class="alert alert-success" role="alert">
-                          <h6 class="alert-heading"><%= err.errors[0].message %> </h6>
-                        </div>    
-                        <% } %>
-                        <div class="form-group">
-                            <label for="">Actor</label>
-                            <select class="custom-select" name="CastId" id="">
-                                <option selected>Select Actor</option>
-                                <% data.forEach(el => { %>
-                                <option value="<%= el.id %>"> <%= el.getFullName() %> </option>
-                                <% }) %>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Role</label>
-                            <input type="text" name="role" id="" class="form-control" placeholder="e.g: Pemeran Utama"
-                                aria-describedby="helpId">
-                            <small id="helpId" class="text-muted">Help text</small>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <a href="/movies"><button class="btn btn-danger" type="button">Cancel</button></a>
-                    </form>
+            <% if (data) { %>
+            <div class="mb-5 align-items-center">
+                <h3 class="display-3"><%= data.getFullName() %> </h3>
+                <div class="float-right">
+                    <a href="/movies/add" class="float-lg-right"><button class="btn btn-primary ">Add Movie</button></a>
                 </div>
             </div>
-        </div>
-        <div class="container mt-5">
-            <h3>List Cast</h3>
             <table class="table table-striped table-inverse table-responsive">
                 <thead class="thead-inverse">
                     <tr>
-                        <th>Id</th>
-                        <th>Actor</th>
+                        <th>ID</th>
+                        <th>Movie</th>
+                        <th>Released Year</th>
+                        <th>Age when Movie Released</th>
                         <th>Role</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% movie.Casts.forEach(el => { %>
+                    <% data.Movies.forEach(el => { %>
                     <tr>
-                        <td scope="row"><%= el.id %></td>
-                        <td><%= el.getFullName() %></td>
+                        <td scope="row"><%= el.id %> </td>
+                        <td><%= el.name %></td>
+                        <td><%= el.released_year %></td>
+                        <td><%= getAgeCast( data.birth_year, el.released_year) %> tahun</td>
                         <td><%= el.MovieCast.role %></td>
                     </tr>
                     <% }) %>
                 </tbody>
             </table>
+            <% } %>
         </div>
     </div>
 

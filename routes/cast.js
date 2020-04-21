@@ -12,4 +12,5 @@ router.post('/:id/edit', CastCont.update)
 
 router.get('/:id/delete', CastCont.delete)
 
+router.get('/:id/seeMovie', CastCont.showMovie)
 module.exports = router;

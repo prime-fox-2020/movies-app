@@ -3,9 +3,14 @@ module.exports = (sequelize, DataTypes) => {
   const Sequelize = sequelize.Sequelize
   const Model = Sequelize.Model
 
-  class Cast extends Model {}
+  class Cast extends Model {
+    fullName(){
+      // console.log(`${this.first_name} ${this.last_name}`)
+      return `${this.first_name} ${this.last_name}`
+    }
+  }
 
-  Cast.ini({
+  Cast.init({
     first_name: DataTypes.STRING,
     last_name: DataTypes.STRING,
     phone_number: DataTypes.STRING,
@@ -14,6 +19,13 @@ module.exports = (sequelize, DataTypes) => {
     createdAt: new Date(),
     updatedAt: new Date()
   }, {sequelize});
+
+  Cast.beforeCreate((instance, option) => {
+    if(!instance.last_name){
+      instance.last_name = instance.first_name
+    }
+  })
+
   
     
   Cast.associate = function(models) {

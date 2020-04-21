@@ -1,0 +1,34 @@
+<%- include('partials/header') %>
+
+<br><h1 class="text-center">Add Cast</h1>
+
+<form action="/casts/<%= data.id %>/edit" method="post">
+    <div class="form-group">
+        <label for="exampleInputEmail1">First Name</label>
+        <input type="text" class="form-control" name="first_name" placeholder="e.g: Emma" value="<%= data.first_name %>" >
+      </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Last Name</label>
+        <input type="text" class="form-control" name="last_name" placeholder="e.g: Wattson" value="<%= data.last_name %>" >
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Phone Number</label>
+        <input type="text" class="form-control" name="phone_number" placeholder="e.g: 081122334455" value="<%= data.phone_number %>" >
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Birth Year</label>
+        <input type="number" class="form-control" name="birth_year" placeholder="e.g: 1990" value="<%= data.birth_year %>" >
+      </div>
+    <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="Male" <%= data.gender == 'Male' ? 'checked' : '' %> >
+        <label class="form-check-label" for="inlineRadio1" >Male</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="Female" <%= data.gender == 'Female' ? 'checked' : '' %> >
+        <label class="form-check-label" for="inlineRadio2">Female</label>
+      </div><br><br>
+
+      <button type="submit" class="btn btn-primary" onclick="return confirm('Save Edit?')" >Update</button>
+</form>   
+
+<%- include('partials/footer') %>

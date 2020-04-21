@@ -3,8 +3,9 @@ const router = express.Router()
 const HomeController = require('../controllers/HomeController')
 const ProductionHouseController = require('../controllers/ProductionHouseController')
 const MovieController = require('../controllers/MovieController')
+const CastController = require('../controllers/CastController')
 
-const { Movie, ProductionHouse } = require('../models')
+const { Movie, ProductionHouse, Cast } = require('../models')
 
 router.get('/', HomeController.home)
 router.get('/productionhouses', ProductionHouseController.show)
@@ -14,12 +15,11 @@ router.post('/movies/addmovieform', MovieController.addMovie)
 router.get('/movies/:id?/edit', MovieController.editMovieForm)
 router.post('/movies/:id?/edit', MovieController.editMovie)
 router.get('/movies/:id?/delete', MovieController.delete)
-// router.get('/tes', (req, res) => {
-//     ProductionHouse.findAll({
-//         include: [{model : Movie}]
-//     }).then(data => {
-//         res.send(data)
-//     })
-// })
+router.get('/casts', CastController.show)
+router.get('/casts/addCastForm', CastController.addCastForm)
+router.post('/casts/addCastForm', CastController.add)
+router.get('/casts/:id?/edit', CastController.editCastForm)
+router.post('/casts/:id?/edit', CastController.editCast)
+router.get('/casts/:id?/delete', CastController.delete)
 
 module.exports = router

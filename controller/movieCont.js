@@ -1,4 +1,4 @@
-const { Movie, ProductionHouse } = require('../models');
+const { Movie, ProductionHouse, Cast } = require('../models');
 
 class MovieCont {
     static show(req, res) {
@@ -76,6 +76,26 @@ class MovieCont {
             }).catch((err) => {
                 res, send(err)
             });
+    }
+
+    static addCast(req, res) {
+        let movie = null
+        Movie.findByPk(req.params.id, { include: [Cast] })
+            .then((data) => {
+                movie = data
+                // res.send(data)
+                return Cast.findAll()
+            })
+            .then((data) => {
+                // res.send({ movie, data })
+                res.render('addCastToMovie',{movie, data})
+            }).catch((err) => {
+                res.send(err)
+            });
+    }
+
+    static updateCast(req, res) {
+        res.send(req.params.id, req.body)
     }
 }
 

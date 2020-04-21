@@ -77,7 +77,7 @@
                             <a href="/cast/<%= el.id %>/edit "><button class="btn btn-primary">Edit</button></a>
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-danger" data-toggle="modal"
-                                data-target="#exampleModalCenter" data-id="@<%= el.id %> ">
+                                data-target="#deleteCast-<%= el.id %>">
                                 Delete
                             </button>
                             <a href="/cast/<%= el.id %>/seeMovie "><button class="btn btn-outline-success">See
@@ -85,7 +85,7 @@
                         </td>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                        <div class="modal fade" id="deleteCast-<%= el.id %>" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
@@ -96,8 +96,8 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        are you sure to delete cast
-                                        <p><%= el.id %> </p>
+                                        are you sure to delete cast 
+                                        with id <p><%= el.id %> </p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"

@@ -38,53 +38,57 @@
             </div>
         </div>
     </nav>
+
     <div class="jumbotron jumbotron-fluid mt-5">
         <div class="container">
-            <div class="mb-5 align-items-center">
-                <h3 class="display-3">List Movies</h3>
-                <div class="float-right">
-                    <a href="/movies/add" class="float-lg-right"><button class="btn btn-primary ">Add Movie</button></a>
+            <div class="d-inline-flex" style="width: 100%;">
+                <div class="col-6 ">
+                    <h1><%= movie.name%></h1>
+                </div>
+                <div class="col-6">
+                    <form action="/movie/<%= movie.id %>/addCast" method="post">
+                        <h4>Add Cast To Movie</h4>
+                        <div class="form-group">
+                            <label for="">Actor</label>
+                            <select class="custom-select" name="" id="">
+                                <option selected>Select Actor</option>
+                                <% data.forEach(el => { %>
+                                <option value="<%= el.id %>"> <%= el.getFullName() %> </option>
+                                <% }) %>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Role</label>
+                            <input type="text" name="role" id="" class="form-control" placeholder="e.g: Pemeran Utama"
+                                aria-describedby="helpId">
+                            <small id="helpId" class="text-muted">Help text</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a href="/movies"><button class="btn btn-danger">Cancel</button></a>
+                    </form>
                 </div>
             </div>
-
-            <% if (msg) { %>
-            <div class="alert alert-success col-6" role="alert">
-                <h6 class="alert-heading"><%= msg %> </h6>
-            </div>
-            <% } %>
-
-            <% if (data) { %>
+        </div>
+        <div class="container mt-5">
+            <h3>List Cast</h3>
             <table class="table table-striped table-inverse table-responsive">
                 <thead class="thead-inverse">
                     <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Released Year</th>
-                        <th>Genre</th>
-                        <th>Produktion House</th>
-                        <th>Rating</th>
-                        <th>Action</th>
+                        <th>Id</th>
+                        <th>Actor</th>
+                        <th>Role</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% data.forEach(el => { %>
+                    <% movie.Casts.forEach(el => { %>
                     <tr>
-                        <td scope="row"><%= el.id %> </td>
-                        <td><%= el.name %></td>
-                        <td><%= el.released_year %></td>
-                        <td><%= el.genre %></td>
-                        <td><%= el.ProductionHouseId == null? 'unknown':el.ProductionHouse.name_prodHouse %></td>
-                        <td><%= el.rating %></td>
-                        <td>
-                            <a href="/movies/<%= el.id %>/edit "><button class="btn btn-primary">Edit</button></a>
-                            <a href="/movies/<%= el.id %>/delete "><button class="btn btn-danger">Delete</button></a>
-                            <a href="/movies/<%= el.id %>/addCast "><button class="btn btn-outline-success">Add Cast</button></a>
-                        </td>
+                        <td scope="row">el.id</td>
+                        <td>el.CastId</td>
+                        <td>el.role</td>
                     </tr>
                     <% }) %>
                 </tbody>
             </table>
-            <% } %>
         </div>
     </div>
 

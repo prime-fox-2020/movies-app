@@ -16,17 +16,21 @@ module.exports = (sequelize, DataTypes) => {
     birth_year: DataTypes.INTEGER,
     gender: DataTypes.STRING
   }, {
-    hook: {
+    hooks: {
       beforeCreate(instance, options){
         console.log('============================================');
-        console.log('ini hook dengan last name :', this.last_name);
+        console.log('ini hook dengan last name :', instance.last_name);
         console.log('============================================');
-        this.last_name = this.last_name == ''? this.first_name:this.last_name
+        instance.last_name = instance.last_name == ''? instance.first_name:instance.last_name
       }
     }, sequelize
   });
 
-
+  // Cast.beforeCreate((instance, options) => {
+  //   if (!instance.last_name) {
+  //     instance.last_name = instance.first_name
+  //   }
+  // })
 
   Cast.associate = function (models) {
     // associations can be defined here

@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * MOVIECAST
+ * MOVIECAST IF NESCESARRY
  * id  MovieId  CastId  role
  * 1   1        1       lead
  * 2   1        2       support
@@ -23,7 +23,7 @@ module.exports = {
     //   {
     //     MovieId: 1,
     //     CastId: 2,
-    //     role: 'gunman',
+    //     role: 'lead',
     //     createdAt: new Date(),
     //     updatedAt: new Date()
     //   },

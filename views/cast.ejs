@@ -23,20 +23,21 @@
             </thead>
             <tbody>
                 <% data.forEach(list => { %>
-                    <tr>
-                        <td><%= `${list.first_name} ${list.last_name}` %></td>
-                        <td><%= list.birth_year %></td>
-                        <td><%= list.phone_number %></td>
-                        <td><%= list.gender %></td>
-                        <td>
+                <tr>
+                    <td><%= list.fullname %></td>
+                    <td><%= list.birth_year %></td>
+                    <td><%= list.phone_number %></td>
+                    <td><%= list.gender %></td>
+                    <td>
                         <a href="/casts/edit/<%=list.id%>"><button type="button" class="btn btn-primary">Edit</button>
                         </a>
-                        <a href="/casts/delete/<%=list.id%>"><button type="button" class="btn btn-danger">Delete</button>
+                        <a href="/casts/delete/<%=list.id%>"onclick="return confirm('Are you sure?')">
+                            <button type="button" class="btn btn-danger">Delete</button>
                         </a>
-                        <a href="/movies/<%=list.id%>"><button type="button" class="btn btn-success">Movies</button>
+                        <a href="/casts/played/<%=list.id%>"><button type="button" class="btn btn-success">Movies Played</button>
                         </a>
-                        </td>
-                    </tr>
+                    </td>
+                </tr>
                 <% }) %>
             </tbody>
         </table>

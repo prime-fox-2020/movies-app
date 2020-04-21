@@ -3,7 +3,11 @@ module.exports = (sequelize, DataTypes) => {
   const Sequelize = sequelize.Sequelize
   const Model = Sequelize.Model
 
-  class Cast extends Model { }
+  class Cast extends Model { //validate by instance 
+    get fullname(){
+      return `${this.first_name} ${this.last_name}`
+    }
+  }
 
   Cast.init({
     first_name: DataTypes.STRING,
@@ -11,7 +15,12 @@ module.exports = (sequelize, DataTypes) => {
     phone_number: DataTypes.STRING,
     birth_year: DataTypes.INTEGER,
     gender: DataTypes.STRING
-  }, {});
+  }, { sequelize});
+
+  Cast.beforeCreate( (instance, option) => { //validate by hooks
+    if(!instance.last_name) {instance.last_name = instance.first_name}
+
+  })
 
   Cast.associate = function(models) {
     // associations can be defined here

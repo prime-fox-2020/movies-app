@@ -9,7 +9,7 @@ router.post('/add', MovieController.postAddPage)
 router.get('/edit/:id', MovieController.editPage)
 router.post('/edit/:id', MovieController.postEditPage)
 router.get('/delete/:id', MovieController.delete)
-// router.get('/casts/:id', MovieController.addCast)
-// router.post('/casts/:id', MovieController.postAddCast)
+router.get('/addCast/:id', MovieController.addCast)
+router.post('/addCast/:id', MovieController.postAddCast)
 
 module.exports = router

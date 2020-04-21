@@ -1,0 +1,42 @@
+<%- include('partials/header')%>
+<body>
+    
+    <div class="container mt-5">
+        <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
+    </div>
+    <div class="container-fluid p-5">
+        <h1 class="text-center"> Add Cast</h1>
+        <% if(alert.msg){ %>
+          <div class="alert alert-danger" role="alert">
+              <%= alert.msg %>
+          </div>
+        <% } %>
+        <form action="/casts/add" method="POST">
+            <div class="form-group">
+              <label>First Name</label>
+              <input name="first_name" type="text" class="form-control" placeholder="e.g: John">
+            </div>
+            <div class="form-group">
+                <label>Last name</label>
+                <input name="last_name" type="text" class="form-control" placeholder="e.g: Doe">
+            </div>
+            <div class="form-group">
+                <label>Birth Year</label>
+                <input name="birth_year" type="text" class="form-control" placeholder="e.g: 1950">
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input name="phone_number" type="text" class="form-control" placeholder="e.g: 08012345">
+            </div>
+            <div class="form-group">
+                <label>Gender</label> <br>
+                <input name="gender" type="radio" value="Male"> Male</label>
+                <input name="gender" type="radio" value="Female"> Female</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="/casts"><button type="button" class="btn btn-danger">Cancel</button></a>
+        </form>
+    </div>
+
+</body>
+</html>

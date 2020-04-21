@@ -5,8 +5,6 @@ class HomeController {
         res.render('home')
     }
 
-    // static getList(){ }
-
     static notFound(req, res){
         res.render('error')
     }

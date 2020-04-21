@@ -7,12 +7,24 @@ module.exports = (sequelize, DataTypes) => {
   
   Movie.init({
     name: DataTypes.STRING,
-    released_year: DataTypes.INTEGER,
+    released_year: { // custom validation
+      type : Sequelize.INTEGER,
+      validate : {
+        kabisat(temp){
+          let year = Number(temp)
+          if((year % 4 == 0 && year % 100 != 0) || year % 4 == 0 && year % 100 == 0 && year % 400 == 0){
+            throw new Error('Highly not recommended to release movie on kabisat year')
+          }else if (!year){
+            throw new Error('incorrect value of release year')
+          }
+        }
+      }
+    },
     genre: DataTypes.STRING, 
     ProductionHouseId: DataTypes.INTEGER, //add new PH Id
     rating: DataTypes.INTEGER //add new rating
-  }, {});
-  
+  }, { sequelize });
+
   Movie.associate = function(models) {
     // associations can be defined here
     Movie.belongsTo(models.ProductionHouse)

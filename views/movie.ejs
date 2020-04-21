@@ -35,9 +35,10 @@
                         <td>
                         <a href="/movies/edit/<%=list.id%>"><button type="button" class="btn btn-primary">Edit</button>
                         </a>
-                        <a href="/movies/delete/<%=list.id%>"><button type="button" class="btn btn-danger">Delete</button>
+                        <a href="/movies/delete/<%=list.id%>"onclick="return confirm('Are you sure?')">
+                            <button type="button" class="btn btn-danger">Delete</button>
                         </a>
-                        <a href="/casts/add"><button type="button" class="btn btn-danger">Add Cast</button>
+                        <a href="/movies/addCast/<%=list.id%>"><button type="button" class="btn btn-success">Add Cast to Movie</button>
                         </a>
                         </td>
                     </tr>

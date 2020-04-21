@@ -1,14 +1,15 @@
 const  { Movie, ProductionHouse, Cast, MovieCast } = require('../models')
 
-
 class MovieController {
 
     static show(req, res){
         const alert = req.query
         Movie.findAll(
             { 
-                include: [{model : ProductionHouse}],
-                order : [['released_year', 'DESC']] 
+                include: {
+                    model : ProductionHouse
+                },
+                order : [['released_year', 'DESC']]
             }
         )
         .then( data => {
@@ -16,8 +17,8 @@ class MovieController {
             // res.send(data)
             res.render('movie', {data, alert})
         })
-        .catch( () => {
-            res.render('error')
+        .catch( (err) => {
+            res.render('error', {msg:err})
         })
     }
 
@@ -60,8 +61,8 @@ class MovieController {
                 const msg = `Succesfully added new movie '${req.body.name}'`
                 res.redirect(`/movies?msg=${msg}`)
             })
-            .catch( () => {
-                res.render('error')
+            .catch( (err) => {
+                res.render('error', {msg: err})
             })
         }
     }
@@ -102,8 +103,8 @@ class MovieController {
                 const msg = `Successfully edit selected movie.`
                 res.redirect(`/movies?msg=${msg}`)
             })
-            .catch( () => {
-                res.render('error')
+            .catch( (err) => {
+                res.render('error', {msg: err})
             })
         }
     }
@@ -118,10 +119,56 @@ class MovieController {
             const msg = `Successfully delete selected movie.`
             res.redirect(`/movies?msg=${msg}`)
         })
-        .catch( () =>{
-            res.render('error')
+        .catch( (err) =>{
+            res.render('error' ,{msg: err})
         })
     }
+
+    static addCast(req, res){
+        const alert = req.query
+        let dataCast = null
+        let data = null
+        Cast.findAll()
+        .then( data1 => {
+            dataCast = data1
+            return Movie.findByPk(Number(req.params.id), {include : {model: Cast}})
+        })
+        .then( data2 => {
+            data = data2
+            return MovieCast.findAll({
+                where: {
+                    MovieId : req.params.id
+                }
+            })
+        })
+        .then( movieCast => {
+            // res.send({data, dataCast, movieCast, alert})
+            res.render('add-movieCast', {data, dataCast, movieCast, alert})
+        })
+        .catch( (err) => {
+            // res.send(err)
+            res.render('error', {msg : err})
+        })
+    }
+
+    static postAddCast(req, res){
+        MovieCast.create({
+            MovieId: req.body.MovieId,
+            CastId: req.body.CastId,
+            role: req.body.role
+        })
+        .then( () => {
+            res.redirect(`/movies/addCast/${req.params.id}`)
+        })
+        .catch( err => {
+            const msg = []
+            for(let i = 0; i < err.errors.length; i++){
+                msg.push(err.errors[i].message)
+            }
+            res.redirect(`/movies/addCast/${req.params.id}?msg=${msg.join(', ')}&type=danger`)
+        })
+    }
+
 }
 
 module.exports = MovieController;

@@ -2,6 +2,9 @@
 <body>
     <div class="jumbotron">
         <h1 class="display-4">Page Error - 404!</h1>
+        <% if (msg) { %>
+            <h4><%= msg %></h4>
+        <% } %>
         <p class="lead">We are sorry for the inconvenience, there has been an unfortunate mistake of data proccessing.</p>
         <hr class="my-4">
         <p>Please select option below for further informations of Production Houses.</p>

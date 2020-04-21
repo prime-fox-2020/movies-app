@@ -30,9 +30,15 @@ class MovieController {
     }
 
     static editMovieForm(req, res) {
+        let globalProdHouse = null
+        ProductionHouse.findAll().then(dataProd => {
+            globalProdHouse = dataProd
+        })
         Movie.findByPk(req.params.id).then(data => {
-            // res.send(data)
-            res.render('editmovieform', { data })
+            // res.send({data: [{data}, {globalProdHouse}]})
+            
+            
+            res.render('editmovieform', {data: [{data}, {globalProdHouse}]})
         })
     }
 

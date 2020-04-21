@@ -53,6 +53,7 @@ class MovieController {
     const error = MovieController.validation(req.body)
     const locals = MovieController.getLocals()
     const message = 'New movie added successfully.'
+    const {title, released_year, genre, ProductionHouseId} = req.body
     locals.title = 'Add new movie'
     locals.method = 'add'
     locals.alert.message = error
@@ -64,26 +65,21 @@ class MovieController {
     })
     .then(results => {
       locals.prodHouse = results
-      if (error.length) {
-        res.render('movie/add', locals)
-      } else {
-        const {title, released_year, genre, ProductionHouseId} = req.body
-        Movie.create({
+      return new Promise((resolve, reject) => {
+        if (error.length) return reject(error)
+        return resolve(Movie.create({
           title,
           released_year,
           genre,
           ProductionHouseId
-        })
-        .then(results => {
-          res.redirect(`/movies?message=${message}&type=success`)
-        })
-        .catch(err => {
-          locals.alert.message = [err]
-          res.render('movie/add', locals)
-        })
-      }
+        }))
+      })
+    })
+    .then(results => {
+      res.redirect(`/movies?message=${message}&type=success`)
     })
     .catch(err => {
+      console.log(req.body)
       locals.alert.message = [err]
       res.render('movie/add', locals)
     })    

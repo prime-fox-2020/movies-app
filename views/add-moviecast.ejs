@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/boostrap.ejs') %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Cast Movie</title>
+</head>
+<body>
+    <%- include('./partials/navbar.ejs') %>
+    <div class="container-fluid p-5">
+        <div class="row">
+            <div class="col-sm">
+                <div class="jumbotron">
+                    <h2 style="text-align: center;"><%= movies.name %></h2>
+                </div>
+            </div>
+            
+            <div class="col-sm">
+                <form action="/movies/<%= movies.id %>/add-moviecast" method="POST">
+                    <input name="MovieId" value="<%= movies.id %>" hidden>
+                    <div class="form-group">
+                        <label>Actor</label>
+                        <select name="CastId" class="form-control">
+                            <option selected disabled>Select Cast</option>
+                            <% for(let i = 0; i < casts.length; i++){ %>
+                                <option value="<%= casts[i].id %>"><%= casts[i].getFullName() %></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Role</label>
+                        <input name="role" type="text" class="form-control" placeholder="e.g: Pemeran Utama Wanita">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a href="/movies" class="btn btn-danger">Cancel</a>
+                </form>
+            </div>
+        </div>
+        <div class="container py-5">
+            <h1>List Cast</h1>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Actor</th>
+                        <th scope="col">Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <% for(let i = 0; i < dataMovieCast.length; i++){ %>
+                            <td>
+                                <%= casts[i].first_name %> <%= casts[i].last_name%>
+                            </td>
+                            <td><%= dataMovieCast[i].role %></td>
+                        <% } %>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

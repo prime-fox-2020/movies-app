@@ -7,6 +7,7 @@
     <body>
         <%- include('./partials/navbar.ejs') %>
         <div class="jumbotron">
+            <h2 style="padding-bottom: 30px;">List Movies</h2>
             <% if (alert){ %>
                 <div style="margin-top: -30px; margin-bottom: 10px;" class="alert alert-<%= alert.type %>" role="alert">
                     <%= alert.message %>
@@ -20,6 +21,7 @@
                     <th scope="col">Released year</th>
                     <th scope="col">Genre</th>
                     <th scope="col">Production House</th>
+                    <th scope="col">Rating</th>
                     <th scope="col">Action</th>
                 </tr>
                 </thead>
@@ -30,8 +32,12 @@
                     <td><%= movies[i].released_year %></td>
                     <td><%= movies[i].genre %></td>
                     <td><%= movies[i].ProductionHouseId == null ? "unknown" : movies[i].ProductionHouse.name_prodHouse %></td>
-                    <td><a href="/movies/<%= movies[i].id %>/edit" type="button" class="btn btn-primary btn-sm">Edit</a>
-                        <a href="/movies/<%= movies[i].id %>/delete" type="button" class="btn btn-danger btn-sm">Delete</a></td>
+                    <td><%= movies[i].rating %></td>
+                    <td>
+                        <a href="/movies/<%= movies[i].id %>/edit" type="button" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="/movies/<%= movies[i].id %>/delete" type="button" class="btn btn-danger btn-sm">Delete</a>
+                        <a href="/movies/<%= movies[i].id %>/add-moviecast" type="button" class="btn btn-success btn-sm">Add Cast</a>
+                    </td>
                 </tr>
                 </tbody>
                 <% } %>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('./partials/boostrap.ejs') %>
+        <title>Casts</title>
+    </head>
+    <body>
+        <%- include('./partials/navbar.ejs') %>
+        <div class="jumbotron">
+            <h2 style="padding-bottom: 30px;">List Casts</h2>
+            <% if (alert){ %>
+                <div style="margin-top: -30px; margin-bottom: 10px;" class="alert alert-<%= alert.type %>" role="alert">
+                    <%= alert.message %>
+                </div>
+            <% } %>
+            <a href="/casts/add" class="btn btn-outline-success my-2 my-sm-0" type="submit">Add Cast</a>
+            <table style="margin-top: 10px;" class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Birth Year</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <% for(let i = 0; i < casts.length; i++) { %>
+                <tbody>
+                <tr>
+                    <td><%= casts[i].getFullName() %></td>
+                    <td><%= casts[i].birth_year %></td>
+                    <td><%= casts[i].phone_number %></td>
+                    <td><%= casts[i].gender %></td>
+                    <td><a href="/casts/<%= casts[i].id %>/edit" type="button" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="/casts/<%= casts[i].id %>/delete" type="button" class="btn btn-danger btn-sm">Delete</a>
+                        <a href="/casts/<%= casts[i].id %>/see-movies" type="button" class="btn btn-success btn-sm">See Movies</a>
+                    </td>
+                </tr>
+                </tbody>
+                <% } %>
+            </table>
+        </div>
+    </body>
+</html>

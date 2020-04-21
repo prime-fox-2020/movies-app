@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('./partials/boostrap.ejs') %>
+        <title>Production House</title>
+    </head>
+    <body>
+        <%- include('./partials/navbar.ejs') %>
+        <div class="jumbotron">
+            <% for(let i = 0; i < movies.length; i++) { %>
+            <h2 style="padding-bottom: 30px;"><%= movies[i].Cast.getFullName() %></h2>
+            <% break } %>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Movie</th>
+                        <th scope="col">Released Year</th>
+                        <th scope="col">Age when Movie Released</th>
+                        <th scope="col">Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% movies.forEach(el => { %>
+                        <tr>
+                            <td><%= el.Movie.name %> </td>
+                            <td><%= el.Movie.released_year %> </td>
+                            <td><%= calculateAge(Number(el.Movie.released_year), Number(el.Cast.birth_year)) %> </td>
+                            <td><%= el.role %> </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

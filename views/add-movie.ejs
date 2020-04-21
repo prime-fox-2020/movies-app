@@ -10,7 +10,7 @@
         <div class="jumbotron">
             <% if (error) { %>
                 <div class="alert alert-danger" role="alert">
-                    <%= error %>
+                    <%= error.msg %>
                 </div>
             <% }%>
             <form action="/movies/add" method="POST">
@@ -32,6 +32,17 @@
                         <option value="Horor">horor</option>
                         <option value="Religious">religious</option>
                         <option value="Thriller">thriller</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Rating</label>
+                    <select class="form-control" id="exampleFormControlSelect1" name="rating">
+                        <option selected disabled>1 - 5</option>
+                        <option value="1">1</option>
+                        <option value="1">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button> <a href="/movies" class="btn btn-danger">Cancel</a href="/movies">

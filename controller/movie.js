@@ -1,5 +1,7 @@
 const movieModel = require('../models').Movie
 const phModel = require('../models').ProductionHouse
+const castModel = require('../models').Cast
+const movieCastModel = require('../models').MovieCast
 
 class MovieControl {
     static getList (req, res) {
@@ -12,6 +14,7 @@ class MovieControl {
             ]]
         })
         .then(data => {
+            console.log(data)
             res.render('movie.ejs', {data})
         })
         .catch(err => {
@@ -19,7 +22,8 @@ class MovieControl {
         })
     }
     static add (req, res) {
-        res.render('addMovie.ejs')
+        const error = req.query.error
+        res.render('addMovie.ejs', {error})
     }
     static postAdd (req, res) {
         movieModel.create(req.body)
@@ -27,7 +31,11 @@ class MovieControl {
             res.redirect('/movies')
         })
         .catch(err => {
-            res.send(err, 'Cannot get to here')
+            let error  = []
+            for (let i = 0; i < err.errors.length; i++) {
+                error.push(err.errors[i].message)
+            }
+            res.redirect(`/movies/addMovie/?error=${error.join('')}`)
         })
     }
 
@@ -79,6 +87,45 @@ class MovieControl {
         })
         .catch(err => {
             res.send(err, 'Unable to delete movie')
+        })
+    }
+
+    static addCast (req, res) {
+        let movie;
+        let cast;
+        movieModel.findByPk(Number(req.params.id))
+        .then(data => {
+            movie = data.dataValues
+            return castModel.findAll().then(data => {
+                cast = data
+                return movieCastModel.findAll().then(data => {
+                    // console.log(data)
+                    res.render('addCastToMovie.ejs', {movie, cast, data})
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+            })
+            .catch(err => {
+                res.send(err)
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+    static postAddCast (req, res) {
+        // console.log(req.body)
+        movieCastModel.create({
+            MovieId : req.params.id,
+            CastId : req.body.actor,
+            role: req.body.role
+        })
+        .then(data => {
+            res.redirect('/movies')
+        })
+        .catch(err => {
+            console.log(err)
         })
     }
 }

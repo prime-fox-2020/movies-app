@@ -1,0 +1,23 @@
+<%- include ('./partials/header', {title: 'Add Cast'}) %>
+
+<body>
+    <form action="/cast/addCast" method="POST">
+        <label for="first_name">First Name</label><br>
+        <input type="text" name="first_name" id="first_name"><br>
+        <label for="last_name">Last Name</label><br>
+        <input type="text" name="last_name" id="last_name"><br>
+        <label for="phone_number">Phone Number</label><br>
+        <input type="text" name="phone_number" id="phone_number"><br>
+        <label for="birth_year">Birth Year</label><br>
+        <input type="text" name="birth_year" id="birth_year"><br>
+        <label for="gender">Gender</label><br>
+        <input type="radio" name="gender" id="gender" value="male">
+        <label for="gender">Male</label>
+        <input type="radio" name="gender" id="female" value="female">
+        <label for="female">Female</label><br>
+
+        <button type="submit">Save</button>
+        <button><a href="/cast">Cancel</a></button>
+    </form>
+</body>
+</html>

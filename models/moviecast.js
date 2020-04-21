@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
 
   MovieCast.associate = function(models) {
     // associations can be defined here
+    MovieCast.belongsTo(models.Cast)
   };
   return MovieCast;
 };

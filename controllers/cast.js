@@ -1,4 +1,5 @@
-const { Cast } = require('../models');
+const { Cast, Movie, MovieCast } = require('../models');
+const getAgeWhenReleased = require('../helpers/getAgeWhenReleased')
 
 class CastController {
     static showAll(req, res){
@@ -80,6 +81,23 @@ class CastController {
         )
         .then(() => {
             res.redirect('/casts')
+        })
+        .catch((err) => {
+            res.send(err)
+        })
+    }
+
+    static seeMovies(req, res){
+        Cast.findOne(
+            {
+                where: {
+                    id: req.params.id
+                },
+                include: [Movie, MovieCast]
+            }
+        )
+        .then((data) => {
+            res.render('see-movies-played', {data, getAgeWhenReleased, title: 'See played movies', nav: 'cast'})
         })
         .catch((err) => {
             res.send(err)

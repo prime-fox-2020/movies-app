@@ -21,7 +21,7 @@ class MovieCont {
     static addForm(req, res) {
         ProductionHouse.findAll()
             .then((data) => {
-                res.render('addFormMovie', { data })
+                res.render('addFormMovie', { data, err: req.query.msg })
             }).catch((err) => {
                 res.send(err)
             });
@@ -32,7 +32,8 @@ class MovieCont {
             .then((data) => {
                 res.redirect(`/movies?msg=Success add movie ${req.body.name}`)
             }).catch((err) => {
-                res.send(err)
+                // res.send(err)
+                res.redirect(`/movies/add?msg=${err.errors[0].message}`)
             });
     }
     static editForm(req, res) {
@@ -90,7 +91,7 @@ class MovieCont {
             .then((casts) => {
                 // res.send({ movie, data })
                 data = casts
-                res.render('addCastToMovie', { err: null, movie, data })
+                res.render('addCastToMovie', { err: req.query.msg, movie, data })
             }).catch((err) => {
                 res.send(err)
             });
@@ -105,9 +106,10 @@ class MovieCont {
         }
         MovieCast.create(movieCast)
             .then((data) => {
-                res.redirect(`/movies/${req.params.id}/addCast`)
+                res.redirect(`/movies/${req.params.id}/addCast?msg=Success add cast to movie`)
             }).catch((err) => {
-                res.send(err)
+                // res.send(err)
+                res.redirect(`/movies/${req.params.id}/addCast?msg=${err.errors[0].message}`)
             });
 
     }

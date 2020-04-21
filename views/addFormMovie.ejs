@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-sm navbar-dark fix-top" style="background-color: #3d93d1;">
+    <nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #3d93d1;">
         <div class="container">
             <a class="navbar-brand" href="#">Philem</a>
             <div class="collapse navbar-collapse" id="collapsibleNavId">
@@ -39,10 +39,15 @@
         </div>
     </nav>
 
-    <div class="jumbotron jumbotron-fluid">
+    <div class="jumbotron jumbotron-fluid mt-5">
         <div class="container">
             <h4 class="display-3">Add Form Movie</h4>
             <form action="/movies/add" method="post">
+                <% if (err) { %>
+                <div class="alert alert-danger" role="alert">
+                    <h8><%= err %> </h8>
+                </div>
+                <% } %>
                 <div class="justify-center col-lg-6">
                     <div class="form-group">
                         <label for="">Name</label>
@@ -70,7 +75,7 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button>
-                <a href="/movies"><button class="btn btn-danger">Cancel</button></a>
+                <a href="/movies"><button class="btn btn-danger" type="button">Cancel</button></a>
             </form>
 
         </div>

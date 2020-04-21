@@ -1,4 +1,4 @@
-const {Movie, ProductionHouse} = require('../models')
+const {Movie, ProductionHouse, Cast, MovieCast} = require('../models')
 
 class MovieController {
 
@@ -174,6 +174,60 @@ class MovieController {
       })
       .catch(err => res.redirect(`/movies?message=${err}&type=danger`))
     }
+  }
+
+  static addTalent(req, res) {
+    const locals = MovieController.getLocals()
+    locals.alert = { message: [req.query.message], type: req.query.type }
+    locals.title = 'Add cast:'
+
+    Cast.findAll({
+      attributes: ['id', 'first_name', 'last_name']
+    })
+    .then(results => {
+      locals.casts = results
+      return Movie.findOne({
+        attributes: ['id', 'title'],
+        where: {
+          id: req.params.id
+        }
+      })
+    })
+    .then(results => {
+      locals.movie = results
+      return MovieCast.findAll({
+        include: [{model: Movie}, {model: Cast}],
+        where: {
+          MovieId: req.params.id
+        }
+      })
+    })
+    .then(results => {
+      locals.movieCasts = results
+      res.render('movie/addTalent', locals)
+      // res.send(locals)
+    })
+    .catch(err => res.send(err))
+  }
+
+  static addTalentPost(req, res) {
+    const locals = MovieController.getLocals()
+    const {CastId, role} = req.body
+    const MovieId = Number(req.params.id)
+
+    MovieCast.create({CastId, MovieId, role})
+    .then(results => {
+      res.redirect(`/movies/${MovieId}/add-talent`)
+    })
+    .catch(err => {
+      let errors
+      if (Array.isArray(err.errors)) {
+        errors = err.errors.map(elm => elm.message).join(' ')
+      } else {
+        errors = err
+      }
+      res.redirect(`/movies/${MovieId}/add-talent?message=${errors}&type=danger`)
+    })
   }
 
   static getLocals() {

@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     Movie.belongsTo(models.ProductionHouse)
     Movie.belongsToMany(models.Cast, {through: models.MovieCast})
+    Movie.hasMany(models.MovieCast)
   };
 
   return Movie;

@@ -15,4 +15,8 @@ router.route('/edit/:id')
 router.route('/delete/:id')
   .get(Controller.delete)
 
+router.route('/:id/add-talent')
+  .get(Controller.addTalent)
+  .post(Controller.addTalentPost)
+
 module.exports = router

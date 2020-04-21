@@ -6,13 +6,30 @@ module.exports = (sequelize, DataTypes) => {
   class MovieCast extends Model {}
 
   MovieCast.init({
-    MovieId: DataTypes.INTEGER,
-    CastId: DataTypes.INTEGER,
-    role: DataTypes.STRING
+    MovieId: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    },
+    CastId: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    },
+    role: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    }
   }, {sequelize});
 
   MovieCast.associate = function(models) {
     // associations can be defined here
+    MovieCast.belongsTo(models.Movie)
+    MovieCast.belongsTo(models.Cast)
   };
   
   return MovieCast;

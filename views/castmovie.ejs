@@ -1,0 +1,30 @@
+<%- include('partials/header', {title: data.fullName()}) %>
+
+<div class="container">
+  <div class="alert alert-info">
+    <h1><%= data.fullName() %></h1>
+  </div>
+
+  <table class="table mt-3">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Movie</th>
+        <th scope="col">Released Year</th>
+        <th scope="col">Age when Movie Released</th>
+        <th scope="col">Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% data.Movies.forEach(el => { %>
+        <tr>
+          <td><%= el.name %></td>
+          <td><%= el.released_year %></td>
+          <td><%= ageReleased(data.birth_year, el.released_year) %></td>
+          <td><%= el.MovieCast.role %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/footer') %>

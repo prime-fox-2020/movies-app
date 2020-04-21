@@ -1,0 +1,24 @@
+<%- include('partials/header', {title: 'Production Houses'}) %>
+
+<div class="container">
+  <h1>Production Houses</h1>
+
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Headquarters</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% data.forEach(el => { %>
+        <tr>
+          <td><%= el.name_prodHouse %></td>
+          <td><%= el.headquarters %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/footer') %>

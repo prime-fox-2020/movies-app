@@ -18,7 +18,7 @@ class MovieController {
     }
 
     static showForm(req, res){
-        res.render('add-form', { title: 'Add New Movie', nav: 'movie'})
+        res.render('add-movie-form', { title: 'Add New Movie', nav: 'movie'})
     }
 
     static addProcess(req, res){
@@ -63,7 +63,7 @@ class MovieController {
         })
         .then((data) => {
             movie = data
-            res.render('edit-form', { movie, ph, title: 'Edit Movie', nav: 'movie' })
+            res.render('edit-movie-form', { movie, ph, title: 'Edit Movie', nav: 'movie' })
         })
         .catch(err => {
             res.send(err)   

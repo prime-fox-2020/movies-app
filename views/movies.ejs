@@ -18,7 +18,7 @@
           <a class="nav-link active" href="/movie">Movies</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Casts</a>
+          <a class="nav-link" href="/cast">Casts</a>
         </li>
     </ul>
     <br>
@@ -36,6 +36,7 @@
                 <th scope="col">Released Year</th>
                 <th scope="col">Genre</th>
                 <th scope="col">Production House</th>
+                <th scope="col">Rating</th>
                 <th scope="col" colspan="2">Action</th>
               </tr>
             </thead>
@@ -46,13 +47,11 @@
                     <td><%= data[i].name %></td>
                     <td><%= data[i].released_year %></td>
                     <td><%= data[i].genre %></td>
-                    <% if(!data[i].ProductionHouseId) { %>
-                        <td>Unknown</td>
-                    <% } else { %>
-                        <td><%= data[i].ProductionHouse.name_prodHouse %></td>
-                    <% }%>
+                    <td><%= data[i].ProductionHouse.name_prodHouse %></td>
+                    <td><%= data[i].rating %></td>
                     <td><a class="btn btn-info" href="/movie/edit/<%= data[i].id %>" role="button">Edit</a></td>
                     <td><a class="btn btn-info" href="/movie/delete/<%= data[i].id %>" role="button">Delete</a></td>
+                    <td><a class="btn btn-info" href="#" role="button">Add Cast</a></td>
                   </tr>
                 </tbody>
             <% } %>

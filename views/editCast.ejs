@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>Add Movies Page</title>
+    <title>Add Cast Page</title>
 </head>
 <body>
     <ul class="nav nav-pills">
@@ -15,55 +15,49 @@
           <a class="nav-link" href="/prodHouse">Production House</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="/movie">Movies</a>
+          <a class="nav-link" href="/movie">Movies</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/cast">Casts</a>
+          <a class="nav-link active" href="/cast">Casts</a>
         </li>
     </ul>
     <br>
-    <h1>Add New Movie</h1><br>
+    <h1>Add New Cast</h1><br>
     <% if(alert.msg) { %>
         <%= alert.msg %>
     <% } %>
     <!-- Form script -->
-    <form action="/movie/add" method="POST">
+    <form action="/cast/edit/<%= data.id %>" method="POST">
         <div class="form-group">
-          <label for="exampleFormControlInput1">Name</label>
-          <input type="text" class="form-control" name="name" placeholder="e.g: Inspector Gadget">
+          <label for="exampleFormControlInput1">First Name</label>
+          <input type="text" class="form-control" name="first_name" placeholder="e.g: John" value="<%= data.first_name %>">
         </div>
         <div class="form-group">
-            <label for="exampleFormControlInput1">Released Year</label>
-            <input type="text" class="form-control" name="released_year" placeholder="e.g: 2008">
+            <label for="exampleFormControlInput1">Last Name</label>
+            <input type="text" class="form-control" name="last_name" placeholder="e.g: Doe" value="<%= data.last_name%>">
         </div>
         <div class="form-group">
-          <label for="exampleFormControlSelect1" >Genre</label>
-          <select class="form-control" name="genre">
-            <option selected>---SELECT---</option>
-            <option value="animation">animation</option>
-            <option value="comedy">comedy</option>
-            <option value="drama">drama</option>
-            <option value="horror">horror</option>
-            <option value="religious">religious</option>
-            <option value="thriller">thriller</option>
-          </select>
+            <label for="exampleFormControlInput1">Birth Year</label>
+            <input type="text" class="form-control" name="birth_year" placeholder="1950" value="<%= data.birth_year %>">
         </div>
         <div class="form-group">
-            <label> Production House </label>
-            <select class="form-control" name="ProductionHouseId">
-                <option value="null" selected>---Production House---</option>
-                <% for(let i = 0; i<data.length; i++) { %>
-                    <option value="<%= data[i].id %>"> <%= data[i].name_prodHouse%></option>
-                <% } %>
-            </select>
+            <label for="exampleFormControlInput1">Phone Number</label>
+            <input type="text" class="form-control" name="phone_number" placeholder="1950" value="<%= data.phone_number%>">
         </div>
         <div class="form-group">
-          <label for="exampleFormControlInput1">Rating</label>
-          <input type="text" class="form-control" name="rating" placeholder="1-5">
+        <label for="exampleFormControlSelect1" >Gender</label><br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gender" value="Male" <%= data.gender == "Male" ? 'checked' : "" %>>
+            <label class="form-check-label">Male</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gender" value="Female" <%= data.gender == "Female" ? 'checked' : "" %>>
+            <label class="form-check-label">Female</label>
+          </div>
         </div>
         <div class="form-group">
-            <button class="btn btn-primary" type="submit">Submit</button>
-            <a class="btn btn-danger" href="/movie" role="button">Cancel</a>
+            <button class="btn btn-primary" type="submit">Save</button>
+            <a class="btn btn-danger" href="/cast" role="button">Cancel</a>
         </div>
       </form>
     

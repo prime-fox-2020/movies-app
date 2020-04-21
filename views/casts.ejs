@@ -14,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-      <% let a %>
+      <% let castId %>
       <% for(let cast of casts) { %>
       <tr>
         <td><%= cast.getFullName() %></td>
@@ -23,7 +23,7 @@
         <td><%= cast.gender %></td>
         <td>
           <a href="/casts/<%= cast.id %>/edit" class="btn btn-info">Edit</a>
-          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#delete">Delete<% a = cast.id %></button>
+          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#delete">Delete<% castId = cast.id %></button>
           <a href="/casts/<%= cast.id %>/movies" class="btn btn-info">See Movies</a>
         </td>
       </tr>
@@ -44,7 +44,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <a id="reallyDelete" href="/casts/<%= a %>/delete" class="btn btn-danger">Yes, i am sure</a>
+              <a id="reallyDelete" href="/casts/<%= castId %>/delete" class="btn btn-danger">Yes, i am sure</a>
             </div>
           </div>
         </div>

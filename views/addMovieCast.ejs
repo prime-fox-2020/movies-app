@@ -49,6 +49,9 @@
             <%}%>
         </select><br><br>
 
+        <%if (error) {%>
+            <p><%=error%></p> 
+        <%}%>
         <label>Role:</label><br>
         <input type="text" name="role"><br><br>
             

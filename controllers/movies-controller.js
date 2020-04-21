@@ -215,11 +215,16 @@ class MoviesController {
         })
         .then(data => {
             console.log(data)
-            res.redirect(`/movies/add-cast/${req.params.id}?error=Berhasil menambahkan cast`);
+            res.redirect(`/movies/add-cast/${req.params.id}?pesan=Berhasil menambahkan cast`);
             
         })
         .catch(err => {
-            res.send(err)
+            let errors = []
+            for (let i = 0; i < err.errors.length; i++) {
+                errors.push(err.errors[i].message)
+            }
+            res.redirect(`/movies/add-cast/${req.params.id}?error=${errors[0]}`);
+            // res.send(errors)
         })
     }
 }

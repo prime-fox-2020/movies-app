@@ -1,6 +1,6 @@
 <%- include('partials/header') %>
 
-<form action="/casts/edit/<%= data.id %> " method="POST">
+<form action="/casts/edit/<%= data.id %>" method="POST">
   <div class="form-group">
     <label for="first_name">First Name</label>
     <input type="text" class="form-control" id="first_name" placeholder="e.g.: John" name="first_name" required value="<%= data.first_name %>">

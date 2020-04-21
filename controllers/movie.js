@@ -1,4 +1,4 @@
-const { Movie, ProductionHouse } = require('../models');
+const { Movie, ProductionHouse, Cast, MovieCast } = require('../models');
 
 class MovieController {
     static showAll(req, res){
@@ -89,6 +89,47 @@ class MovieController {
         })
         .catch(err => {
             res.send(err)
+        })
+    }
+
+    static showAddCast(req, res){
+        let error = req.query
+        let movie, castList
+        Movie.findOne({
+            where: {
+              id: req.params.id
+            },
+            include: [Cast]
+        })
+        .then((data) => {
+            movie = data
+            return Cast.findAll()
+        })
+        .then((data) => {
+            castList = data
+            res.render('add-cast-in-movie', {movie, castList, error, title: 'Add Cast in Movie', nav: 'movie'})
+        })
+        .catch((err) => {
+            res.send(err)
+        })
+    }
+
+    static addCastProcess(req, res){
+        MovieCast.create({
+            CastId: req.body.cast,
+            MovieId: req.params.id,
+            role: req.body.role
+        })
+        .then(() => {
+            res.redirect(`/movies/add-cast/${req.params.id}`)
+        })
+        .catch(err => {
+            // const errors = []
+            // for(let i = 0; i < err.length; i++){
+            //     errors.push(err.errors[i].message)
+            // }
+            res.redirect(`/movies/add-cast/${req.params.id}?error=${err.errors[0].message}`)
+            // res.send(err)
         })
     }
 }

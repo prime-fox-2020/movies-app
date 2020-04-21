@@ -1,0 +1,48 @@
+<%- include('partials/header') %>
+
+<h4><%= movie.name %></h4>
+
+<form action="/movies/add-cast/<%= movie.id %>" method="POST">
+    <% if (error || error.length > 0) { %>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <%= JSON.stringify(error.error) %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <% } %>
+    <div class="form-group">
+        <label for="cast">Actor:</label>
+        <select class="form-control" id="cast" name="cast" required>
+            <% for(let i = 0; i < castList.length; i++){ %> 
+            <option value="<%= castList[i].id %>"><%= castList[i].getFullName() %></option>
+            <% } %> 
+        </select>
+      </div>
+    <div class="form-group">
+      <label for="role">Role:</label>
+      <input type="text" class="form-control" id="role" placeholder="e.g.: Pemeran utama wanita" name="role">
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>  <a class="btn btn-danger" href="/movies" role="button">Cancel</a>
+</form><br><br>
+
+<h4>List Cast</h4>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+        <th scope="col">Actor</th>
+        <th scope="col">Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for( let i = 0; i < movie.Casts.length; i++ ) { %>
+            <tr>
+                <td><%= movie.Casts[i].getFullName() %></td>
+                <td><%= movie.Casts[i].MovieCast.role %></td>
+                </tr>
+        <% } %>
+    </tbody>
+</table>
+
+
+<%- include('partials/footer') %>

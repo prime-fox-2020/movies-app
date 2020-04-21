@@ -1,4 +1,4 @@
-const {Movies, ProductionHouse} = require('../models')
+const {Movies, ProductionHouse, Cast, MovieCast} = require('../models')
 
 class MoviesController {
     static showMovies(req, res) {
@@ -165,6 +165,58 @@ class MoviesController {
                 pesan = ''
                 res.render("movie-by-id.ejs", {dataById, queryBody, pesan})
             }
+        })
+        .catch(err => {
+            res.send(err)
+        })
+    }
+
+    static getAddCastForm(req, res) {
+        let error = req.query.error  
+        let dataMovie = null
+        let dataProdHouse = null
+        let dataCast = null
+        let id = req.params.id
+        let pesan = req.query.pesan
+        Movies.findByPk(id, {include: {model: ProductionHouse}})
+        .then(data => {
+            dataMovie = data.dataValues            
+            return ProductionHouse.findAll()              
+        })
+        .then(prodHouseData => {
+            dataProdHouse = prodHouseData
+            return Cast.findAll()
+        })
+        .then(castData => {
+            dataCast = castData
+            return MovieCast.findAll({include: {model: Cast}, where : {"MovieId": id}})
+        })
+        .then(dataMovieCast => {
+            console.log('getAddCastForm: ', dataMovieCast);
+            res.render('addMovieCast.ejs', {id, dataMovie, error, dataProdHouse, dataCast, dataMovieCast, pesan})
+            
+        })
+        .catch(err => {
+            res.send(err)
+        })
+    }
+    
+    static postAddCast(req, res) {
+        let actorId = Number(req.body.actor)
+        let actorRole = req.body.role
+        let movie_id = req.params.id
+        console.log('movie id: ', movie_id)
+        console.log('actor id: ', actorId);
+        console.log('actor role: ', actorRole);
+        MovieCast.create({
+            "MovieId": movie_id,
+            "CastId": actorId,
+            "role": actorRole
+        })
+        .then(data => {
+            console.log(data)
+            res.redirect(`/movies/add-cast/${req.params.id}?error=Berhasil menambahkan cast`);
+            
         })
         .catch(err => {
             res.send(err)

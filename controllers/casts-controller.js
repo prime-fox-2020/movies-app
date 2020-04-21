@@ -1,4 +1,4 @@
-const {Cast, Movies} = require('../models')
+const {Cast, Movies, MovieCast} = require('../models')
 
 class CastsController {
     static showCasts(req, res) {
@@ -94,6 +94,18 @@ class CastsController {
             res.redirect(`/casts?pesan=Berhasil delete data cast dengan id ${id}`)
         })
         .catch()
+    }
+
+    static seeMovies(req, res) {
+        let id = req.params.id
+        Cast.findByPk(id, {include: [{model: Movies}, {model: MovieCast}]})
+        .then(dataCast => {
+            console.log(dataCast);
+            res.render("seeMovies.ejs", {dataCast})
+        })
+        .catch(err => {
+            res.send(err)
+        })
     }
 }
 

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add movie cast page</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/movies">List Movies</a></li>
+            <li><a href="/phouses">List Production Houses</a></li>
+            <li><a href="/casts">List Casts</a></li>
+            <li><a href="/">Home</a></li>
+        </ul>
+    </nav>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>MOVIES</td>
+                <td>RELEASED YEAR</td>
+                <td>GENRE</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><%=dataMovie.id%></td>
+                <td><%=dataMovie.name%></td>
+                <td><%=dataMovie.released_year%></td>
+                <td><%=dataMovie.genre%></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>ADD CAST:</h3>
+    <form action="/movies/add-cast/<%=id%>" method="post">
+        
+        <label>Actor:</label><br>
+        <select name="actor">
+            <% for (let i in dataCast) {%>
+                <option value="<%=dataCast[i].id%>"><%=dataCast[i].getFullName()%></option>
+            <%}%>
+        </select><br><br>
+
+        <label>Role:</label><br>
+        <input type="text" name="role"><br><br>
+            
+        <button type="submit">Save</button>
+        <button><a href="/movies">Cancel</a></button>
+    </form>
+    <br><br>
+    <table border="1">
+        <thead>
+            <tr>
+                <td>ACTOR</td>
+                <td>ROLE</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let i in dataMovieCast) {%>
+                <tr>
+                    <td><%=dataMovieCast[i].Cast.getFullName()%></td>
+                    <td><%=dataMovieCast[i].role%></td>
+                </tr>
+            <%}%>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -21,12 +21,6 @@
     
     <h1>LIST CASTS</h1>
 
-    <!-- <form action="/casts/:id" method="post">
-        <label>Search Casts by Id</label> <br>
-        <input type="text" name="casts_by_id"><br>
-        <button type="submit">Search</button> <br><br>
-    </form> -->
-
     <button><a href="/casts/add">Add new cast</a></button>
 
     <%if(pesan){%>
@@ -54,7 +48,7 @@
                     <td><%=dataCast[i].gender%></td>
                     <td><button><a href="/casts/edit/<%=dataCast[i].id%>">EDIT</a></button></td>
                     <td><button onclick="return confirm('Apakah anda ingin menghapus data Cast bernama <%=dataCast[i].getFullName()%>')"><a href="/casts/delete/<%=dataCast[i].id%>">DELETE</a></button></td>
-                    <td><button><a href="/casts/:id/<%=dataCast[i].id%>">See Movies</a></button></td>
+                    <td><button><a href="/casts/see-movies/<%=dataCast[i].id%>">See Movies</a></button></td>
                 </tr>
             <%}%>
         </tbody>

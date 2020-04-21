@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add movie cast page</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/movies">List Movies</a></li>
+            <li><a href="/phouses">List Production Houses</a></li>
+            <li><a href="/casts">List Casts</a></li>
+            <li><a href="/">Home</a></li>
+        </ul>
+    </nav>
+
+
+    <h3>Actor atau Actress:</h3>
+    <h1><%=dataCast.getFullName()%></h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <td>MOVIES</td>
+                <td>RELEASED YEAR</td>
+                <td>AGE WHEN MOVIE RELEASED</td>
+                <td>ROLE</td>
+            </tr>
+        </thead>
+        <tbody>
+            <%for (let i in dataCast) {%>
+                <%for (let j in dataCast[i].Movies) {%>
+                    <tr>
+                        <td><%=dataCast[i].Movies[j].name%></td>
+                        <td><%=dataCast[i].Movies[j].released_year%></td>
+                        <td><%=dataCast[i].birth_year%></td>
+                        <td><%=dataCast[i].MovieCasts[j].role%></td>
+                    </tr>        
+                <%}%>
+            <%}%>
+        </tbody>
+    </table>
+
+    
+</body>
+</html>

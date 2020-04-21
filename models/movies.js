@@ -7,7 +7,16 @@ module.exports = (sequelize, DataTypes) => {
 
   Movies.init({
     name: DataTypes.STRING,
-    released_year: DataTypes.INTEGER,
+    released_year: {
+      type: DataTypes.INTEGER,
+      validate: {
+        isKabisat(value) {
+          if ((value % 4 == 0 && value % 100 != 0) || (value % 4 == 0 && value % 100 == 0 && value % 400 == 0)) {
+            throw new Error('Tidak bisa add movies yang release pada tahun kabisat')
+          }
+        }
+      }
+    },
     genre: DataTypes.STRING,
     ProductionHouseId: DataTypes.INTEGER
   }, {sequelize});

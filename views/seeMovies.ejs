@@ -39,7 +39,7 @@
                     <tr>
                         <td><%=dataCast[i].Movies[j].name%></td>
                         <td><%=dataCast[i].Movies[j].released_year%></td>
-                        <td><%=getAgeReleased(dataCast[i].Movies[j].released_year, dataCast[i].birth_year)%></td>
+                        <td><%=getAgeReleased(dataCast[i].Movies[j].released_year, dataCast[i].birth_year)%> years old</td>
                         <td><%=dataCast[i].MovieCasts[j].role%></td>
                     </tr>        
                 <%}%>

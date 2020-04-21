@@ -19,9 +19,10 @@ class MoviesController {
         let pesan = req.query.pesan
         let id = req.params.id
         let error = req.query.error
+        let errorKabisat = req.query.errorKabisat
         ProductionHouse.findAll()
         .then(dataProdHouse => {
-            res.render("add-movies.ejs", {pesan, id, dataProdHouse, error})
+            res.render("add-movies.ejs", {pesan, id, dataProdHouse, error, errorKabisat})
         })
         .catch(error => {
             res.send(error)
@@ -43,7 +44,7 @@ class MoviesController {
         if (req.body.released_year === '' || req.body.released_year === undefined) {
             res.redirect('/movies/add?error=Released Year harus diisi')
         } else if (req.body.released_year) {
-            if (req.body.released_year < 2021 && req.body.released_year > 999) {
+            if (req.body.released_year < 2051 && req.body.released_year > 999) {
                 ry = true
             } else {
                 res.redirect('/movies/add?error=Released Year Tidak Valid')
@@ -67,7 +68,11 @@ class MoviesController {
                 res.redirect(`/movies?pesan=berhasil menambah movie dengan judul ${queryBody.name}`)
             })
             .catch(err => {
-                res.send(err)
+                let errors = []
+                for (let i = 0; i < err.errors.length; i++) {
+                    errors.push(err.errors[i].message)
+                }
+                res.redirect(`/movies/add?errorKabisat=${errors[0]}`)
             })
         }
     }
@@ -104,7 +109,7 @@ class MoviesController {
         if (req.body.released_year === '' || req.body.released_year === undefined) {
             res.redirect(`/movies/edit/${req.params.id}?error=Released Year harus diisi`)
         } else if (req.body.released_year) {
-            if (req.body.released_year < 2021 && req.body.released_year > 999) {
+            if (req.body.released_year < 2051 && req.body.released_year > 999) {
                 ry = true
             } else {
                 res.redirect(`/movies/edit/${req.params.id}?error=Released Year Tidak Valid`)

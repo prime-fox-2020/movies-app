@@ -4,7 +4,7 @@ class Controller{
 
     static findAll(req,res){
         ProductionHouse.findAll({
-            // order: [['name', 'asc']],
+            order: [['name_prodHouse', 'asc']],
             // include: [{ model: Movie }]
         })
         .then(data => {

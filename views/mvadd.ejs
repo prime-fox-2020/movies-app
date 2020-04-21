@@ -12,7 +12,7 @@
             <br>
             <label for = "">Name</label>
             <br>
-            <input type="text" name="name" value="eg : Boogle 1"> 
+            <input type="text" name="name" value="eg : Boogle 1 " > 
             <br> 
             <label for = "">Released Year</label>
             <br>
@@ -27,10 +27,10 @@
                 </select>
             <br>
             <label for="production_house">Production House</label><br>
-                <select name="ph">
-                    <% const listPH =['','Walt Disney Studios','Pixar','Warner Bros','Universal Pictures','Paramount Picture'] %>
-                    <% for(let i =0; i<listPH.length;i++){ %>
-                          <option value="<%= listPH[i] %>"><%= listPH[i] %></option>
+                <select name="phId">
+                    <option value=""> </option>
+                    <% for(let i =0; i < data.length ; i++){ %>
+                          <option value="<%= data[i].id %>"><%= data[i].name_prodHouse %></option>
                       <% } %>
                 </select>
             <br>

@@ -12,15 +12,14 @@
         <th scope="col">Released Year</th>
         <th scope="col">Genre</th>
         <th scope="col">Production House</th>
-        <!-- <th scope="col">Rating</th> -->
         <th scope="col">Action</th>
       </tr>
     </thead>
     <% for(let i = 0; i < data.length; i++) {%>
       <tr>
-        <td ><%=data[i].name%></td>
-        <td ><%=data[i].released_year%></td>
-        <td ><%=data[i].genre%></td>
+        <th ><%=data[i].name%></th>
+        <th ><%=data[i].released_year%></th>
+        <th ><%=data[i].genre%></th>
         <% if(!data[i].ProductionHouseId){ %>
             <td>unknown</td>
             <% } else { %>

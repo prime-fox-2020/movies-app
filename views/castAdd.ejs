@@ -10,16 +10,8 @@
       <input type="text" name="name" placeholder="Name" ><br>
       <label>Released year</label>
       <input type="text" name="released_year" placeholder="released_year"><br>
-      <label>Production House</label>
-      <select name="productionHouseId" >
-        <option value="" selected disabled>--Production House--</option>
-          <%for(let i= 0; i < data.length; i++) {%>
-            <option value="<%=data[i].id%>"><%= data[i].name_prodHouse%></option>
-          <% }%>
-        </select><br>
-          <label>Genre</label>
       <select name="genre" id="genreSelect">
-            <option value="" selected disabled>--Genre--</option>
+            <option value="" disabled selected disabled>--Genre--</option>
             <option value="animation">animation</option>
             <option value="comedy">comedy</option>
             <option value="drama">drama</option>
@@ -27,10 +19,7 @@
             <option value="religious">religious</option>
             <option value="thriller">thriller</option>
         </select><br>
-        <!-- <label>Rating</label> -->
-        <!-- <input name="rating" type="text" class="form-control" placeholder="1-5"> -->
-      <a href="/movie"><button type="submit">Save</button></a>
-
+      <button type="submit">Submit</button>
     </form><br>
   </body>
 </html>

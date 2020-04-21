@@ -6,9 +6,9 @@ const MC = require('../controller/MovieController');
 routes.get('/', MC.show);
 routes.get('/add', MC.addForm);
 routes.post('/add', MC.add);
-routes.get('/edit/:id', MC.editForm);
-routes.post('/edit/:id', MC.edit);
-routes.get('/delete/:id', MC.delete);
+routes.get('/:id/edit', MC.editForm);
+routes.post('/:id/edit', MC.edit);
+routes.get('/id:/delete', MC.delete);
 
 
 module.exports = routes;

@@ -14,14 +14,28 @@ class MovieController {
   }
 
   static addForm(req, res){
-    res.render('add');
+    PHM.findAll()
+    .then(data => {
+      res.render('add', {data})
+    })
+    .catch(err => {
+      res.send(err);
+    })
    }
 
    static add(req, res){
+     let rating
+      if(!req.body.rating){
+          rating = null
+      } else {
+          rating = Number(req.body.rating)
+      }
      MM.create({
        name: req.body.name,
        released_year: req.body.released_year,
        genre: req.body.genre,
+       ProductionHouseId: req.body.ProductionHouseId,
+       rating : rating
      })
      .then(data => {
        res.redirect('/movie');
@@ -32,7 +46,7 @@ class MovieController {
   }
 
   static editForm(req, res) {
-    MM.findByPK(Number(req.params.id))
+    MM.findByPk(Number(req.params.id))
     .then(data => {
          res.render('edit', {data})
       })
@@ -42,15 +56,22 @@ class MovieController {
   }
 
   static edit(req, res) {
+    let rating
+      if(!req.body.rating){
+          rating = null
+      } else {
+          rating = Number(req.body.rating)
+      }
     MM.update({
       name : req.body.name,
       released_year : req.body.released_year,
       genre : req.body.genre,
       released_year: req.body.released_year,
-      ProductionHouseId : req.body.productionHouse
+      ProductionHouseId : req.body.ProductionHouseId,
+      rating: rating
     },
-    {
-      where : {id : req.params.id}
+  {
+      where : {id : Number(req.params.id)}
         })
         .then (data => {
             res.redirect('/movie')

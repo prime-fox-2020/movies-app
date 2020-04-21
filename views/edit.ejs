@@ -5,14 +5,25 @@
     <title></title>
   </head>
   <body>
-    <form action="/students/add" method="post">
+    <form action="/movie/edit" method="post">
       <label>Name</label>
-      <input type="text" name="name" placeholder="First Name" ><br>
-      <label>Last Name</label>
-      <input type="text" name="released_year" placeholder="released_year"><br>
-      <label>Email</label>
-      <input type="text" name="genre" placeholder="genre" ><br>
-      <button type="submit">Submit</button>
+      <input type="text" name="name" value="<%=data.name%>" ><br>
+      <label>Released year</label>
+      <input type="text" name="genre" value="<%=data.released_year%>"><br>
+      <label>Genre</label>
+      <select name="genre" id="genreSelect">
+            <option value="<%=data.genre%>">--Genre--</option>
+            <option value="animation">animation</option>
+            <option value="comedy">comedy</option>
+            <option value="drama">drama</option>
+            <option value="horror">horror</option>
+            <option value="religious">religious</option>
+            <option value="thriller">thriller</option>
+        </select><br>
+      <label>Production House</label>
+      <input type="text" name="productionHouseId" value="<%=data.ProductionHouseId%>"><br>
+
+    <a href="/movie"><button type="submit">Submit</button></a>
     </form><br>
   </body>
 </html>

@@ -1,0 +1,35 @@
+<%- include('./partials/head')%>
+<style>
+  form {
+    margin: 0 auto;
+    width:250px;
+  }
+</style>
+<% if(error) {%>
+  <div class="alert alert-danger" role="alert">
+    <%= error %>
+  </div>
+  <% } %>
+<form action="/casts/add" method="POST">
+  <div class="form-group mb-2">
+      <label for="exampleFormControlInput1">First Name</label>
+      <input type="text" name='first_name' class="form-control" id="exampleFormControlInput1" placeholder=""><br>
+
+      <label for="exampleFormControlInput1">Last Name</label>
+      <input type="text" name='last_name' class="form-control" id="exampleFormControlInput1" placeholder=""><br>
+
+      <label for="exampleFormControlInput1">Birth Year</label>
+      <input type="text" name='birth_year' class="form-control" id="exampleFormControlInput1" placeholder="e.g: 1995"><br>
+
+      <label for="exampleFormControlInput1">Phone Number</label>
+      <input type="text" name='phone_number' class="form-control" id="exampleFormControlInput1" placeholder="e.g: 0857123123123"><br>
+
+      <label for="exampleFormControlInput1">Gender</label><br>
+      <input type="radio" name='gender' value='male'>male
+      <input type="radio" name='gender' value='female'>female
+      <br><br>
+      <button type="submit" class="btn btn-primary">Submit</button>    <a href="/movies" type="submit" class="btn btn-danger">Cancel</a>
+    </div>
+</form>
+
+<%- include('./partials/foot')%>

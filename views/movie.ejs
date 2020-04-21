@@ -1,6 +1,4 @@
 <%- include('./partials/head')%>
-
-
 <table class="table table-hover">
   <thead>
     <tr>
@@ -25,7 +23,8 @@
         <% } %>
         <td>
           <a href='/movies/<%= data[i].id %>/edit' type="button" class="btn btn-primary">EDIT</button>
-          <a href="/movies/<%= data[i].id %>/delete" type="button" class="btn btn-danger">DELETE</a></td>
+          <a href="/movies/<%= data[i].id %>/delete" type="button" class="btn btn-danger" onclick="return confirm('are you want to delete <%= data[i].name%>?')">DELETE</a>
+          <a href="/movies/<%= data[i].id %>/addcast" type="button" class="btn btn-primary">ADD CAST</a></td>
       </tr>
       <% } %>
   </tbody>

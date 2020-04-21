@@ -1,0 +1,58 @@
+<%- include('./partials/head')%>
+<style>
+  form {
+    margin: 0 auto;
+    width:250px;
+  }
+</style>
+<% if(error) {%>
+  <div class="alert alert-danger" role="alert">
+    <%= error %>
+  </div>
+  <% } %>
+<form action="/movies/<%= movie.id %>/addcast" method="POST">
+  <div class="form-group mb-2">
+
+    <h3>Add Cast on <%= movie.name %></h3>
+
+    <label>Actor</label>
+    <select name="listCastId" class="form-control" id="exampleFormControlInput1">
+    <option selected disabled>Select Actor</option>
+      <% for(let i = 0; i < listCast.length; i++){ %>
+      <option value="<%= listCast[i].id %>"><%= listCast[i].fullname() %></option>
+      <% } %>
+    </select><br>
+
+
+    <label for="exampleFormControlInput1">Role</label>
+      <input type="text" name='role' class="form-control" id="exampleFormControlInput1" placeholder=""><br>
+
+
+
+      <button type="submit" class="btn btn-primary">Submit</button>    <a href="/movies" type="submit" class="btn btn-danger">Cancel</a>
+    </div>
+</form>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Actor</th>
+      <th scope="col">Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(let i = 0; i < movie.Casts.length;i++){%>
+      <% for(let j = 0; j < listCast.length;j++){%>
+      <tr>
+        <% if (movie.Casts[i].id === listCast[j].id) {%>
+        <td><%= listCast[j].fullname() %></td>
+        <td><%= movie.Casts[i].MovieCast.role %></td>
+        <% } %>
+      </tr>
+      <% } %>
+      <% } %>
+  </tbody>
+</table>
+
+
+<%- include('./partials/foot')%>

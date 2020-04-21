@@ -1,0 +1,30 @@
+<%- include('./partials/head')%>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Birth Year</th>
+      <th scope="col">Phone Number</th>
+      <th scope="col">gender</th>
+      <th scope='col'>Action</th>
+      <th><a href='/casts/add' type="button" class="btn btn-primary btn-lg" >Add Cast</a><br><br></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(let i = 0; i < data.length;i++){%>
+      <tr>
+        <td><%= data[i].fullname() %></td>
+        <td><%= data[i].birth_year %></td>
+        <td><%= data[i].phone_number %></td>
+        <td><%= data[i].gender %></td>
+        <td>
+          <a href='/casts/<%= data[i].id %>/edit' type="button" class="btn btn-primary">Edit</button>
+          <a href="/casts/<%= data[i].id %>/delete" type="button" class="btn btn-danger" onclick="return confirm('are you want to delete <%= data[i].name%>?')">Delete</a>
+          <a href='/casts/<%= data[i].id %>/seeMovies' type="button" class="btn btn-primary">See Movies</button></td>
+        </tr>
+      <% } %>
+  </tbody>
+</table>
+
+
+<%- include('./partials/foot')%>

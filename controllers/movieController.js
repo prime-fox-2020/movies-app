@@ -1,4 +1,4 @@
-const { Movie, ProductionHouse } = require("../models");
+const { Movie, ProductionHouse, Cast, MovieCast } = require("../models");
 
 class MovieController {
   static show(req, res) {
@@ -15,31 +15,30 @@ class MovieController {
   }
 
   static addForm(req, res) {
-    res.render("addmovie", {error:null});
+    const error = req.query.error;
+    res.render("addmovie", { error });
   }
 
   static add(req, res) {
-    const errors = MovieController.validate(req.body);
-    if (errors.length > 0) {
-
-      res.render('addmovie', {error:errors.join(', ')})
-
-    } else {
-      Movie.create({
-        name: req.body.name,
-        released_year: req.body.released_year,
-        genre: req.body.genre,
+    Movie.create({
+      name: req.body.name,
+      released_year: req.body.released_year,
+      genre: req.body.genre,
+    })
+      .then(() => {
+        res.redirect("/movies");
       })
-        .then(() => {
-          res.redirect("/movies");
-        })
-        .catch((err) => {
-          res.send(err);
-        });
-    }
+      .catch((err) => {
+        let error = [];
+        for (let i = 0; i < err.errors.length; i++) {
+          error.push(err.errors[i].message);
+        }
+        res.redirect(`/movies/add/?error=${error.join(", ")}`);
+      });
   }
 
   static editForm(req, res) {
+    const error = req.query.error;
     let listProductionHouse;
     ProductionHouse.findAll()
       .then((data) => {
@@ -47,7 +46,7 @@ class MovieController {
         return Movie.findByPk(Number(req.params.id));
       })
       .then((data) => {
-        res.render("editmovie", { data, listProductionHouse, error: null });
+        res.render("editmovie", { data, listProductionHouse, error });
       })
       .catch((err) => {
         res.send(err);
@@ -55,42 +54,29 @@ class MovieController {
   }
 
   static edit(req, res) {
-    const errors = MovieController.validate(req.body);
-    if (errors.length > 0) {
-      let listProductionHouse;
-      ProductionHouse.findAll()
-        .then((data) => {
-          listProductionHouse = data;
-          return Movie.findByPk(Number(req.params.id));
-        })
-        .then((data) => {
-          res.render("editmovie", {
-            data,
-            listProductionHouse,
-            error: errors.join(", "),
-          });
-        });
-    } else {
-      Movie.update(
-        {
-          first_name: req.body.name,
-          released_year: req.body.released_year,
-          genre: req.body.genre,
-          ProductionHouseId: req.body.listProductionHouseId,
+    Movie.update(
+      {
+        first_name: req.body.name,
+        released_year: req.body.released_year,
+        genre: req.body.genre,
+        ProductionHouseId: req.body.listProductionHouseId,
+      },
+      {
+        where: {
+          id: req.params.id,
         },
-        {
-          where: {
-            id: req.params.id,
-          },
+      }
+    )
+      .then(() => {
+        res.redirect("/movies");
+      })
+      .catch((err) => {
+        let error = [];
+        for (let i = 0; i < err.errors.length; i++) {
+          error.push(err.errors[i].message);
         }
-      )
-        .then(() => {
-          res.redirect("/movies");
-        })
-        .catch((err) => {
-          res.send(err);
-        });
-    }
+        res.redirect(`/movies/${req.params.id}/edit?error=${error.join("")}`);
+      });
   }
 
   static delete(req, res) {
@@ -107,18 +93,47 @@ class MovieController {
       });
   }
 
-  static validate(data) {
-    const error = [];
-    if (!data.name) {
-      error.push("name must be filled");
-    }
-    if (!data.released_year) {
-      error.push("released year must be filled");
-    }
-    if (!data.genre) {
-      error.push("genre must be selected");
-    }
-    return error;
+  static addCastForm(req, res) {
+    const error = req.query.error;
+    let listCast;
+    let listMovie;
+    Movie.findAll({
+      where: {
+        id: Number(req.params.id),
+      },
+      include: [{ model: Cast }],
+      })
+      .then((data)=>{
+        listMovie = data
+        return Cast.findAll()
+      })
+      .then((data) => {
+        listCast = data
+        res.render("addcastmovie", { listCast, error, movie:listMovie[0] });
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  }
+
+  static addCast(req, res) {
+    MovieCast.create({
+      MovieId: req.params.id,
+      CastId: req.body.listCastId,
+      role: req.body.role,
+    })
+      .then(() => {
+        res.redirect("/movies");
+      })
+      .catch((err) => {
+        let error = [];
+        for (let i = 0; i < err.errors.length; i++) {
+          error.push(err.errors[i].message);
+        }
+        res.redirect(
+          `/movies/${req.params.id}/addcast/?error=${error.join("")}`
+        );
+      });
   }
 }
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>Movies Page</title>
+    <title>Movies Cast Page</title>
 </head>
 <body>
     <ul class="nav nav-pills">
@@ -15,29 +15,25 @@
           <a class="nav-link" href="/prodHouse">Production House</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="/movie">Movies</a>
+          <a class="nav-link" href="/movie">Movies</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/cast">Casts</a>
+          <a class="nav-link active" href="/cast">Casts</a>
         </li>
     </ul>
     <br>
-    <h1>List Movies</h1><br>
-    <% if(alert.msg) { %>
-        <%= alert.msg %>
-    <% } %><br>
+    <h1>List Movies with Cast</h1><br>
+    
+    <%= data.fullname()%>
 
-    <a class="btn btn-success" href="/movie/add" role="button">Add Movies</a>
     <% if (data) { %>
         <table class="table">
             <thead>
               <tr>
-                <th scope="col">Name</th>
+                <th scope="col">Movie</th>
                 <th scope="col">Released Year</th>
-                <th scope="col">Genre</th>
-                <th scope="col">Production House</th>
-                <th scope="col">Rating</th>
-                <th scope="col" colspan="2">Action</th>
+                <th scope="col">Age when Movie Released</th>
+                <th scope="col">Role</th>
               </tr>
             </thead>
             <!-- <% const keys = Object.keys(data)%> -->
@@ -48,10 +44,6 @@
                     <td><%= data[i].released_year %></td>
                     <td><%= data[i].genre %></td>
                     <td><%= data[i].ProductionHouse.name_prodHouse %></td>
-                    <td><%= data[i].rating %></td>
-                    <td><a class="btn btn-info" href="/movie/edit/<%= data[i].id %>" role="button">Edit</a></td>
-                    <td><a class="btn btn-info" href="/movie/delete/<%= data[i].id %>" role="button">Delete</a></td>
-                    <td><a class="btn btn-info" href="/movie/showCast/<%= data[i].id%>" role="button">Add Cast</a></td>
                   </tr>
                 </tbody>
             <% } %>

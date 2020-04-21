@@ -4,12 +4,21 @@ module.exports = (sequelize, DataTypes) => {
   const Model = Sequelize.Model
   class Movie extends Model{}
   Movie.init({
-    name: DataTypes.STRING,
+    name: {
+      type : DataTypes.STRING
+      // validate : {
+      //   isName(value){
+      //     if(isNaN(value)){
+      //       throw new Error(`Invalid Empty Name`)
+      //     }
+      //   }
+      // }
+    },
     released_year: {
       type : DataTypes.INTEGER,
       validate: {
         isKabisatYear(value) {
-          if(isNan(value)){
+          if(isNaN(value)){
             throw new Error('Invalid Empty Year')
           } else {
             const number = Number(value)
@@ -20,13 +29,29 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    genre: DataTypes.STRING,
+    genre: {
+      type : DataTypes.STRING
+      // validate : {
+      //   isGenre(value){
+      //     if(isNaN(value)){
+      //       throw new Error(`Invalid Empty Genre`)
+      //     }
+      //   }
+      // }
+    },
     ProductionHouseId: DataTypes.INTEGER,
     rating: {
       type : DataTypes.INTEGER,
       validate : {
-        min : 1,
-        max : 5
+        isRating(value){
+          if(isNaN(value)){
+            throw new Error(`Invalid Empty Rating`)
+          } else {
+            if(Number(value)<1 || Number(value)>5){
+              throw new Error(`Invalid Rating Value`)
+            }
+          }
+        }
       }
     }
   }, { sequelize });

@@ -1,4 +1,5 @@
-const {Cast} = require('../models')
+const {Cast, Movie, MovieCast} = require('../models')
+const formatAge = require('../helper/formatAge')
 
 class CastController {
     static showCasts(req,res){
@@ -64,7 +65,29 @@ class CastController {
     }
 
     static deleteCast(req,res){
-        
+        Cast.destroy({
+            where : {id : Number(req.param.id)}
+        })
+        .then(()=>{
+            const msg = `Cast berhasil di hapus`
+            res.redirect(`/cast?msg=${msg}`)
+        })
+        .catch(error => {
+            res.send(error)
+        })
+    }
+
+    static showMovieCast(req,res){
+        Cast.findByPk(Number(req.params.id), {
+            include: [{model: Movie}]
+        })
+        .then(data=>{
+            res.send(data)
+            // res.render('',{data,dataMovie})
+        })
+        .catch(error=> {
+            res.send(error)
+        })
     }
 }
 

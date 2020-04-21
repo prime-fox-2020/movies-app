@@ -122,13 +122,22 @@ class MovieController{
     static addMovieCast(req, res){
         const alert = req.query
         let dataCast
+        let data
         Cast.findAll()
         .then( data => {
             dataCast = data
             return Movie.findByPk(Number(req.params.id), {include : {model: Cast}})
         })
-        .then( data => {
-            res.render('addMovieCast', {data, dataCast, alert})
+        .then( dataMovie => {
+            data = dataMovie
+            return MovieCast.findAll({
+                where: {
+                    MovieId : req.params.id
+                }
+            })
+        })
+        .then( dataMovieCast => {
+            res.render('addMovieCast', {data, dataCast, dataMovieCast, alert})
         })
         .catch( err => {
             res.render('error', {msg : err})

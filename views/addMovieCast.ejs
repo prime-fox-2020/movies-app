@@ -43,12 +43,25 @@
                 </tr>
             </thead>
             <tbody>
-                <% for(let i = 0; i < data.Casts.length; i++){ %>
+                <% for(let i = 0; i < dataMovieCast.length; i++){ %>
+                    <tr>
+                        <td>
+                            <% for(let i = 0; i < dataCast.length; i++){ %>
+                                <% if(dataCast[i].id === dataMovieCast[i].CastId){ %>
+                                    <%= dataCast[i].name %>
+                                    <% break %>
+                                <% } %>
+                            <% } %>
+                        </td>
+                        <td><%= dataMovieCast[i].role %></td>
+                    </tr>
+                <% } %>
+                <!-- <% for(let i = 0; i < data.Casts.length; i++){ %>
                     <tr>
                         <td><%= data.Casts[i].name %></td>
                         <td><%= data.Casts[i].MovieCast.role %></td>
                     </tr>
-                <% } %>
+                <% } %> -->
             </tbody>
         </table>
     </div>

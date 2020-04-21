@@ -78,6 +78,7 @@ class MoviesController {
     }
 
     static getEditForm(req, res) {
+        let errorKabisat = req.query.errorKabisat
         let error = req.query.error  
         let dataMovie = null
         let id = req.params.id
@@ -87,7 +88,7 @@ class MoviesController {
             return ProductionHouse.findAll()              
         })
         .then(dataProdHouse => {
-            res.render('edit-movies.ejs', {id, dataMovie, error, dataProdHouse})
+            res.render('edit-movies.ejs', {id, dataMovie, error, dataProdHouse, errorKabisat})
         })
         .catch(err => {
             res.send(err)
@@ -133,7 +134,11 @@ class MoviesController {
                 res.redirect(`/movies?pesan=Berhasil edit data movie dengan id: ${id}`)
             })
             .catch(err => {
-                res.send(err)
+                let errors = []
+                for (let i = 0; i < err.errors.length; i++) {
+                    errors.push(err.errors[i].message)
+                }
+                res.redirect(`/movies/edit/${req.params.id}?errorKabisat=${errors[0]}`)
             })
         }
     }

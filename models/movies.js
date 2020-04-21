@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         isKabisat(value) {
           if ((value % 4 == 0 && value % 100 != 0) || (value % 4 == 0 && value % 100 == 0 && value % 400 == 0)) {
-            throw new Error('Tidak bisa add movies yang release pada tahun kabisat')
+            throw new Error('Tidak bisa add atau edit movies yang release pada tahun kabisat')
           }
         }
       }

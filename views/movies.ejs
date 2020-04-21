@@ -1,7 +1,7 @@
 <%- include('partials/header') %>
 
     <br>
-    <h1 class="text-center">Production House</h1><br>
+    <h1 class="text-center">Movies</h1><br>
     <table class="table">
         <thead class="thead-dark">
             <tr>
@@ -25,7 +25,7 @@
                 <td><%= data.ProductionHouse.name_prodHouse %></td>  
                 <% } %>
                 
-                <td><a href="movies/<%= data.id %>/edit">Edit</a> | <a href="movies/<%= data.id %>/delete">Delete</a></td>
+                <td><a href="movies/<%= data.id %>/edit" >Edit</a> | <a href="movies/<%= data.id %>/delete" onclick="return confirm(`Are you sure to delete this record ?`)">Delete</a> | <a href="/movies/<%= data.id %>/addcast">Add Cast</a></td>
             </tr>
             <% }) %>
         </tbody>

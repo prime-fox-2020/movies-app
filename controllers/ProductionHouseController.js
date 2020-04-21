@@ -1,4 +1,4 @@
-const ProductionHouse = require('../models').ProductionHouse
+const {Movie, ProductionHouse, Cast, MovieCast} = require('../models')
 
 class ProductionHouseController {
     static show(req,res) {

@@ -1,5 +1,4 @@
-const Movie = require('../models').Movie
-const ProductionHouse = require('../models').ProductionHouse
+const { Movie, ProductionHouse, Cast, MovieCast } = require('../models')
 
 class MovieController {
     static show(req, res) {
@@ -36,9 +35,9 @@ class MovieController {
         })
         Movie.findByPk(req.params.id).then(data => {
             // res.send({data: [{data}, {globalProdHouse}]})
-            
-            
-            res.render('editmovieform', {data: [{data}, {globalProdHouse}]})
+
+
+            res.render('editmovieform', { data: [{ data }, { globalProdHouse }] })
         })
     }
 
@@ -51,12 +50,12 @@ class MovieController {
             genre: req.body.genre,
             ProductionHouseId: Number(req.body.ProductionHouseId),
         }, {
-            where:{
+            where: {
                 id: req.params.id
             }
-        }).then(data =>{
+        }).then(data => {
             res.redirect('/movies')
-        }).catch(err =>{
+        }).catch(err => {
             res.send(err)
         })
 
@@ -72,6 +71,61 @@ class MovieController {
         }).catch(err => {
             res.send(err)
         })
+    }
+
+    static addCastForm(req, res) {
+        // let castList = null
+        // let castListMovie = null
+        // Cast.findAll()
+        //     .then(dataCast => {
+        //         castList = dataCast
+        //         return MovieCast.findAll({
+        //             where: {
+        //                 MovieId: req.params.id
+        //             }
+        //         })
+        //     }).then(data => {
+        //         castListMovie = data
+        //         return Movie.findByPk(req.params.id)
+        //     })
+        //     .then(object => {
+        //         // res.send(castListMovie)
+        //         // res.send({ data: [[object], [castList], [castListMovie]] })
+        //         res.render('addcastmovie', { data: [[object], [castList], [castListMovie]] })
+        //     }).catch(err => {
+        //         res.send(err)
+        //     })
+        let id = req.params.id
+        Promise.all(
+            [
+                Cast.findAll(),
+                Movie.findByPk(id, { include: Cast })
+            ]).then(([casts, movie]) => {
+                res.render('addcastmovie',{ casts, movie });
+            }).catch(err => {
+                res.send(err);
+            });
+    }
+
+
+    static addCast(req, res) {
+        // let temp = {
+        //     MovieId: req.params.id,
+        //     CastId: req.body.CastId,
+        //     role: req.body.role
+        // }
+        MovieCast.create({
+            MovieId: req.params.id,
+            CastId: req.body.CastId,
+            role: req.body.role
+        })
+            .then(data => {
+                res.redirect(`/movies/${req.params.id}/addcast`)
+            })
+            .catch(err => {
+                res.send(err)
+            })
+
     }
 }
 

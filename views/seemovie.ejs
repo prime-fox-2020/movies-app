@@ -1,0 +1,26 @@
+<%- include('./partial/header')%>
+<h1><%= data.first_name %> <%= data.last_name %></h1>
+<table class="table" border="1">
+    <thead>
+      <tr>
+        <th scope="col">Movie</th>
+        <th scope="col">Released Year</th>
+        <th scope="col">Age When Movie Released</th>
+        <th scope="col">Roles</th>
+      </tr>
+    </thead>
+    <tbody>
+ 
+    <% for(j = 0; j < data.Movies.length ; j++ ) { %>
+        <tr>
+            <td><%= data.Movies[j].name %></td>
+            <td><%= data.Movies[j].released_year %></td>
+            <td><%= movieOld(data.birth_year,data.Movies[j].released_year) %></td>
+            <td><%= data.Movies[j].MovieCast.role %></td>
+          </tr>
+    <% } %>
+
+    </tbody>
+  </table>
+</body>
+<%- include('./partial/footer')%>

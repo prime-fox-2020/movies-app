@@ -1,4 +1,4 @@
-const {Movie,ProductionHouse}=require('../models')
+const {Movie,ProductionHouse,Cast,MovieCast}=require('../models')
 
 
 class MovieController{
@@ -17,10 +17,12 @@ class MovieController{
     }
 
     static addForm(req,res){
-        res.render('add')
+        const error=req.query.error
+        res.render('add',{error})
     }
 
     static addPost(req,res){
+        // res.send(req.body)
         Movie.create({
             name:req.body.name,
             released_year:req.body.releasedyear,
@@ -28,7 +30,7 @@ class MovieController{
         }).then(data=>{
             res.redirect('/movies')
         }).catch(err=>{
-            res.send(err)
+            res.redirect(`/movies/add?error=${err.message}`)
         })
     }
 
@@ -40,7 +42,8 @@ class MovieController{
         }).then(data=>{
             ProductionHouse.findAll()
             .then(dataPro=>{
-                res.render('edit',{data,dataPro})
+                const error=req.query.error
+                res.render('edit',{data,dataPro,error})
             }).catch(err=>{
                 res.send(err)
             })
@@ -62,7 +65,7 @@ class MovieController{
         }).then(data=>{
             res.redirect('/movies')
         }).catch(err=>{
-            res.send(err)
+            res.redirect(`/movies/edit/${Number(req.params.id)}?error=${err.message}`)
         })
     }
 
@@ -75,6 +78,37 @@ class MovieController{
             res.redirect('/movies')
         }).catch(err=>{
             res.send(err)
+        })
+    }
+
+    static addRole(req,res){
+        Movie.findOne({
+            include:[{model: Cast}],
+            where:{
+                id:Number(req.params.id)
+            },
+        }).then(data=>{
+            Cast.Name()
+            .then(dataactor=>{
+                const error=req.query.error
+                res.render('addrole',{data,dataactor,error})
+            }).catch(err=>{
+            res.send(err)
+            })
+        }).catch(err=>{
+            res.send(err.message)
+        })
+    }
+
+    static addRolePost(req,res){
+        MovieCast.create({
+            MovieId:Number(req.params.id),
+            CastId:req.body.actor,
+            role:req.body.role
+        }).then(data=>{
+            res.redirect(`/movies/addrole/${Number(req.params.id)}`)
+        }).catch(err=>{
+            res.redirect(`/movies/addrole/${Number(req.params.id)}?error=${err.message}`)
         })
     }
 }

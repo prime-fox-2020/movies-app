@@ -1,0 +1,28 @@
+<%- include('./partial/header')%>
+<div style="margin-left:92%;">
+    <a class="btn btn-primary" href="/casts/add" role="button">Add Cast</a>
+    </div>
+<table class="table" border="1">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Birth Year</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody
+    <% for(i = 0; i < data.length ; i++ ) { %>
+        <tr>
+            <td><%= data[i].full_name %></td>
+            <td><%= data[i].birth_year %></td>
+            <td><%= data[i].phone_number %></td>
+            <td><%= data[i].gender %></td>
+            <td><a class="btn btn-primary" href="/casts/edit/<%= data[i].id %>">Edit</a> <a class="btn btn-primary" href="/casts/delete/<%= data[i].id %>" onclick="return confirm('Are you sure you want to delete this item?');">Delete</a> <a class="btn btn-primary" href="/casts/seemovies/<%= data[i].id %>">See Movies</a></td>
+          </tr>
+    <% } %>
+    </tbody>
+  </table>
+</body>
+<%- include('./partial/footer')%>

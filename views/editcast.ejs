@@ -1,0 +1,32 @@
+<%- include('./partial/header')%>
+<div>
+    <form class="px-4 py-3" method="POST" action="/casts/edit/<%= data.id%>"">
+      <div class="form-group">
+        <label>First Name</label>
+        <input type="text" class="form-control" name="fname" value="<%= data.first_name%>">
+      </div>
+      <div class="form-group">
+        <label>Last Name</label>
+        <input type="text" class="form-control" name="lname" value="<%= data.last_name%>">
+      </div>
+      <div class="form-group">
+        <label>Birth Year</label>
+        <input type="text" class="form-control" name="birthyear" value="<%= data.birth_year%>">
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="text" class="form-control" name="phonenumber" value="<%= data.phone_number%>">
+      </div>
+      <div>
+        <label>Gender</label><br>
+        <label for="male">Male</label>
+        <input type="radio" name="gender" value="male" <%= data.gender==="male" ? 'checked' : '' %>>
+        <label for="female">Female</label>
+        <input type="radio" name="gender" value="female" <%= data.gender==="female" ? 'checked' : '' %>>
+      </div>
+      <button type="submit">Submit</button>
+      <a class="btn btn-primary" href="/casts" role="button">Cancel</a>
+    </form>
+  </div>
+</body>
+<%- include('./partial/footer')%>

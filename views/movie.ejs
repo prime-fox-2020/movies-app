@@ -1,6 +1,6 @@
 <%- include('./partial/header')%>
 <div style="margin-left:92%;">
-<a class="btn btn-primary" href="/movies/add" role="button">Add Button</a>
+<a class="btn btn-primary" href="/movies/add" role="button">Add Movie</a>
 </div>
 <table class="table" border="1">
     <thead>
@@ -12,7 +12,7 @@
         <th scope="col">Actions</th>
       </tr>
     </thead>
-    <tbody
+    <tbody>
     <% for(i = 0; i < data.length ; i++ ) { %>
         <tr>
             <td><%= data[i].name %></td>
@@ -23,7 +23,7 @@
             <% }else { %>
                 <td><%= data[i].ProductionHouse.name_prodHouse %></td>
             <% } %>
-            <td><a href="/movies/edit/<%= data[i].id %>">Edit</a>|<a href="/movies/delete/<%= data[i].id %>">Delete</a></td>
+            <td><a class="btn btn-primary" href="/movies/edit/<%= data[i].id %>">Edit</a> <a class="btn btn-primary" href="/movies/delete/<%= data[i].id %>">Delete</a> <a class="btn btn-primary" href="/movies/addrole/<%= data[i].id %>">Add Cast</a></td>
           </tr>
     <% } %>
     </tbody>

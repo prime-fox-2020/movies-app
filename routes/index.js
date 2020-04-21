@@ -6,9 +6,11 @@ const router = require('express').Router()
 const home              = require('../controllers/home')
 const productionHouses  = require('./productionHouses')
 const movies            = require('./movies')
+const casts             = require('./casts')
 
-router.get('/', home.getHome)
+router.get('/',                 home.getHome)
 router.use('/productionHouses', productionHouses)
-router.use('/movies', movies)
+router.use('/movies',           movies)
+router.use('/casts',            casts)
 
 module.exports = router

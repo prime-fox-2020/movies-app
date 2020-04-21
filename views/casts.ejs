@@ -1,0 +1,35 @@
+<%- include('./partials/header') %> 
+
+<div class="container" style="max-width: 1000px;">
+  <h1 class="display-4 mt-5">Casts</h1>
+  <a href="/casts/add" class="btn btn-success my-3">Add Casts</a>
+  <table class="table table-bordered">
+    <thead class="table-info">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Birth Year</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(let cast of casts) { %>
+      <tr>
+        <td><%= cast.getFullName() %></td>
+        <td><%= cast.birth_year %></td>
+        <td><%= cast.phone_number %></td>
+        <td><%= cast.gender %></td>
+        <td>
+          <a href="/casts/<%= cast.id %>/edit" class="btn btn-info">Edit</a>
+          <a href="/casts/<%= cast.id %>/delete" class="btn btn-info">Delete</a>
+          <a href="/casts/<%= cast.id %>/movies" class="btn btn-info">See Movies</a>
+        </td>
+      </tr>
+      <%}%>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<%- include('./partials/footer') %> 

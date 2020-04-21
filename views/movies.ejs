@@ -2,9 +2,9 @@
 
 <div class="container" style="max-width: 1000px;">
   <h1 class="display-4 mt-5">Movies</h1>
-  <a href="/movies/add" class="btn btn-info my-3">Add Movie</a>
+  <a href="/movies/add" class="btn btn-success my-3">Add Movie</a>
   <table class="table table-bordered">
-    <thead class="thead-dark">
+    <thead class="table-info">
       <tr>
         <th scope="col">Name</th>
         <th scope="col">Released Year</th>
@@ -21,8 +21,9 @@
         <td><%= movie.genre %></td>
         <td><%= movie.ProductionHouse.name_prodHouse %> </td>
         <td>
-          <a href="/movies/<%= movie.id %> /edit" class="btn btn-info">Edit</a>
-          <a href="/movies/<%= movie.id %> /delete" class="btn btn-danger">Delete</a>
+          <a href="/movies/<%= movie.id %>/edit" class="btn btn-info">Edit</a>
+          <a href="/movies/<%= movie.id %>/delete" class="btn btn-info">Delete</a>
+          <a href="/movies/<%= movie.id %>/casts" class="btn btn-info">Add Cast</a>
         </td>
       </tr>
       <%}%>

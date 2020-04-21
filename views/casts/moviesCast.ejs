@@ -1,0 +1,28 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+  <h5 class="display-4 my-3"><%= cast.getFullName() %></h3>
+
+  <table class="table table-bordered mb-5">
+    <thead class="table-info">
+      <tr>
+        <th scope="col">Movie</th>
+        <th scope="col">Released Year</th>
+        <th scope="col">Age when Movie Released</th>
+        <th scope="col">role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(let movie of cast.Movies){ %>
+        <tr>
+          <td><%= movie.name %></td>
+          <td><%= movie.released_year %></td>
+          <td><%= getAge(movie.released_year, cast.birth_year) %></td>
+          <td><%= movie.MovieCast.role %></td>
+        </tr>
+      <% } %> 
+    </tbody>
+  </table>
+</div>
+
+<%- include('../partials/footer') %>

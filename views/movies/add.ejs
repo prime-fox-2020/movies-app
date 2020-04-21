@@ -7,11 +7,17 @@
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text" class="form-control" id="name" name="name" placeholder="e.g: 12 Angry Men">
+      <% if(name !== undefined){ %>
+        <small id="nameHelper" class="form-text text-danger"><%= name %> </small>
+      <% } %>
     </div>
     <!-- RELEASED YEAR -->
     <div class="form-group">
       <label for="released_year">Released Year</label>
       <input type="text" class="form-control" id="released_year" name="released_year" placeholder="e.g: 1957">
+      <% if(released_year !== undefined){ %>
+        <small id="released_yearHelper" class="form-text text-danger"><%= released_year %> </small>
+      <% } %>
     </div>
     <!-- GENRE -->
     <div class="form-group">
@@ -25,6 +31,9 @@
         <option value="religious">religious</option>
         <option value="thriller">thriller</option>
       </select>
+      <% if(genre !== undefined){ %>
+        <small id="genreHelper" class="form-text text-danger"><%= genre %> </small>
+      <% } %>
     </div>
     <!-- PRODUCTION HOUSES -->
     <div class="form-group">
@@ -35,6 +44,9 @@
           <option value="<%= prodHouse.id %>"><%= prodHouse.name_prodHouse %> </option>  
         <% } %> 
       </select>
+      <% if(ProductionHouseId !== undefined){ %>
+        <small id="ProductionHouseIdHelper" class="form-text text-danger"><%= ProductionHouseId %> </small>
+      <% } %>
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>

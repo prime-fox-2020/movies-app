@@ -1,0 +1,62 @@
+<%- include ('../partials/header') %> 
+
+<div class="container">
+  <!-- MOVIE TITLE -->
+  <div class="row">
+    <div class="col-7">
+      <div class="jumbotron jumbotron-fluid my-5">
+        <div class="container">
+          <h1 class="display-3"><%= movie.name %> </h1>
+        </div>
+      </div>
+    </div>
+    <!-- FORM -->
+    <div class="col-5">
+      <h2 class="display-4 text-center">Add Movie Cast</h2>
+      <form action="/movies/<%= movie.id %>/casts" method="POST">
+        <!-- NAME -->
+        <div class="form-group">
+          <label for="CastId">Cast</label>
+          <select class="custom-select" id="CastId" name="CastId">
+            <% for(let cst of cast){ %>
+              <option value="<%= cst.id %>"><%= cst.getFullName() %> </option>  
+            <% } %> 
+          </select>
+        </div>
+        <!-- RELEASED YEAR -->
+        <div class="form-group">
+          <label for="role">Role</label>
+          <input type="text" class="form-control" id="role" name="role" placeholder="e.g: Pemeran Utama Wanita">
+          <% if(error !== undefined){ %>
+            <small id="role" class="form-text text-danger"><%= error %> </small>
+          <% } %>  
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="/movies/<%= movie.id %>/casts" class="btn btn-danger">Cancel</a>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- MOVIE CAST LIST -->
+  <h4>Cast List</h4>
+  <table class="table table-bordered">
+    <thead class="table-info">
+      <tr>
+        <th scope="col">Actor</th>
+        <th scope="col">Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(let cast of movie.Casts){ %>
+        <tr>
+          <td><%= cast.getFullName() %></td>
+          <td><%= cast.MovieCast.role %></td>
+        </tr>
+      <% } %> 
+    </tbody>
+  </table>
+</div>
+
+<%- include ('../partials/footer') %> 

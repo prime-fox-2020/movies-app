@@ -14,7 +14,6 @@ class MovieController {
     .then(results => {
       if (results.length) {
         locals.data = results
-        console.log(locals.data)
         res.render('movie', locals)
       } else {
         locals.alert.message = [`You dont have any movie data in database.`]
@@ -79,7 +78,6 @@ class MovieController {
       res.redirect(`/movies?message=${message}&type=success`)
     })
     .catch(err => {
-      console.log(req.body)
       locals.alert.message = [err]
       res.render('movie/add', locals)
     })    
@@ -96,22 +94,21 @@ class MovieController {
     } else {
       Movie.findByPk(req.params.id)
       .then(results => {
-        if (results !== null) {
-          locals.data = results
-          return ProductionHouse.findAll({
-            order: [['name_prodHouse', 'ASC']]
-          })
+        locals.data = results
+        return ProductionHouse.findAll({
+          order: [['name_prodHouse', 'ASC']]
+        })
+      })
+      .then(results => {
+        locals.prodHouse = results
+        if (locals.data) {
+          res.render('movie/edit', locals)
         } else {
           res.redirect(`/movies?message=${fail}&type=danger`)
         }
       })
-      .then(results => {
-        locals.prodHouse = results
-        res.render('movie/edit', locals)
-      })
       .catch(err => {
-        locals.alert.message = [err]
-        res.render('movie/add', locals)
+        res.redirect(`/movies?message=${err}&type=danger`)
       })
     }  
   }
@@ -202,7 +199,6 @@ class MovieController {
     }
     if (released_year > new Date().getFullYear()) error.push('Unreleased movie cant be submited')
     if (!genre) error.push('Please select movie genre')
-    console.log(error)
     return error
   }
 }

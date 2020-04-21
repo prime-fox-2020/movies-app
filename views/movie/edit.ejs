@@ -7,7 +7,7 @@
   <%- include('../partials/alert') %>
 <% } %>
 
-  <form action="/movies/<%= method === 'edit' ? `edit/${data.id}` : 'add'%>" method="post">
+  <form action="/movies/<%= method === 'edit' && data ? `edit/${data.id}` : 'add'%>" method="post">
     <div class="form-group">
       <label for="title">Movie Name</label>
       <input type="text" name="title" class="form-control" value="<%= data ? data.title : '' %>" placeholder="e.g: 12 Angry Man">

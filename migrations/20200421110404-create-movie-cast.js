@@ -14,6 +14,9 @@ module.exports = {
       CastId: {
         type: Sequelize.INTEGER
       },
+      role: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -1,0 +1,13 @@
+<%- include('./parts/header') %>
+<h1 class="text-center"><%= header %></h1>
+
+<div class="container w-25 p-3 text-center alert alert-secondary" role="alert">
+    <h2><%= actor %></h2>
+</div>
+
+<%- include('./parts/table', {list, content:'cast'}) %>
+
+<%- include('./parts/alerts') %>
+
+
+<%- include('./parts/footer') %>

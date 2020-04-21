@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
     role: DataTypes.STRING
   }, {sequelize});
   MovieCast.associate = function(models) {
-    // MovieCast.hasMany(models.Movie);
-    // MovieCast.hasMany(models.Cast);
+    // MovieCast.hasMany(models.Movie),
+    // MovieCast.hasMany(models.Cast)
   };
   return MovieCast;
 };

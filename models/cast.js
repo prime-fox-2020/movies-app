@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     hooks: {
       beforeCreate: (instance, option) => {
-        if (!instance.last_name) instance.last_name = instance.first_name;
+        if (!instance.dataValues.last_name) {instance.last_name = instance.first_name;}
       }
     }, 
     // validate: {
@@ -31,7 +31,8 @@ module.exports = (sequelize, DataTypes) => {
     sequelize});
   
   Cast.associate = function(models) {
-    Cast.belongsToMany(models.Movie, {through:'MovieCast'});
+    Cast.belongsToMany(models.Movie, {through:models.MovieCast})
+    // Cast.belongsTo(models.MovieCast)
   };
   return Cast;
 };

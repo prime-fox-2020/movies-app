@@ -1,5 +1,8 @@
 const Movie = require('../models').Movie;
 const ProductionHouse = require('../models').ProductionHouse;
+const Cast = require('../models').Cast;
+const MovieCast = require('../models').MovieCast;
+
 
 class CinemaController {
     static showMovie(req, res) {
@@ -13,7 +16,7 @@ class CinemaController {
             for (let entry of list) {
                 entry.ProductionHouse = entry.ProductionHouse.name_prodHouse;
             }
-            res.render('movie', {list, msg, type:"success", action:'true'})
+            res.render('movie', {list, msg, type:"success", action:{edit:'true', delete:'true', addCast:'true'}})
         })
         .catch(err => {
             res.render('error', {msg:err})
@@ -92,6 +95,52 @@ class CinemaController {
             .catch(() => res.render('error', {msg:err, type:"error"}));
         } else {
             res.redirect(`/movie/edit/${req.params.id}?msg=All movie details must be filled&type=error`);
+        }
+    }
+
+    static addCastGet(req, res){
+        const msg = req.query.msg;
+        const type = req.query.type;
+        Movie.findAll({
+            where:{id:req.params.id},
+            attributes:['id','name'],
+            include:{model:Cast, attributes:['first_name','last_name']}
+        })
+        .then(movie => {
+            const showList = []
+            for (let actor of movie[0].Casts) {
+                    showList.push({dataValues : {
+                        name : actor.fullName(),
+                        role : actor.MovieCast.role
+                    },
+                    name : actor.fullName(),
+                    role : actor.MovieCast.role})
+            }
+            Cast.findAll({
+                attributes:['id', 'first_name', 'last_name']
+            })
+            .then(actors => {
+                for (let i in actors) {
+                    actors[i].dataValues.name = actors[i].fullName();
+                    actors[i].name = actors[i].dataValues.name;
+                };
+                res.render('add_cast_movie', {list:showList, casts:actors , header:"Add cast to", movieTitle:movie[0].name, movieId:movie[0].id, action:null, msg, type});
+            })
+            .catch(err => res.render('error', {msg: err, type:"error"}));
+        })
+        .catch(err => res.render('error', {msg: err, type:"error"}));
+    }
+    static addCastPost(req, res){
+        if (req.body.actorId && req.body.movieId && req.body.role) {
+            MovieCast.create({
+                MovieId: req.body.movieId,
+                CastId: req.body.actorId,
+                role: req.body.role
+            })
+            .then(() => res.redirect('/movie/?msg=New cast successfully added to the movie'))
+            .catch(err => res.render('error', {msg:err, type:"error"}));
+        } else {
+            res.redirect(`/movie/add/cast/${req.body.movieId}?msg=All movie details must be filled&type=error`);
         }
     }
 

@@ -11,8 +11,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {sequelize});
 
   Movie.associate = function(models) {
-    Movie.belongsTo(models.ProductionHouse);
-    Movie.belongsToMany(models.Cast, {through:'MovieCast'});
+    Movie.belongsTo(models.ProductionHouse)
+    Movie.belongsToMany(models.Cast, {through: models.MovieCast})
+    // Movie.belongsTo(models.MovieCast)
   };
   return Movie;
 };

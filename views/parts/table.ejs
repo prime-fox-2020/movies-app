@@ -17,12 +17,23 @@
                 <% for (let entry of list) { %>
                     <tr>
                         <% for (let property in entry.dataValues) { %>
-                        <td><%= (!entry[property]) ? 'unknown' : entry[property] %></td>
+                            <td><%= (!entry[property]) ? 'unknown' : entry[property] %></td>
                         <% } %>
+                        
                         <% if (action) { %>
                             <td>
+                            <% if (action.see) { %>
+                                <a href="/<%= content %>/see/<%= entry.id %>" class="btn btn-success" role="button" aria-pressed="true">See Movies</a>
+                            <% } %>
+                            <% if (action.edit) { %>
                                 <a href="/<%= content %>/edit/<%= entry.id %>" class="btn btn-primary" role="button" aria-pressed="true">Edit</a>
-                                <a href="/<%= content %>/delete/<%= entry.id %>" class="btn btn-warning" role="button" aria-pressed="true">delete</a>
+                            <% } %>
+                            <% if (action.addCast) { %>
+                                <a href="/<%= content %>/add/cast/<%= entry.id %>" class="btn btn-success" role="button" aria-pressed="true">Add Cast</a>
+                            <% } %>
+                            <% if (action.delete) { %>
+                                <a href="/<%= content %>/delete/<%= entry.id %>" class="btn btn-warning" role="button" aria-pressed="true">Delete</a>
+                            <% } %>
                             </td>
                         <% } %>
                     </tr>

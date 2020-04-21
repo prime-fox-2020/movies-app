@@ -32,7 +32,14 @@
                         <% }else {%>
                             <td>unknown</td>
                         <% } %>
-                        <td><a href="/movies/edit/<%=list.id%>"><button type="button" class="btn btn-primary">Edit</button></a>  <a href="/movies/delete/<%=list.id%>"><button type="button" class="btn btn-danger">Delete</button></a></td>
+                        <td>
+                        <a href="/movies/edit/<%=list.id%>"><button type="button" class="btn btn-primary">Edit</button>
+                        </a>
+                        <a href="/movies/delete/<%=list.id%>"><button type="button" class="btn btn-danger">Delete</button>
+                        </a>
+                        <a href="/casts/add"><button type="button" class="btn btn-danger">Add Cast</button>
+                        </a>
+                        </td>
                     </tr>
                 <% }) %>
             </tbody>

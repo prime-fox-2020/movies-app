@@ -2,40 +2,32 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Movies', [
+    return queryInterface.bulkInsert('Casts', 
+    [
       {
-        name: 'Mr.Bean',
-        released_year: 2000,
-        genre: 'Comedy',
-        ProductionHouseId: 1,
-        rating: 9,
+        first_name: 'John',
+        last_name: 'Doe',
+        phone_number: '08012345',
+        birth_year: 1950,
+        gender: 'Male',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        name: 'Avengers',
-        released_year: 2001,
-        genre: 'Action',
-        ProductionHouseId: 2,
-        rating: 8,
+        first_name: 'Brad',
+        last_name: 'Pritt',
+        phone_number: '08543210',
+        birth_year: 1960,
+        gender: 'Male',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        name: 'Jaws',
-        released_year: 2002,
-        genre: 'Horror',
-        ProductionHouseId: 3,
-        rating: 7,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        name: 'Cintaku Kepentok Sudoku',
-        released_year: 2020,
-        genre: 'Comedy',
-        ProductionHouseId: 3,
-        rating: 10,
+        first_name: 'Dian',
+        last_name: 'Sastro',
+        phone_number: '08888777',
+        birth_year: 1970,
+        gender: 'Female',
         createdAt: new Date(),
         updatedAt: new Date()
       }
@@ -53,7 +45,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Movies', null, {});
+    return queryInterface.bulkDelete('Casts', null, {});
 
     /*
       Add reverting commands here.

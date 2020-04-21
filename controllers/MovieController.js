@@ -1,4 +1,4 @@
-const  { Movie, ProductionHouse } = require('../models')
+const  { Movie, ProductionHouse, Cast, MovieCast } = require('../models')
 
 
 class MovieController {

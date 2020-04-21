@@ -1,0 +1,55 @@
+<%- include('./partial/header') %>
+<% if(alert.message) {%>
+  <div class="alert alert-success" role="alert">
+    <%= alert.message%>
+  </div>
+<%}%>
+  <div class="container-fluid p-5">
+      <h1><%= data.name %></h1><br>
+      <div class="col-sm"></div>
+        <form action="/movies/<%= data.id %>/addCast" method="POST">
+          <input name="MovieId" value="<%= data.id %>" hidden>
+          <h2>Add Cast:</h2><br>
+          <label>Actor</label>
+          <div class="form-row align-items-center">
+              <select class="form-control" name="CastId" id="CastId">
+                <option value="" selected disabled>-- Choose Cast --</option>
+                <% for(let i = 0; i < dataCast.length; i++) { %>
+                  <option value="<%= dataCast[i].id %>"><%= dataCast[i].full_name %></option>
+                <% } %>
+              </select>
+          </div>
+          <div class="form-group">
+            <br><label for="role">Role</label>
+            <input type="text" class="form-control" id="role" name="role" placeholder="e.g: Pemeran Utama Pria">
+          </div>
+          <br><button type="submit" class="btn btn-primary">Submit</button>
+          <a class="btn btn-danger" href="/movies" role="button">Cancel</a>
+        </form>
+      </div>
+  </div>
+  <div class="container py-5">
+    <h1>List Cast</h1>
+    <table class="table">
+      <thead class="table-primary">
+        <tr>
+          <th scope="col">Actor</th>
+          <th scope="col">Role</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% for(let i = 0; i < dataMovieCast.length; i++){ %>
+        <% for(let j = 0; j < dataCast.length; j++){ %>
+        <tr>
+            <% if(dataCast[j].id === dataMovieCast[i].CastId){ %>
+              <td><%= dataCast[j].full_name %></td>
+              <%break%>
+              <% } %>
+        <% } %>
+          <td><%= dataMovieCast[i].role %></td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+<%- include('./partial/footer') %>

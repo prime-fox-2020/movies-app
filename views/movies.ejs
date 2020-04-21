@@ -1,7 +1,11 @@
 <%- include('./partial/header') %>
-<h1>Production Houses</h1><br>
+<h1>List Movie</h1><br>
+<% if(alert.message) {%>
+  <div class="alert alert-success" role="alert">
+    <%= alert.message%>
+  </div>
+<%}%>
 <a href="/movies/add" class="btn btn-success">Add Movies</a><br><br>
-
 <% if(data.length) {%>
 <table class="table">
   <thead class="table-primary">
@@ -26,7 +30,8 @@
         <%}%>
         <td>
           <a class="btn btn-info" href="/movies/<%= data[i].id %>/edit" role="button">Edit</a>
-          <a class="btn btn-info" href="/movies/<%= data[i].id %>/delete" role="button">Delete</a>
+          <a class="btn btn-info" href="/movies/<%= data[i].id %>/delete" role="button" onclick="return confirm('delete this movie?')">Delete</a>
+          <a class="btn btn-info" href="/movies/<%= data[i].id %>/addCast" role="button">Add Cast</a>
         </td>
       </tr>
         <%}%>
@@ -37,5 +42,4 @@
     Movies Not Found!
   </div>
   <%}%>
-</body>
-</html>
+<%- include('./partial/footer') %>

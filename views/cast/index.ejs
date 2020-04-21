@@ -24,7 +24,7 @@
       <% data.forEach((cast, idx) => { %>
         <tr>
           <th scope="row"><%= idx + 1 %></th>
-          <td><%= cast.first_name %></td>
+          <td><%= cast.getFullName() %></td>
           <td><%= cast.birth_year %></td>
           <td><%= cast.phone_number %></td>
           <td><%= cast.gender %></td>

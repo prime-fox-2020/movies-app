@@ -56,7 +56,7 @@ module.exports = {
       },
       {
         first_name: 'Oracle',
-        last_name: null,
+        last_name: 'Postgres',
         phone_number: '081317779999',
         birth_year: 1933,
         gender: 'female',

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie App</title>
+    <%- include('partials/styles') %>
+</head>
+<body>
+    <%- include('partials/navbar') %>
+    <div class="container">
+        <h1>Movies</h1>
+        <div class="text-right mb-3">
+            <a class="btn btn-success" href="/movies/add">Add Movie</a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Released Year</th>
+                    <th>Genre</th>
+                    <th>Production House</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% movies.forEach(movie => { %>
+                    <tr>
+                        <td><%= movie.name %></td>
+                        <td><%= movie.releasedYear %></td>
+                        <td><%= movie.genre %></td>
+                        <td><%= movie.ProductionHouse ? movie.ProductionHouse.nameProdHouse : 'Unknown' %></td>
+                        <td><a href="/movies/edit/<%= movie.id %>" class="btn btn-primary">Edit</a> <a href="/movies/delete/<%= movie.id %>" class="btn btn-primary">Delete</a> <a href="/movies/casts/<%= movie.id %>" class="btn btn-primary">Add Cast</a></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <%- include('partials/scripts') %>
+</body>
+</html>

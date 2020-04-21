@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie App</title>
+    <%- include('partials/styles') %>
+</head>
+<body>
+    <%- include('partials/navbar') %>
+    <div class="container">
+        <h1><%= typeof(movie) !== 'undefined' ? 'Edit' : 'Add' %> Movie</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input class="form-control" name="name" id="name" type="text" placeholder="e.g: 12 Angry Men" value="<%= typeof(movie) !== 'undefined' ? movie.name : '' %>">
+            </div>
+            <div class="form-group">
+                <label for="released_year">Released Year</label>
+                <input class="form-control" name="released_year" id="released_year" type="number" placeholder="e.g: 1957" value="<%= typeof(movie) !== 'undefined' ? movie.releasedYear : '' %>">
+            </div>
+            <div class="form-group">
+                <label for="genre">Genre</label>
+                <select class="form-control" id="genre" name="genre">
+                    <option value=""></option>
+                    <option <%= typeof(movie) !== 'undefined' && movie.genre === 'animation' ? 'selected' : '' %> value="animation">animation</option>
+                    <option <%= typeof(movie) !== 'undefined' && movie.genre === 'comedy' ? 'selected' : '' %> value="comedy">comedy</option>
+                    <option <%= typeof(movie) !== 'undefined' && movie.genre === 'drama' ? 'selected' : '' %> value="drama">drama</option>
+                    <option <%= typeof(movie) !== 'undefined' && movie.genre === 'horror' ? 'selected' : '' %> value="horror">horror</option>
+                    <option <%= typeof(movie) !== 'undefined' && movie.genre === 'religious' ? 'selected' : '' %> value="religious">religious</option>
+                    <option <%= typeof(movie) !== 'undefined' && movie.genre === 'thriller' ? 'selected' : '' %> value="thriller">thriller</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="production_house">Production House</label>
+                <select class="form-control" id="production_house" name="production_house">
+                    <option value="">==========SELECT===========</option>
+                    <% productionHouses.forEach(prodHouse => { %>
+                    <option <%= typeof(movie) !== 'undefined' && movie.ProductionHouseId === prodHouse.id ? 'selected' : '' %> value="<%= prodHouse.id %>"><%= prodHouse.nameProdHouse %></option>
+                    <% }) %>
+                </select>
+            </div>            
+            <input class="btn btn-primary" type="submit" value="Save">
+            <a class="btn btn-danger" href="/movies">Cancel</a>
+        </form>
+    </div>
+    <%- include('partials/scripts') %>
+</body>
+</html>

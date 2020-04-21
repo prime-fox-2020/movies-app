@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie App</title>
+    <%- include('partials/styles') %>
+</head>
+
+<body>
+    <%- include('partials/navbar') %>
+    <div class="container">
+        <h1>Casts</h1>
+        <div class="text-right mb-3">
+            <a class="btn btn-success" href="/casts/add">Add Cast</a>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Birth Year</th>
+                    <th>Phone Number</th>
+                    <th>Gender</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% casts.forEach(cast => { %>
+                <tr>
+                    <td><%= cast.getFullName() %></td>
+                    <td><%= cast.birthYear %></td>
+                    <td><%= cast.phoneNumber %></td>
+                    <td><%= cast.gender %></td>
+                    <td>
+                        <a href="/casts/edit/<%= cast.id %>" class="btn btn-primary">Edit</a>
+                        <button type="  button" class="btn btn-primary" data-toggle="modal" data-target="#confirmDelete" data-id="<%= cast.id %>">Delete</button>
+                        <a href="/casts/movies/<%= cast.id %>" class="btn btn-primary">See Movies</a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteLabel">Konfirmasi hapus data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah anda yakin ingin menghapus data ini?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-danger">Hapus</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('partials/scripts') %>
+</body>
+
+</html>

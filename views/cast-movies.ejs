@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie App</title>
+    <%- include('partials/styles') %>
+</head>
+<body>
+    <%- include('partials/navbar') %>
+    <div class="container">
+        <h1><%= cast.getFullName() %></h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Released Year</th>
+                    <th>Age when Movie Released</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% cast.Movies.forEach(castMovie => { %>
+                    <tr>
+                        <td><%= castMovie.name %></td>
+                        <td><%= castMovie.releasedYear %></td>
+                        <td><%= Math.abs(cast.birthYear-castMovie.releasedYear) %></td>
+                        <td><%= castMovie.MovieCast.role %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <%- include('partials/scripts') %>
+</body>
+</html>

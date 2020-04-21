@@ -1,4 +1,4 @@
-<%- include('partials/header', { title: 'Add Movie' }) %>
+<%- include('partials/header', { title: 'Edit Movie' }) %>
 
 <a class="btn btn-primary btn-lg" href="/" role="button">Go back to Home Page</a>
 <a class="btn btn-primary btn-lg" href="/movie" role="button">Go back to Movie List</a>
@@ -27,7 +27,7 @@
         </select>
     </div>
     <div class="form-group">
-        <label for="prodHouse">Genre</label>
+        <label for="prodHouse">Production House</label>
         <select class="form-control" id="prodHouse" name="ProductionHouseId">
             <% object2.forEach(item => { %>
             <option value="<%= item.id %>" <%= item.id == object.ProductionHouseId ? 'selected' : '' %>><%= item.name_prodHouse %></option>

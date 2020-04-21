@@ -14,6 +14,8 @@ module.exports = (sequelize, DataTypes) => {
   Movie.associate = function(models) {
     // associations can be defined here
     Movie.belongsTo(models.ProductionHouse)
+
+    Movie.belongsToMany(models.Cast, { through: models.MovieCast })
   };
   return Movie;
 };

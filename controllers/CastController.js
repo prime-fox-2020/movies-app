@@ -1,15 +1,14 @@
-const { Movie, ProductionHouse } = require('../models')
+const { Cast } = require('../models')
 
-class MovieController {
+class CastController {
     static get(req, res) {
-        Movie.findAll({
+        Cast.findAll({
             order: [
-                ['released_year', 'DESC']
-            ],
-            include: [ProductionHouse]
+                ['first_name', 'ASC']
+            ]
         })
             .then(data => {
-                return res.render('movie', { object: data })
+                return res.render('cast', { object: data })
             })
             .catch(err => {
                 return res.render('error', { err: err })
@@ -17,17 +16,19 @@ class MovieController {
     }
 
     static add(req, res) {
-        res.render('addMovie')
+        res.render('addCast')
     }
 
     static addPost(req, res) {
-        Movie.create({
-            name: req.body.name,
-            released_year: req.body.released_year,
-            genre: req.body.genre
+        Cast.create({
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            birth_year: req.body.birth_year,
+            phone_number: req.body.phone_number,
+            gender: req.body.gender
         })
             .then(data => {
-                return res.redirect('/movie')
+                return res.redirect('/cast')
             })
             .catch(err => {
                 return res.render('error', { err: err })
@@ -35,14 +36,9 @@ class MovieController {
     }
 
     static edit(req, res) {
-        let movie;
-        Movie.findByPk(req.params.id)
+        Cast.findByPk(req.params.id)
             .then((data) => {
-                movie = data
-                return ProductionHouse.findAll()
-            })
-            .then((data) => {
-                return res.render('editMovie', { object: movie, object2: data });
+                return res.render('editCast', { object: data });
             })
             .catch((err) => {
                 return res.render('error', { err: err })
@@ -50,16 +46,17 @@ class MovieController {
     }
 
     static editPost(req, res) {
-        Movie.update({
-            name: req.body.name,
-            released_year: req.body.released_year,
-            genre: req.body.genre,
-            ProductionHouseId: req.body.ProductionHouseId
+        Cast.update({
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            birth_year: req.body.birth_year,
+            phone_number: req.body.phone_number,
+            gender: req.body.gender
         }, {
             where: { id: Number(req.params.id) }
         })
             .then(data => {
-                return res.redirect('/movie');
+                return res.redirect('/cast');
             })
             .catch(err => {
                 return res.render('error', { err: err })
@@ -67,11 +64,11 @@ class MovieController {
     }
 
     static delete(req, res) {
-        Movie.destroy({
+        Cast.destroy({
             where: { id: Number(req.params.id) },
         })
             .then(data => {
-                return res.redirect('/movie')
+                return res.redirect('/cast')
             })
             .catch(err => {
                 return res.render('error', { err: err })
@@ -80,4 +77,4 @@ class MovieController {
 }
 
 
-module.exports = MovieController;
+module.exports = CastController;

@@ -22,7 +22,7 @@
         <td><%= item.ProductionHouseId == null? 'unknown' : item.ProductionHouse.name_prodHouse %></td>
         <td>
           <a class="btn btn-primary btn-sm" href="/movie/edit/<%= item.id %>" role="button">Edit</a>
-          <a class="btn btn-danger btn-sm" href="/movie/delete/<%= item.id %>" role="button">Delete</a>
+          <a class="btn btn-danger btn-sm" href="/movie/delete/<%= item.id %>" role="button" onclick="return confirm('Are you sure?')">Delete</a>
         </td>
       </tr>
       <% }) %>

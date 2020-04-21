@@ -1,13 +1,14 @@
 const express = require('express')
-const { Movie } = require('../models')
-const { ProductionHouse } = require('../models') // utk edit
+const { Movie,ProductionHouse,Cast,Cast_Movie } = require('../models')
+
+
 
 class controllerMovie {
     static showAll(request, respond) {
         let status = 'Unknown'
         Movie.findAll({
             include: [{ model: ProductionHouse }]
-        },{order :[['released_year','DESC']]})
+        }, { order: [['released_year', 'DESC']] })
             .then(data => {
                 // respond.send(data)
                 respond.render('movies', { data, status })
@@ -61,10 +62,10 @@ class controllerMovie {
             name: request.body.name,
             released_year: request.body.released_year,
             genre: request.body.genre,
-            ProductionHouseId : request.body.PHid
+            ProductionHouseId: request.body.PHid
         },
             { where: { id: Number(request.params.id) } },
-            {include : [{model: ProductionHouse}]})
+            { include: [{ model: ProductionHouse }] })
             .then(data => {
                 respond.redirect('/movies')
             })
@@ -72,18 +73,68 @@ class controllerMovie {
                 respond.render('err', { err })
             })
     }
-    static delete(request,respond){
+    static delete(request, respond) {
         Movie.destroy({
-            where: {id : request.params.id}
+            where: { id: request.params.id }
+        })
+            .then(data => {
+                respond.redirect('/movies')
+            })
+            .catch(err => {
+                respond.render('err', { err })
+            }
+            )
+    }
+    static addCast(request, respond) {
+        let dataMovie 
+        return new Promise((resolve,reject) =>{
+            Movie.findByPk(Number(request.params.id), {
+                include: [{ model: Cast}]
+            })
+            .then(data=>{
+                // respond.send(data)
+                dataMovie = data
+                return Cast.findAll()
+            })
+            .then(dataCast=>{
+                
+                respond.render('add_cast_movie',{dataMovie,dataCast})
+            })
+            .catch(err=>{
+                respond.render('err',{err})
+            })
+            
+        })
+    }
+
+    //cast_id > CastId 
+    static addCastPost(request,respond){
+        // respond.send(request.body)
+        Cast_Movie.create({
+            CastId: request.body.cast_id,
+            MovieId: request.params.id,
+            roles : request.body.roles
         })
         .then(data=>{
-            respond.redirect('/movies')
+            respond.redirect(`/movies/addcast/${request.params.id}`)
         })
         .catch(err=>{
             respond.render('err',{err})
-        }        
-        )
+        })
     }
-}
 
+    static deleteCast(request,respond){
+        Cast_Movie.destroy(
+            {where:{id: Number(request.params.id)}}
+        )
+        .then(data=>{
+            respond.redirect(`movies/addcast/${id}`)
+        })
+        .catch(err=>{
+            respond.render('err',{err})
+        })
+    }
+    
+
+}
 module.exports = controllerMovie

@@ -4,7 +4,7 @@ const app = express()
 const port = 3000
 const productionRoutes = require('./routes/production-routes.js')
 const movieRoutes = require('./routes/movie-routes.js')
-
+const castRoutes = require('./routes/cast-routes.js')
 
 app.listen(port, ()=>{
     console.log(`App Online. Listening on ${port}`)
@@ -16,3 +16,4 @@ app.get('/',(request,respond)=>{
 }) //for home page
 app.use(productionRoutes)
 app.use(movieRoutes)
+app.use(castRoutes)

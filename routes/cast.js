@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Controller = require('../controllers/movie');
+const Controller = require('../controllers/cast');
 
 router.get('/', Controller.showData);
 router.get('/add', Controller.addData);

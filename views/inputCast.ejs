@@ -1,0 +1,56 @@
+<%- include('../template/head', {title}); %>
+
+<form action="/casts/<%=title[0] == 'A'? 'add': 'edit/'+data.id%>" method="POST" style="padding: 2% 35%;">
+    <% if(alert) {%>
+    <div class="alert alert-danger" role="alert">
+        <%=alert%>
+    </div>
+    <%}%>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">First Name</label>
+        <input value="<%=data.first_name%>" name="first_name" type="text" class="form-control"
+    id="exampleFormControlInput1"
+    placeholder="e.g: Steven">
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Last Name</label>
+        <input value="<%=data.last_name%>" name="last_name" type="text" class="form-control"
+            id="exampleFormControlInput1" placeholder="e.g: Chow">
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Birth Year</label>
+        <input value="<%=data.birth_year%>" name="birth_year" type="number" class="form-control"
+            id="exampleFormControlInput1" placeholder="e.g: 1991">
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Phone Number</label>
+        <input value="<%=data.phone_number%>" name="phone_number" type="text" class="form-control"
+            id="exampleFormControlInput1" placeholder="e.g: 0822XXXXXXXX">
+    </div>
+    <fieldset class="form-group">
+        <div class="row">
+            <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male"
+                        <%=data.gender == 'male'? 'checked':''%>>
+                    <label class="form-check-label" for="inlineRadio1">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female"
+                        <%=data.gender == 'female'? 'checked':''%>>
+                    <label class="form-check-label" for="inlineRadio2">Female</label>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <br>
+    <button type="submit" class="btn btn-primary"><%=title[0] == 'A'? 'Save': 'Update'%></button> &nbsp;
+    <a href="/casts" type="button" class="btn btn-danger">Cancel</a>
+    <input style="visibility: hidden;" value="<%=title%>" name="act" type="text">
+    <input style="visibility: hidden;" value="<%=data.id? data.id: ''%>" name="id" type="text">
+</form>
+
+</body>
+
+</html>

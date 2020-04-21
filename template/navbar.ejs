@@ -1,25 +1,29 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Movie App</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item <%= title == 'Home' ? 'active':''%>">
-          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item <%= title == 'ProdHouses' ? 'active':''%>">
-          <a class="nav-link" href="/prodhouses">Production House</a>
-        </li>
-        <li class="nav-item <%= title == 'Movies' ? 'active':''%>">
-            <a class="nav-link" href="/movies">Movies</a>
-          </li>
-      </ul>
-      <% if(title == 'Movies') {%>
-      <form class="form-inline my-2 my-lg-0">
-        <a href="/<%=title.toLowerCase()%>/add" class="btn btn-outline-success my-2 my-sm-0" type="submit">Add Data</a>
-      </form>
-      <%}%>
+  <a class="navbar-brand" href="#">Movie App</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item <%= title == 'Home' ? 'active':''%>">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item <%= title == 'ProdHouses' ? 'active':''%>">
+        <a class="nav-link" href="/prodhouses">Production House</a>
+      </li>
+      <li class="nav-item <%= title == 'Movies' ? 'active':''%>">
+        <a class="nav-link" href="/movies">Movies</a>
+      </li>
+      <li class="nav-item <%= title == 'Casts' ? 'active':''%>">
+        <a class="nav-link" href="/casts">Casts</a>
+      </li>
+    </ul>
+    <% if(title == 'Movies' || title == 'Casts') {%>
+    <form class="form-inline my-2 my-lg-0">
+      <a href="/<%=title.toLowerCase()%>/add" class="btn btn-outline-success my-2 my-sm-0" type="submit">Add Data</a>
+    </form>
+    <%}%>
     </div>
   </nav>

@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   //   headquarters: DataTypes.STRING
   // }, {});
   ProductionHouse.associate = function(models) {
-    ProductionHouse.hasOne(models.Movie);
+    ProductionHouse.hasMany(models.Movie);
     // associations can be defined here
   };
   return ProductionHouse;

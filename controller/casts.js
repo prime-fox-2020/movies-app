@@ -1,4 +1,5 @@
-const Cast = require('../models').Cast;
+const {Cast, Movie} = require('../models');
+const ageReleased = require('../helpers/ageRelease');
 
 class CastsController {
   static getData(req, res) {
@@ -42,7 +43,7 @@ class CastsController {
       birth_year: req.body.birth_year,
       gender: req.body.gender
     }
-    Cast.update(value, {where: {id: req.params.id}})
+    Cast.update(value, {where: {id: req.params.id}, individualHooks: true})
     .then(() => res.redirect('/casts'))
     .catch(err => res.send(err))
   }
@@ -50,6 +51,12 @@ class CastsController {
   static delete(req, res) {
     Cast.destroy({where: {id: req.params.id}})
     .then(() => res.redirect('/casts'))
+    .catch(err => res.send(err))
+  }
+
+  static getMovies(req, res) {
+    Cast.findOne({where: {id: req.params.id}, include: Movie})
+    .then(data => res.render('castmovie', {data, ageReleased}))
     .catch(err => res.send(err))
   }
 }

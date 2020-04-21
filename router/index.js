@@ -28,5 +28,6 @@ router.post('/casts/add', Casts.add);
 router.get('/casts/:id/edit', Casts.editData);
 router.post('/casts/:id/edit', Casts.edit);
 router.get('/casts/:id/delete', Casts.delete);
+router.get('/casts/:id/movies', Casts.getMovies);
 
 module.exports = router;

@@ -15,13 +15,24 @@ module.exports = (sequelize, DataTypes) => {
     phone_number: DataTypes.STRING,
     birth_year: DataTypes.INTEGER,
     gender: DataTypes.STRING
-  }, {sequelize});
-
-  Cast.beforeCreate((cast, options) => {
-    if (!cast.last_name) {
-      cast.last_name = cast.first_name;
+  }, {sequelize,
+    hooks: {
+      beforeCreate: (cast, options) => {
+        if (!cast.last_name) {
+          cast.last_name = cast.first_name;
+          console.log(!cast.last_name);
+        }
+      },
+      beforeUpdate: (cast, options) => {
+        if (!cast.last_name) {
+          cast.last_name = cast.first_name;
+        }
+      }
     }
-  })
+  
+  });
+
+  
 
   Cast.associate = function(models) {
     // associations can be defined here

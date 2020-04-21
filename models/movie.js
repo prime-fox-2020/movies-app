@@ -7,7 +7,18 @@ module.exports = (sequelize, DataTypes) => {
 
   Movie.init({
     name: DataTypes.STRING,
-    released_year: DataTypes.INTEGER,
+    released_year: {
+      type: DataTypes.INTEGER,
+      validate: {
+        isLeap(year) {
+          if (year % 400 == 0) {
+            throw new Error('Cannot add Movie in this year');
+          } else if (year % 400 != 0 && year % 100 != 0 && year % 4 == 0) {
+            throw new Error('Cannot add Movie in this year');
+          }
+        }
+      }
+    },
     genre: DataTypes.STRING,
     ProdHouseId: DataTypes.INTEGER
   }, {sequelize});

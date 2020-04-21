@@ -1,4 +1,5 @@
-const { Cast } = require('../models');
+const { Cast, Movie } = require('../models');
+const age = require('../helpers/age');
 
 class Controller {
     static showData(req, res) {
@@ -82,6 +83,17 @@ class Controller {
             .catch(err => {
                 res.render('error', { err });
             });
+    }
+
+    static seeMovies(req, res) {
+        let data = null;
+        Cast.findOne({where: {id: req.params.id}, include: [{model: Movie}]})
+        .then(data => {
+            res.render('seeMovies', {data, age});
+        })
+        .catch(err => {
+            res.render('error', {err});
+        })
     }
 }
 

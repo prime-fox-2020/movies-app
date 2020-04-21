@@ -4,7 +4,7 @@ class Controller {
     }
 
     static notFound(req, res) {
-        res.render('error', {mes: '404 - Page Not Found'});
+        res.render('error', {err: '404 - Page Not Found'});
     }
 }
 

@@ -1,0 +1,48 @@
+<%- include('../template/head', {title}); %>
+
+<form action="/movies/addcast/<%=data.id%>" method="POST" style="padding: 2% 35%;">
+    <h1><%=data.name%></h1>
+    <% if(alert) {%>
+    <div class="alert alert-danger" role="alert">
+        <%=alert%>
+    </div>
+    <%}%>
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Cast</label>
+        <select name="CastId" class="form-control" id="exampleFormControlSelect1">
+    <% for(let i in data2) {%>
+    <option value="<%=data2[i].id%>" <%=data.CastId == data2[i].id? 'selected': ''%>><%=data2[i].fullName()%></option>
+    <%}%>    
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleFormControlInput1">Role</label>
+        <input value="<%=data.role ? data.role: ''%>" name="role" type="text" class="form-control"
+    id="exampleFormControlInput1" placeholder="e.g: Pemeran Utama">
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button> &nbsp;
+    <a href="/movies" type="button" class="btn btn-danger">Cancel</a>
+    <input style="visibility: hidden;" value="<%=data.id%>" name="id" type="text">
+    <input style="visibility: hidden;" value="<%=data.name%>" name="name" type="text">
+</form>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Cast</th>
+            <th scope="col">Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(let i in data.Casts) {%>
+        <tr>
+            <th scope="row"><%=data.Casts[i].fullName()%></th>
+            <td><%=data.Casts[i].MovieCast.role%></td>
+        </tr>
+        <%}%>
+    </tbody>
+</table>
+
+</body>
+
+</html>

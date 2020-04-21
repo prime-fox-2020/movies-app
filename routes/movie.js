@@ -7,5 +7,7 @@ router.post('/add', Controller.addPost);
 router.get('/edit/:id', Controller.editData);
 router.post('/edit/:id', Controller.editPost);
 router.get('/delete/:id', Controller.delete);
+router.get('/addcast/:id', Controller.addCast);
+router.post('/addcast/:id', Controller.castPost);
 
 module.exports = router;

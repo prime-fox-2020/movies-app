@@ -1,0 +1,27 @@
+<%- include('../template/head', {title: 'See Movies'}); %>
+<%- include('../template/navbar', {title: 'See Movies'}); %>
+<h1><%=data.fullName()%></h1>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Movie</th>
+            <th scope="col">Released Year</th>
+            <th scope="col">Age when Movie Released</th>
+            <th scope="col">Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(let i in data.Movies) {%>
+        <tr>
+            <th scope="row"><%=data.Movies[i].name%></th>
+            <td><%=data.Movies[i].released_year%></td>
+            <td><%=age(data.Movies[i].released_year, data.birth_year)%></td>
+            <td><%=data.Movies[i].MovieCast.role%></td>
+        </tr>
+        <%}%>
+    </tbody>
+</table>
+
+</body>
+
+</html>

@@ -6,10 +6,38 @@ module.exports = (sequelize, DataTypes) => {
   class Movie extends Model {}
 
   Movie.init({
-    title: DataTypes.STRING,
-    released_year: DataTypes.INTEGER,
-    genre: DataTypes.STRING,
-    ProductionHouseId: DataTypes.INTEGER
+    title: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    },
+    released_year: {
+      type: DataTypes.STRING,
+      validate: {
+        isKabisat(num) {
+          if (!num) {
+            throw new Error('Released Year harus diisi')
+          } else if (num % 400 === 0){
+            throw new Error('Tahun Kabisat! Ganti ya!')
+          } else if (num % 400 !== 0 && num % 100 !==0 && num % 4 === 0) {
+            throw new Error('Tahun Kabisat! Ganti ya!')
+          }
+        }
+      }
+    },
+    genre: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    },
+    ProductionHouseId: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    }
   }, {sequelize});
 
   Movie.associate = function(models) {

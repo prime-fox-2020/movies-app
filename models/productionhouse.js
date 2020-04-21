@@ -5,7 +5,6 @@ module.exports = (sequelize, DataTypes) => {
   const Model = Sequelize.Model
 
   class ProductionHouse extends Model {
-
   }
 
   ProductionHouse.init({

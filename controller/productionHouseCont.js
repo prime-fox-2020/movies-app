@@ -1,4 +1,4 @@
-const {ProductionHouse} = require('../models');
+const { ProductionHouse } = require('../models');
 
 class ProductionHouseCont {
     static show(req, res) {
@@ -8,11 +8,11 @@ class ProductionHouseCont {
                 ['name_prodHouse', 'ASC']
             ]
         })
-        .then((data) => {
-            res.render('productionHouses',{data})
-        }).catch((err) => {
-            res.send(err)
-        });
+            .then((data) => {
+                res.render('productionHouses', { data })
+            }).catch((err) => {
+                res.send(err)
+            });
     }
 }
 

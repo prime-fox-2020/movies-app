@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Movies</title>
+    <title>Casts</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,7 +15,7 @@
 <body>
     <nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color: #3d93d1;">
         <div class="container">
-            <a class="navbar-brand" href="#">Philem</a>
+            <a class="navbar-brand" href="/">Philem</a>
             <div class="collapse navbar-collapse" id="collapsibleNavId">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item active">
@@ -41,9 +41,9 @@
     <div class="jumbotron jumbotron-fluid mt-5">
         <div class="container">
             <div class="mb-5 align-items-center">
-                <h3 class="display-3">List Movies</h3>
+                <h3 class="display-3">List Casts</h3>
                 <div class="float-right">
-                    <a href="/movies/add" class="float-lg-right"><button class="btn btn-primary ">Add Movie</button></a>
+                    <a href="/cast/add" class="float-lg-right"><button class="btn btn-primary ">Add Cast</button></a>
                 </div>
             </div>
 
@@ -59,10 +59,9 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Released Year</th>
+                        <th>Birth Year</th>
+                        <th>Phone Number</th>
                         <th>Genre</th>
-                        <th>Produktion House</th>
-                        <th>Rating</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -70,15 +69,46 @@
                     <% data.forEach(el => { %>
                     <tr>
                         <td scope="row"><%= el.id %> </td>
-                        <td><%= el.name %></td>
-                        <td><%= el.released_year %></td>
-                        <td><%= el.genre %></td>
-                        <td><%= el.ProductionHouseId == null? 'unknown':el.ProductionHouse.name_prodHouse %></td>
-                        <td><%= el.rating %></td>
+                        <td><%= el.getFullName() %></td>
+                        <td><%= el.birth_year %></td>
+                        <td><%= el.phone_number %></td>
+                        <td><%= el.gender %></td>
                         <td>
-                            <a href="/movies/<%= el.id %>/edit "><button class="btn btn-primary">edit</button></a>
-                            <a href="/movies/<%= el.id %>/delete "><button class="btn btn-danger">delete</button></a>
+                            <a href="/cast/<%= el.id %>/edit "><button class="btn btn-primary">Edit</button></a>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                data-target="#exampleModalCenter" data-id="@<%= el.id %> ">
+                                Delete
+                            </button>
+                            <a href="/cast/<%= el.id %>/seeMovie "><button class="btn btn-outline-success">See
+                                    Movie</button></a>
                         </td>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Confirmation Delete Cast</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        are you sure to delete cast
+                                        <p><%= el.id %> </p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <a href="/cast/<%= el.id %>/delete "><button
+                                                class="btn btn-danger">Delete</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </tr>
                     <% }) %>
                 </tbody>

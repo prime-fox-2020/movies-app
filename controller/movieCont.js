@@ -2,7 +2,14 @@ const { Movie, ProductionHouse } = require('../models');
 
 class MovieCont {
     static show(req, res) {
-        Movie.findAll({ include: [ProductionHouse] })
+        Movie.findAll(
+            {
+                include: [ProductionHouse],
+                order: [
+                    ['name', 'DESC']
+                ]
+            }
+        )
             .then((data) => {
                 // res.send (data)
                 let msg = req.query.msg

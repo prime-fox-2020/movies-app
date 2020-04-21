@@ -55,7 +55,7 @@ class CastController{
     }
 
     static delete(req, res){
-        Cast.destroy({where: {id: req.params.id}})
+        Cast.destroy({where: {id: Number(req.params.id)}})
         .then(() => {
             res.redirect('/casts');
         })

@@ -2,20 +2,29 @@ const {Movie, ProductionHouse, Cast, MovieCast} = require('../models');
 
 class MovieController{
     static read(req, res){
+        console.log('READ')
         Movie.findAll({
             include: ProductionHouse,
-            order: [['id', 'asc']]
+            order: [['released_year', 'desc']]
         })
         .then(data => {
             res.render('movie/movie', {data});
         })
         .catch(err => {
+            console.log(err)
             res.send(err);
         })
     }
 
     static add_get(req,res){
-        res.render('movie/movie_add');
+        ProductionHouse.findAll({})
+        .then(data => {
+            res.render('movie/movie_add', {data});
+        })
+        .catch(err => {
+            console.log(err)
+            res.send(err);
+        })
     }
 
     static add_post(req, res){
@@ -34,9 +43,15 @@ class MovieController{
     }
 
     static edit_get(req, res){
+        let dataMovie = null;
         Movie.findByPk(req.params.id, {})
         .then(data => {
-            res.render('movie/movie_edit', {data});
+            dataMovie = data;
+            return ProductionHouse.findAll({})
+        })
+        .then(dataProdHouse => {
+            res.render('movie/movie_edit', {dataMovie, dataProdHouse});
+
         })
         .catch(err => {
             res.send(err);

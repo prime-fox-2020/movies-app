@@ -17,6 +17,12 @@ module.exports = (sequelize, DataTypes) => {
     gender: DataTypes.STRING
   }, {sequelize});
 
+  Cast.addHook('beforeCreate', (instance, options) => {
+    if(instance.last_name === ''){
+      instance.last_name = instance.first_name
+    }
+  })
+
   Cast.associate = function(models) {
     Cast.hasMany(models.MovieCast);
   };

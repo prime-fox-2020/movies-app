@@ -30,11 +30,9 @@
         <label for="ProductionHouseId">Production Houses</label>
         <select name="ProductionHouseId" id="ProductionHouseId">
             <option value="" hidden>Choose Production House:</option>
-            <option value=1>Walt Disney Studio</option>
-            <option value=2>Pixar</option>
-            <option value=3>Warner Bros</option>
-            <option value=4>Universal Pictures</option>
-            <option value=5>Paramount Pictures</option>
+            <% data.forEach(el => { %>
+             <option value=<%= el.id %>><%= el.name_prodHouse %> </option>
+            <% }) %>
         </select>
 
         <button type="submit">ADD</button>

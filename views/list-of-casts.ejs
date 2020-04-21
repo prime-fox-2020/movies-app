@@ -14,7 +14,7 @@
     <tbody>
         <% for( let i = 0; i < data.length; i++ ) { %>
             <tr>
-                <td><%= data[i].first_name + data[i].last_name %></td>
+                <td><%= data[i].getFullName() %></td>
                 <td><%= data[i].birth_year %></td>
                 <td><%= data[i].phone_number %></td>
                 <td><%= data[i].gender %></td>
@@ -39,7 +39,7 @@
           </button>
         </div>
         <div class="modal-body">
-          Are you sure want to delete <%= data[i].first_name + data[i].last_name %>?
+          Are you sure want to delete <%= data[i].getFullName() %>?
         </div>
         <div class="modal-footer">
           <a class="btn btn-primary" href="/casts/delete/<%= id %>" role="button">Yes, Delete</a>

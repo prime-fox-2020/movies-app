@@ -1,0 +1,48 @@
+<%-  include ('./partials/header', {title: 'Movie'}) %>
+
+
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href='/'>Home</a> 
+  <a class="navbar-brand" href='/movies/add'> <button>Add Movie</button> </a>
+</nav>
+<h1>Movie</h1>
+<%if(msg){ %>
+  <p><%=msg%></p>
+  <%} %>
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Movie</th>
+      <th scope="col">Realeased Year</th>
+      <th scope="col">Production House</th>
+      <th scope="col">Genre</th>
+      <th scope="col">Action</th>
+      
+  </thead>
+  <tbody>
+
+  <%  if(movies){ %>
+
+    <% for(let i = 0; i < movies.length; i++){ %>
+     
+      <tr>
+        <td><%= movies[i].name %></td>
+        <td><%= movies[i].released_year %></td>
+     <%   if(movies[i].ProductionHouse === null){ %>
+          <td>Unknown</td>
+      <%  } else{ %>
+          <td><%= movies[i].ProductionHouse.name_prodHouse %></td>
+       <% } %>
+       
+        <td><%= movies[i].genre %></td>
+        <td> <a href="/movies/<%=movies[i].id %>/edit"> EDIT</a> ||  <a href="/movies/<%=movies[i].id %>/question">Delete </a> ||  <a href="/movies/<%=movies[i].id %>/addCast">Add Cast </a></td>
+      </tr>
+
+   <% } %>
+  <%}%>
+  </tbody>
+</table>
+
+
+
+<%-  include ('./partials/footer') %>

@@ -1,0 +1,8 @@
+<%- include ('./partials/header', {title: 'Movie'}) %>
+
+<h1>Are you sure you want to delete the movie?</h1>
+
+<a href="/movies"> <button>No</button> </a> <a href="/movies/<%=movies.id%>/delete"> <button>Yes</button> </a>
+
+
+<%- include ('./partials/footer') %>

@@ -5,7 +5,17 @@ module.exports = (sequelize, DataTypes) => {
   class Movie extends Model {}
   Movie.init({
     name: DataTypes.STRING,
-    released_year: DataTypes.INTEGER,
+    released_year: 
+    {
+      type: DataTypes.INTEGER,
+      validate: {
+        isintercalary(released_year) {
+          if (released_year % 4 == 0) {
+            throw new Error('Tidak boleh merelease film di tahun kabisat bro!');
+          }
+        }
+      } 
+    },
     genre: DataTypes.STRING,
     ProductionHouseId: DataTypes.INTEGER,
   }, {sequelize});

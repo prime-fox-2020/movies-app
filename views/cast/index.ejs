@@ -28,7 +28,9 @@
           <td><%= cast.birth_year %></td>
           <td><%= cast.phone_number %></td>
           <td><%= cast.gender %></td>
-          <td><a href="/casts/edit/<%= cast.id %>" class="btn btn-info">Edit</a> &nbsp; <a onclick="return alert('Are you sure want to delete this talent?')" href="/casts/delete/<%= cast.id %>" class="btn btn-danger">Delete</a></td>
+          <td><a href="/casts/edit/<%= cast.id %>" class="btn btn-info">Edit</a> &nbsp; <a onclick="return alert('Are you sure want to delete this talent?')" href="/casts/delete/<%= cast.id %>" class="btn btn-danger">Delete</a>
+            &nbsp; <a href="/casts/<%= cast.id %>/movies" class="btn btn-info">See Movies</a>
+          </td>
         </tr>
       <% }) %>
     </tbody>

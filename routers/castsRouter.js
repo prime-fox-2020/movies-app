@@ -15,4 +15,7 @@ router.route('/edit/:id')
 router.route('/delete/:id')
   .get(Controller.delete)
 
+router.route('/:id/movies')
+  .get(Controller.getMovies)
+  
 module.exports = router

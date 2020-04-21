@@ -1,4 +1,5 @@
-const {Cast} = require('../models')
+const {Cast, MovieCast, Movie} = require('../models')
+const helper = require('../helpers')
 
 class CastController {
 
@@ -133,6 +134,22 @@ class CastController {
       })
       .catch(err => res.redirect(`/casts?message=${err}&type=danger`))
     }  
+  }
+
+  static getMovies(req, res) {
+    const locals = CastController.getLocals()
+
+    Cast.findByPk(req.params.id, {
+      include: [{model: Movie}]
+    })
+    .then(results => {
+      locals.cast = results
+      locals.helper = {
+        ageCalc: helper.ageCalc
+      }
+      res.render('cast/movies', locals)
+    })
+    .catch(err => res.send(err))
   }
 
   static getLocals() {

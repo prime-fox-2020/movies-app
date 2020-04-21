@@ -23,23 +23,23 @@
       <select name="genre" class="form-control">
         <% if (data) { %>
         <option value="" <%= data.genre === '' ? 'selected' : '' %> disabled>Select genre</option>
-        <option value="Action" <%= data.genre === 'Action' ? 'selected' : '' %>>Action</option>
-        <option value="Animation" <%= data.genre === 'Animation' ? 'selected' : '' %>>Animation</option>
-        <option value="Drama" <%= data.genre === 'Drama' ? 'selected' : '' %>>Drama</option>
-        <option value="Comedy" <%= data.genre === 'Comedy' ? 'selected' : '' %>>Comedy</option>
-        <option value="Horror" <%= data.genre === 'Horror' ? 'selected' : '' %>>Horror</option>
-        <option value="Religius" <%= data.genre === 'Religius' ? 'selected' : '' %>>Religius</option>
-        <option value="Thriller" <%= data.genre === 'Thriller' ? 'selected' : '' %>>Thriller</option>
+        <option value="action" <%= data.genre === 'action' ? 'selected' : '' %>>Action</option>
+        <option value="animation" <%= data.genre === 'animation' ? 'selected' : '' %>>Animation</option>
+        <option value="drama" <%= data.genre === 'drama' ? 'selected' : '' %>>Drama</option>
+        <option value="comedy" <%= data.genre === 'comedy' ? 'selected' : '' %>>Comedy</option>
+        <option value="horror" <%= data.genre === 'horror' ? 'selected' : '' %>>Horror</option>
+        <option value="religius" <%= data.genre === 'religius' ? 'selected' : '' %>>Religius</option>
+        <option value="thriller" <%= data.genre === 'thriller' ? 'selected' : '' %>>Thriller</option>
         
         <% } else { %>
         <option value="" >Select genre</option>
-        <option value="Action" >Action</option>
-        <option value="Animation" >Animation</option>
-        <option value="Drama" >Drama</option>
-        <option value="Comedy" >Comedy</option>
-        <option value="Horror" >Horror</option>
-        <option value="Religius">Religius</option>
-        <option value="Thriller" >Thriller</option>
+        <option value="action" >Action</option>
+        <option value="animation" >Animation</option>
+        <option value="drama" >Drama</option>
+        <option value="comedy" >Comedy</option>
+        <option value="horror" >Horror</option>
+        <option value="religius">Religius</option>
+        <option value="thriller" >Thriller</option>
         <% } %>
 
       </select>

@@ -1,4 +1,5 @@
 const {Cast, Movies, MovieCast} = require('../models')
+const getAgeReleased = require('../helpers/getAgeReleased')
 
 class CastsController {
     static showCasts(req, res) {
@@ -101,7 +102,7 @@ class CastsController {
         Cast.findByPk(id, {include: [{model: Movies}, {model: MovieCast}]})
         .then(dataCast => {
             console.log(dataCast);
-            res.render("seeMovies.ejs", {dataCast})
+            res.render("seeMovies.ejs", {dataCast, getAgeReleased})
         })
         .catch(err => {
             res.send(err)

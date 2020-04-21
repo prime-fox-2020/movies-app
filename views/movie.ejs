@@ -3,7 +3,7 @@
     <div class="container-fluid p-5">
         <h1>Movie List</h1>
         <% if(alert.msg){ %>
-            <div class="alert alert-success" role="alert">
+            <div class="alert alert-danger" role="alert">
                 <%= alert.msg %>
             </div>
         <% } %>
@@ -14,6 +14,7 @@
             <thead class="thead-light">
               <tr>
                 <th scope="col">Movie</th>
+                <th scope="col">Rating</th>
                 <th scope="col">Released Year</th>
                 <th scope="col">Genre</th>
                 <th scope="col">Production House</th>
@@ -24,6 +25,7 @@
                 <% for(let i = 0; i < data.length; i++){ %>
                     <tr>
                         <td><%= data[i].name %></td>
+                        <td><%= data[i].rating %></td>
                         <td><%= data[i].released_year %></td>
                         <td><%= data[i].genre %></td>
                         <% if(!data[i].ProductionHouseId){ %>
@@ -31,7 +33,31 @@
                         <% } else { %>
                             <td><%= data[i].ProductionHouse.name_prodHouse %></td>
                         <% } %>
-                        <td><a href="/movies/edit/<%=data[i].id%>"><button type="button" class="btn btn-primary">Edit</button></a>  <a href="/movies/delete/<%=data[i].id%>"><button type="button" class="btn btn-primary">Delete</button></a></td>
+                        <td>
+                            <a href="/movies/edit/<%=data[i].id%>"><button type="button" class="btn btn-primary">Edit</button></a>  
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal<%=data[i].id%>">Delete</button>
+                            <!-- <a href="/movies/delete/<%=data[i].id%>"><button type="button" class="btn btn-primary">Delete</button></a> -->
+                            <a href="/movies/addcast/<%=data[i].id%>"><button type="button" class="btn btn-primary">Add Cast</button></a>
+                            <div class="modal fade" id="exampleModal<%=data[i].id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Notification</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      Are you sure want to delete this?
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                      <a href="/movies/delete/<%=data[i].id%>"><button type="button" class="btn btn-danger">Delete</button></a>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>  
+                        </td>
                     </tr>
                 <% } %>
             </tbody>

@@ -1,5 +1,7 @@
 const Movie = require('../models').Movie
 const ProductionHouse = require('../models').ProductionHouse
+const Cast = require('../models').Cast
+const MovieCast = require('../models').MovieCast
 
 class MovieController{
     static getHome(req, res){
@@ -19,10 +21,9 @@ class MovieController{
     }
 
     static add(req, res){
-        const alert = req.query
         ProductionHouse.findAll()
         .then( data => {
-            res.render('addMovie', {data, alert})
+            res.render('addMovie', {data})
         })
         .catch( err => {
             res.render('error', {msg: err})
@@ -30,28 +31,29 @@ class MovieController{
     }
 
     static addPost(req, res){
-        const validate = MovieController.validate(req.body)
-        if(validate.length > 0){
-            res.redirect(`/movies/add?msg=${validate.join(', ')}`)
+        let rating 
+        if(!req.body.rating){
+            rating = null
         } else {
-            Movie.create({
-                name: req.body.name,
-                released_year: req.body.released_year,
-                genre: req.body.genre,
-                ProductionHouseId: req.body.ProductionHouseId
-            })
-            .then( () => {
-                const msg = `Movie titled '${req.body.name}' has been added`
-                res.redirect(`/movies?msg=${msg}`)
-            })
-            .catch( err => {
-                res.render('error', {msg: err})
-            })
+            rating = Number(req.body.rating)
         }
+        Movie.create({
+            name: req.body.name,
+            released_year: req.body.released_year,
+            genre: req.body.genre,
+            ProductionHouseId: req.body.ProductionHouseId,
+            rating : rating
+        })
+        .then( () => {
+            res.redirect(`/movies`)
+        })
+        .catch( err => {
+            const msg = err.errors[0].message
+            res.redirect(`/movies?msg=${msg}`)
+        })
     }
 
     static edit(req, res){
-        const alert = req.query
         let dataProductionHouse
         ProductionHouse.findAll()
         .then( data => {
@@ -59,7 +61,7 @@ class MovieController{
             return Movie.findByPk(Number(req.params.id))
         })
         .then( data => {
-            res.render('editMovie', {data, dataProductionHouse, alert})
+            res.render('editMovie', {data, dataProductionHouse})
         })
         .catch( err => {
             res.render('error', {msg: err})
@@ -67,31 +69,33 @@ class MovieController{
     }
 
     static editPost(req, res){
-        const validate = MovieController.validate(req.body)
-        if(validate.length > 0){
-            res.redirect(`/movies/edit/${req.params.id}?msg=${validate.join(', ')}`)
+        let rating 
+        if(!req.body.rating){
+            rating = null
         } else {
-            Movie.update(
-                {
-                    name: req.body.name,
-                    released_year: req.body.released_year,
-                    genre: req.body.genre,
-                    ProductionHouseId : req.body.ProductionHouseId
-                },
-                {
-                    where: {
-                        id: Number(req.params.id)  
-                    }
-                }
-            )
-            .then( () => {
-                const msg = `Movie has been edited successfully`
-                res.redirect(`/movies?msg=${msg}`)
-            })
-            .catch( err => {
-                res.send('error', {msg : err})
-            })
+            rating = Number(req.body.rating)
         }
+        Movie.update(
+            {
+                name: req.body.name,
+                released_year: req.body.released_year,
+                genre: req.body.genre,
+                ProductionHouseId : req.body.ProductionHouseId,
+                rating : rating
+            },
+            {
+                where: {
+                    id: Number(req.params.id)  
+                }
+            }
+        )
+        .then( () => {
+            res.redirect(`/movies`)
+        })
+        .catch( err => {
+            const msg = err.errors[0].message
+            res.redirect(`/movies?msg=${msg}`)
+        })
     }
 
     static delete(req, res){
@@ -101,34 +105,52 @@ class MovieController{
             }
         })
         .then( () => {
-            const msg = `Movies has been deleted successfully`
-            res.redirect(`/movies?msg=${msg}`)
+            return MovieCast.destroy({
+                where: {
+                    MovieId : Number(req.params.id)
+                }
+            })
+        })
+        .then( () => {
+            res.redirect(`/movies`)
         })
         .catch( err =>{
             res.render('error', {msg: err})
         })
     }
 
-    static validate(data){
-        const error = []
-        if(!data.name){
-            error.push('Movie name is required')
-        }
-        if(data.released_year){
-            if(isNaN(data.released_year)){
-                error.push('Invalid released year')
+    static addMovieCast(req, res){
+        const alert = req.query
+        let dataCast
+        Cast.findAll()
+        .then( data => {
+            dataCast = data
+            return Movie.findByPk(Number(req.params.id), {include : {model: Cast}})
+        })
+        .then( data => {
+            res.render('addMovieCast', {data, dataCast, alert})
+        })
+        .catch( err => {
+            res.render('error', {msg : err})
+        })
+    }
+
+    static addMovieCastPost(req, res){
+        MovieCast.create({
+            MovieId: req.body.MovieId,
+            CastId: req.body.CastId,
+            role: req.body.role
+        })
+        .then( () => {
+            res.redirect(`/movies/addcast/${req.params.id}`)
+        })
+        .catch( err => {
+            const msg = []
+            for(let i = 0; i < err.errors.length; i++){
+                msg.push(err.errors[i].message)
             }
-            else {
-                const year = new Date().getFullYear()
-                if(data.released_year > year){
-                    error.push('Invalid released year')
-                }
-            }
-        }
-        if(!data.genre){
-            error.push('Movie genre is required')
-        }
-        return error
+            res.redirect(`/movies/addcast/${req.params.id}?msg=${msg.join(', ')}&type=danger`)
+        })
     }
 }
 

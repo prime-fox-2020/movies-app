@@ -11,7 +11,7 @@
         <table class="table table-sm">
             <thead class="table-info">
               <tr>
-                <th scope="col">Name</th>
+                <th scope="col">Movie Name</th>
                 <th scope="col">Released Year</th>
                 <th scope="col">Genre</th>
                 <th scope="col">Production House</th>
@@ -27,7 +27,8 @@
                     <td><%= data[i].ProductionHouse.name_prodHouse %></td>
                     <td>
                         <button ><a href="/movies/edit/<%= data[i].id %>" >Edit</a></button> || 
-                        <button><a href="/movies/delete/<%= data[i].id %>">Delete</a></button>
+                        <button><a href="/movies/delete/<%= data[i].id %>">Delete</a></button> ||
+                        <button><a href="/movies/casts/<%= data[i].id %>">Add Cast</a></button>
                     </td>
               </tr>
             </tbody>

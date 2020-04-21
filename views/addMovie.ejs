@@ -8,11 +8,6 @@
       <%- include('partials/navbar') %> 
         <h1 style="text-align: center;">Add Movies</h1>
         <p style="text-align: center;"><a href="/movies">show all data</a></p>
-        <div class="alert alert-primary" role="alert">
-          <% if (error) { %>
-            <p style="color: red;"><%= error %></p>
-          <% } %>
-        </div>
         <form action='/movies/add' method = 'POST'>
             <div class="form-row">
               <div class="form-group col-md-6">

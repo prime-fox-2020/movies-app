@@ -1,4 +1,4 @@
-const { Movie , ProductionHouse } = require('../models')
+const { Movie , ProductionHouse, Cast, MovieCast } = require('../models')
 
 class Movies {
     static showData (req, res) {
@@ -16,27 +16,10 @@ class Movies {
         })
     }
 
-    static validation(data) {
-        const error = []
-
-        if(!data.name){
-            error.push('name is required')
-        }
-
-        if(!data.released_year){
-            error.push('released year is required')
-        }
-
-        return error
-    }
-
     static addForm(req, res) {
-
-        const error = req.query.error
-
         ProductionHouse.findAll()
         .then(data => {
-            res.render('addMovie.ejs', {data, error})
+            res.render('addMovie.ejs', {data})
         })
         .catch(err => {
             res.send(err)
@@ -44,24 +27,18 @@ class Movies {
     }
 
     static addPost(req, res) {
-        const error = Movies.validation(req.body)
-
-        if(error.length > 0) {
-            res.redirect(`/movies/add?error=${error.join(', ')}`)
-        } else {
-            Movie.create({
-                name : req.body.name,
-                released_year : req.body.released_year,
-                genre : req.body.genre,
-                ProductionHouseId : req.body.ProductionHouseId
-            })
-            .then(data => {
-                res.redirect('/movies')
-            })
-            .catch(err => {
-                res.send(err)
-            })
-        }
+        Movie.create({
+            name : req.body.name,
+            released_year : req.body.released_year,
+            genre : req.body.genre,
+            ProductionHouseId : req.body.ProductionHouseId
+        })
+        .then(data => {
+            res.redirect('/movies')
+        })
+        .catch(err => {
+            res.send(err)
+        })
     }
 
     static editForm(req, res) {
@@ -114,6 +91,7 @@ class Movies {
             res.send(err)
         })
     }
+
 }
 
 module.exports = Movies

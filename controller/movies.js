@@ -1,5 +1,4 @@
-const Movie = require('../models').Movie;
-const ProductionHouse = require('../models').ProductionHouse;
+const {Movie, ProductionHouse, Cast, MovieCast} = require('../models');
 
 class MoviesController {
   static getData(req, res) {
@@ -112,6 +111,34 @@ class MoviesController {
     if (!PHId) msg.push('Production House cannot be empty');
 
     return msg.join(', ');
+  }
+
+  static addCastGet(req, res) {
+    Movie.findOne({
+      where: {id: req.params.id},
+      include: Cast
+    })
+    .then(movie => {
+      Cast.findAll()
+      .then(cast => {
+        // res.send(movie)
+        res.render('addcast', {movie, cast})
+      })
+      .catch(err => res.send(err))
+    })
+    .catch(err => res.send(err))
+  }
+
+  static addCast(req, res) {
+    const value = {
+      MovieId: req.params.id,
+      CastId: req.body.CastId,
+      role: req.body.role
+    }
+
+    MovieCast.create(value)
+    .then(() => res.redirect('/movies'))
+    .catch(err => res.send(err))
   }
 }
 

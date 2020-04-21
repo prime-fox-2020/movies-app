@@ -19,6 +19,8 @@ router.post('/movies/add', Movies.add);
 router.get('/movies/:id/edit', Movies.editData);
 router.post('/movies/:id/edit', Movies.edit);
 router.get('/movies/:id/delete', Movies.delete);
+router.get('/movies/:id/addCast', Movies.addCastGet);
+router.post('/movies/:id/addCast', Movies.addCast);
 
 router.get('/casts', Casts.getData);
 router.get('/casts/add', Casts.addData);

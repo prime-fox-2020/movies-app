@@ -1,0 +1,48 @@
+<%- include('partials/header', {title: 'Add Cast'}) %>
+
+<div class="container">
+  <div class="alert alert-info">
+    <h2><%= movie.name %></h2>
+  </div>
+
+  <h1>Add Cast</h1>
+
+  <form action="" method="POST" class="mt-5">
+    <div class="form-group">
+      <label for="CastId">Actor</label>
+      <select name="CastId" id="CastId" class="custom-select">
+        <option value="" selected disabled>Choose:</option>
+        <% cast.forEach(el => { %>
+          <option value="<%= el.id %>"><%= el.fullName() %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="role">Role</label>
+      <input type="text" class="form-control" id="role" name="role" placeholder="e.g: Pemeran Utama Wanita">
+    </div>
+    <button class="btn btn-primary" type="submit">Save</button>
+    <a href="/movies"><button class="btn btn-danger" type="button">Cancel</button></a>
+  </form>
+
+  <h2 class="mt-5">List Cast</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Actor</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% movie.Casts.forEach(el => { %>
+        <tr>
+          <td><%= el.fullName() %></td>
+          <td><%= el.MovieCast.role %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('partials/footer') %>

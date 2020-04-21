@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>list movies</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/movies">List Movies</a></li>
+            <li><a href="/phouses">List Production Houses</a></li>
+            <li><a href="/">Home</a></li>
+        </ul>
+    </nav>
+    
+    <h1>LIST CASTS</h1>
+
+    <!-- <form action="/casts/:id" method="post">
+        <label>Search Casts by Id</label> <br>
+        <input type="text" name="casts_by_id"><br>
+        <button type="submit">Search</button> <br><br>
+    </form> -->
+
+    <button><a href="/casts/add">Add new cast</a></button>
+
+    <%if(pesan){%>
+        <%=pesan%>
+    <%}%>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>NAME</td>
+                <td>BIRTH YEAR</td>
+                <td>PHONE NUMBER</td>
+                <td>GENDER</td>
+                <td colspan="3">ACTION</td>
+            </tr>
+        </thead>
+        <tbody>
+            <%for (let i in dataCast) {%>
+                <tr>
+                    <td><%=dataCast[i].id%></td>
+                    <td><%=dataCast[i].getFullName()%></td>
+                    <td><%=dataCast[i].birth_year%></td>
+                    <td><%=dataCast[i].phone_number%></td>
+                    <td><%=dataCast[i].gender%></td>
+                    <td><button><a href="/casts/edit/<%=dataCast[i].id%>">EDIT</a></button></td>
+                    <td><button onclick="return confirm('Apakah anda ingin menghapus data Cast bernama <%=dataCast[i].getFullName()%>')"><a href="/casts/delete/<%=dataCast[i].id%>">DELETE</a></button></td>
+                    <td><button><a href="/casts/:id/<%=dataCast[i].id%>">See Movies</a></button></td>
+                </tr>
+            <%}%>
+        </tbody>
+    </table>
+</body>
+</html>

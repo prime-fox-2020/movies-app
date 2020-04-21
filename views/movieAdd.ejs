@@ -1,12 +1,16 @@
 <%- include ('./partials/header', {title: 'Movie'}) %>
-
+<% if(error){ %>
+<p><%= error %></p>
+<%} %>
 
 <form action="/movies/add" method = 'POST'>
   <h1>Movie Name</h1>
 <input type="text" name = 'name' value = '' placeholder="Movie name"> <br>
 <h1>Released Year</h1>
 <input type="text" name = 'released_year' value = '' placeholder="released_year">  <br>
-
+<h1>Rating</h1>
+<input type="text" name = 'rating' value = '' placeholder="rating">  <br>
+<h1>Genre</h1>
 <select name="genre">
   <option value="">Choose</option>
   <option value="animation">animation</option>

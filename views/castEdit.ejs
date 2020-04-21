@@ -1,0 +1,32 @@
+<%- include ('./partials/header', {title: 'Cast'}) %>
+
+
+<form action="/casts/<%=casts.id%>/edit" method = 'POST'>
+  <h1>First Name</h1>
+<input type="text" name = 'first_name' value = '<%=casts.first_name%>' >  <br>
+<h1>Last Name</h1>
+<input type="text" name = 'last_name' value = '<%=casts.last_name%>' >  <br>
+<h1>Birth Year</h1>
+<input type="text" name = 'birth_year' value = '<%=casts.birth_year %>'>  <br>
+<h1>Phone Number</h1>
+<input type="text" name = 'phone_number' value = '<%=casts.phone_number%>' >  <br>
+
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="male" name ='gender' <% if(casts.gender ===' male'){%> checked   <%}%>    >
+  <label class="form-check-label" for="inlineCheckbox1">Male</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="female" name = 'gender'   <% if(casts.gender ==='female'){%> checked   <%}%>   >
+  <label class="form-check-label" for="inlineCheckbox2">female</label>
+</div>
+
+
+<button type="submit">Click</button>
+</form>
+
+
+
+
+
+
+<%- include ('./partials/footer') %>

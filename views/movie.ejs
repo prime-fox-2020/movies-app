@@ -2,10 +2,13 @@
 
 
 <nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href='/'>Home</a>
+  <a class="navbar-brand" href='/'>Home</a> 
   <a class="navbar-brand" href='/movies/add'> <button>Add Movie</button> </a>
 </nav>
 <h1>Movie</h1>
+<%if(msg){ %>
+  <p><%=msg%></p>
+  <%} %>
 <table class="table table-dark">
   <thead>
     <tr>
@@ -17,6 +20,7 @@
       
   </thead>
   <tbody>
+
   <%  if(movies){ %>
 
     <% for(let i = 0; i < movies.length; i++){ %>
@@ -31,7 +35,7 @@
        <% } %>
        
         <td><%= movies[i].genre %></td>
-        <td> <a href="/movies/<%=movies[i].id %>/edit"> EDIT</a> ||  <a href="/movies/<%=movies[i].id %>/delete">Delete </a></td>
+        <td> <a href="/movies/<%=movies[i].id %>/edit"> EDIT</a> ||  <a href="/movies/<%=movies[i].id %>/question">Delete </a> ||  <a href="/movies/<%=movies[i].id %>/addCast">Add Cast </a></td>
       </tr>
 
    <% } %>

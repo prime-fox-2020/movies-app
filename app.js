@@ -2,7 +2,7 @@ const express = require('express');
 
 const app = express();
 
-const port = 3000;
+const port = 3100;
 
 const routes = require('./routes');
 
@@ -11,12 +11,13 @@ app.use(express.urlencoded({extended:true}));
 
 app.use(routes);
 
-const {Movie, ProductionHouse} = require('./models')
+const {Movie, ProductionHouse, Cast} = require('./models')
 app.get('/mama', (req,res)=>{
-  Movie.findAll({
-    include: [{model: ProductionHouse}]
+  ProductionHouse.findAll({
+    include: [{model: Movie}]
   })
   .then(data=>{
+     console.log(data)
     res.send(data)
   })
   .catch(err=>{

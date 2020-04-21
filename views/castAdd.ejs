@@ -1,0 +1,32 @@
+<%- include ('./partials/header', {title: 'Cast'}) %>
+
+
+<form action="/casts/add" method = 'POST'>
+  <h1>First Name</h1>
+<input type="text" name = 'first_name' value = '' placeholder="First name"> <br>
+<h1>Last Name</h1>
+<input type="text" name = 'last_name' value = '' placeholder="last name">  <br>
+<h1>Birth Year</h1>
+<input type="text" name = 'birth_year' value = '' placeholder="Birth Year">  <br>
+<h1>Phone Number</h1>
+<input type="text" name = 'phone_number' value = '' placeholder="Phone Number">  <br>
+
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="male" name ='gender'>
+  <label class="form-check-label" for="inlineCheckbox1">Male</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="female" name = 'gender'>
+  <label class="form-check-label" for="inlineCheckbox2">female</label>
+</div>
+
+
+<button type="submit">Click</button>
+</form>
+
+
+
+
+
+
+<%- include ('./partials/footer') %>

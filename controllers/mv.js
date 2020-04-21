@@ -1,4 +1,4 @@
-const { Movie,ProductionHouse } = require('../models/index')
+const { Movie , ProductionHouse , Cast } = require('../models/index')
 
 class Controller{
 
@@ -19,7 +19,23 @@ class Controller{
         })
     }
 
-    static createMovie(req,res){
+    static mvcast(req,res){
+        Movie.findAll({
+            order: [['released_year', 'asc']],
+            include: [{ model: Cast }]
+        })
+        .then(data => {
+            // res.render('',{data : Movie})
+            // res.render('mv',{data})
+            res.send(data)
+        })
+        .catch(err =>{
+            console.log(err)
+            res.send(err)
+        })
+    }
+
+    static create(req,res){
         ProductionHouse.findAll({})
         .then(data=>{
             res.render('mvadd', {data})
@@ -29,7 +45,7 @@ class Controller{
         })
     }
 
-    static addMovie(req,res){
+    static add(req,res){
         const body = req.body
         console.log(body)
 
@@ -50,7 +66,7 @@ class Controller{
 
     }
 
-    static editForm (req,res){
+    static edit(req,res){
         const id = req.params.id
         let mvByPkData = null
         Movie.findByPk(id, { include: { model: ProductionHouse } })
@@ -66,7 +82,7 @@ class Controller{
         })
     }
 
-    static changeMovie(req,res){
+    static change(req,res){
         const body = req.body
         console.log (body)
 
@@ -87,7 +103,7 @@ class Controller{
 
     }
 
-    static destroyMovie(req,res){
+    static destroy(req,res){
         const id = req.params.id
         Movie.destroy({ where: { id: id } })
         .then(() => {

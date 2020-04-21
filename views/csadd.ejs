@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang=eng>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width , initial-scale=1.0">
+        <title>Movies</title>
+    </head>
+
+    <body>
+        <h1>Add Movie</h1>
+        <form action='/cs/add' method='post'>
+            <br>
+            <label for = "">First Name</label>
+            <br>
+            <input type="text" name="first_name" value="Juan " > 
+            <br> 
+            <label for = "">Last Name</label>
+            <br>
+            <input type="text" name="last_name" value="Sanjay"> 
+            <br>
+            <label for = "">Phone Number</label>
+            <br>
+            <input type="text" name="phone_number" value="08787878787"> 
+            <br><label for = "">Birth Year</label>
+            <br>
+            <input type="text" name="birth_year" value="1895"> 
+            <br>
+
+            <label for="genre">Gender</label><br>
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">Male</label><br>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">Female</label><br>
+                <input type="radio" id="other" name="gender" value="other">
+                <label for="other">Other</label> 
+            <br>
+            <label for="moviecast">Salah Satu Movie yang diperankan</label><br>
+                <select name="MovieId">
+                    <option value=""> </option>
+                    <% for(let i =0; i < data.length ; i++){ %>
+                          <option value="<%= data[i].id %>"><%= data[i].name %></option>
+                      <% } %>
+                </select>
+            <br><label for = "">Role</label>
+            <br>
+            <input type="text" name="role" value="rear cast"> 
+            <br>
+            <br>
+
+            <button type = "Submit"> Submit </button>
+        </form>
+
+
+
+
+
+    </body>
+
+
+
+</html>

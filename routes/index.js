@@ -36,8 +36,8 @@ route.get('/ph',cekLogin,phController.findAll)
 
 
 route.get('/cs',csController.findAll)
-// route.get('/cs/:id/edit/',csController.edit)
-// route.post('/cs/:id/edit/',csController.change)
+route.get('/cs/:id/edit/',csController.edit)
+route.post('/cs/:id/edit/',csController.change)
 route.get('/cs/:id/delete/',csController.destroy)
 route.get('/cs/add',csController.create)
 route.post('/cs/add',csController.add)

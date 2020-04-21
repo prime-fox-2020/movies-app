@@ -8,17 +8,17 @@
 
     <body>
         <h1>Edit Movie</h1>
-        <form action='/mv/<%=mvByPkData.id%>/edit' method='post'>
+        <form action='/mv/<%=ByPkData.id%>/edit' method='post'>
             <br>
             <label for = "">Name</label>
             <br>
-            <input type="text" name="name" value="<%= mvByPkData.name %>"> 
+            <input type="text" name="name" value="<%= ByPkData.name %>"> 
             <br> 
             <label for = "">Released Year</label>
             <br>
-            <input type="text" name="released_year" value="<%= mvByPkData.released_year %>"> 
+            <input type="text" name="released_year" value="<%= ByPkData.released_year %>"> 
             <br> 
-            <label for="genre">Genre : Default : <%= mvByPkData.genre %> </label><br>
+            <label for="genre">Genre : Default : <%= ByPkData.genre %> </label><br>
                 <select name="genre">
                   <% const listgenres =['','Animation','Comedy','Drama','Horror','Religious','Thriller'] %>
                   <% for(let i =0; i < listgenres.length ; i++) { %>
@@ -26,7 +26,7 @@
                     <% } %>
                 </select>
             <br>
-            <label for="production_house">Production House : Default : <%= mvByPkData.ProductionHouse.name_prodHouse %></label><br>
+            <label for="production_house">Production House : Default : <%= ByPkData.ProductionHouse.name_prodHouse %></label><br>
                 <select name="phId">
                     <option value=""> </option>
                     <% for(let i =0; i<data.length;i++){ %>

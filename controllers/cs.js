@@ -2,8 +2,7 @@ const { Movie , ProductionHouse , Cast , MovieCast} = require('../models/index')
 
 class Controller{
 
-    static findAll(req,res){
-        
+    static findAll(req,res){   
         Cast.findAll(
             {include: [{ model: Movie}]}
             )
@@ -27,19 +26,14 @@ class Controller{
 
     static add(req,res){
         const body = req.body
-
-        console.log(body)
-
         body.first_name=body.first_name
         body.last_name=body.last_name
         body.phone_number=body.phone_number
         body.birth_year= Number(body.birth_year)
         body.createdAt = new Date()
         body.updatedAt = new Date()
-
         let MovieId;
         let role;
-
         Cast.create(body)
         .then((data)=>{
             // res.redirect('/cs')
@@ -66,19 +60,41 @@ class Controller{
 
     static edit(req,res){
         const id = req.params.id
-        let dataByPk;
+        let ByPkData;
+
         Cast.findByPk(id, { include : { model : Movie } })
         .then(data=>{
-            dataByPk=data
+            ByPkData=data
             return Movie.findAll({})
         })
         .then(data=>{
-            res.render('csedit',{data,dataByPk})
+            console.log(data)
+            res.render('csedit',{data,ByPkData})
         })
         .catch(err=>{
             res.send(err)
         })
     }
+
+    static change(req,res){
+        const body = req.body
+
+        body.first_name=body.first_name
+        body.last_name=body.last_name
+        body.phone_number=body.phone_number
+        body.birth_year=Number(body.birth_year)
+        body.gender=body.gender
+
+        Cast.update(body,{ where: { id: req.params.id } })
+        .then(()=>{
+            res.redirect('/cs')
+        })
+        .catch(err=>{
+            res.send(err)
+        })
+
+    }
+
 
     static destroy(req,res){
         const id = req.params.id

@@ -68,14 +68,14 @@ class Controller{
 
     static edit(req,res){
         const id = req.params.id
-        let mvByPkData = null
+        let ByPkData = null
         Movie.findByPk(id, { include: { model: ProductionHouse } })
         .then(data => {
-            mvByPkData = data
+            ByPkData = data
             return ProductionHouse.findAll({})
         })
         .then(data=>{
-            res.render('mvedit', {data,mvByPkData})
+            res.render('mvedit', {data,ByPkData})
         })
         .catch(err => {
             res.send(err)

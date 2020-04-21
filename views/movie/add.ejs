@@ -44,6 +44,23 @@
 
       </select>
     </div>
+    <% if (prodHouse) { %>
+    <div class="form-group">
+      <label for="ProductionHouseId">Production House</label>
+      <select name="ProductionHouseId" class="form-control">
+        <option value="">---SELECT---</option>
+        <% if (data) { %>
+          <% prodHouse.forEach(ph => { %>
+            <option value="<%= ph.id %>" <%= ph.id == data.ProductionHouseId ? 'selected' : '' %>><%= ph.name_prodHouse %></option>
+          <% }) %>
+        <% } else { %>
+          <% prodHouse.forEach(ph => { %>
+            <option value="<%= ph.id %>" ><%= ph.name_prodHouse %></option>
+          <% }) %>
+        <% } %>
+      </select>
+    </div>
+      <% } %>
     <div class="form-group">
       <button class="btn btn-primary" type="submit"><%= method === 'edit' ? `Update Data` : 'Submit Data'%></button>
     </div>

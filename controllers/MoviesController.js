@@ -33,7 +33,20 @@ class MovieController {
     const locals = MovieController.getLocals()
     locals.title = 'Add new movie'
     locals.method = 'add'
-    res.render('movie/add', locals)
+    locals.prodHouse = []
+
+    ProductionHouse.findAll({
+      order: [['name_prodHouse', 'ASC']]
+    })
+    .then(results => {
+      locals.prodHouse = results
+      res.render('movie/add', locals)
+    })
+    .catch(err => {
+      locals.alert.message = [err]
+      locals.alert.type = 'danger'
+      res.render('movie/add', locals)
+    })
   }
   
   static add(req, res) {
@@ -46,23 +59,34 @@ class MovieController {
     locals.alert.type = 'danger'
     locals.data = req.body
 
-    if (error.length) {
-      res.render('movie/add', locals)
-    } else {
-      const {title, released_year, genre} = req.body
-      Movie.create({
-        title,
-        released_year,
-        genre
-      })
-      .then(results => {
-        res.redirect(`/movies?message=${message}&type=success`)
-      })
-      .catch(err => {
-        locals.alert.message = [err]
+    ProductionHouse.findAll({
+      order: [['name_prodHouse', 'ASC']]
+    })
+    .then(results => {
+      locals.prodHouse = results
+      if (error.length) {
         res.render('movie/add', locals)
-      })
-    }
+      } else {
+        const {title, released_year, genre, ProductionHouseId} = req.body
+        Movie.create({
+          title,
+          released_year,
+          genre,
+          ProductionHouseId
+        })
+        .then(results => {
+          res.redirect(`/movies?message=${message}&type=success`)
+        })
+        .catch(err => {
+          locals.alert.message = [err]
+          res.render('movie/add', locals)
+        })
+      }
+    })
+    .catch(err => {
+      locals.alert.message = [err]
+      res.render('movie/add', locals)
+    })    
   }
 
   static editForm(req, res) {
@@ -90,9 +114,10 @@ class MovieController {
         res.render('movie/edit', locals)
       })
       .catch(err => {
-        res.redirect(`/movies?message=${err}&type=danger`)
+        locals.alert.message = [err]
+        res.render('movie/add', locals)
       })
-    }
+    }  
   }
   
   static edit(req, res) {
@@ -106,26 +131,36 @@ class MovieController {
     locals.data.id = req.params.id
     locals.alert.message = error
 
-    if (error.length) {
-      res.render('movie/edit', locals)
-    } else {
-      const {title, released_year, genre, ProductionHouseId} = req.body
-      Movie.update({
-        title,
-        released_year,
-        genre,
-        ProductionHouseId
-      }, {
-        where: {id: req.params.id}
-      })
-      .then(results => {
-        res.redirect(`/movies?message=${message}&type=success`)
-      })
-      .catch(err => {
-        locals.alert.message = [err]
+    ProductionHouse.findAll({
+      order: [['name_prodHouse', 'ASC']]
+    })
+    .then(results => {
+      locals.prodHouse = results
+      if (error.length) {
         res.render('movie/edit', locals)
-      })
-    }
+      } else {
+        const {title, released_year, genre, ProductionHouseId} = req.body
+        Movie.update({
+          title,
+          released_year,
+          genre,
+          ProductionHouseId
+        }, {
+          where: {id: req.params.id}
+        })
+        .then(results => {
+          res.redirect(`/movies?message=${message}&type=success`)
+        })
+        .catch(err => {
+          locals.alert.message = [err]
+          res.render('movie/edit', locals)
+        })
+      }
+    })
+    .catch(err => {
+      locals.alert.message = [err]
+      res.render('movie/edit', locals)
+    })
   }
 
   static delete(req, res) {

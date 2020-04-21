@@ -49,9 +49,15 @@
       <label for="ProductionHouseId">Production House</label>
       <select name="ProductionHouseId" class="form-control">
         <option value="">---SELECT---</option>
-        <% prodHouse.forEach(ph => { %>
-          <option value="<%= ph.id %>" <%= ph.id === data.ProductionHouseId ? 'selected' : '' %>><%= ph.name_prodHouse %></option>
-        <% }) %>
+        <% if (data) { %>
+          <% prodHouse.forEach(ph => { %>
+            <option value="<%= ph.id %>" <%= ph.id == data.ProductionHouseId ? 'selected' : '' %>><%= ph.name_prodHouse %></option>
+          <% }) %>
+        <% } else { %>
+          <% prodHouse.forEach(ph => { %>
+            <option value="<%= ph.id %>" ><%= ph.name_prodHouse %></option>
+          <% }) %>
+        <% } %>
       </select>
     </div>
     <% } %>

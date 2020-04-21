@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .jumbotron {
+            max-width: 85%;
+            text-align: center;
+            margin-left: 6%;
+            margin-top: 3%;
+        }
+
+        .form-group {
+            max-width: 80%;
+            align-items: center;
+        }
+
+        .table {
+            max-width: 90%;
+            text-align: center;
+        }
+    </style>
+    <title>Add Cast</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="/">Home</a>
+            <a class="nav-item nav-link active" href="/productionhouses">Production Houses</a>
+            <a class="nav-item nav-link active" href="/movies">Movies</a>
+            <a class="nav-item nav-link active" href="/casts">Casts</a>
+        </div>
+    </nav>
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-6"><%= selected.dataValues.name %></h1>
+        </div>
+    </div>
+    <div class="container">
+        <form action="/movies/addCast/<%= selected.dataValues.id %>" method="POST">
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Actor:</label>
+                <select class="form-control" id="exampleFormControlSelect1" name='actor'>
+                    <% for (let i = 0; i < data.length; i++) { %>
+                    <option value="<%= data[i].id %>"><%= data[i].fullName() %></option>
+                    <% } %>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Role:</label>
+                <input type="text" class="form-control" id="exampleFormControlInput1"
+                    placeholder="e.g Pemeran Utama Wanita" name="role" value="">
+                    <%= console.log(error) %> 
+                    <% if(error) { %>
+                        <p style="color: red;"><%= error %></p>
+                    <% } %>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-danger"><a href="/movies"
+                    style="color: white; text-decoration: none;">Cancel</a></button>
+        </form>
+    </div>
+    <br>
+    <div class="container">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Actor/Actress</th>
+                    <th scope="col">Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i = 0; i < selected.dataValues.Casts.length; i++) { %>
+                <tr>
+                    <th scope="row"><%= selected.dataValues.Casts[i].fullName() %></th>
+                    <td><%= selected.dataValues.Casts[i].MovieCast.role %></td>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>

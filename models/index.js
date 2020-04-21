@@ -12,7 +12,29 @@ let sequelize;
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
+
+  sequelize = new Sequelize(config.database, config.username, config.password, config)
+    // define: {
+    //   hooks: {
+    //     beforeCreate(instance, options){
+    //       console.log('========================');
+    //       console.log('Ini Global Hooks');
+    //       console.log('========================');
+    //     }
+    //   }
+    // }
+
+    // sequelize.addHook('beforeCreate', (instance,options) => {
+    //       console.log('========================');
+    //       console.log('Ini Global Hooks');
+    //       console.log('========================');
+    // })
+
+    // sequelize.beforeCreate((instance, options) => {
+    //       console.log('========================');
+    //       console.log('Ini Global Hooks');
+    //       console.log('========================');
+    // })
 }
 
 fs

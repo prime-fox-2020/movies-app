@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+   <nav class="navbar navbar-expand-lg navbar-light bg-primary">
         <div class="navbar-nav">
             <a class="nav-item nav-link active" href="/">Home</a>
             <a class="nav-item nav-link active" href="/productionhouses">Production Houses</a>
@@ -24,29 +24,29 @@
         </div>
     </nav>
     <div class="container" style="max-width: 90%;">
-        <h2>List Movies</h2>
-        <a class="btn btn-success float-right" href="movies/add" role="button">Add Movie</a>
+        <h2>List Casts</h2>
+        <a class="btn btn-success float-right" href="/casts/add" role="button">Add Cast</a>
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th scope="col">Name</th>
-                    <th scope="col">Released Year</th>
-                    <th scope="col">Genre</th>
-                    <th scope="col">Production House</th>
+                    <th scope="col">Birth Year</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Gender</th>
                     <th scope="col">Option</th>
                 </tr>
             </thead>
             <tbody>
                 <% for(let i = 0; i < data.length; i++) { %>
                 <tr>
-                    <th scope="row"><%= data[i].dataValues.name %></th>
-                    <td><%= data[i].dataValues.released_year %></td>
-                    <td><%= data[i].dataValues.genre %></td>
-                    <td><%= data[i].dataValues.ProductionHouse.name_prodHouse %></td>
-                    <td> <a class="btn btn-primary" href="/movies/edit/<%= data[i].dataValues.id %>" role="button">Edit</a>
-                         <a class="btn btn-primary" href="/movies/delete/<%= data[i].dataValues.id %>" role="button">Delete</a> 
-                         <a class="btn btn-primary" href="/movies/addCast/<%= data[i].dataValues.id %>" role="button">Add Cast</a>
-                    </td>
+                    <th scope="row"><%= data[i].fullName() %></th>
+                    <td><%= data[i].dataValues.birth_year %></td>
+                    <td><%= data[i].dataValues.phone_number %></td>
+                    <td><%= data[i].dataValues.gender %></td>
+                    <td><a class="btn btn-primary" href="/casts/edit/<%= data[i].dataValues.id %>" role="button">Edit</a>
+                        <a class="btn btn-primary" href="/casts/delete/<%= data[i].dataValues.id %>" role="button">Delete</a>
+                        <a class="btn btn-primary" href="/casts/seeMovies/<%= data[i].dataValues.id %>" role="button">See Movies</a>
+                        </td>
                 </tr>
                 <% } %>
             </tbody>

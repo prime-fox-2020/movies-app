@@ -14,6 +14,13 @@ module.exports = (sequelize, DataTypes) => {
     birth_year: DataTypes.INTEGER,
     gender: DataTypes.STRING
   }, {sequelize});
+
+  Cast.addHook('beforeCreate', (instance, options) => {
+    if(instance.last_name === ''){
+      instance.last_name = instance.first_name
+    }
+  })
+
   Cast.associate = function(models) {
     // associations can be defined here
     Cast.belongsToMany(models.Movie, { 

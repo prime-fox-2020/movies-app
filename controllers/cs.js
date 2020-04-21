@@ -95,7 +95,6 @@ class Controller{
 
     }
 
-
     static destroy(req,res){
         const id = req.params.id
         Cast.destroy({ where: { id: id } })
@@ -108,7 +107,16 @@ class Controller{
       
     }
 
-
+    static seemovies(req,res){
+        const id = req.params.id
+        Cast.findOne({ where: { id: id } ,include: [{ model: Movie}]})
+        .then((data)=>{
+            res.send(data)
+        })
+        .catch((err)=>{
+            res.send(err)
+        })
+    }
 
 
 }

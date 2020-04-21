@@ -1,6 +1,6 @@
 </select>
     <body>
-        <h1>Movies</h1>
+        <h1>Casts</h1>
         <%- include('../partials/navbar.ejs') %>
         
         <table border = "2">
@@ -26,6 +26,7 @@
                     <td>
                     <a href="/cs/<%= el.id %>/edit"><button>Edit</button></a>
                     <a href="/cs/<%= el.id %>/delete"><Button>Delete</Button></a>
+                    <a href="/cs/<%= el.id %>/seemovies"><Button>See Movie</Button></a>
                     </td>
                 </tr>
                 <% }) %>

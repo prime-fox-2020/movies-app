@@ -22,7 +22,8 @@ route.post('/mv/:id/edit/',mvController.change)
 route.get('/mv/:id/delete/',mvController.destroy)
 route.get('/mv/add',mvController.create)
 route.post('/mv/add',mvController.add)
-route.get('/mvcast',mvController.mvcast)
+route.get('/mv/:id/addcast',mvController.mvcreatecast)
+route.post('/mv/:id/addcast',mvController.mvaddcast)
 
 
 
@@ -39,6 +40,7 @@ route.get('/cs',csController.findAll)
 route.get('/cs/:id/edit/',csController.edit)
 route.post('/cs/:id/edit/',csController.change)
 route.get('/cs/:id/delete/',csController.destroy)
+route.get('/cs/:id/seemovies/',csController.seemovies)
 route.get('/cs/add',csController.create)
 route.post('/cs/add',csController.add)
 

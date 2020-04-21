@@ -1,4 +1,4 @@
-const { Movie , ProductionHouse , Cast } = require('../models/index')
+const { Movie , ProductionHouse , Cast , MovieCast } = require('../models/index')
 
 class Controller{
 
@@ -19,18 +19,39 @@ class Controller{
         })
     }
 
-    static mvcast(req,res){
-        Movie.findAll({
-            order: [['released_year', 'asc']],
-            include: [{ model: Cast }]
-        })
+    static mvcreatecast(req,res){
+        const id = req.params.id
+        let FindOneData ;
+        Movie.findOne({ where: { id: id }, include: [{ model: Cast }]})
         .then(data => {
-            // res.render('',{data : Movie})
-            // res.render('mv',{data})
-            res.send(data)
+            FindOneData = data
+            return Cast.findAll({})
+        })
+        .then(data=>{
+            // res.send(FindOneData.Casts)
+            res.render('mvaddcast', {data , FindOneData})
         })
         .catch(err =>{
             console.log(err)
+            res.send(err)
+        })
+    }
+    
+    static mvaddcast(req,res){
+        const body = req.body
+        const id = req.params.id
+
+        body.MovieId = id
+        body.CastId = body.CastId
+        body.role = body.role
+        body.createdAt = new Date()
+        body.updatedAt = new Date()
+
+        MovieCast.create(body)
+        .then(()=>{
+            res.redirect(`addcast`)
+        })
+        .catch(err=>{
             res.send(err)
         })
     }

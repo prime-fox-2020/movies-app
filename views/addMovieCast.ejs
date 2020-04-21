@@ -1,0 +1,48 @@
+<%- include('partials/header', { title: 'Movie Cast' }) %>
+    <div class="row">
+      <div class="col">
+        <h2>Movie Title</h2><br>
+        <h3><%= object2.name %></h3>
+      </div>
+      <div class="col">
+        <h2>Add Cast</h2>
+        <form action="/movie/addCast/<%= object2.id %>" method="POST">
+            <div class="form-group">
+                <label for="actor">Actor</label>
+                <select class="form-control" id="actor" name="CastId">
+                    <% object.forEach(item => { %>
+                    <option value="<%= item.id %>" ><%= item.first_name %> <%= item.last_name %></option>
+                    <% }) %>
+                </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Role</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" name="role"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit"> Save </button>
+    <a class="btn btn-danger" href="/movie" role="button">Cancel</a>
+          </form>
+      </div>
+    </div>
+
+    <div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Actor</th>
+              <th scope="col">Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% object2.Casts.forEach(item => { %>
+            <tr>
+              <td><%= item.first_name %> <%= item.last_name %></td>
+              <td><%= item.MovieCast.role %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+
+
+<%- include('partials/footer') %>

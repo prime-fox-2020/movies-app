@@ -1,4 +1,6 @@
-const { Cast } = require('../models')
+const { Cast, Movie } = require('../models')
+
+const old = require('../helpers/MovieOld')
 
 class CastController {
     static get(req, res) {
@@ -73,6 +75,18 @@ class CastController {
             .catch(err => {
                 return res.render('error', { err: err })
             })
+    }
+
+    static seeMovie(req, res) {
+        Cast.findByPk(req.params.id, {
+            include: [Movie]
+        })
+        .then(data => {
+            return res.render('seeMovie', { object: data, old })
+        })
+        .catch(err => {
+            return res.render('error', { err: err })
+        })
     }
 }
 

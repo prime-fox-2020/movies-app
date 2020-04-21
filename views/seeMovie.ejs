@@ -1,0 +1,25 @@
+<%- include('partials/header', { title: 'Movie List' }) %>
+<h2><%= object.first_name %> <%= object.last_name %></h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Movie</th>
+            <th scope="col">Released Year</th>
+            <th scope="col">Age When Movie Released</th>
+            <th scope="col">Roles</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(a = 0; a < object.Movies.length ; a++ ) { %>
+        <tr>
+            <td><%= object.Movies[a].name %></td>
+            <td><%= object.Movies[a].released_year %></td>
+            <td><%= old(object.birth_year, object.Movies[a].released_year) %></td>
+            <td><%= object.Movies[a].MovieCast.role %></td>
+        </tr>
+        <% } %>
+
+    </tbody>
+</table>
+
+<%- include('partials/footer') %>

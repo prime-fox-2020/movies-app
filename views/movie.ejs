@@ -23,6 +23,7 @@
         <td>
           <a class="btn btn-primary btn-sm" href="/movie/edit/<%= item.id %>" role="button">Edit</a>
           <a class="btn btn-danger btn-sm" href="/movie/delete/<%= item.id %>" role="button" onclick="return confirm('Are you sure?')">Delete</a>
+          <a class="btn btn-primary btn-sm" href="/movie/addCast/<%= item.id %>" role="button">Add Cast</a>
         </td>
       </tr>
       <% }) %>

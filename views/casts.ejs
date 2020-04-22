@@ -1,0 +1,30 @@
+<%- include('partials/header') %>
+
+<br>
+    <h1 class="text-center">Casts</h1><br>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Birth Year</th>
+                <th scope="col">Gender</th>
+                <th scope="col" colspan="2">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach(data => { %>
+            <tr>
+                <td> <%= data.fullName() %></td>
+                <td> <%= data.phone_number %> </td>
+                <td> <%= data.birth_year %> </td>
+                <td> <%= data.gender %> </td>
+                <td><a href="/casts/<%=data.id%>/edit">Edit</a> | <a href="/casts/<%=data.id%>/delete" onclick="return confirm(`Are you sure to delete <%= data.first_name %> <%= data.last_name %> record ?`)">Delete</a> | <a href="/casts/<%= data.id %>/seemovies">See Movies</a></td>  
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+    <a href="/Casts/addCastForm" class="btn btn-primary">Add Cast</a>
+
+<%- include('partials/footer') %>

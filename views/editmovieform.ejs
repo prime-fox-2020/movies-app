@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+
+<form action="/movies/<%= data[0].data.id %>/edit" method="post">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Name</label>
+        <input type="text" class="form-control" name="name" placeholder="Movie Title" value="<%= data[0].data.name %>">
+      </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Release Year</label>
+        <input type="number" class="form-control" name="released_year" placeholder="Release Date" value="<%= data[0].data.released_year %>">
+      </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Genre</label>
+        <select class="form-control" name="genre">
+            <option value="" selected disabled>-- Please select --</option>
+            <option <%= data[0].data.genre == 'Animation'  ? 'selected' : '' %> >Animation</option>
+            <option <%= data[0].data.genre == 'Comedy'  ? 'selected' : '' %> >Comedy</option>
+            <option <%= data[0].data.genre == 'Drama'  ? 'selected' : '' %> >Drama</option>
+            <option <%= data[0].data.genre == 'Horror'  ? 'selected' : '' %> >Horror</option>
+            <option <%= data[0].data.genre == 'Religious'  ? 'selected' : '' %> >Religious</option>
+            <option <%= data[0].data.genre == 'Thriller'  ? 'selected' : '' %> >Thriller</option>
+          </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="exampleInputEmail1">Production House</label>
+        <select class="form-control" name="ProductionHouseId">
+          <option value="" selected disabled>-- Please select --</option>
+          <% data[1].globalProdHouse.forEach(dataPh => { %>
+            <option value="<%= dataPh.id %>"  <%= data[0].data.ProductionHouseId == dataPh.id ? 'selected' : '' %> > <%= dataPh.name_prodHouse %></option>
+            <% }) %>
+          </select>
+      </div>
+
+      
+
+      <button type="submit" class="btn btn-primary">Save Edit</button>
+</form>   
+
+<%- include('partials/footer') %>

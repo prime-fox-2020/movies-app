@@ -1,0 +1,22 @@
+<%- include('partials/header') %>
+
+    <br>
+    <h1 class="text-center">Production House</h1><br>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Headquarters</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach(data => { %>
+            <tr>
+                <td><%= data.name_prodHouse %></td>
+                <td><%= data.headquarters %></td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+<%- include('partials/footer') %>

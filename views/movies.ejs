@@ -1,0 +1,36 @@
+<%- include('partials/header') %>
+
+    <br>
+    <h1 class="text-center">Movies</h1><br>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Movie</th>
+                <th scope="col">Release Year</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Production House</th>
+                <th scope="col" colspan="2">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach(data => { %>
+            <tr>
+                <td><%= data.name %></td>
+                <td><%= data.released_year %></td>
+                <td><%= data.genre %></td>
+
+                <% if(data.ProductionHouseId == undefined || data.ProductionHouseId == null) { %>
+                <td>unknown</td>
+                <% } else {%>
+                <td><%= data.ProductionHouse.name_prodHouse %></td>  
+                <% } %>
+                
+                <td><a href="movies/<%= data.id %>/edit" >Edit</a> | <a href="movies/<%= data.id %>/delete" onclick="return confirm(`Are you sure to delete this record ?`)">Delete</a> | <a href="/movies/<%= data.id %>/addcast">Add Cast</a></td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+    <a href="/movies/addMovieForm" class="btn btn-primary">Add Movie</a>
+
+<%- include('partials/footer') %>

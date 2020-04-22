@@ -1,0 +1,44 @@
+<%- include('partials/header') %>
+
+<div class="jumbotron jumbotron-fluid" style="background-color: #e3f2fd;">
+    <div class="container">
+      <h1 class="display-4"><%= movie.name %></h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <form action="/movies/<%= movie.id %>/addcast" method="post">
+        <div class="form-group col-md-4">
+            <label for="inputState">Actor :</label>
+            <select id="inputState" class="form-control" name="CastId">
+              <option selected disabled="true">Choose actor ..</option>
+              <% casts.forEach(cast => { %>
+              <option value="<%=cast.id%>"><%= cast.fullName() %></option>
+              <% }) %>
+            </select><br>
+            <label for="formGroupExampleInput">Role</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" name="role" placeholder="e.g: Pemeran Utama Antagonis"><br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+    </form>
+  </div>
+
+  <h2 class="text-center">Cast List</h2><br>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Actor</th>
+                <th scope="col">Role</th>
+            </tr>
+        </thead>
+        <tbody>
+          <% movie.Casts.forEach(data => { %>
+            <tr>
+                <td><%= data.fullName() %></td>
+                <td><%= data.MovieCast.role %></td>
+              </tr>
+                <% }) %>
+        </tbody>
+    </table>
+
+<%- include('partials/footer') %>

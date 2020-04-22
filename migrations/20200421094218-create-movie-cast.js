@@ -11,6 +11,12 @@ module.exports = {
       role: {
         type: Sequelize.STRING
       },
+      MovieId: {
+        type: Sequelize.INTEGER
+      },
+      CastId: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

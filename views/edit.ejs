@@ -5,25 +5,28 @@
     <title></title>
   </head>
   <body>
-    <form action="/movie/edit" method="post">
+    <form action="/movie/<%= data.id%>/edit" method="post">
       <label>Name</label>
       <input type="text" name="name" value="<%=data.name%>" ><br>
       <label>Released year</label>
-      <input type="text" name="genre" value="<%=data.released_year%>"><br>
+      <input type="text" name="released_year" value="<%=data.released_year%>"><br>
       <label>Genre</label>
-      <select name="genre" id="genreSelect">
-            <option value="<%=data.genre%>">--Genre--</option>
-            <option value="animation">animation</option>
-            <option value="comedy">comedy</option>
-            <option value="drama">drama</option>
-            <option value="horror">horror</option>
-            <option value="religious">religious</option>
-            <option value="thriller">thriller</option>
+      <select name="genre" >
+            <option value="animation" <%= data.genre === 'animation' ? 'selected' : '' %> >animation</option>
+            <option value="comedy" <%= data.genre === 'comedy' ? 'selected' : '' %>>comedy</option>
+            <option value="drama" <%= data.genre === 'drama' ? 'selected' : '' %>>drama</option>
+            <option value="horror" <%= data.genre === 'horror' ? 'selected' : '' %>>horror</option>
+            <option value="religious" <%= data.genre === 'religious' ? 'selected' : '' %>>religious</option>
+            <option value="thriller" <%= data.genre === 'thriler' ? 'selected' : '' %>>thriller</option>
         </select><br>
       <label>Production House</label>
-      <input type="text" name="productionHouseId" value="<%=data.ProductionHouseId%>"><br>
-
-    <a href="/movie"><button type="submit">Submit</button></a>
+      <select name="productionHouseId"><br>
+        <option selected disabled >-- Select Production House--</option>
+        <% for(let i = 0; i < dataPH.length; i++) {%>
+          <option value="<%=dataPH[i].id%>"><%= dataPH[i].name_prodHouse %> <%= data.ProductionHouseId === dataPH[i].id ? 'selected' : '' %>></option>
+          <%}%>
+      </select><br>
+    <button type="submit">Submit</button></a>
     </form><br>
   </body>
 </html>

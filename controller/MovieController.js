@@ -46,34 +46,39 @@ class MovieController {
   }
 
   static editForm(req, res) {
-    MM.findByPk(Number(req.params.id))
+    let dataPH;
+    PHM.findAll()
     .then(data => {
-         res.render('edit', {data})
-      })
-      .catch(err =>{
-         res.send(err);
-      })
+      dataPH = data
+      return MM.findByPk(Number(req.params.id))
+    })
+    .then(data => {
+      res.render('edit', {data, dataPH})
+    })
+    .catch(err => {
+      res.send(err)
+    })
   }
 
   static edit(req, res) {
-    let rating
-      if(!req.body.rating){
-          rating = null
-      } else {
-          rating = Number(req.body.rating)
-      }
-    MM.update({
+    // let rating
+    //   if(!req.body.rating){
+    //       rating = null
+    //   } else {
+    //       rating = Number(req.body.rating)
+    //   }
+    MM.update(
+      {
       name : req.body.name,
       released_year : req.body.released_year,
       genre : req.body.genre,
-      released_year: req.body.released_year,
-      ProductionHouseId : req.body.ProductionHouseId,
-      rating: rating
+      ProductionHouseId : req.body.ProductionHouseId
+      // rating: rating
     },
   {
-      where : {id : Number(req.params.id)}
-        })
-        .then (data => {
+    where : {id : Number(req.params.id)}
+  })
+        .then (() => {
             res.redirect('/movie')
         })
         .catch(err => {
@@ -83,7 +88,7 @@ class MovieController {
 
   static delete(req, res) {
     MM.destroy({where:{id:req.params.id}})
-    .then(data => {
+    .then( () => {
       res.redirect('/movie')
     })
     .catch(err => {

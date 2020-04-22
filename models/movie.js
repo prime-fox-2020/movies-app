@@ -16,9 +16,9 @@ module.exports = (sequelize, DataTypes) => {
           } else {
             const num = Number(value)
             if(num % 4 === 0 && num % 100 !== 0){
-              res.send('Tahun kabisat')
+              throw new Error('Tahun kabisat')
             } else if( num % 4 === 0 && num % 100 === 0 && num % 400 === 0){
-              res.send('Tahun kabisat')
+              throw new Error ('Tahun kabisat')
             }
           }
         }

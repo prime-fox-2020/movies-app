@@ -22,17 +22,6 @@ class MovieController {
         })
     }
 
-    static valid(data){
-        const error = []
-        if(!data.name || !data.genre || !data.released_year){
-            error.push('Please do not leave an empty data.')
-        }
-        else if(data.released_year > 2020){
-            error.push('Invalid released year')
-        }
-        return error
-    }
-
     static addPage(req, res){
         const alert = req.query
         ProductionHouse.findAll()
@@ -47,24 +36,19 @@ class MovieController {
     }
 
     static postAddPage(req, res){
-        const invalid = MovieController.valid(req.body)
-        if(invalid.length > 0){
-            res.redirect(`/movies/add?msg=${invalid.join(', ')}`)
-        } else {
-            Movie.create({
-                name: req.body.name,
-                released_year: req.body.released_year,
-                genre: req.body.genre,
-                ProductionHouseId: req.body.ProductionHouseId
-            })
-            .then( () => {
-                const msg = `Succesfully added new movie '${req.body.name}'`
-                res.redirect(`/movies?msg=${msg}`)
-            })
-            .catch( (err) => {
-                res.render('error', {msg: err})
-            })
-        }
+        Movie.create({
+            name: req.body.name,
+            released_year: req.body.released_year,
+            genre: req.body.genre,
+            ProductionHouseId: req.body.ProductionHouseId
+        })
+        .then( () => {
+            const msg = `Succesfully added new movie '${req.body.name}'`
+            res.redirect(`/movies?msg=${msg}`)
+        })
+        .catch( (err) => {
+            res.render('error', {msg: err})
+        })
     }
 
     static editPage(req, res){
@@ -85,28 +69,23 @@ class MovieController {
     }
 
     static postEditPage(req, res){
-        const invalid = MovieController.valid(req.body)
-        if(invalid.length > 0){
-            res.redirect(`/movies/edit/${req.params.id}?msg=${invalid.join(', ')}`)
-        } else {
-            Movie.update({
-                    name: req.body.name,
-                    released_year: req.body.released_year,
-                    genre: req.body.genre,
-                    ProductionHouseId : req.body.ProductionHouseId
-            }, {
-                where: {
-                    id: Number(req.params.id)  
-                }
-            })
-            .then( () => {
-                const msg = `Successfully edit selected movie.`
-                res.redirect(`/movies?msg=${msg}`)
-            })
-            .catch( (err) => {
-                res.render('error', {msg: err})
-            })
-        }
+        Movie.update({
+                name: req.body.name,
+                released_year: req.body.released_year,
+                genre: req.body.genre,
+                ProductionHouseId : req.body.ProductionHouseId
+        }, {
+            where: {
+                id: Number(req.params.id)  
+            }
+        })
+        .then( () => {
+            const msg = `Successfully edit selected movie.`
+            res.redirect(`/movies?msg=${msg}`)
+        })
+        .catch( (err) => {
+            res.render('error', {msg: err})
+        })
     }
 
     static delete(req, res){

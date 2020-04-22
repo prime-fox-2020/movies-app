@@ -10,12 +10,14 @@ module.exports = (sequelize, DataTypes) => {
     released_year: { // custom validation
       type : Sequelize.INTEGER,
       validate : {
-        kabisat(temp){
+        checkValidityAndKabisat(temp){
           let year = Number(temp)
           if((year % 4 == 0 && year % 100 != 0) || year % 4 == 0 && year % 100 == 0 && year % 400 == 0){
             throw new Error('Highly not recommended to release movie on kabisat year')
           }else if (!year){
             throw new Error('incorrect value of release year')
+          }else if(year > 2020){
+            throw new Error('Invalid released year')
           }
         }
       }

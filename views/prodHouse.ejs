@@ -1,0 +1,23 @@
+<%- include('../template/head', {title: 'ProdHouses'}); %>
+<%- include('../template/navbar', {title: 'ProdHouses'}); %>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Headquarters</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(let i in data) {%>
+        <tr>
+            <th scope="row"><%=data[i].name_prodHouse%></th>
+            <td><%=data[i].headquarters%></td>
+        </tr>
+        <%}%>
+    </tbody>
+</table>
+
+</body>
+
+</html>

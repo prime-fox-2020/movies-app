@@ -1,0 +1,38 @@
+<%- include('../template/head', {title: 'Casts'}); %>
+<%- include('../template/navbar', {title: 'Casts'}); %>
+
+<% if(alert) {%>
+<div class="alert alert-success" role="alert">
+    <%=alert%>
+</div>
+<%}%>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Birth Year</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(let i in data) {%>
+<tr>
+    <th scope="row"><%=data[i].fullName()%></th>
+    <td><%=data[i].birth_year%></td>
+    <td><%=data[i].phone_number%></td>
+    <td><%=data[i].gender%></td>
+    <td>
+        <a href="casts/edit/<%=data[i].id%>" type="button" class="btn btn-primary">Edit</a> &nbsp;
+        <a href="casts/delete/<%=data[i].id%>" type="button" onclick="return confirm('Delete Data?')" class="btn btn-danger">Delete</a> &nbsp;
+        <a href="casts/seemovies/<%=data[i].id%>" type="button" class="btn btn-primary">See Movies</a>
+    </td>
+</tr>
+<%}%>
+    </tbody>
+</table>
+
+</body>
+
+</html>

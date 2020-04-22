@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>list production houses</title>
+    <%- include('partials/style-nav-bar')%>
+    <%- include('partials/style-form')%>
+    <%- include('partials/style-table')%>
+</head>
+<body>
+    <%- include('partials/nav-bar')%>
+    <h1>LIST PRODUCTION HOUSES</h1>
+
+    <div class="container">
+        <form action="/phouses/:id" method="post">
+            <div class="row">
+                <div class="col-50">
+                    <label>Search PH by Id</label> <br>
+                    <input type="text" name="ph_by_id"><br>
+                </div>
+            </div>
+
+            <div class="row">
+                <button type="submit">Search</button> <br><br>
+            </div>
+        </form>
+    </div>
+
+    <button id="not-on-form"><a href="/phouses/add">Add new PH</a></button>
+
+    <%if(pesan){%>
+        <%=pesan%>
+    <%}%>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>PRODUCTION HOUSE</td>
+                <td>HEADQUARTER</td>
+                <td colspan="2">ACTION</td>
+            </tr>
+        </thead>
+        <tbody>
+            <%for (let i in data) {%>
+                <tr>
+                    <td><%=data[i].id%></td>
+                    <td><%=data[i].name_prodHouse%></td>
+                    <td><%=data[i].headquarters%></td>
+                    <td><button id="not-on-form"><a href="/phouses/edit/<%=data[i].id%>">EDIT</a></button></td>
+                    <td><button id="not-on-form" onclick="return confirm('Apakah anda ingin menghapus data PH bernama <%=data[i].name_prodHouse%>')"><a href="/phouses/delete/<%=data[i].id%>">DELETE</a></button></td>
+                </tr>
+            <%}%>
+        </tbody>
+    </table>
+</body>
+</html>

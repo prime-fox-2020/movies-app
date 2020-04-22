@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>list movies</title>
+    <%- include('partials/style-nav-bar')%>
+    <%- include('partials/style-form')%>
+    <%- include('partials/style-table')%>
+</head>
+<body>
+    <%- include('partials/nav-bar')%>
+    
+    <h1>LIST MOVIES</h1>
+    <div class="container">
+        <form action="/movies/:id" method="post">
+            <div class="row">
+                <div class="col-50">
+                    <label>Search Movie by Id</label> <br>
+                    <input type="text" name="movie_by_id"><br>
+                </div>
+            </div>
+
+            <div class="row">
+                <button type="submit">Search</button> <br><br>
+            </div>
+        </form>
+    </div>
+
+    <button id="not-on-form"><a href="/movies/add">Add new movie</a></button>
+
+    <%if(pesan){%>
+        <%=pesan%>
+    <%}%>
+    <table>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>MOVIES</td>
+                <td>RELEASED YEAR</td>
+                <td>GENRE</td>
+                <td>PRODUCTION HOUSE</td>
+                <td>RATING</td>
+                <td colspan="3">ACTION</td>
+            </tr>
+        </thead>
+        <tbody>
+            <%for (let i in dataMovies) {%>
+                <tr>
+                    <td><%=dataMovies[i].id%></td>
+                    <td><%=dataMovies[i].name%></td>
+                    <td><%=dataMovies[i].released_year%></td>
+                    <td><%=dataMovies[i].genre%></td>
+                    <% if (dataMovies[i].ProductionHouseId === null) {%>
+                        <td>Unknown</td>
+                    <%}%>
+
+                    <% if (dataMovies[i].ProductionHouseId !== null) {%>
+                        <td><%=dataMovies[i].ProductionHouse.name_prodHouse%></td>
+                    <%}%>
+                    <td><%=dataMovies[i].rating%></td>
+                    <td><button id="not-on-form"><a href="/movies/edit/<%=dataMovies[i].id%>">EDIT</a></button></td>
+                    <td><button id="not-on-form" onclick="return confirm('Apakah anda ingin menghapus data Movies bernama <%=dataMovies[i].name%>')"><a href="/movies/delete/<%=dataMovies[i].id%>">DELETE</a></button></td>
+                    <td><button id="not-on-form"><a href="/movies/add-cast/<%=dataMovies[i].id%>">ADD CAST</a></button></td>
+                </tr>
+            <%}%>
+        </tbody>
+    </table>
+</body>
+</html>

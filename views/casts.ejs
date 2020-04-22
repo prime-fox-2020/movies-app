@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>list movies</title>
+    <%- include('partials/style-nav-bar')%>
+    <%- include('partials/style-form')%>
+    <%- include('partials/style-table')%>
+</head>
+<body>
+    <%- include('partials/nav-bar')%>
+    
+    <h1>LIST CASTS</h1>
+
+    <button id="not-on-form"><a href="/casts/add">Add new cast</a></button>
+
+    <%if(pesan){%>
+        <%=pesan%>
+    <%}%>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>NAME</td>
+                <td>BIRTH YEAR</td>
+                <td>PHONE NUMBER</td>
+                <td>GENDER</td>
+                <td colspan="3">ACTION</td>
+            </tr>
+        </thead>
+        <tbody>
+            <%for (let i in dataCast) {%>
+                <tr>
+                    <td><%=dataCast[i].id%></td>
+                    <td><%=dataCast[i].getFullName()%></td>
+                    <td><%=dataCast[i].birth_year%></td>
+                    <td><%=dataCast[i].phone_number%></td>
+                    <td><%=dataCast[i].gender%></td>
+                    <td><button id="not-on-form"><a href="/casts/edit/<%=dataCast[i].id%>">EDIT</a></button></td>
+                    <td><button id="not-on-form" onclick="return confirm('Apakah anda ingin menghapus data Cast bernama <%=dataCast[i].getFullName()%>')"><a href="/casts/delete/<%=dataCast[i].id%>">DELETE</a></button></td>
+                    <td><button id="not-on-form"><a href="/casts/see-movies/<%=dataCast[i].id%>">See Movies</a></button></td>
+                </tr>
+            <%}%>
+        </tbody>
+    </table>
+</body>
+</html>

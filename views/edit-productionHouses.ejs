@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edit ph page</title>
+    <%- include('partials/style-nav-bar')%>
+    <%- include('partials/style-form')%>
+</head>
+<body>
+    <%- include('partials/nav-bar')%>
+    <div class="container">
+        <h1>EDIT PRODUCTION HOUSE</h1>
+        <form action="/phouses/edit/<%=id%>" method="post">
+            <div class="row">
+                <div class="col-50">
+                    <%if (error === 'Nama PH harus diisi') {%>
+                        <p><%= error %></p>
+                    <%}%>
+                    <label>Production House:</label><br>
+                    <input type="text" name="name_prodHouse" value="<%=dataPh.name_prodHouse%>"><br><br>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="col-50">
+                    <%if (error === 'Headquarter harus diisi') {%>
+                        <p><%= error %></p>
+                    <%}%>
+                    <label>Headquarter:</label><br>
+                    <input type="text" name="headquarters" value="<%=dataPh.headquarters%>"><br><br>
+                </div>
+            </div>
+
+            <div class="row">
+                <button type="submit">Save</button>
+                <button><a href="/phouses">Cancel</a></button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+

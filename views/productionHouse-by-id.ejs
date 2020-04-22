@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ph by id page</title>
+    <%- include('partials/style-nav-bar')%>
+    <%- include('partials/style-table')%>
+</head>
+<body>
+    <%- include('partials/nav-bar')%>
+    
+    <h1>PRODUCTION HOUSE BY ID</h1>
+    
+    <% if (pesan) {%>
+        <h4><%=pesan%></h4>
+    <%}%>
+    <table border="1">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>PRODUCTION HOUSE</td>
+                <td>HEADQUARTER</td>
+                <td colspan="2">ACTION</td>
+            </tr>
+        </thead>
+        <tbody>
+            <%for (let i in dataById) {%>
+                <tr>
+                    <td><%=dataById[i].id%></td>
+                    <td><%=dataById[i].name_prodHouse%></td>
+                    <td><%=dataById[i].headquarters%></td>
+                    <td><button><a href="/phouses/edit/<%=dataById[i].id%>">EDIT</a></button></td>
+                    <td><button onclick="return confirm('Apakah anda ingin menghapus data PH bernama <%=dataById[i].name_prodHouse%>')"><a href="/phouses/delete/<%=dataById[i].id%>">DELETE</a></button></td>
+                </tr>
+            <%}%>
+        </tbody>
+    </table>
+</body>
+</html>

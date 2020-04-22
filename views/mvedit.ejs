@@ -32,10 +32,10 @@
                     <%if(ByPkData.ProductionHouse === null){ %>
                         <% for(let i =0; i<data.length;i++){ %>
                         <option value="<%= data[i].id %>"> <%= data[i].name_prodHouse  %></option>
-                        <% } %
+                        <% } %>
                     <% }else{ %>
                     <% for(let i =0; i<data.length;i++){ %>
-                        <option value="<%= data[i].id %>" <%= ByPkData.ProductionHouse.id === data[i].productionHouseId ? 'selected' : '' %>><%= data[i].name_prodHouse  %></option>
+                        <option value="<%= data[i].id %>" <%= ByPkData.productionHouseId === data[i].id ? 'selected' : '' %>><%= data[i].name_prodHouse  %></option>
                       <% } %>
                     <% } %>
                 </select>

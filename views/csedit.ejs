@@ -27,11 +27,11 @@
             <input type="text" name="birth_year" value="<%= ByPkData.birth_year %>"> 
             <br>
             <label for="gender">Gender</label><br>
-                <input type="radio" id="male" name="gender" value="male">
+                <input type="radio" id="male" name="gender" value="male" <%= ByPkData.gender === "male" ? 'checked' : '' %>>
                 <label for="male">Male</label><br>
-                <input type="radio" id="female" name="gender" value="female">
+                <input type="radio" id="female" name="gender" value="female" <%= ByPkData.gender === "female" ? 'checked' : '' %>>
                 <label for="female">Female</label><br>
-                <input type="radio" id="other" name="gender" value="other">
+                <input type="radio" id="other" name="gender" value="other" <%= ByPkData.gender === "other" ? 'checked' : '' %>>
                 <label for="other">Other</label> 
             <br>
             <br>

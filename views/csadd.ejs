@@ -37,13 +37,6 @@
                 <input type="radio" id="other" name="gender" value="other">
                 <label for="other">Other</label> 
             <br>
-            <label for="moviecast">Salah Satu Movie yang diperankan</label><br>
-                <select name="MovieId">
-                    <option value=""> </option>
-                    <% for(let i =0; i < data.length ; i++){ %>
-                          <option value="<%= data[i].id %>"><%= data[i].name %></option>
-                      <% } %>
-                </select>
             <br>
             <br>
 

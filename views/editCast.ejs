@@ -6,13 +6,20 @@
   </head>
   <body>
     <form action="movie/<%=data[0].id%>/editCast" method="post">
-      <label>Name</label>
-      <input type="text" name="name" placeholder="Name" ><br>
+      <label>First Name</label>
+      <input type="text" name="first_name" placeholder="first_name" ><br>
       <label>Last Name</label>
-      <input type="text" name="released_year" placeholder="released_year"><br>
-      <label>Email</label>
+      <input type="text" name="last_name" placeholder="last_name"><br>
+      <label>Birth Year</label>
+      <input type="text" name="birth_year" placeholder="birth_year" ><br>
+      <label>Phone Number</label>
+      <input type="text" name="phone_number" placeholder="phone_number" ><br>
+      <label>Gender</label>
       <input type="text" name="email" placeholder="email" ><br>
-      <button type="submit">Submit</button>
+      <input type="radio" name="gender" value="Male" <%= data.gender === 'Male' ? 'checked' : '' %>>Male</label>
+      <input type="radio" name="gender" value="Female" <%= data.gender === 'Female' ? 'checked' : '' %>>Female</label>
+      <button type="submit">Update</button>
+      <a href="/cast"><button type="button" class="btn btn-danger">Cancel</button></a>
     </form><br>
   </body>
 </html>

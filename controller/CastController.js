@@ -1,7 +1,7 @@
 const MM = require('../models').Movie;
 const CM = require('../models').Cast;
 const MC = require('../models').MovieCast;
-
+// const formatAge = require('../helpers/formatAge');
 
 class CastController {
 
@@ -20,6 +20,12 @@ class CastController {
   }
 
   static addCast(req, res){
+    let year;
+    if(!req.body.birth_year){
+        year = null
+    } else {
+        year = Number(req.body.birth_year)
+    }
     CM.create({
       first_name:req.body.first_name,
       last_name:req.body.last_name,
@@ -34,17 +40,17 @@ class CastController {
       res.send(err);
     })
   }
-  //
+
   static editFormCast(req, res) {
     CM.findByPk(Number(req.params.id))
     .then(data => {
-         res.render('edit', {data})
+         res.render('editCast', {data})
       })
       .catch(err =>{
          res.send(err);
       })
   }
-  //
+
   static editCast(req, res) {
     CM.update({
       first_name:req.body.first_name,
@@ -67,7 +73,7 @@ class CastController {
   static showMovie(req, res) {
     CM.findByPk(Number(req.params.id), {include: [{model: MM}]})
     .then(data => {
-      res.render('castMovie',{data});
+      res.render('castMovie',{data, formatAge});
     })
     .catch(err => {
       res.send(err)
@@ -78,7 +84,7 @@ class CastController {
     CM.destroy({where:{id:req.params.id}})
     .then( () => {
       return MC.destroy({where: {CastId: Number(req.params.id)}})
-      .then( data => {
+      .then( () => {
         res.redirect('/cast')
       })
     })

@@ -30,8 +30,14 @@ module.exports = (sequelize, DataTypes) => {
       type: Sequelize.INTEGER,
       validate: {
         ratingCheck(value){
-          if (Number(value) > 5 || Number(value) < 1) {
-            res.send('Invalid rating');
+          if(value){
+            if(isNaN(value)){
+              throw new Error('Invalid rating input')
+            } else {
+              if (Number(value) > 5 || Number(value) < 1) {
+                res.send('Invalid rating');
+              }
+            }
           }
         }
       }

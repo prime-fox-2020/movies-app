@@ -9,6 +9,8 @@ routes.post('/add', MC.add);
 routes.get('/:id/edit', MC.editForm);
 routes.post('/:id/edit', MC.edit);
 routes.get('/:id/delete', MC.delete);
+// router.get('/:id/addCast', MC.addMovieCastForm);
+// router.post('/:id/addCast', MC.addMovieCast);
 
 
 module.exports = routes;

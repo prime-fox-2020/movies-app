@@ -10,24 +10,21 @@
       <tr>
         <th scope="col">Movie</th>
         <th scope="col">Released Year</th>
-        <th scope="col">Genre</th>
-        <th scope="col">Production House</th>
-        <th scope="col">Action</th>
+        <th scope="col">Age</th>
+        <th scope="col">Role</th>
       </tr>
     </thead>
-    <% for(let i = 0; i < data.length; i++) {%>
+    <% for(let i = 0; i < data.Movie.length; i++) {%>
       <tr>
-        <th ><%=data[i].name%></th>
-        <th ><%=data[i].released_year%></th>
-        <th ><%=data[i].genre%></th>
-        <% if(!data[i].ProductionHouseId){ %>
-            <td>unknown</td>
-            <% } else { %>
-              <td><%= data[i].ProductionHouse.name_prodHouse %></td>
-            <% } %>
+        <td ><%=data.Movie[i].name%></td>
+        <td ><%=data.Movie[i].released_year%></td>
+        <td ><%=formatAge(data.birth_year, data.Movie[i].released_year)%></td>
+        <td ><%=data.Movie[i].MovieCast.role%></td>
+
+
             <td><a href="/movie/<%= data[i].id %>/edit">Edit</a> <a href="/movie/<%= data[i].id %>/delete">Delete</a></td>
       </tr>
     <% } %>
-    <a href="/movie/add">Add</a>
+    <a href="/movie/addCast">Add</a>
   </body>
 </html>

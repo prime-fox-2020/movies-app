@@ -5,8 +5,25 @@ module.exports = (sequelize, DataTypes) => {
   class MovieCast extends Model {}
 
   MovieCast.init({
-    role: DataTypes.STRING,
-    MovieId: DataTypes.INTEGER,
+    role: {
+      type: Sequelize.STRING,
+      validate: {
+        notEmpty: {
+          msg: 'Role is empty'
+        }
+      }
+    },
+    MovieId: {
+      type: Sequelize.INTEGER,
+      allowNull: true,
+      validate: {
+        customNull(value) {
+          if(value === null) {
+            throw new Error('Actor is invalid')
+          }
+        }
+      }
+    },
     CastId: DataTypes.INTEGER
   }, {sequelize});
   MovieCast.associate = function(models) {

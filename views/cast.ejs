@@ -19,16 +19,17 @@
         <th scope="col">Action</th>
       </tr>
   </thead>
-    <tbody>
+
+    <% for(let i = 0; i < data.length; i++) {%>
       <tr>
-        <% for(let i = 0; i < data.length; i++) {%>
-          <th ><%= `${data[i].first_name} ${data[i].last_name}` %></th>
-          <th ><%=data[i].birth_year%></th>
-          <th ><%=data[i].phone_number%></th>
-          <th ><%=data[i].gender%></th>
-        <td><a href="/cast/<%= data[i].id %>/editCast">Edit</a> <a href="/cast/<%= data[i].id %>/delete">Delete</a></td>
-          <% } %>
-      </tr>
-    </tbody>
+      <td ><%= data[i].name %></td>
+      <td ><%=data[i].birth_year%></td>
+      <td ><%=data[i].phone_number%></td>
+      <td ><%=data[i].gender%></td>
+      <td><a href="/cast/<%= data[i].id %>/editCast">Edit</a> <a href="/cast/<%= data[i].id %>/deleteCast">Delete</a> <a href="/cast/<%=data[i].id%>/movieCast">See Movies</a></td>
+      <% } %>
+
+  </tr>
+
   </body>
 </html>

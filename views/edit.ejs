@@ -26,6 +26,8 @@
           <option value="<%=dataPH[i].id%>" <%= data.ProductionHouseId === dataPH[i].name_prodHouse ? 'selected' : '' %>><%= dataPH[i].name_prodHouse%></option>
           <%}%>
       </select><br>
+      <label>Rating</label>
+      <input name="rating" type="number" class="form-control" placeholder="1-5" value="<%= data.rating %>"><br>
     <button type="submit">Submit</button></a>
     </form><br>
   </body>

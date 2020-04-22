@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <form action="movie/<%=data.id%>/editCast" method="post">
+      <label>First Name</label>
+      <input type="text" name="first_name" value="<%=data.first_name%>" ><br>
+      <label>Last Name</label>
+      <input type="text" name="last_name" value="<%=data.last_name%>"><br>
+      <label>Birth Year</label>
+      <input type="text" name="birth_year" value="<%=data.birth_year%>" ><br>
+      <label>Phone Number</label>
+      <input type="text" name="phone_number" value="<%=data.phone_number%>" ><br>
+      <label>Gender</label>
+      <input type="text" name="gender" value="<%=data.gender%>" ><br>
+      <input type="radio" name="gender" value="Male" <%= data.gender === 'Male' ? 'checked' : '' %>>Male</label>
+      <input type="radio" name="gender" value="Female" <%= data.gender === 'Female' ? 'checked' : '' %>>Female</label>
+      <button type="submit">Update</button>
+      <a href="/cast"><button type="button" class="btn btn-danger">Cancel</button></a>
+    </form><br>
+  </body>
+</html>

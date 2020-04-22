@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <form action="/movie/add" method="post">
+      <label>Name</label>
+      <input type="text" name="name" placeholder="Name" ><br>
+      <label>Released year</label>
+      <input type="text" name="released_year" placeholder="released_year"><br>
+      <label>Genre</label>
+      <select name="genre" id="genreSelect">
+            <option value="" selected disabled>--Genre--</option>
+            <option value="animation">animation</option>
+            <option value="comedy">comedy</option>
+            <option value="drama">drama</option>
+            <option value="horror">horror</option>
+            <option value="religious">religious</option>
+            <option value="thriller">thriller</option>
+        </select><br>
+        <label>Production House</label>
+        <select name="productionHouseId" >
+          <option value="" selected disabled>--Production House--</option>
+            <%for(let i= 0; i < data.length; i++) {%>
+              <option value="<%=data[i].id%>"><%= data[i].name_prodHouse%></option>
+            <% }%>
+            <label>Rating</label>
+            <input name="rating" type="text" class="form-control" placeholder="1-5">
+          </select><br>
+        </form><br>
+          <button type="submit">Save</button>
+
+      <a href="/movie"><button type="submit">Cancel</button></a>
+
+  </body>
+</html>

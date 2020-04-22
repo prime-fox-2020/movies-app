@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Production House</title>
+  </head>
+  <body>
+    <h1><%= data.name %></h1>
+    <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Movie</th>
+        <th scope="col">Released Year</th>
+        <th scope="col">Age</th>
+        <th scope="col">Role</th>
+      </tr>
+    </thead>
+    <% for(let i = 0; i < data.MM.length; i++) {%>
+      <tr>
+        <td ><%=data.MM[i].name%></td>
+        <td ><%=data.MM[i].released_year%></td>
+        <td ><%=formatAge(data.birth_year, data.MM[i].released_year)%></td>
+        <td ><%=data.MM[i].MC.role%></td>
+
+
+            <td><a href="/movie/<%= data[i].id %>/edit">Edit</a> <a href="/movie/<%= data[i].id %>/delete">Delete</a></td>
+      </tr>
+    <% } %>
+    <a href="/movie/addCast">Add</a>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <form action="/movie/<%= data.id%>/edit" method="post">
+      <label>Name</label>
+      <input type="text" name="name" value="<%=data.name%>" ><br>
+      <label>Released year</label>
+      <input type="text" name="released_year" value="<%=data.released_year%>"><br>
+      <label>Genre</label>
+      <select name="genre" >
+            <option value="animation" <%= data.genre === 'animation' ? 'selected' : '' %> >animation</option>
+            <option value="comedy" <%= data.genre === 'comedy' ? 'selected' : '' %>>comedy</option>
+            <option value="drama" <%= data.genre === 'drama' ? 'selected' : '' %>>drama</option>
+            <option value="horror" <%= data.genre === 'horror' ? 'selected' : '' %>>horror</option>
+            <option value="religious" <%= data.genre === 'religious' ? 'selected' : '' %>>religious</option>
+            <option value="thriller" <%= data.genre === 'thriler' ? 'selected' : '' %>>thriller</option>
+        </select><br>
+      <label>Production House</label>
+      <select name="ProductionHouseId"><br>
+        <option value="" selected disabled >-- Select Production House--</option>
+        <% for(let i = 0; i < dataPH.length; i++) {%>
+          <option value="<%=dataPH[i].id%>" <%= data.ProductionHouseId === dataPH[i].name_prodHouse ? 'selected' : '' %>><%= dataPH[i].name_prodHouse%></option>
+          <%}%>
+      </select><br>
+      <label>Rating</label>
+      <input name="rating" type="number" class="form-control" placeholder="1-5" value="<%= data.rating %>"><br>
+    <button type="submit">Submit</button></a>
+    </form><br>
+  </body>
+</html>

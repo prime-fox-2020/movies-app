@@ -11,13 +11,21 @@ module.exports = (sequelize, DataTypes) => {
   MovieCast.init( {
     MovieId: DataTypes.INTEGER,
     CastId: DataTypes.INTEGER,
-    role: DataTypes.STRING
+    role: {
+      type : DataTypes.STRING,
+      allowNull : false,
+      validate: {
+        notEmpty: {
+          msg: 'cast role ?'
+        }
+      }
+    }
   }, { sequelize });
 
   MovieCast.associate = function(models) {
     // associations can be defined here
-    MovieCast.belongsTo(models.Movie)
-    MovieCast.belongsTo(models.Cast)
+    //MovieCast.belongsTo(models.Movie)
+    //MovieCast.belongsTo(models.Cast)
   };
   
   return MovieCast;

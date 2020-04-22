@@ -11,7 +11,14 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   Cast.init( {
-    first_name: DataTypes.STRING,
+    first_name: {
+      type : Sequelize.STRING,
+      validate : {
+        notEmpty : {
+          msg: 'name is required'
+        }
+      }
+    },
     last_name: DataTypes.STRING,
     phone_number: DataTypes.STRING,
     birth_year: DataTypes.INTEGER,
@@ -26,7 +33,8 @@ module.exports = (sequelize, DataTypes) => {
 
   Cast.associate = function(models) {
     // associations can be defined here
-    Cast.hasMany(models.MovieCast)
+    //Cast.hasMany(models.MovieCast)
+    Cast.belongsToMany(models.Movie, {through : models.MovieCast})
   };
   
   return Cast;

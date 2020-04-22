@@ -31,7 +31,8 @@ class Movies {
             name : req.body.name,
             released_year : req.body.released_year,
             genre : req.body.genre,
-            ProductionHouseId : req.body.ProductionHouseId
+            ProductionHouseId : req.body.ProductionHouseId,
+            rating : req.body.rating
         })
         .then(data => {
             res.redirect('/movies')
@@ -64,7 +65,8 @@ class Movies {
             name : req.body.name,
             released_year : req.body.released_year,
             genre : req.body.genre,
-            ProductionHouseId : req.body.ProductionHouseId
+            ProductionHouseId : req.body.ProductionHouseId,
+            rating : req.body.rating
         }, {
             where : {
                 id : req.params.id
@@ -92,6 +94,43 @@ class Movies {
         })
     }
 
+    static addCastMovieForm(req, res) {
+        let movies = null
+        let data = null
+
+        Movie.findOne({
+            where : {
+                id: req.params.id
+            }   
+        }, {include: [Cast]})
+        .then(data => {
+            movies = data
+            return Cast.findAll()
+        })
+        .then(casts => {
+            data = casts
+            res.render('addCastMovie.ejs', {movies, data})
+        } )
+        .catch(err => {
+            res.send(err)
+        })
+    }
+
+    static addCastMoviePost(req, res) {
+        let movieCast = {
+            MovieId : req.params.id,
+            CastId : req.body.CastId,
+            role : req.body.role
+        }
+
+        MovieCast.create(movieCast)
+        .then(data => {
+            res.redirect('/movies')
+        })
+        .catch(err => {
+            res.redirect('/movies')
+        })
+    }
 }
 
 module.exports = Movies

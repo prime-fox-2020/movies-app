@@ -1,4 +1,5 @@
 const { Cast ,Movie, MovieCast} = require('../models')
+const getAgeCast = require('../helper/ageCast')
 
 class Casts {   
     static showData (req, res) {
@@ -76,7 +77,15 @@ class Casts {
     }
 
     static showMovies(req, res) {
-        
+        Cast.findByPk(Number(req.params.id), {
+            include: [Movie]
+        })
+        .then(data => {
+            res.render('showMovies.ejs', { object: data, getAgeCast })
+        })
+        .catch(err => {
+            res.send(err)
+        })
     }
 }
 

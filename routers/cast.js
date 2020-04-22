@@ -8,6 +8,7 @@ router.post('/add', castController.addPost)
 router.get('/edit/:id', castController.editGet)
 router.post('/edit/:id', castController.editPost)
 router.get('/delete/:id', castController.delete)
+router.get('/movies/:id', castController.showMovies)
 
 
 module.exports = router

@@ -16,18 +16,30 @@ module.exports = (sequelize, DataTypes) => {
     birth_year: DataTypes.INTEGER,
     gender: DataTypes.STRING
   }, {
+    //Model Hooks type 1
     hooks: {
-      beforeCreate(instance, options){
+      beforeCreate(instance, options) {
         console.log('============================================');
-        console.log('ini hook dengan last name :', instance.last_name);
+        console.log('ini hook dengan last name before create:', instance.last_name);
         console.log('============================================');
-        instance.last_name = instance.last_name == ''? instance.first_name:instance.last_name
+        instance.last_name = instance.last_name == '' ? instance.first_name : instance.last_name
+      },
+      beforeUpdate(instance, options) {
+        console.log('============================================');
+        console.log('ini hook dengan last name before update:', instance.last_name);
+        console.log('============================================');
+        instance.last_name.trim()
+        instance.last_name = instance.last_name == '' ? instance.first_name : instance.last_name
       }
     }, sequelize
   });
 
-  // Cast.beforeCreate((instance, options) => {
-  //   if (!instance.last_name) {
+  //model hooks type 2
+  // Cast.beforeUpdate((instance, options) => {
+  //   if (instance.last_name == '') {
+  //     console.log('============================================');
+  //     console.log('Hook last name before update :', instance.last_name);
+  //     console.log('============================================');
   //     instance.last_name = instance.first_name
   //   }
   // })

@@ -6,7 +6,7 @@ class MovieCont {
             {
                 include: [ProductionHouse],
                 order: [
-                    ['name', 'DESC']
+                    ['released_year', 'DESC']
                 ]
             }
         )

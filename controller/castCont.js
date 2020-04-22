@@ -48,21 +48,26 @@ class CastCont {
                 res.send(err)
             });
     }
+
     static update(req, res) {
         let updatedCast = {
-            first_name: req.body.first_name,
-            last_name: req.body.last_name,
-            birth_year: req.body.birth_year,
-            phone_number: req.body.phone_number,
+            first_name: req.body.first_name.trim(),
+            last_name: req.body.last_name.trim(),
+            birth_year: req.body.birth_year.trim(),
+            phone_number: req.body.phone_number.trim(),
             gender: req.body.gender
         }
+        console.log('updatedCast: ', updatedCast);
         Cast.update(updatedCast, {
             where: {
                 id: req.params.id
-            }
+            },
+            returning: true,
+            individualHooks: true
         })
             .then((data) => {
-                res.redirect(`/cast?msg=Cast success updated`)
+                console.log('data: ', data[1][0].getFullName());
+                res.redirect(`/cast?msg=Cast ${data[1][0].getFullName()} success updated`)
             }).catch((err) => {
                 res.send(err)
             });

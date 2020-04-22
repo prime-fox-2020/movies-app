@@ -2,7 +2,9 @@ const ProductionHouse = require('../models').ProductionHouse
 
 class ProductionHouseController {
     static show (req, res){
-        ProductionHouse.findAll()
+        ProductionHouse.findAll(
+            {order: [['name_prodHouse', 'asc']]}
+        )
         .then(data => {
             res.render('viewproductionhouses', { data })
         }).catch(err => {

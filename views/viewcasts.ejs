@@ -1,0 +1,33 @@
+<%- include('partials/top.ejs') %>
+
+<h1>Casts</h1>
+
+<button><a href="/casts/add">Add Casts</a></button>
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Birth Year</th>
+      <th scope="col">Phone Number</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% data.forEach(i => { %>        
+    <tr>
+      <td scope="row"><%= i.first_name %> <%= i.last_name %></td>
+      <td scope="row"><%= i.birth_year %></td>
+      <td scope="row"><%= i.phone_number %></td>
+      <td scope="row"><%= i.gender %></td>
+      <td scope="row">
+        <button><a href="/casts/edit/<%= i.id %>">Edit</a></button>
+        <button><a href="/casts/delete/<%= i.id %>">Delete</a></button>
+      </td>
+    </tr>
+  <% }) %>
+  </tbody>
+</table>
+
+<%- include('partials/bottom.ejs') %>

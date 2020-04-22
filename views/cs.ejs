@@ -8,6 +8,7 @@
                 <tr>
                     <th>ID </th>
                     <th>Name</th>
+                    <th>Gender</th>
                     <th>Phone Number</th>
                     <th>Birth Year</th>
                     <th>Action</th>
@@ -19,11 +20,12 @@
                 <tr>
                     <td><%= el.id %></td>
                     <td><%=el.getFullName()%></td>
+                    <td><%=el.gender%></td>
                     <td><%= el.phone_number %></td>
                     <td><%= el.birth_year %></td>
                     <td>
                     <a href="/cs/<%= el.id %>/edit"><button>Edit</button></a>
-                    <a href="/cs/<%= el.id %>/delete"><Button>Delete</Button></a>
+                    <a href="/cs/<%= el.id %>/delete" onclick="return confirm('Are you sure?')"><button>Delete</button></a>
                     <a href="/cs/<%= el.id %>/seemovies"><Button>See Movie</Button></a>
                     </td>
                 </tr>

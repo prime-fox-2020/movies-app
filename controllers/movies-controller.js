@@ -19,10 +19,10 @@ class MoviesController {
         let pesan = req.query.pesan
         let id = req.params.id
         let error = req.query.error
-        let errorKabisat = req.query.errorKabisat
+        let errorValidasi = req.query.errorValidasi
         ProductionHouse.findAll()
         .then(dataProdHouse => {
-            res.render("add-movies.ejs", {pesan, id, dataProdHouse, error, errorKabisat})
+            res.render("add-movies.ejs", {pesan, id, dataProdHouse, error, errorValidasi})
         })
         .catch(error => {
             res.send(error)
@@ -62,7 +62,8 @@ class MoviesController {
                 "name": queryBody.name,
                 "released_year": queryBody.released_year,
                 "genre": queryBody.genre,
-                "ProductionHouseId": queryBody.ProductionHouseId
+                "ProductionHouseId": queryBody.ProductionHouseId,
+                "rating": queryBody.rating
             })
             .then(data => {
                 res.redirect(`/movies?pesan=berhasil menambah movie dengan judul ${queryBody.name}`)
@@ -71,14 +72,14 @@ class MoviesController {
                 let errors = []
                 for (let i = 0; i < err.errors.length; i++) {
                     errors.push(err.errors[i].message)
-                }
-                res.redirect(`/movies/add?errorKabisat=${errors[0]}`)
+                }                
+                res.redirect(`/movies/add?errorValidasi=${errors}`)
             })
         }
     }
 
     static getEditForm(req, res) {
-        let errorKabisat = req.query.errorKabisat
+        let errorValidasi = req.query.errorValidasi
         let error = req.query.error  
         let dataMovie = null
         let id = req.params.id
@@ -88,7 +89,7 @@ class MoviesController {
             return ProductionHouse.findAll()              
         })
         .then(dataProdHouse => {
-            res.render('edit-movies.ejs', {id, dataMovie, error, dataProdHouse, errorKabisat})
+            res.render('edit-movies.ejs', {id, dataMovie, error, dataProdHouse, errorValidasi})
         })
         .catch(err => {
             res.send(err)
@@ -128,7 +129,8 @@ class MoviesController {
                 "name": queryBody.name,
                 "released_year": queryBody.released_year,
                 "genre": queryBody.genre,
-                "ProductionHouseId": queryBody.ProductionHouseId
+                "ProductionHouseId": queryBody.ProductionHouseId,
+                "rating": queryBody.rating
             }, {returning: true, where: {id}})
             .then(data => {
                 res.redirect(`/movies?pesan=Berhasil edit data movie dengan id: ${id}`)
@@ -138,7 +140,9 @@ class MoviesController {
                 for (let i = 0; i < err.errors.length; i++) {
                     errors.push(err.errors[i].message)
                 }
-                res.redirect(`/movies/edit/${req.params.id}?errorKabisat=${errors[0]}`)
+                console.log(errors);
+                
+                res.redirect(`/movies/edit/${req.params.id}?errorValidasi=${errors}`)
             })
         }
     }
@@ -233,7 +237,9 @@ class MoviesController {
             for (let i = 0; i < err.errors.length; i++) {
                 errors.push(err.errors[i].message)
             }
-            res.redirect(`/movies/add-cast/${req.params.id}?error=${errors[0]}`);
+            console.log(errors);
+            
+            res.redirect(`/movies/add-cast/${req.params.id}?error=${errors}`);
             // res.send(errors)
         })
     }

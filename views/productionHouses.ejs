@@ -4,29 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>list production houses</title>
-    <style>
-        a {
-            text-decoration: none;
-        }
-    </style>
+    <%- include('partials/style-nav-bar')%>
+    <%- include('partials/style-form')%>
+    <%- include('partials/style-table')%>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="/movies">List Movies</a></li>
-            <li><a href="/casts">List Casts</a></li>
-            <li><a href="/">Home</a></li>
-        </ul>
-    </nav>
+    <%- include('partials/nav-bar')%>
     <h1>LIST PRODUCTION HOUSES</h1>
 
-    <form action="/phouses/:id" method="post">
-        <label>Search PH by Id</label> <br>
-        <input type="text" name="ph_by_id"><br>
-        <button type="submit">Search</button> <br><br>
-    </form>
+    <div class="container">
+        <form action="/phouses/:id" method="post">
+            <div class="row">
+                <div class="col-50">
+                    <label>Search PH by Id</label> <br>
+                    <input type="text" name="ph_by_id"><br>
+                </div>
+            </div>
 
-    <button><a href="/phouses/add">Add new PH</a></button>
+            <div class="row">
+                <button type="submit">Search</button> <br><br>
+            </div>
+        </form>
+    </div>
+
+    <button id="not-on-form"><a href="/phouses/add">Add new PH</a></button>
 
     <%if(pesan){%>
         <%=pesan%>
@@ -47,8 +48,8 @@
                     <td><%=data[i].id%></td>
                     <td><%=data[i].name_prodHouse%></td>
                     <td><%=data[i].headquarters%></td>
-                    <td><button><a href="/phouses/edit/<%=data[i].id%>">EDIT</a></button></td>
-                    <td><button><a href="/phouses/delete/<%=data[i].id%>">DELETE</a></button></td>
+                    <td><button id="not-on-form"><a href="/phouses/edit/<%=data[i].id%>">EDIT</a></button></td>
+                    <td><button id="not-on-form" onclick="return confirm('Apakah anda ingin menghapus data PH bernama <%=data[i].name_prodHouse%>')"><a href="/phouses/delete/<%=data[i].id%>">DELETE</a></button></td>
                 </tr>
             <%}%>
         </tbody>

@@ -4,27 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>add movie cast page</title>
-    <style>
-        a {
-            text-decoration: none;
-        }
-    </style>
+    <%- include('partials/style-nav-bar')%>
+    <%- include('partials/style-table')%>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="/movies">List Movies</a></li>
-            <li><a href="/phouses">List Production Houses</a></li>
-            <li><a href="/casts">List Casts</a></li>
-            <li><a href="/">Home</a></li>
-        </ul>
-    </nav>
+    <%- include('partials/nav-bar')%>
 
 
     <h3>Actor atau Actress:</h3>
     <h1><%=dataCast.getFullName()%></h1>
 
-    <table border="1">
+    <table>
         <thead>
             <tr>
                 <td>MOVIES</td>
@@ -43,6 +33,7 @@
                         <td><%=dataCast[i].MovieCasts[j].role%></td>
                     </tr>        
                 <%}%>
+                <%break%>
             <%}%>
         </tbody>
     </table>

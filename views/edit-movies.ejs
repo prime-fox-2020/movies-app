@@ -4,59 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>edit movie page</title>
-    <style>
-        a {
-            text-decoration: none;
-        }
-    </style>
+    <%- include('partials/style-nav-bar')%>
+    <%- include('partials/style-form')%>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="/phouses">List Production Houses</a></li>
-            <li><a href="/casts">List Casts</a></li>
-            <li><a href="/">Home</a></li>
-        </ul>
-    </nav>
-    <h1>EDIT MOVIE</h1>
-    <form action="/movies/edit/<%=id%>" method="post">
-        <%if (error === 'Judul movie harus diisi') {%>
-            <p><%= error %></p>
-        <%}%>
-        <label>Movie:</label><br>
-        <input type="text" name="name" value="<%=dataMovie.name%>"><br><br>
-
-        <%if (error === 'Released Year harus diisi') {%>
-            <p><%= error %></p>
-        <%} else if (error === 'Released Year Tidak Valid') {%>
-            <p><%= error %></p>
-        <%} else if (errorKabisat) {%>
-            <p><%= errorKabisat %></p>
-        <%}%>
-        <label>Released Year: (1000 s/d 2050)</label><br>
-        <input type="number" name="released_year"value="<%=dataMovie.released_year%>"><br><br>
-
-        <label>Genre:</label><br>
-        <select name="genre">
-            <option value="Unknown" <%=dataMovie.genre === 'Unknown' ? 'selected' : 'dataMovie.genre'%>>--SELECT--</option> 
-            <option value="animasi" <%=dataMovie.genre === 'animasi' ? 'selected' : 'unknown'%>>Animation</option> 
-            <option value="comedy" <%=dataMovie.genre === 'comedy' ? 'selected' : 'unknown'%>>Comedy</option> 
-            <option value="drama" <%=dataMovie.genre === 'drama' ? 'selected' : 'unknown'%>>Drama</option> 
-            <option value="horor" <%=dataMovie.genre === 'horor' ? 'selected' : 'unknown'%>>Horror</option> 
-            <option value="religi" <%=dataMovie.genre === 'religious' ? 'selected' : 'unknown'%>>Religious</option> 
-            <option value="thriller" <%=dataMovie.genre === 'thriller' ? 'selected' : 'unknown'%>>Thriller</option> 
-        </select><br><br>
-
-        <label>Production House:</label><br>
-        <select name="ProductionHouseId">
-            <option value="Unknown" <%=dataMovie.ProductionHouseId === null ? 'selected' : ''%>>--SELECT--</option> 
-            <% for (let i in dataProdHouse) {%>
-                <option value="<%=dataProdHouse[i].id%>" <%=dataProdHouse[i].id === dataMovie.ProductionHouseId ? 'selected' : ''%>><%=dataProdHouse[i].name_prodHouse%></option>
+    <%- include('partials/nav-bar')%>
+    <div class="container">
+        <h1>EDIT MOVIE</h1>
+        <form action="/movies/edit/<%=id%>" method="post">
+            <%if (errorValidasi) {%>
+                <p><%= errorValidasi %></p>
             <%}%>
-        </select><br><br>
-        <button type="submit">Save</button>
-        <button><a href="/movies">Cancel</a></button>
-    </form>
+            <div class="row">
+                <div class="col-50">
+                    <%if (error === 'Judul movie harus diisi') {%>
+                        <p><%= error %></p>
+                    <%}%>
+                    <label>Movie:</label><br>
+                    <input type="text" name="name" value="<%=dataMovie.name%>"><br><br>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-50">
+                    <%if (error === 'Released Year harus diisi') {%>
+                        <p><%= error %></p>
+                    <%} else if (error === 'Released Year Tidak Valid') {%>
+                        <p><%= error %></p>
+                    <%}%> 
+                    <label>Released Year: (1000 s/d 2050)</label><br>
+                    <input type="number" name="released_year" value="<%=dataMovie.released_year%>"><br><br>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-50">
+                    <label>Genre:</label><br>
+                    <select name="genre">
+                        <option value="Unknown" <%=dataMovie.genre === 'Unknown' ? 'selected' : 'dataMovie.genre'%>>--SELECT--</option> 
+                        <option value="animasi" <%=dataMovie.genre === 'animasi' ? 'selected' : 'unknown'%>>Animation</option> 
+                        <option value="comedy" <%=dataMovie.genre === 'comedy' ? 'selected' : 'unknown'%>>Comedy</option> 
+                        <option value="drama" <%=dataMovie.genre === 'drama' ? 'selected' : 'unknown'%>>Drama</option> 
+                        <option value="horor" <%=dataMovie.genre === 'horor' ? 'selected' : 'unknown'%>>Horror</option> 
+                        <option value="religi" <%=dataMovie.genre === 'religious' ? 'selected' : 'unknown'%>>Religious</option> 
+                        <option value="thriller" <%=dataMovie.genre === 'thriller' ? 'selected' : 'unknown'%>>Thriller</option> 
+                    </select><br><br>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-50">
+                    <label>Production House:</label><br>
+                    <select name="ProductionHouseId">
+                        <option value="Unknown" <%=dataMovie.ProductionHouseId === null ? 'selected' : ''%>>--SELECT--</option> 
+                        <% for (let i in dataProdHouse) {%>
+                            <option value="<%=dataProdHouse[i].id%>" <%=dataProdHouse[i].id === dataMovie.ProductionHouseId ? 'selected' : ''%>><%=dataProdHouse[i].name_prodHouse%></option>
+                        <%}%>
+                    </select><br><br>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-50">
+                    <label>Rating: (1 s/d 10)</label><br>
+                    <input type="number" name="rating" value="<%=dataMovie.rating%>"><br><br>
+                </div>
+            </div>
+
+            <div class="row">
+                <button type="submit">Save</button>
+                <button><a href="/movies">Cancel</a></button>
+            </div>
+        </form>
+    </div>
+    
     
 </body>
 </html>

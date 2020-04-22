@@ -4,59 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>add new movie page</title>
-    <style>
-        a {
-            text-decoration: none;
-        }
-    </style>
+    <%- include('partials/style-nav-bar')%>
+    <%- include('partials/style-form')%>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="/phouses">List Production Houses</a></li>
-            <li><a href="/casts">List Casts</a></li>
-            <li><a href="/">Home</a></li>
-        </ul>
-    </nav>
-    <h1>ADD NEW MOVIE</h1>
-    <form action="/movies/add" method="post">
-        <%if (error === 'Judul movie harus diisi') {%>
-            <p><%= error %></p>
-        <%}%>
-        <label>Movie:</label><br>
-        <input type="text" name="name"><br><br>
-
-        <%if (error === 'Released Year harus diisi') {%>
-            <p><%= error %></p>
-        <%} else if (error === 'Released Year Tidak Valid') {%>
-            <p><%= error %></p>
-        <%} else if (errorKabisat) {%>        
-            <p><%=errorKabisat%></p>
-        <%}%>
-        <label>Released Year: (1000 s/d 2050)</label><br>
-        <input type="number" name="released_year"><br><br>
-
-        <label>Genre:</label><br>
-        <select name="genre">
-            <option value="Unknown" selected>--SELECT--</option> 
-            <option value="animasi">Animation</option> 
-            <option value="comedy">Comedy</option> 
-            <option value="drama">Drama</option> 
-            <option value="horor">Horror</option> 
-            <option value="religi">Religious</option> 
-            <option value="thriller">Thriller</option> 
-        </select><br><br>
-
-        <label>Production House:</label><br>
-        <select name="ProductionHouseId">
-            <option value="unknown" selected>--SELECT--</option> 
-            <% for (let i in dataProdHouse) {%>
-                <option value="<%=dataProdHouse[i].id%>"><%=dataProdHouse[i].name_prodHouse%></option>
+    <%- include('partials/nav-bar')%>
+    <div class="container">
+        <h1>ADD NEW MOVIE</h1>
+        <form action="/movies/add" method="post">
+            <%if (errorValidasi) {%>        
+                <p><%=errorValidasi%></p>
             <%}%>
-        </select><br><br>
-        <button type="submit">Add</button>
-        <button><a href="/movies">Cancel</a></button>
-    </form>
+            <div class="row">
+                <div class="col-50">
+                    <%if (error === 'Judul movie harus diisi') {%>
+                        <p><%= error %></p>
+                    <%}%>
+                    <label>Movie:</label><br>
+                    <input type="text" name="name"><br><br>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-50">
+                    <label>Released Year: (1000 s/d 2050)</label><br>
+                    <input type="number" name="released_year"><br><br>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-50">
+                    <label>Genre:</label><br>
+                    <select name="genre">
+                        <option value="Unknown" selected>--SELECT--</option> 
+                        <option value="animasi">Animation</option> 
+                        <option value="comedy">Comedy</option> 
+                        <option value="drama">Drama</option> 
+                        <option value="horor">Horror</option> 
+                        <option value="religi">Religious</option> 
+                        <option value="thriller">Thriller</option> 
+                    </select><br><br>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-50">
+                    <label>Production House:</label><br>
+                    <select name="ProductionHouseId">
+                        <option value="unknown" selected>--SELECT--</option> 
+                        <% for (let i in dataProdHouse) {%>
+                            <option value="<%=dataProdHouse[i].id%>"><%=dataProdHouse[i].name_prodHouse%></option>
+                        <%}%>
+                    </select><br><br>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-50">
+                    <label>Rating: (1 s/d 10)</label><br>
+                    <input type="number" name="rating"><br><br>
+                </div>
+            </div>
+
+            <div class="row">
+                <button type="submit">Add</button>
+                <button><a href="/movies">Cancel</a></button>
+            </div>
+        </form>
+    </div>
+    
     
 </body>
 </html>

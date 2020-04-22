@@ -4,35 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>list movies</title>
-    <style>
-        a {
-            text-decoration: none;
-        }
-    </style>
+    <%- include('partials/style-nav-bar')%>
+    <%- include('partials/style-form')%>
+    <%- include('partials/style-table')%>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="/phouses">List Production Houses</a></li>
-            <li><a href="/casts">List Casts</a></li>
-            <li><a href="/">Home</a></li>
-        </ul>
-    </nav>
+    <%- include('partials/nav-bar')%>
     
     <h1>LIST MOVIES</h1>
+    <div class="container">
+        <form action="/movies/:id" method="post">
+            <div class="row">
+                <div class="col-50">
+                    <label>Search Movie by Id</label> <br>
+                    <input type="text" name="movie_by_id"><br>
+                </div>
+            </div>
 
-    <form action="/movies/:id" method="post">
-        <label>Search Movie by Id</label> <br>
-        <input type="text" name="movie_by_id"><br>
-        <button type="submit">Search</button> <br><br>
-    </form>
+            <div class="row">
+                <button type="submit">Search</button> <br><br>
+            </div>
+        </form>
+    </div>
 
-    <button><a href="/movies/add">Add new movie</a></button>
+    <button id="not-on-form"><a href="/movies/add">Add new movie</a></button>
 
     <%if(pesan){%>
         <%=pesan%>
     <%}%>
-    <table border="1">
+    <table>
         <thead>
             <tr>
                 <td>ID</td>
@@ -40,6 +40,7 @@
                 <td>RELEASED YEAR</td>
                 <td>GENRE</td>
                 <td>PRODUCTION HOUSE</td>
+                <td>RATING</td>
                 <td colspan="3">ACTION</td>
             </tr>
         </thead>
@@ -57,10 +58,10 @@
                     <% if (dataMovies[i].ProductionHouseId !== null) {%>
                         <td><%=dataMovies[i].ProductionHouse.name_prodHouse%></td>
                     <%}%>
-
-                    <td><button><a href="/movies/edit/<%=dataMovies[i].id%>">EDIT</a></button></td>
-                    <td><button><a href="/movies/delete/<%=dataMovies[i].id%>">DELETE</a></button></td>
-                    <td><button><a href="/movies/add-cast/<%=dataMovies[i].id%>">ADD CAST</a></button></td>
+                    <td><%=dataMovies[i].rating%></td>
+                    <td><button id="not-on-form"><a href="/movies/edit/<%=dataMovies[i].id%>">EDIT</a></button></td>
+                    <td><button id="not-on-form" onclick="return confirm('Apakah anda ingin menghapus data Movies bernama <%=dataMovies[i].name%>')"><a href="/movies/delete/<%=dataMovies[i].id%>">DELETE</a></button></td>
+                    <td><button id="not-on-form"><a href="/movies/add-cast/<%=dataMovies[i].id%>">ADD CAST</a></button></td>
                 </tr>
             <%}%>
         </tbody>

@@ -4,22 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>add movie cast page</title>
-    <style>
-        a {
-            text-decoration: none;
-        }
-    </style>
+    <%- include('partials/style-nav-bar')%>
+    <%- include('partials/style-form')%>
+    <%- include('partials/style-table')%>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="/movies">List Movies</a></li>
-            <li><a href="/phouses">List Production Houses</a></li>
-            <li><a href="/casts">List Casts</a></li>
-            <li><a href="/">Home</a></li>
-        </ul>
-    </nav>
-
+    <%- include('partials/nav-bar')%>
     <table border="1">
         <thead>
             <tr>
@@ -39,25 +29,37 @@
         </tbody>
     </table>
 
-    <h3>ADD CAST:</h3>
-    <form action="/movies/add-cast/<%=id%>" method="post">
-        
-        <label>Actor:</label><br>
-        <select name="actor">
-            <% for (let i in dataCast) {%>
-                <option value="<%=dataCast[i].id%>"><%=dataCast[i].getFullName()%></option>
-            <%}%>
-        </select><br><br>
+    <div class="container">
+        <h3>ADD CAST:</h3>
+        <form action="/movies/add-cast/<%=id%>" method="post">
+            <div class="row">
+                <div class="col-50">
+                    <label>Actor:</label><br>
+                    <select name="actor">
+                        <% for (let i in dataCast) {%>
+                            <option value="<%=dataCast[i].id%>"><%=dataCast[i].getFullName()%></option>
+                        <%}%>
+                    </select><br><br>
+                </div>
+            </div>
 
-        <%if (error) {%>
-            <p><%=error%></p> 
-        <%}%>
-        <label>Role:</label><br>
-        <input type="text" name="role"><br><br>
-            
-        <button type="submit">Save</button>
-        <button><a href="/movies">Cancel</a></button>
-    </form>
+            <div class="row">
+                <div class="col-50">
+                    <%if (error) {%>
+                        <p><%=error%></p> 
+                    <%}%>
+                    <label>Role:</label><br>
+                    <input type="text" name="role"><br><br>
+                </div>
+            </div>
+
+            <div class="row">
+                <button type="submit">Save</button>
+                <button><a href="/movies">Cancel</a></button>
+            </div>
+        </form>
+    </div>
+
     <br><br>
     <table border="1">
         <thead>

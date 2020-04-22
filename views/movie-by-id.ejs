@@ -4,21 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>movie by id page</title>
-    <style>
-        a {
-            text-decoration: none;
-        }
-    </style>
+    <%- include('partials/style-nav-bar')%>
+    <%- include('partials/style-table')%>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="/movies">List Movies</a></li>
-            <li><a href="/phouses">List Production Houses</a></li>
-            <li><a href="/casts">List Casts</a></li>
-            <li><a href="/">Home</a></li>
-        </ul>
-    </nav>
+    <%- include('partials/nav-bar')%>
     
     <h1>MOVIE BY ID</h1>
     
@@ -33,6 +23,7 @@
                 <td>RELEASED YEAR</td>
                 <td>GENRE</td>
                 <td>PRODUCTION HOUSE</td>
+                <td>RATING</td>
                 <td colspan="2">ACTION</td>
             </tr>
         </thead>
@@ -50,9 +41,9 @@
                     <% if (dataById[i].ProductionHouseId !== null) {%>
                         <td><%=dataById[i].ProductionHouse.name_prodHouse%></td>
                     <%}%>
-
+                    <td><%=dataById[i].rating%></td>
                     <td><button><a href="/movies/edit/<%=dataById[i].id%>">EDIT</a></button></td>
-                    <td><button><a href="/movies/delete/<%=dataById[i].id%>">DELETE</a></button></td>
+                    <td><button onclick="return confirm('Apakah anda ingin menghapus data Movies bernama <%=dataById[i].name%>')"><a href="/movies/delete/<%=dataById[i].id%>">DELETE</a></button></td>
                 </tr>
             <%}%>
         </tbody>

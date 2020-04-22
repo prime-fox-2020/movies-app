@@ -17,10 +17,12 @@ module.exports = (sequelize, DataTypes) => {
     gender: DataTypes.STRING
   }, { sequelize});
 
-  Cast.beforeCreate( (instance, option) => { //validate by hooks
+  Cast.beforeCreate( (instance, option) => {            //validate by hooks 1
     if(!instance.last_name) {instance.last_name = instance.first_name}
-
   })
+//   Cast.addHook('beforeCreate', (instance, option) => { //validate by hooks 2
+//     if(!instance.last_name) {instance.last_name = instance.first_name}
+//   })
 
   Cast.associate = function(models) {
     // associations can be defined here

@@ -9,8 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   
   ProductionHouse.init({
     name_prodHouse: DataTypes.STRING,
-    headquarters: DataTypes.STRING,
-    MovieId: DataTypes.INTEGER
+    headquarters: DataTypes.STRING
   }, {sequelize});
 
   ProductionHouse.associate = function(models) {

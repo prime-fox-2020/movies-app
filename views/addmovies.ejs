@@ -1,0 +1,41 @@
+<%- include('partials/top.ejs') %>
+
+<h1>Add A Movie</h1>
+
+<form action="/movies/add" method="POST">
+  <label for="name">Name</label><br>
+  <input type="text" id="name" name="name" placeholder="e.g The Incredibles" autofocus required>
+  <br><br>
+  <label for="released_year">Year Released</label><br>
+  <input type="number" id="released_year" name="released_year" placeholder="e.g 2010" maxlength="4" required>
+  <br><br>
+  <div class="genreselection">
+      <label for="genre">Genre</label><br>
+      <select name="genre" id="genre">
+        <option value="" disabled selected>--SELECT--</option>
+        <option value="Animation">Animation</option>
+        <option value="Comedy">Comedy</option>
+        <option value="Drama">Drama</option>
+        <option value="Horror">Horror</option>
+        <option value="Religious">Religious</option>
+        <option value="Thriller">Thriller</option>
+      </select>
+  </div>
+  <br>
+  <div class="productionhouseselection">
+    <label for="ProductionHouseId">Production House</label><br>
+    <select name="ProductionHouseId" id="ProductionHouseId">
+      <option value="" disabled selected>--SELECT--</option>
+      <option value="7">Paramount Pictures</option>
+      <option value="8">Pixar</option>
+      <option value="9">Universal Pictures</option>
+      <option value="10">Walt Disney Studios</option>
+      <option value="11">Warner Bros</option>
+    </select>
+  </div>
+  <br>
+  <button type="submit">Submit</button>
+  <button><a href="/movies">Cancel</a></button>
+</form>
+
+<%- include('partials/bottom.ejs') %>

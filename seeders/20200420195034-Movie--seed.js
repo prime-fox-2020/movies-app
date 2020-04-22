@@ -7,6 +7,7 @@ module.exports = {
       name: 'American Pie',
       released_year: 2008,
       genre: 'Comedy',
+      ProductionHouseId: 7,
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -14,6 +15,7 @@ module.exports = {
       name: 'Scary Stories',
       released_year: 2007,
       genre: 'Horror',
+      ProductionHouseId: 8,
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -21,6 +23,7 @@ module.exports = {
       name: 'Epic Stories',
       released_year: 2009,
       genre: 'Action',
+      ProductionHouseId: 9,
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -28,6 +31,7 @@ module.exports = {
       name: 'Sad Stories',
       released_year: 2009,
       genre: 'Drama',
+      ProductionHouseId: 10,
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -35,6 +39,7 @@ module.exports = {
       name: 'Kids Stories',
       released_year: 2009,
       genre: 'Animation',
+      ProductionHouseId: 11,
       createdAt: new Date(),
       updatedAt: new Date()
     }

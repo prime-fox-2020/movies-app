@@ -11,9 +11,8 @@
     <%- include('../partial/navbar') %> 
     <h1>List Movies</h1>
 
-    <button>
-        <a href="movies/add">ADD MOVIE</a>
-    </button>
+    <a href="movies/add"><button>ADD MOVIE</button></a>
+    
     <table border="1" style="text-align: center;">
         <thead>
             <tr>
@@ -30,11 +29,15 @@
                     <td><%= el.name %> </td>
                     <td><%= el.released_year %> </td>
                     <td><%= el.genre %> </td>
-                    <td><%= el.ProductionHouse.name_prodHouse %> </td>
+                    <% if (el.ProductionHouse.name_prodHouse) { %>
+                        <td><%= el.ProductionHouse.name_prodHouse %> </td>
+                    <% } else { %>
+                        <td>Unknown</td>
+                    <% } %> 
                     <td>
-                        <button><a href="movies/<%= el.id %>/edit">EDIT</a></button>
-                        <button><a href="movies/<%= el.id %>/delete">DELETE</a></button>
-                        <button><a href="movies/casts/<%= el.id %>?name=<%= el.name %>">ADD CAST</a></button>
+                        <a href="movies/<%= el.id %>/edit"><button>EDIT</button></a>
+                        <a href="movies/<%= el.id %>/delete"><button>DELETE</button></a>
+                        <a href="movies/casts/<%= el.id %>?name=<%= el.name %>"><button>ADD CAST</button></a>
                     </td>
                 </tr>
             <% }) %>

@@ -12,9 +12,8 @@
     <%- include('../partial/navbar') %> 
     <h1>List Cast</h1>
 
-    <button>
-        <a href="casts/add">ADD CAST</a>
-    </button>
+    <a href="casts/add"><button>ADD CAST</button></a>
+    
     <table border="1" style="text-align: center;">
         <thead>
             <tr>
@@ -34,24 +33,14 @@
                     <td><%= el.gender %></td>
                     <td>
                         <div class="popup" onclick="myFunction()">
-                            <button><a href="casts/<%= el.id %>/edit">EDIT</a></button>
-                            <button>
-                                    DELETE
-                                    <span class="popuptext" id="delete">Are You Sure Wanna Delete? <a href="casts/<%= el.id %>/delete">Yes</a></span>
-                            </button>
-                            <button><a href="casts/movies/<%= el.id %>?name=<%= el.getFullName() %>">SEE MOVIES</a></button>
+                            <a href="casts/<%= el.id %>/edit"><button>EDIT</button></a>
+                            <a href="casts/<%= el.id %>/delete" onclick="return confirm('Are you sure?')"><button>DELETE</button></a>
+                            <a href="casts/movies/<%= el.id %>?name=<%= el.getFullName() %>"><button>SEE MOVIES</button></a>
                         </div>
                     </td>
                 </tr>
             <% }) %>
         </tbody>
     </table>
-
-    <script>
-        function myFunction() {
-          var popup = document.getElementById("delete");
-          popup.classList.toggle("show");
-        }
-    </script> 
 </body>
 </html>

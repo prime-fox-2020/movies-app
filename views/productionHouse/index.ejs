@@ -1,12 +1,12 @@
-<%- include('../partials/header'), {title, page} %>
+<%- include('../partials/header') %>
 
-<h3 class="d-inline-block"><%= title %></h3>
+<h3 class="d-inline-block"><%= pageTitle %></h3>
 
 <% if (alert.type) { %>
   <%- include('../partials/alert') %>
 <% } %>
 
-<% if (data) { %>
+<% if (pHouses) { %>
 
   <table class="table table-bordered">
     <thead>
@@ -17,7 +17,7 @@
       </tr>
     </thead>
     <tbody>
-      <% data.forEach((ph, idx) => { %>
+      <% pHouses.forEach((ph, idx) => { %>
         <tr>
           <th scope="row"><%= idx + 1 %></th>
           <td><%= ph.name_prodHouse %></td>

@@ -1,49 +1,47 @@
-const {Cast, MovieCast, Movie} = require('../models')
+const {Cast, Movie} = require('../models')
 const helper = require('../helpers')
 
 class CastController {
 
   static show(req, res) {
-    const locals = CastController.getLocals()
-    locals.title = 'List of Talents'
-    locals.alert = { message: [req.query.message], type: req.query.type }
+    CastController.setLocals(res)
+    res.locals.pageTitle = 'List of Talents'
+    res.locals.alert = { message: [req.query.message], type: req.query.type }
 
     Cast.findAll({
       order: [['first_name', 'ASC']]
     })
     .then(results => {
       if (results.length) {
-        locals.data = results
-        res.render('cast', locals)
+        res.locals.casts = results
+        res.render('cast')
       } else {
-        locals.alert.message = [`You dont have any talent data in database.`]
-        locals.alert.type = 'danger'
-        res.render('cast', locals)
+        res.locals.alert.message = [`You dont have any talent data in database.`]
+        res.locals.alert.type = 'danger'
+        res.render('cast')
       }
     })
     .catch(err => {
-      locals.alert.message = [err]
-      locals.alert.type = 'danger'
-      res.render('cast', locals)
+      res.locals.alert.message = [err]
+      res.locals.alert.type = 'danger'
+      res.render('cast')
     })
   }
 
   static addForm(req, res) {
-    const locals = CastController.getLocals()
-    locals.title = 'Add new talent'
-    locals.method = 'add'
+    CastController.setLocals(res)
+    res.locals.pageTitle = 'Add new talent'
 
-    res.render('cast/add', locals)
+    res.render('cast/add')
   }
   
   static add(req, res) {
-    const locals = CastController.getLocals()
     const message = 'New talent added successfully.'
     const {first_name, last_name, birth_year, gender, phone_number} = req.body
-    locals.title = 'Add new talent'
-    locals.method = 'add'
-    locals.alert.type = 'danger'
-    locals.data = req.body
+    CastController.setLocals(res)
+    res.locals.title = 'Add new talent'
+    res.locals.alert.type = 'danger'
+    res.locals.tempData = req.body
 
     Cast.create({
       first_name,
@@ -56,28 +54,28 @@ class CastController {
       res.redirect(`/casts?message=${message}&type=success`)
     })
     .catch(err => {
-      locals.alert.message = [err]
-      res.render('cast/add', locals)
+      if (Array.isArray(err.errors)) {
+        res.locals.alert.message = err.errors.map(er => er.message)
+        res.render('cast/add')
+      } else {
+        res.locals.alert.message = [err]
+        res.render('cast/add')
+      }
     })
   }
 
   static editForm(req, res) {
-    const locals = CastController.getLocals()
     const fail = `Talent with ID ${req.params.id} is not found.`
-    locals.title = 'Edit data talent'
-    locals.method = 'edit'
+    CastController.setLocals(res)
+    res.locals.title = 'Edit data talent'
 
     if (isNaN(req.params.id)) {
       res.redirect(`/casts?message=${fail}&type=danger`)
     } else {
       Cast.findByPk(req.params.id)
       .then(results => {
-        locals.data = results
-        if (results) {
-          res.render('cast/edit', locals)
-        } else {
-          res.redirect(`/casts?message=${fail}&type=danger`)
-        }
+        res.locals.cast = results
+        res.render('cast/edit')
       })
       .catch(err => {
         res.redirect(`/casts?message=${err}&type=danger`)
@@ -86,14 +84,14 @@ class CastController {
   }
   
   static edit(req, res) {
-    const locals = CastController.getLocals()
     const message = 'Data talent updated successfully.'
     const {first_name, last_name, birth_year, gender, phone_number} = req.body
-    locals.title = 'Edit data talent'
-    locals.method = 'edit'
-    locals.alert.type = 'danger'
-    locals.data = req.body
-    locals.data.id = req.params.id
+    CastController.setLocals(res)
+    res.locals.title = 'Edit data talent'
+    res.locals.method = 'edit'
+    res.locals.alert.type = 'danger'
+    res.locals.cast = req.body
+    res.locals.cast.id = req.params.id
 
     Cast.update({
         first_name,
@@ -108,8 +106,9 @@ class CastController {
       res.redirect(`/casts?message=${message}&type=success`)
     })
     .catch(err => {
-      locals.alert.message = [err]
-      res.render('cast/edit', locals)
+      res.locals.alert.message = [err]
+      // res.send(res.locals)
+      res.render('cast/edit')
     })
   }
 
@@ -117,6 +116,7 @@ class CastController {
     const success = `Talent with ID ${req.params.id} successfully deleted.`
     const fail = `Talent with ID ${req.params.id} is not found.`
     let found
+
     if (isNaN(req.params.id)) {
       res.redirect(`/casts?message=${fail}&type=danger`)
     } else {
@@ -126,40 +126,38 @@ class CastController {
         return Cast.destroy({ where: { id: req.params.id } })
       })
       .then(results => {
-        if (found) {
+        console.log(found)
           res.redirect(`/casts?message=${success}&type=success`)
-        } else {
+      })
+      .catch(err => {
+        if (found === null) {
           res.redirect(`/casts?message=${fail}&type=danger`)
+        } else {
+          res.redirect(`/casts?message=${err}&type=danger`)
         }
       })
-      .catch(err => res.redirect(`/casts?message=${err}&type=danger`))
     }  
   }
 
   static getMovies(req, res) {
-    const locals = CastController.getLocals()
-
+    CastController.setLocals(res)
+    
     Cast.findByPk(req.params.id, {
       include: [{model: Movie}]
     })
     .then(results => {
-      locals.cast = results
-      locals.helper = {
+      res.locals.cast = results
+      res.locals.helper = {
         ageCalc: helper.ageCalc
       }
-      res.render('cast/movies', locals)
+      res.render('cast/movies')
     })
     .catch(err => res.send(err))
   }
-
-  static getLocals() {
-    return {
-      alert: { message: null, type: null },
-      data: null,
-      method: null,
-      title: null,
-      page: 'Cast'
-    }
+  
+  static setLocals(res) {
+    res.locals.page = 'Cast'
+    res.locals.tempData = null
   }
 }
 

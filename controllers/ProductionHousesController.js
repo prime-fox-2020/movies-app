@@ -3,39 +3,30 @@ const {ProductionHouse} = require('../models')
 class ProductionHouseController {
 
   static show(req, res) {
-    const locals = ProductionHouseController.getLocals()
-    locals.title = 'List of Production Houses'
-    locals.alert = { message: [req.body.message], type: req.body.type }
+    res.locals.title += ' | List of Production Houses'
+    res.locals.pageTitle = 'List of Production Houses'
+    res.locals.page += 'Production House'
 
     ProductionHouse.findAll({
-      order: [['id', 'ASC']]
+      order: [['name_prodHouse', 'ASC']]
     })
     .then(results => {
       if (results.length) {
-        locals.data = results
-        res.render('productionHouse', locals)
+        res.locals.pHouses = results
+        res.render('productionHouse')
       } else {
-        locals.alert.message = [`You dont have any production house data in database.`]
-        locals.alert.type = 'danger'
-        res.render('productionHouse', locals)
+        res.locals.alert.message = [`You dont have any production house data in database.`]
+        res.locals.alert.type = 'danger'
+        res.render('productionHouse')
       }
     })
     .catch(err => {
-      locals.alert.message = [err]
-      locals.alert.type = 'danger'
-      res.render('productionHouse', locals)
+      res.locals.alert.message = [err]
+      res.locals.alert.type = 'danger'
+      res.render('productionHouse')
     })
   }
 
-  static getLocals() {
-    return {
-      alert: { message: null, type: null },
-      data: null,
-      method: null,
-      title: null,
-      page: 'Production House'
-    }
-  }
 }
 
 module.exports = ProductionHouseController

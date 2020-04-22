@@ -1,13 +1,13 @@
 <%- include('../partials/header') %>
 
-<h3 class="d-inline-block"><%= title %></h3>
+<h3 class="d-inline-block"><%= pageTitle%></h3>
 <a href="/movies/add" class="btn btn-info float-right">Add new movie</a>
 
 <% if (alert.type) { %>
   <%- include('../partials/alert') %>
 <% } %>
 
-<% if (data) { %>
+<% if (movies) { %>
 
   <table class="table table-bordered">
     <thead>
@@ -17,19 +17,21 @@
         <th scope="col">Released Year</th>
         <th scope="col">Genre</th>
         <th scope="col">Production House</th>
+        <th scope="col">Rating</th>
         <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
-      <% data.forEach((movie, idx) => { %>
+      <% movies.forEach((movie, idx) => { %>
         <tr>
           <th scope="row"><%= idx + 1 %></th>
           <td><%= movie.title %></td>
           <td><%= movie.released_year %></td>
           <td><%= movie.genre %></td>
           <td><%= movie.ProductionHouse ? movie.ProductionHouse.name_prodHouse : 'Unknown' %></td>
+          <td><%= movie.rating %></td>
           <td><a href="/movies/edit/<%= movie.id %>" class="btn btn-info">Edit</a> &nbsp; 
-            <a onclick="return alert('Are you sure want to delete this movie?')" href="/movies/delete/<%= movie.id %>" class="btn btn-danger">Delete</a>  &nbsp; 
+            <a onclick="return window.confirm('Are you sure want to delete this movie?')" href="/movies/delete/<%= movie.id %>" class="btn btn-danger">Delete</a>  &nbsp; 
             <a href="/movies/<%= movie.id %>/add-talent" class="btn btn-info">Add Cast</a>
           </td>
         </tr>

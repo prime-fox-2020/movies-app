@@ -3,9 +3,9 @@ const {Movie, ProductionHouse, Cast, MovieCast} = require('../models')
 class MovieController {
 
   static show(req, res) {
-    const locals = MovieController.getLocals()
-    locals.title = 'List of Movies'
-    locals.alert = { message: [req.query.message], type: req.query.type }
+    MovieController.setLocals(res)
+    res.locals.pageTitle += 'List of Movies'
+    if (req.query.type) res.locals.alert = { message: [req.query.message], type: req.query.type }
 
     Movie.findAll({
       order: [['released_year', 'DESC']],
@@ -13,96 +13,94 @@ class MovieController {
     })
     .then(results => {
       if (results.length) {
-        locals.data = results
-        res.render('movie', locals)
+        res.locals.movies = results
+        res.render('movie')
       } else {
-        locals.alert.message = [`You dont have any movie data in database.`]
-        locals.alert.type = 'danger'
-        res.render('movie', locals)
+        res.locals.alert.message = [`You dont have any movie data in database.`]
+        res.locals.alert.type = 'danger'
+        res.render('movie')
       }
     })
     .catch(err => {
-      locals.alert.message = [err]
-      locals.alert.type = 'danger'
-      res.render('movie', locals)
+      res.locals.alert.message = [err]
+      res.locals.alert.type = 'danger'
+      res.render('movie')
     })
   }
 
   static addForm(req, res) {
-    const locals = MovieController.getLocals()
-    locals.title = 'Add new movie'
-    locals.method = 'add'
-    locals.prodHouse = []
+    MovieController.setLocals(res)
+    res.locals.pageTitle = 'Add new movie'
+    res.locals.prodHouses = []
 
     ProductionHouse.findAll({
       order: [['name_prodHouse', 'ASC']]
     })
     .then(results => {
-      locals.prodHouse = results
-      res.render('movie/add', locals)
+      res.locals.prodHouses = results
+      res.render('movie/add')
     })
     .catch(err => {
-      locals.alert.message = [err]
-      locals.alert.type = 'danger'
-      res.render('movie/add', locals)
+      res.locals.alert.message = [err]
+      res.locals.alert.type = 'danger'
+      res.render('movie/add')
     })
   }
   
   static add(req, res) {
-    const error = MovieController.validation(req.body)
-    const locals = MovieController.getLocals()
     const message = 'New movie added successfully.'
-    const {title, released_year, genre, ProductionHouseId} = req.body
-    locals.title = 'Add new movie'
-    locals.method = 'add'
-    locals.alert.message = error
-    locals.alert.type = 'danger'
-    locals.data = req.body
+    const {title, released_year, genre, ProductionHouseId, rating} = req.body
+    MovieController.setLocals(res)
+    res.locals.pageTitle = 'Add new movie'
+    res.locals.alert.type = 'danger'
+    res.locals.tempData = req.body
 
     ProductionHouse.findAll({
       order: [['name_prodHouse', 'ASC']]
     })
     .then(results => {
-      locals.prodHouse = results
-      return new Promise((resolve, reject) => {
-        if (error.length) return reject(error)
-        return resolve(Movie.create({
-          title,
-          released_year,
-          genre,
-          ProductionHouseId
-        }))
+      res.locals.prodHouses = results
+      return Movie.create({
+        title,
+        released_year,
+        genre,
+        ProductionHouseId,
+        rating
       })
     })
     .then(results => {
       res.redirect(`/movies?message=${message}&type=success`)
     })
     .catch(err => {
-      locals.alert.message = [err]
-      res.render('movie/add', locals)
+      if (Array.isArray(err.errors)) {
+        res.locals.alert.message = err.errors.map(er => er.message)
+        res.render('movie/add')
+      } else {
+        res.locals.alert.message = [err]
+        res.render('movie/add')
+      } 
     })    
   }
 
   static editForm(req, res) {
-    const locals = MovieController.getLocals()
     const fail = `Movie with ID ${req.params.id} is not found.`
-    locals.title = 'Edit data movie'
-    locals.method = 'edit'
+    MovieController.setLocals(res)
+    res.locals.pageTitle = 'Edit data movie'
 
     if (isNaN(req.params.id)) {
       res.redirect(`/movies?message=${fail}&type=danger`)
     } else {
       Movie.findByPk(req.params.id)
       .then(results => {
-        locals.data = results
+        res.locals.movie = results
         return ProductionHouse.findAll({
           order: [['name_prodHouse', 'ASC']]
         })
       })
       .then(results => {
-        locals.prodHouse = results
-        if (locals.data) {
-          res.render('movie/edit', locals)
+        res.locals.prodHouses = results
+        if (res.locals.movie) {
+          res.render('movie/edit')
         } else {
           res.redirect(`/movies?message=${fail}&type=danger`)
         }
@@ -114,60 +112,62 @@ class MovieController {
   }
   
   static edit(req, res) {
-    const error = MovieController.validation(req.body)
-    const locals = MovieController.getLocals()
     const message = 'Data movie updated successfully.'
-    locals.title = 'Edit data movie'
-    locals.method = 'edit'
-    locals.alert.type = 'danger'
-    locals.data = req.body
-    locals.data.id = req.params.id
-    locals.alert.message = error
+    const {title, released_year, genre, ProductionHouseId, rating} = req.body
+    MovieController.setLocals(res)
+    res.locals.pageTitle = 'Edit data movie'
+    res.locals.alert.type = 'danger'
+    res.locals.movie = req.body
+    res.locals.movie.id = req.params.id
 
-    ProductionHouse.findAll({
-      order: [['name_prodHouse', 'ASC']]
+    Movie.update({
+      title,
+      released_year,
+      genre,
+      ProductionHouseId,
+      rating
+    }, {
+      where: {id: req.params.id}
     })
     .then(results => {
-      locals.prodHouse = results
-      if (error.length) {
-        res.render('movie/edit', locals)
-      } else {
-        const {title, released_year, genre, ProductionHouseId} = req.body
-        Movie.update({
-          title,
-          released_year,
-          genre,
-          ProductionHouseId
-        }, {
-          where: {id: req.params.id}
-        })
-        .then(results => {
-          res.redirect(`/movies?message=${message}&type=success`)
-        })
-        .catch(err => {
-          locals.alert.message = [err]
-          res.render('movie/edit', locals)
-        })
-      }
+      res.redirect(`/movies?message=${message}&type=success`)
     })
     .catch(err => {
-      locals.alert.message = [err]
-      res.render('movie/edit', locals)
-    })
+      if (Array.isArray(err.errors)) {
+        res.locals.alert.message = err.errors.map(er => er.message)
+      } else {
+        res.locals.alert.message = [err]
+      }
+      ProductionHouse.findAll({
+        order: [['name_prodHouse', 'ASC']]
+      })
+      .then(results => {
+        res.locals.prodHouses = results
+        res.render('movie/edit')
+      })
+      .catch(err => {
+        res.locals.alert.message.push(err)
+        res.render('movie/edit')
+      })
+    }) 
   }
 
   static delete(req, res) {
     const success = `Movie with ID ${req.params.id} successfully deleted.`
     const fail = `Movie with ID ${req.params.id} is not found.`
+    let movie
+
     if (isNaN(req.params.id)) {
       res.redirect(`/movies?message=${fail}&type=danger`)
     } else {
       Movie.findByPk(req.params.id)
       .then(results => {
-        if (results !== null) {
-          Movie.destroy({ where: { id: req.params.id } })
-          .then(results => res.redirect(`/movies?message=${success}&type=success`))
-          .catch(err => res.redirect(`/movies?message=${err}&type=danger`))
+        movie = results
+        if (results) return Movie.destroy({ where: {id: results.id}})
+      })
+      .then(results => {
+        if (movie) {
+          res.redirect(`/movies?message=${success}&type=success`)
         } else {
           res.redirect(`/movies?message=${fail}&type=danger`)
         }
@@ -177,15 +177,14 @@ class MovieController {
   }
 
   static addTalent(req, res) {
-    const locals = MovieController.getLocals()
-    locals.alert = { message: [req.query.message], type: req.query.type }
-    locals.title = 'Add cast:'
+    MovieController.setLocals(res)
+    if (req.query.type) res.locals.alert = { message: [req.query.message], type: req.query.type }
 
     Cast.findAll({
       attributes: ['id', 'first_name', 'last_name']
     })
     .then(results => {
-      locals.casts = results
+      res.locals.casts = results
       return Movie.findOne({
         attributes: ['id', 'title'],
         where: {
@@ -194,7 +193,7 @@ class MovieController {
       })
     })
     .then(results => {
-      locals.movie = results
+      res.locals.movie = results
       return MovieCast.findAll({
         include: [{model: Movie}, {model: Cast}],
         where: {
@@ -203,21 +202,29 @@ class MovieController {
       })
     })
     .then(results => {
-      locals.movieCasts = results
-      res.render('movie/addTalent', locals)
-      // res.send(locals)
+      res.locals.pageTitle = res.locals.movie.title
+      res.locals.movieCasts = results
+      res.render('movie/addTalent')
     })
-    .catch(err => res.send(err))
+    .catch(err => {
+      if (!res.locals.casts) {
+        res.redirect(`/movies?message=You dont have talent in database. Add some first.&type=danger`)
+      } else if (!res.locals.movie) {
+        res.redirect(`/movies?message=Movie with ID ${req.params.id} is not found&type=danger`)
+      } else {
+        res.send(err)
+      }
+    })
   }
 
   static addTalentPost(req, res) {
-    const locals = MovieController.getLocals()
     const {CastId, role} = req.body
     const MovieId = Number(req.params.id)
+    const success = `Talent successfully added.`
 
     MovieCast.create({CastId, MovieId, role})
     .then(results => {
-      res.redirect(`/movies/${MovieId}/add-talent`)
+      res.redirect(`/movies/${MovieId}/add-talent?message=${success}&type=success`)
     })
     .catch(err => {
       let errors
@@ -230,30 +237,9 @@ class MovieController {
     })
   }
 
-  static getLocals() {
-    return {
-      alert: { message: null, type: null },
-      data: null,
-      method: null,
-      title: null,
-      page: 'Movie'
-    }
-  }
-  
-  static validation(obj) {
-    if (obj.title) obj.title = obj.title.trim()
-    if (obj.released_year) obj.released_year = Number(obj.released_year)
-    const {title, released_year, genre} = obj
-    const error = []
-    if (!title) error.push('Please enter movie title.')
-    if (isNaN(released_year)) {
-      error.push('Please enter number only for released year.')
-    } else if (released_year === '') {
-      error.push('Please enter released year.')
-    }
-    if (released_year > new Date().getFullYear()) error.push('Unreleased movie cant be submited')
-    if (!genre) error.push('Please select movie genre')
-    return error
+  static setLocals(res) {
+    res.locals.page = 'Movie'
+    res.locals.tempData = null
   }
 }
 

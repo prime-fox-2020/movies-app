@@ -1,38 +1,38 @@
 <%- include('../partials/header') %>
 
-  <h3 class="d-inline-block"><%= title %></h3>
+  <h3 class="d-inline-block"><%= pageTitle %></h3>
   <a href="/casts" class="btn btn-primary float-right">Show All Talents</a>
   
 <% if (alert.type) { %>
   <%- include('../partials/alert') %>
 <% } %>
 
-  <form action="/casts/<%= method === 'edit' ? `edit/${data.id}` : 'add'%>" method="post">
+  <form action="/casts/add" method="post">
     <div class="form-group">
       <label for="first_name">First Name</label>
-      <input type="text" name="first_name" class="form-control" value="<%= data ? data.first_name : '' %>" placeholder="e.g: Neo">
+      <input type="text" name="first_name" class="form-control" value="<%= tempData ? tempData.first_name : '' %>" placeholder="e.g: Neo">
     </div>
     <div class="form-group">
       <label for="last_name">Last Name</label>
-      <input type="text" name="last_name" class="form-control" value="<%= data ? data.last_name : '' %>" placeholder="e.g: Matrix">
+      <input type="text" name="last_name" class="form-control" value="<%= tempData ? tempData.last_name : '' %>" placeholder="e.g: Matrix">
     </div>
     
     <div class="form-group">
       <label for="birth_year">Birth Year</label>
-      <input type="number" name="birth_year" class="form-control" value="<%= data ? data.birth_year : '' %>" placeholder="e.g: 1960">
+      <input type="number" name="birth_year" class="form-control" value="<%= tempData ? tempData.birth_year : '' %>" placeholder="e.g: 1960">
     </div>
     <div class="form-group">
       <label for="phone_number">Phone Number</label>
-      <input type="text" name="phone_number" class="form-control" value="<%= data ? data.phone_number : '' %>" placeholder="e.g: 081211112222">
+      <input type="text" name="phone_number" class="form-control" value="<%= tempData ? tempData.phone_number : '' %>" placeholder="e.g: 081211112222">
     </div>
     
     <div class="form-group">
       <label for="gender">Gender</label>
       <br>
-      <% if (data) { %>
-      <input type="radio" id="male" name="gender" value="male" <%= data.gender === 'male' ? 'checked' : '' %>>
+      <% if (tempData) { %>
+      <input type="radio" id="male" name="gender" value="male" <%= tempData.gender === 'male' ? 'checked' : '' %>>
       <label for="male">Male</label><br>
-      <input type="radio" id="female" name="gender" value="female" <%= data.gender === 'female' ? 'checked' : '' %>>
+      <input type="radio" id="female" name="gender" value="female" <%= tempData.gender === 'female' ? 'checked' : '' %>>
       <label for="female">Female</label><br>
       <% } else { %>
 
@@ -43,7 +43,7 @@
       <% } %>
     </div>
     <div class="form-group">
-      <button class="btn btn-primary" type="submit"><%= method === 'edit' ? `Update Data` : 'Submit Data'%></button>
+      <button class="btn btn-primary" type="submit">Submit Data</button>
     </div>
   </form>
 </main>

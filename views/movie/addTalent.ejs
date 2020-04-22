@@ -1,12 +1,12 @@
 <%- include('../partials/header') %>
 
-  <h3><%= movie.title %></h3>
+  <h2><%= movie.title %></h2>
   
 <% if (alert.type) { %>
   <%- include('../partials/alert') %>
 <% } %>
 
-  <h3><%= title %></h3>
+  <h3>Add cast :</h3>
 
   <form action="/movies/<%= movie.id %>/add-talent" method="post">
     <div class="form-group">

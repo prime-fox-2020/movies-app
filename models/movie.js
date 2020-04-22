@@ -37,7 +37,8 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: true
       }
-    }
+    },
+    rating: DataTypes.INTEGER
   }, {sequelize});
 
   Movie.associate = function(models) {

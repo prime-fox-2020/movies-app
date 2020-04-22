@@ -11,11 +11,34 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   Cast.init({
-    first_name: DataTypes.STRING,
+    first_name: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
+    },
     last_name: DataTypes.STRING,
-    phone_number: DataTypes.STRING,
-    birth_year: DataTypes.INTEGER,
-    gender: DataTypes.STRING
+    phone_number: {
+      type: DataTypes.INTEGER,
+      validate: {
+        notEmpty: true,
+        len: [9, 12],
+      }
+    },
+    birth_year: {
+      type: DataTypes.INTEGER,
+      validate: {
+        notEmpty: true,
+        max: new Date().getFullYear(),
+        min: 1900
+      }
+    },
+    gender: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true,
+      }
+    }
   }, {
     hooks: {
       afterValidate: (cast, options) => {

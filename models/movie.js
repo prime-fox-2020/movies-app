@@ -9,8 +9,19 @@ module.exports = (sequelize, DataTypes) => {
 
   Movie.init({
     name: DataTypes.STRING,
-    released_year: DataTypes.INTEGER,
-    genre: DataTypes.STRING
+    released_year: { type: DataTypes.INTEGER,
+    validate: {
+        isLeapYear(value){
+          if(value % 4 === 0){
+            throw new Error('badluck year')
+          }
+        }
+      }
+    },
+    
+    genre: DataTypes.STRING,
+    productionHouseId: DataTypes.INTEGER,
+    rating: DataTypes.INTEGER
   }, {sequelize});
 
   Movie.associate = function(models) {

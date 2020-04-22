@@ -27,7 +27,7 @@ route.post('/mv/:id/addcast',mvController.mvaddcast)
 
 
 
-route.get('/ph',cekLogin,phController.findAll)
+route.get('/ph',phController.findAll)
 // route.get('/ph/:id/edit/',phController.editForm)
 // route.post('/ph/:id/edit/',phController.editMovie)
 // route.get('/ph/:id/delete/',phController.destroyMovie)

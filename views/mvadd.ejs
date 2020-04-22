@@ -8,6 +8,9 @@
 
     <body>
         <h1>Add Movie</h1>
+        <% if (error) { %>
+            <p style="color: red;">cannot add : <%= error %></p>
+          <% } %>
         <form action='/mv/add' method='post'>
             <br>
             <label for = "">Name</label>
@@ -26,13 +29,6 @@
                     <% } %>
                 </select>
             <br>
-            <label for="production_house">Production House</label><br>
-                <select name="phId">
-                    <option value=""> </option>
-                    <% for(let i =0; i < data.length ; i++){ %>
-                          <option value="<%= data[i].id %>"><%= data[i].name_prodHouse %></option>
-                      <% } %>
-                </select>
             <br>
             <br>
 

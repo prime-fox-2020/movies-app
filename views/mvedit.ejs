@@ -22,7 +22,7 @@
                 <select name="genre">
                   <% const listgenres =['','Animation','Comedy','Drama','Horror','Religious','Thriller'] %>
                   <% for(let i =0; i < listgenres.length ; i++) { %>
-                      <option value="<%= listgenres[i] %>"><%= listgenres[i] %></option>
+                    <option value="<%= listgenres[i] %>" <%= ByPkData.genre === listgenres[i] ? 'selected' : '' %>><%= listgenres[i] %></option>
                     <% } %>
                 </select>
             <br>
@@ -30,7 +30,7 @@
                 <select name="phId">
                     <option value=""> </option>
                     <% for(let i =0; i<data.length;i++){ %>
-                          <option value="<%= data[i].id %> "><%= data[i].name_prodHouse %></option>
+                        <option value="<%= data[i].id %>" <%= ByPkData.ProductionHouse.name_prodHouse === data[i].name_prodHouse ? 'selected' : '' %>><%= data[i].name_prodHouse  %></option>
                       <% } %>
                 </select>
             <br>

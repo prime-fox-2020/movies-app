@@ -4,7 +4,7 @@ class Controller{
 
     static findAll(req,res){
         Movie.findAll({
-            order: [['released_year', 'asc']],
+            order: [['released_year', 'DESC']],
             include: [{ model: ProductionHouse }]
         })
         .then(data => {
@@ -57,9 +57,10 @@ class Controller{
     }
 
     static create(req,res){
+        let error = req.query.error
         ProductionHouse.findAll({})
         .then(data=>{
-            res.render('mvadd', {data})
+            res.render('mvadd', {data,error})
         })
         .catch(err=>{
             res.send(err)
@@ -68,21 +69,20 @@ class Controller{
 
     static add(req,res){
         const body = req.body
-        console.log(body)
 
         body.name = body.name
         body.released_year = body.released_year
         body.genre = body.genre
         body.createdAt = new Date()
         body.updatedAt = new Date()
-        body.productionHouseId = body.phId
+        body.productionHouseId = null
 
         Movie.create(body)
         .then(()=>{
             res.redirect('/mv')
         })
         .catch(err=>{
-            res.send(err)
+            res.redirect(`/mv/add?error=${err.errors[0].message}`)
         })
 
     }
@@ -105,7 +105,6 @@ class Controller{
 
     static change(req,res){
         const body = req.body
-        console.log (body)
 
         body.name = body.name
         body.released_year = body.released_year
@@ -119,6 +118,7 @@ class Controller{
             res.redirect('/mv')
         })
         .catch(err=>{
+            // console.log(error)
             res.send(err)
         })
 

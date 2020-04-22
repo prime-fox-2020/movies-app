@@ -8,8 +8,8 @@ class Controller{
             // include: [{ model: Movie }]
         })
         .then(data => {
-            // res.render('',{data : Movie})
-            res.send(data)
+            res.render('ph',{data})
+            // res.send(data)
         })
         .catch(err =>{
             console.log(err)

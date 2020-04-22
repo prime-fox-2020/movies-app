@@ -22,7 +22,11 @@
                     <td><%= el.name %></td>
                     <td><%= el.released_year %></td>
                     <td><%= el.genre %></td>
-                    <td><%= el.productionHouseId %>. <%=el.ProductionHouse.name_prodHouse %></td>
+                    <td><% if(el.productionHouseId === null){ %>
+                        <%= "Unknown" %>
+                        <% }else{%>
+                        <%= el.productionHouseId %> <%=el.ProductionHouse.name_prodHouse %></td>
+                        <% } %>
                     <td>
                     <a href="/mv/<%= el.id %>/edit"><button>Edit</button></a>
                     <a href="/mv/<%= el.id %>/delete"><Button>Delete</Button></a>

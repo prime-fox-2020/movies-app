@@ -14,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-      <% let castId %>
+      
       <% for(let cast of casts) { %>
       <tr>
         <td><%= cast.getFullName() %></td>
@@ -23,35 +23,36 @@
         <td><%= cast.gender %></td>
         <td>
           <a href="/casts/<%= cast.id %>/edit" class="btn btn-info">Edit</a>
-          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#delete">Delete<% castId = cast.id %></button>
+          <button id="deleteBtn" type="button" class="btn btn-info" data-toggle="modal" data-target="#delete<%=cast.id%>">Delete</button>
           <a href="/casts/<%= cast.id %>/movies" class="btn btn-info">See Movies</a>
         </td>
       </tr>
+
+      <!-- Modal -->
+      <div class="modal fade" id="delete<%=cast.id%>" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Are you sure to delete this cast?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <a href="/casts/<%=cast.id%>/delete" class="btn btn-danger">Yes, i am sure</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
       <%}%>
 
     </tbody>
   </table>
-  </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="delete" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Are you sure to delete this cast?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a id="reallyDelete" href="/casts/<%= castId %>/delete" class="btn btn-danger">Yes, i am sure</a>
-      </div>
-    </div>
   </div>
 </div>
 

@@ -45,13 +45,19 @@ class MovieController{
   }
 
   static editGetMovie(req, res){
+    const name              = req.query.name
+    const released_year     = req.query.released_year
+    const genre             = req.query.genre
+    const ProductionHouseId = req.query.ProductionHouseId
     let pH = []
     ProductionHouse.findAll({order: [['name_prodHouse', 'ASC']]})
       .then(prodHouse => {
         pH = prodHouse
         return Movie.findByPk(req.params.id)
       })
-      .then(movie => res.render('movies/edit', {movie, productionHouses: pH}))
+      .then(movie => res.render('movies/edit', {
+        movie, productionHouses: pH, name, released_year, genre, ProductionHouseId
+      }))
       .catch(err => res.send(err))
   }
 
@@ -66,7 +72,14 @@ class MovieController{
       where: { id: req.params.id }
     })
       .then(result => res.redirect('/movies'))
-      .catch(err => res.send(err))
+      .catch(err => {
+        const error = {}
+        for(let e of err.errors){
+          error[e.path] = e.message
+        }
+        const errors = Object.keys(error).map(key => `${key}=${error[key]}`).join('&')
+        res.redirect(`/movies/${req.params.id}/edit?${errors}`)
+      })
   }
 
   static deleteMovie(req, res){

@@ -14,6 +14,7 @@
       </tr>
     </thead>
     <tbody>
+
       <% for(let movie of movies) { %>
       <tr>
         <td><%= movie.name %></td>
@@ -22,10 +23,31 @@
         <td><%= movie.ProductionHouse.name_prodHouse %> </td>
         <td>
           <a href="/movies/<%= movie.id %>/edit" class="btn btn-info">Edit</a>
-          <a href="/movies/<%= movie.id %>/delete" class="btn btn-info">Delete</a>
+          <button type="button" class="btn btn-info" data-toggle="modal" data-target="#delete<%= movie.id %>">Delete</button>
           <a href="/movies/<%= movie.id %>/casts" class="btn btn-info">Add Cast</a>
         </td>
       </tr>
+
+      <!-- Modal -->
+      <div class="modal fade" id="delete<%= movie.id %>" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Are you sure to delete this Movie?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <a href="/movies/<%= movie.id %>/delete" class="btn btn-danger">Yes, i am sure</a>
+            </div>
+          </div>
+        </div>
+      </div>
       <%}%>
     </tbody>
   </table>

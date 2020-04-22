@@ -8,11 +8,35 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Cast.init({
-    first_name: DataTypes.STRING,
+    first_name: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'First Name cannot be Empty'
+        }
+      }
+    },
     last_name: DataTypes.STRING,
     phone_number: DataTypes.STRING,
-    birth_year: DataTypes.INTEGER,
-    gender: DataTypes.STRING
+    birth_year: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      validate:{
+        isValid(value){
+          if(value <= 0) throw new Error('Birth Year cannot be Empty')
+        }
+      }
+    },
+    gender: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      validate : {
+        notNull: {
+          msg: 'Gender cannot be Empty'
+        }
+      }
+    }
   }, {
     hooks:{
       beforeCreate(cast, options){

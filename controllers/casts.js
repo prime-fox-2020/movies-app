@@ -13,7 +13,10 @@ class CastsController{
   }
 
   static addGetCast(req, res){
-    res.render('casts/add')
+    const first_name = req.query.first_name
+    const birth_year = req.query.birth_year
+    const gender     = req.query.gender
+    res.render('casts/add', {first_name, birth_year, gender})
   }
 
   static addPostCast(req, res){
@@ -25,12 +28,22 @@ class CastsController{
       gender      : req.body.gender
     })
       .then(result => res.redirect('/casts'))
-      .catch(err => res.send(err))
+      .catch(err => {
+        const error = {}
+        for(let e of err.errors){
+          error[e.path] = e.message
+        }
+        const errors = Object.keys(error).map(key => `${key}=${error[key]}`).join('&')
+        res.redirect(`/casts/add?${errors}`)
+      })
   }
 
   static editGetCast(req, res){
+    const first_name = req.query.first_name
+    const birth_year = req.query.birth_year
+    const gender     = req.query.gender
     Cast.findByPk(req.params.id)
-      .then(cast => res.render('casts/edit', {cast}))
+      .then(cast => res.render('casts/edit', {cast, first_name, birth_year, gender}))
       .catch(err => res.send(err))
   }
 
@@ -47,7 +60,14 @@ class CastsController{
       }
     )
       .then(result => res.redirect('/casts'))
-      .catch(err => res.send(err))
+      .catch(err => {
+        const error = {}
+        for(let e of err.errors){
+          error[e.path] = e.message
+        }
+        const errors = Object.keys(error).map(key => `${key}=${error[key]}`).join('&')
+        res.redirect(`/casts/${req.params.id}/edit?${errors}`)
+      })
   }
 
   static deleteCast(req, res){

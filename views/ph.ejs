@@ -1,0 +1,17 @@
+<%- include ('./partials/header', {title: 'Add Movie'}) %>
+
+<body>
+    <h2>Productionhouse List</h2>
+    <!-- <%= JSON.stringify(data) %> -->
+    <table>
+        <th>Name</th>
+        <th>Headquarters</th>
+        <% for (let i = 0; i < data.length; i++) { %>
+            <tr>
+                <td><%= data[i].name_prodHouse %></td>
+                <td><%= data[i].headquarters %></td>
+            </tr>
+        <% } %>
+    </table>
+</body>
+</html>

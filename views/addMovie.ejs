@@ -1,0 +1,29 @@
+<%- include ('./partials/header', {title: 'Add Movie'}) %>
+
+<% if(error) { %>
+   <p><%= error %></p> 
+<% } %>
+
+<body>
+    <form action="/movies/addMovie" method="POST">
+        <label for="nameInput">Name</label><br>
+        <input type="text" name="name" id="nameInput" placeholder="e.g: 12 Angry Men"><br>
+        <label for="ryInput">Released Year</label><br>
+        <input type="text" name="released_year" id="ryInput" placeholder="e.g: 1957"><br>
+        <label for="genreSelect">Genre</label><br>
+        <select name="genre" id="genreSelect">
+            <option value="" disabled selected disabled>--Genre--</option>
+            <option value="animation">animation</option>
+            <option value="comedy">comedy</option>
+            <option value="drama">drama</option>
+            <option value="horror">horror</option>
+            <option value="religious">religious</option>
+            <option value="thriller">thriller</option>
+        </select><br>
+
+        <button type="submit">Save</button>
+        <a href="/movies">Cancel</a>
+    </form>
+
+</body>
+</html>

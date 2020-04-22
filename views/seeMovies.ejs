@@ -1,0 +1,20 @@
+<%- include ('./partials/header', {title: 'Cast Movies'}) %>
+
+<h3><%= cast.getFullName() %></h3>
+
+<table>
+    <th>Movie</th>
+    <th>Released Year</th>
+    <th>Age When Movie Released</th>
+    <th>Role</th>
+    <!-- <%= JSON.stringify(cast.Movies) %> -->
+    <% for (let i = 0; i < cast.Movies.length; i++) { %>
+        <tr>
+            <td><%= cast.Movies[i].name %></td>
+            <td><%= cast.Movies[i].released_year %></td>
+            <td><%= age(cast.Movies[i].released_year, cast.birth_year) %></td>
+            <td><%= cast.Movies[i].MovieCast.role %></td>
+        </tr>
+    <% } %>
+    
+</table>

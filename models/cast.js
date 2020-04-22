@@ -4,7 +4,9 @@ module.exports = (sequelize, DataTypes) => {
   const Model = Sequelize.Model
 
   class Cast extends Model{
-
+    getFullName() {
+      return `${this.first_name} ${this.last_name}`
+    }
   } 
   
   Cast.init({

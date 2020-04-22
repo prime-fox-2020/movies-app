@@ -29,7 +29,7 @@
                         <% } %>
                     <td>
                     <a href="/mv/<%= el.id %>/edit"><button>Edit</button></a>
-                    <a href="/mv/<%= el.id %>/delete"><Button>Delete</Button></a>
+                    <a href="/mv/<%= el.id %>/delete" onclick="return confirm('Are you sure?')"><button>Delete</button></a>
                     <a href="/mv/<%= el.id %>/addcast"><Button>Add Cast</Button></a>
                     </td>
                 </tr>

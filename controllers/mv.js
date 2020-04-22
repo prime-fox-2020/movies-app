@@ -94,6 +94,7 @@ class Controller{
             return ProductionHouse.findAll({})
         })
         .then(data=>{
+            console.log(ByPkData)
             res.render('mvedit', {data,ByPkData})
         })
         .catch(err => {

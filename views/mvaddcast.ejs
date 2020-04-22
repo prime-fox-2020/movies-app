@@ -20,13 +20,9 @@
             </select>
             <br>
             <br>
-            <label for="role"> Role </label><br>
-            <select name="role">
-                <% const listroles =['Lead','Antagonist Lead','Rear Cast','Supporting Cast'] %>
-                <% for(let i =0; i < listroles.length ; i++) { %>
-                    <option value="<%= listroles[i] %>"><%= listroles[i] %></option>
-                  <% } %>
-              </select>
+            <label for="role"> Role </label>
+            <br>
+            <input type="text" name="role" value="eg : lead role"> 
             <br>
             <br>
             <button type = "Submit"> Add this cast </button>

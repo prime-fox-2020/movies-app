@@ -7,23 +7,26 @@
     </head>
 
     <body>
-        <h1>Add Movie</h1>
+        <h1>Add Casts</h1>
+        <% if (error) { %>
+            <p style="color: red;">cannot add : <%= error %></p>
+          <% } %>
         <form action='/cs/add' method='post'>
             <br>
             <label for = "">First Name</label>
             <br>
-            <input type="text" name="first_name" value="Juan " > 
+            <input type="text" name="first_name" value="" > 
             <br> 
             <label for = "">Last Name</label>
             <br>
-            <input type="text" name="last_name" value="Sanjay"> 
+            <input type="text" name="last_name" value=""> 
             <br>
             <label for = "">Phone Number</label>
             <br>
-            <input type="text" name="phone_number" value="08787878787"> 
+            <input type="text" name="phone_number" value=""> 
             <br><label for = "">Birth Year</label>
             <br>
-            <input type="text" name="birth_year" value="1895"> 
+            <input type="text" name="birth_year" value=""> 
             <br>
 
             <label for="genre">Gender</label><br>
@@ -43,7 +46,7 @@
                 </select>
             <br><label for = "">Role</label>
             <br>
-            <input type="text" name="role" value="rear cast"> 
+            <input type="text" name="role" value=""> 
             <br>
             <br>
 

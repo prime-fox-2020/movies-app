@@ -1,4 +1,5 @@
 const { Movie , ProductionHouse , Cast , MovieCast} = require('../models/index')
+const helper = require('../helpers/age');
 
 class Controller{
 
@@ -15,9 +16,10 @@ class Controller{
     }
 
     static create(req,res){
+        let error = req.query.error
         Movie.findAll({})
         .then(data=>{
-            res.render('csadd',{data})
+            res.render('csadd',{data,error})
         })
         .catch(err=>{
             res.send(err)
@@ -54,7 +56,7 @@ class Controller{
             res.redirect('/cs')
         })
         .catch((err)=>{
-            res.send(err)
+            res.redirect(`/cs/add?error=${err.errors[0].message}`)
         })
     }
 
@@ -109,9 +111,11 @@ class Controller{
 
     static seemovies(req,res){
         const id = req.params.id
-        Cast.findOne({ where: { id: id } ,include: [{ model: Movie}]})
+        
+        MovieCast.findAll({ where: { id: id } ,include: [{ model: Movie},{model : Cast}]})
         .then((data)=>{
-            res.send(data)
+            console.log(data[0].Cast)
+            res.render('seemovies', {data , castName: data[0].Cast, calculateAge:helper})
         })
         .catch((err)=>{
             res.send(err)

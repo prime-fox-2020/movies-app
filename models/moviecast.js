@@ -10,7 +10,15 @@ module.exports = (sequelize, DataTypes) => {
   MovieCast.init({
     MovieId: DataTypes.INTEGER,
     CastId: DataTypes.INTEGER,
-    role: DataTypes.STRING
+    role: { type: DataTypes.STRING,
+      validate: {
+          isOkay(value){
+            if(value === ""){
+              throw new Error('role tidak boleh kosong')
+            }
+          }
+        }
+      }
   }, {sequelize});
   MovieCast.associate = function(models) {
     // associations can be defined here

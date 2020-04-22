@@ -20,10 +20,10 @@
             <option value="thriller" <%= data.genre === 'thriler' ? 'selected' : '' %>>thriller</option>
         </select><br>
       <label>Production House</label>
-      <select name="productionHouseId"><br>
-        <option selected disabled >-- Select Production House--</option>
+      <select name="ProductionHouseId"><br>
+        <option value="" selected disabled >-- Select Production House--</option>
         <% for(let i = 0; i < dataPH.length; i++) {%>
-          <option value="<%=dataPH[i].id%>"><%= dataPH[i].name_prodHouse %> <%= data.ProductionHouseId === dataPH[i].id ? 'selected' : '' %>></option>
+          <option value="<%=dataPH[i].id%>" <%= data.ProductionHouseId === dataPH[i].name_prodHouse ? 'selected' : '' %>><%= dataPH[i].name_prodHouse%></option>
           <%}%>
       </select><br>
     <button type="submit">Submit</button></a>

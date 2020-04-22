@@ -3,9 +3,9 @@ module.exports = (sequelize, DataTypes) => {
   const Sequelize = sequelize.Sequelize;
   const Model = Sequelize.Model;
   class Cast extends Model {
-  get name() {
-    return `${this.first_name} ${this.last_name}`;
-  }
+    get name() {
+      return `${this.first_name} ${this.last_name}`;
+    }
   }
   Cast.init({
     first_name: {
@@ -21,11 +21,11 @@ module.exports = (sequelize, DataTypes) => {
     birth_year: DataTypes.INTEGER,
     gender: DataTypes.STRING
   }, {sequelize});
+  Cast.beforeCreate( (instance, option) => {
+      if(!instance.last_name) instance.last_name = instance.first_name
+    })
   Cast.associate = function(models) {
     // associations can be defined here
-    // Cast.beforeCreate( (instance, option) => {
-    //   if(!instance.last_name) instance.last_name = instance.first_name
-    // })
     Cast.hasMany(models.MovieCast);
     Cast.belongsToMany(models.Movie, {through: models.MovieCast});
   };

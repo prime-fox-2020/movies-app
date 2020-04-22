@@ -1,5 +1,7 @@
 const MM = require('../models').Movie;
 const PHM = require('../models').ProductionHouse;
+const Cast = require('../models').Cast;
+const MC = require('../models').MovieCast;
 
 
 class MovieController {
@@ -61,12 +63,12 @@ class MovieController {
   }
 
   static edit(req, res) {
-    // let rating
-    //   if(!req.body.rating){
-    //       rating = null
-    //   } else {
-    //       rating = Number(req.body.rating)
-    //   }
+    let rating
+      if(!req.body.rating){
+          rating = null
+      } else {
+          rating = Number(req.body.rating)
+      }
     MM.update(
       {
       name : req.body.name,
@@ -95,6 +97,8 @@ class MovieController {
       res.send(err);
     })
   }
+
+
 
 
 }

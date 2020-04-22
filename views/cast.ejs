@@ -6,38 +6,29 @@
     <title>Cast</title>
   </head>
     <div class="jumbotron">
-      <h1 class="display-4">Production House </h1>
+      <h1 class="display-4">Cast List </h1>
   <body>
     <table class="table table-dark">
   <thead>
+    <a href="/cast/addCast"><button type="button">Add Cast</button></a>
       <tr>
-
-        <th scope="col">First Name</th>
-        <th scope="col">Last Name</th>
+        <th scope="col">Name</th>
         <th scope="col">Birth Year</th>
         <th scope="col">Phone Number</th>
         <th scope="col">Gender</th>
-        <input type="radio" name="role" placeholder="released_year"><br>
-        <select name="genre" id="genreSelect">
-              <option value="" disabled selected disabled>--Genre--</option>
-              <option value="animation">animation</option>
-              <option value="comedy">comedy</option>
-              <option value="drama">drama</option>
-              <option value="horror">horror</option>
-              <option value="religious">religious</option>
-              <option value="thriller">thriller</option>
-          </select><br>
+        <th scope="col">Action</th>
       </tr>
-    </thead>
-    <% for(let i = 0; i < data.length; i++) {%>
+  </thead>
+    <tbody>
       <tr>
-
-        <th ><%=data[i].name_prodHouse%></th>
-        <th ><%=data[i].headquarter%></th>
-        <th ><%=data[i].headquarter%></th>
-        <th ><%=data[i].headquarter%></th>
-        <th ><%=data[i].headquarter%></th>
+        <% for(let i = 0; i < data.length; i++) {%>
+          <th ><%= `${data[i].first_name} ${data[i].last_name}` %></th>
+          <th ><%=data[i].birth_year%></th>
+          <th ><%=data[i].phone_number%></th>
+          <th ><%=data[i].gender%></th>
+        <td><a href="/cast/<%= data[i].id %>/editCast">Edit</a> <a href="/cast/<%= data[i].id %>/delete">Delete</a></td>
+          <% } %>
       </tr>
-    <% } %>
+    </tbody>
   </body>
 </html>

@@ -3,12 +3,12 @@ const routes = express.Router();
 
 const CC = require('../controller/CastController');
 
-// routes.get('/', CC.show);
-// routes.get('/:id/castMovie', CC.showMovie);
-// routes.get('/castAdd', CC.addForm);
-// routes.post('/castAdd', CC.add);
-// routes.get('/:id/castEdit', CC.editForm );
-// routes.post('/:id/castEdit', CC.edit);
-// routes.get('/delete', CC.delete);
+routes.get('/', CC.showCast);
+routes.get('/:id/castMovie', CC.showMovie);
+routes.get('/addCast', CC.addFormCast);
+routes.post('/addCast', CC.addCast);
+routes.get('/:id/editCast', CC.editFormCast );
+routes.post('/:id/editCast', CC.editCast);
+routes.get('/:id/deleteCast', CC.deleteCast);
 
 module.exports = routes;

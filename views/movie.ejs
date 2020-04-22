@@ -24,7 +24,7 @@
         <% if(!data[i].ProductionHouseId){ %>
             <td>unknown</td>
             <% } else { %>
-              <td><%= data[i].PHM.name_prodHouse %></td>
+              <td><%= data[i].ProductionHouse.name_prodHouse %></td>
             <% } %>
             <td><a href="/movie/<%= data[i].id %>/edit">Edit</a> <a href="/movie/<%= data[i].id %>/delete">Delete</a></td>
       </tr>

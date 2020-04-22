@@ -19,7 +19,7 @@
                 <td> <%= data.phone_number %> </td>
                 <td> <%= data.birth_year %> </td>
                 <td> <%= data.gender %> </td>
-                <td><a href="/casts/<%=data.id%>/edit">Edit</a> | <a href="/casts/<%=data.id%>/delete" onclick="return confirm(`Are you sure to delete <%= data.first_name %> <%= data.last_name %> record ?`)">Delete</a></td>  
+                <td><a href="/casts/<%=data.id%>/edit">Edit</a> | <a href="/casts/<%=data.id%>/delete" onclick="return confirm(`Are you sure to delete <%= data.first_name %> <%= data.last_name %> record ?`)">Delete</a> | <a href="/casts/<%= data.id %>/seemovies">See Movies</a></td>  
             </tr>
             <% }) %>
         </tbody>

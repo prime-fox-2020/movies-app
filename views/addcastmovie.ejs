@@ -32,12 +32,12 @@
             </tr>
         </thead>
         <tbody>
+          <% movie.Casts.forEach(data => { %>
             <tr>
-                <% movie.Casts.forEach(data => { %>
                 <td><%= data.fullName() %></td>
                 <td><%= data.MovieCast.role %></td>
+              </tr>
                 <% }) %>
-           </tr>
         </tbody>
     </table>
 

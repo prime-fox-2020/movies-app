@@ -24,7 +24,14 @@ class MovieController {
             released_year: Number(req.body.released_year),
             genre: req.body.genre
         }).then(data => {
+
             res.redirect('/movies')
+        }).catch(err => {
+            if(err.errors[0].validatorKey){
+                res.send("ini tahun kabisat, buatlah film di tahun lain")
+            }else{
+            res.send(err)
+        }
         })
     }
 
@@ -56,6 +63,9 @@ class MovieController {
         }).then(data => {
             res.redirect('/movies')
         }).catch(err => {
+            if(err.errors[0].validatorKey){
+                res.send("ini tahun kabisat, buatlah film di tahun lain")
+            }else{
             res.send(err)
         })
 
@@ -123,7 +133,7 @@ class MovieController {
                 res.redirect(`/movies/${req.params.id}/addcast`)
             })
             .catch(err => {
-                res.send(err)
+                res.send(err.errors[0].message)
             })
 
     }

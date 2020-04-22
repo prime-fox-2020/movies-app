@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+
+<div class="jumbotron jumbotron-fluid" style="background-color: #e3f2fd;">
+    <div class="container">
+      <h1 class="display-4"><%= data.fullName() %></h1>
+    </div>
+  </div>
+
+
+  <h2 class="text-center">Cast List</h2><br>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Movie</th>
+                <th scope="col">Released</th>
+                <th scope="col">Age when movie released</th>
+                <th scope="col">Role</th>
+            </tr>
+        </thead>
+        <tbody>
+          <% data.Movies.forEach(dat => { %>
+            <tr>
+              <td><%= dat.name %></td>
+              <td><%= dat.released_year %></td>
+              <td><%= dat.released_year - data.birth_year %></td>
+              <td><%= dat.MovieCast.role %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+    </table>
+
+<%- include('partials/footer') %>

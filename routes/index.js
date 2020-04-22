@@ -26,5 +26,6 @@ router.post('/casts/addCastForm', CastController.add)
 router.get('/casts/:id?/edit', CastController.editCastForm)
 router.post('/casts/:id?/edit', CastController.editCast)
 router.get('/casts/:id?/delete', CastController.delete)
+router.get('/casts/:id?/seemovies', CastController.seeMovies)
 
 module.exports = router

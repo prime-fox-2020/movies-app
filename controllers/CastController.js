@@ -70,6 +70,14 @@ class CastController{
             res.send(err)
         })
     }
+
+    static seeMovies(req,res){
+        Cast.findByPk(req.params.id, {include: Movie})
+        .then(data =>{
+            // res.send(data)
+            res.render('seemovies', {data})
+        })
+    }
 }
 
 module.exports = CastController

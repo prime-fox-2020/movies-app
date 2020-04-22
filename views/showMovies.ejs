@@ -19,11 +19,13 @@
             </thead>
             <tbody>
                 <% for(let i=0; i< object.Movies.length; i++) { %>
-                    <td><%= object.Movies[i].id %></td>
-                    <td><%= object.Movies[i].name %></td>
-                    <td><%= object.Movies[i].released_year %></td>
-                    <td><%= getAgeCast(object.birth_year, object.Movies[i].released_year) %></td>
-                    <td><%= object.Movies[i].MovieCast.role %></td>
+                   <tr>
+                        <td><%= object.Movies[i].id %></td>
+                        <td><%= object.Movies[i].name %></td>
+                        <td><%= object.Movies[i].released_year %></td>
+                        <td><%= getAgeCast(object.birth_year, object.Movies[i].released_year) %></td>
+                        <td><%= object.Movies[i].MovieCast.role %></td>
+                    </tr>
                 <% } %>
             </tbody>
         </table>

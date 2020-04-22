@@ -10,11 +10,48 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   Cast.init({
-    first_name: DataTypes.STRING,
+    first_name: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: 'Input First Name'
+        }
+      }
+    },
     last_name: DataTypes.STRING,
-    phone_number: DataTypes.STRING,
-    birth_year: DataTypes.INTEGER,
-    gender: DataTypes.STRING
+    phone_number: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          msg: 'Input phone number'
+        }
+      }
+    },
+    birth_year: {
+      type: DataTypes.INTEGER,
+      validate: {
+        notEmpty: {
+          msg: 'Input Birth Year'
+        },
+        min: {
+          args: 1500,
+          msg: 'Invalid year'
+        },
+        max: {
+          args: 2019,
+          msg: 'Invalid year'
+        }
+      }
+    }, 
+    gender: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      validate: {
+        notNull: {
+          msg: 'Choose gender'
+        }
+      }
+    } 
   }, {
     hooks: {
       beforeCreate: (cast) => {

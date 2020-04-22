@@ -25,7 +25,7 @@
     <td><%=data[i].ProductionHouseId == null || data[i].ProductionHouseId == 0? 'unknown': data[i].ProductionHouse.name_prodHouse%></td>
     <td>
         <a href="movies/edit/<%=data[i].id%>" type="button" class="btn btn-primary">Edit</a> &nbsp;
-        <a href="movies/delete/<%=data[i].id%>" type="button" class="btn btn-danger">Delete</a> &nbsp;
+        <a href="movies/delete/<%=data[i].id%>" onclick="return confirm('Delete Data?')" type="button" class="btn btn-danger">Delete</a> &nbsp;
         <a href="movies/addcast/<%=data[i].id%>" type="button" class="btn btn-primary">Add Cast</a>
     </td>
 </tr>

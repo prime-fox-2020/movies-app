@@ -3,7 +3,7 @@ const age = require('../helpers/age');
 
 class Controller {
     static showData(req, res) {
-        Cast.findAll({ order: [['first_name', 'ASC']]})
+        Cast.findAll({ order: [['first_name', 'ASC']] })
             .then(data => {
                 res.render('cast', { data, alert: req.query.mes });
             })
@@ -29,50 +29,36 @@ class Controller {
 
     static addPost(req, res) {
         const data = req.body;
-        if (data.first_name == '') res.render('inputCast', { title: data.act, data, alert: 'Input first name' });
-        else if (data.birth_year == '') res.render('inputCast', { title: data.act, data, alert: 'Input birth year' });
-        else if (data.birth_year < 1500 || data.birth_year > 2020) res.render('inputCast', { title: data.act, data, alert: 'Invalid year' });
-        else if (data.gender == null) res.render('inputCast', { title: data.act, data, alert: 'Choose gender' });
-        else if (data.phone_number == '') res.render('inputCast', { title: data.act, data, alert: 'Input Phone Number' });
-        else {
-            Cast.create({
-                first_name: data.first_name,
-                last_name: data.last_name,
-                birth_year: data.birth_year,
-                gender: data.gender,
-                phone_number: data.phone_number
+        Cast.create({
+            first_name: data.first_name,
+            last_name: data.last_name,
+            birth_year: data.birth_year,
+            gender: data.gender,
+            phone_number: data.phone_number
+        })
+            .then(data => {
+                res.redirect('/casts?mes=Create Data Success');
             })
-                .then(data => {
-                    res.redirect('/casts?mes=Create Data Success');
-                })
-                .catch(err => {
-                    res.render('error', { err });
-                });
-        }
+            .catch(err => {
+                res.render('inputCast', { title: data.act, data, alert: err.errors[0].message });
+            });
     }
 
     static editPost(req, res) {
         const data = req.body;
-        if (data.first_name == '') res.render('inputCast', { title: data.act, data, alert: 'Input first name' });
-        else if (data.birth_year == '') res.render('inputCast', { title: data.act, data, alert: 'Input birth year' });
-        else if (data.birth_year < 1500 || data.birth_year > 2020) res.render('inputCast', { title: data.act, data, alert: 'Invalid year' });
-        else if (data.gender == null) res.render('inputCast', { title: data.act, data, alert: 'Choose gender' });
-        else if (data.phone_number == '') res.render('inputCast', { title: data.act, data, alert: 'Input Phone Number' });
-        else {
-            Cast.update({
-                first_name: data.first_name,
-                last_name: data.last_name,
-                birth_year: data.birth_year,
-                gender: data.gender,
-                phone_number: data.phone_number
-            }, {where: {id: req.params.id}})
-                .then(data => {
-                    res.redirect('/casts?mes=Update Data Success');
-                })
-                .catch(err => {
-                    res.render('error', { err });
-                });
-        }
+        Cast.update({
+            first_name: data.first_name,
+            last_name: data.last_name,
+            birth_year: data.birth_year,
+            gender: data.gender,
+            phone_number: data.phone_number
+        }, {where: {id: req.params.id}, individualHooks: true})
+            .then(data => {
+                res.redirect('/casts?mes=Update Data Success');
+            })
+            .catch(err => {
+                res.render('inputCast', { title: data.act, data, alert: err.errors[0].message });
+            });
     }
 
     static delete(req, res) {
@@ -87,13 +73,13 @@ class Controller {
 
     static seeMovies(req, res) {
         let data = null;
-        Cast.findOne({where: {id: req.params.id}, include: [{model: Movie}]})
-        .then(data => {
-            res.render('seeMovies', {data, age});
-        })
-        .catch(err => {
-            res.render('error', {err});
-        })
+        Cast.findOne({ where: { id: req.params.id }, include: [{ model: Movie }] })
+            .then(data => {
+                res.render('seeMovies', { data, age });
+            })
+            .catch(err => {
+                res.render('error', { err });
+            })
     }
 }
 

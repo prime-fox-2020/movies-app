@@ -25,7 +25,7 @@
     <td><%=data[i].gender%></td>
     <td>
         <a href="casts/edit/<%=data[i].id%>" type="button" class="btn btn-primary">Edit</a> &nbsp;
-        <a href="casts/delete/<%=data[i].id%>" type="button" class="btn btn-danger">Delete</a> &nbsp;
+        <a href="casts/delete/<%=data[i].id%>" type="button" onclick="return confirm('Delete Data?')" class="btn btn-danger">Delete</a> &nbsp;
         <a href="casts/seemovies/<%=data[i].id%>" type="button" class="btn btn-primary">See Movies</a>
     </td>
 </tr>

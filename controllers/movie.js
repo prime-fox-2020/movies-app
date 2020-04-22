@@ -38,54 +38,45 @@ class Controller {
     }
 
     static addPost(req, res) {
-        const data = req.body, data3 = null;
+        const data = req.body;
+        let data2 = null;
         ProductionHouse.findAll({ order: [['name_prodHouse', 'ASC']] })
-            .then(data2 => {
-                data3 = data2;
-                if (data.name == '') res.render('inputMovie', { title: data.act, data, data2, alert: 'Input movie name' });
-                else if (data.released_year == '') res.render('inputMovie', { title: data.act, data, data2, alert: 'Input released year' });
-                else if (data.released_year < 1500 || data.released_year > 2020) res.render('inputMovie', { title: data.act, data, data2, alert: 'Invalid year' });
-                else if (data.genre == '') res.render('inputMovie', { title: data.act, data, data2, alert: 'Choose genre' });
-                else {
-                    return Movie.create({
-                        name: data.name,
-                        released_year: data.released_year,
-                        genre: data.genre,
-                        ProductionHouseId: data.ProductionHouseId
-                    })
-                }
+            .then(dataPH => {
+                data2 = dataPH;
+                return Movie.create({
+                    name: data.name,
+                    released_year: data.released_year,
+                    genre: data.genre,
+                    ProductionHouseId: data.ProductionHouseId
+                })
             })
             .then(data => {
                 res.redirect('/movies?mes=Create Data Success');
             })
             .catch(err => {
-                res.render('inputMovie', { title: data.act, data, data2: data3, alert: err.errors[0].message });
-            });
+                res.render('inputMovie', { title: data.act, data, data2, alert: err.errors[0].message });
+            })
     }
 
     static editPost(req, res) {
         const data = req.body;
+        let data2 = null;
         ProductionHouse.findAll({ order: [['name_prodHouse', 'ASC']] })
-            .then(data2 => {
-                if (data.name == '') res.render('inputMovie', { title: data.act, data, data2, alert: 'Input movie name' });
-                else if (data.released_year == '') res.render('inputMovie', { title: data.act, data, data2, alert: 'Input released year' });
-                else if (data.released_year < 1500 || data.released_year > 2020) res.render('inputMovie', { title: data.act, data, data2, alert: 'Invalid year' });
-                else if (data.genre == '') res.render('inputMovie', { title: data.act, data, data2, alert: 'Choose genre' });
-                else {
-                    return Movie.update({
-                        name: data.name,
-                        released_year: data.released_year,
-                        genre: data.genre,
-                        ProductionHouseId: data.ProductionHouseId
-                    }, { where: { id: req.params.id } })
-                }
+            .then(dataPH => {
+                data2 = dataPH;
+                return Movie.update({
+                    name: data.name,
+                    released_year: data.released_year,
+                    genre: data.genre,
+                    ProductionHouseId: data.ProductionHouseId
+                }, {where: {id: req.params.id}})
             })
             .then(data => {
                 res.redirect('/movies?mes=Update Data Success');
             })
             .catch(err => {
-                res.render('inputMovie', { title: data.act, data, data2: data3, alert: err.errors[0].message });
-            });
+                res.render('inputMovie', { title: data.act, data, data2, alert: err.errors[0].message });
+            })
     }
 
     static delete(req, res) {

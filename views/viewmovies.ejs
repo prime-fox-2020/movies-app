@@ -1,0 +1,33 @@
+<%- include('partials/top.ejs') %>
+
+<h1>Movies</h1>
+
+<button><a href="/movies/add">Add Movies</a></button>
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Year Released</th>
+      <th scope="col">Genre</th>
+      <th scope="col">Production House</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% data.forEach(i => { %>        
+    <tr>
+      <td scope="row"><%= i.name %></td>
+      <td scope="row"><%= i.released_year %></td>
+      <td scope="row"><%= i.genre %></td>
+      <td scope="row"><%= i.ProductionHouseId ? i.ProductionHouse.name_prodHouse : 'Unknown' %></td>
+      <td scope="row">
+        <button><a href="/movies/edit/<%= i.id %>">Edit</a></button>
+        <button><a href="/movies/delete/<%= i.id %>">Delete</a></button>
+      </td>
+    </tr>
+  <% }) %>
+  </tbody>
+</table>
+
+<%- include('partials/bottom.ejs') %>

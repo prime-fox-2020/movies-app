@@ -1,0 +1,22 @@
+<%- include('partials/top.ejs') %>
+
+<h1>Production Houses</h1>
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Headquarters</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% data.forEach(i => { %>        
+    <tr>
+      <td scope="row"><%= i.name_prodHouse %></td>
+      <td scope="row"><%= i.headquarters %></td>
+    </tr>
+  <% }) %>
+  </tbody>
+</table>
+
+<%- include('partials/bottom.ejs') %>

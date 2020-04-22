@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Actor</title>
+  </head>
+  <body>
+    <form action="/movie/<%=data.id%>/addCast" method="post">
+      <input name="MovieId" value="<%= data.id %>" hidden>
+      <label>Actor</label>
+      <select name="CastId" class="form-control">
+          <option selected disabled>Select Cast</option>
+          <% for(let i = 0; i < dataCast.length; i++){ %>
+              <option value="<%= dataCast[i].id %>"><%= dataCast[i].name %></option>
+              <!-- <option value="<%= dataCast[i].id %>"><%= `${dataCast[i].first_name} ${dataCast[i].last_name}` %></option> -->
+          <% } %>
+          <label>Role:</label>
+          <input name="role" type="text" class="form-control" placeholder="e.g: Lead Actress">
+
+      </select>
+          </select><br>
+        </form><br>
+          <button type="submit">Save</button>
+
+      <a href="/movie"><button type="submit">Cancel</button></a>
+      <% for(let i = 0; i < dataMovieCast.length; i++){ %>
+          <tr>
+              <td>
+                  <% for(let i = 0; i < dataCast.length; i++){ %>
+                      <% if(dataCast[i].id === dataMovieCast[i].CastId){ %>
+                          <%= dataCast[i].name %>
+                          <% break %>
+                      <% } %>
+                  <% } %>
+              </td>
+              <td><%= dataMovieCast[i].role %></td>
+          </tr>
+      <% } %>
+      <% for(let i = 0; i < data.Casts.length; i++){ %>
+          <tr>
+              <td><%= data.Casts[i].name %></td>
+              <td><%= data.Casts[i].MovieCast.role %></td>
+          </tr>
+      <% } %>
+  </body>
+</html>

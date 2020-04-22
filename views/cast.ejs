@@ -26,7 +26,7 @@
       <td ><%=data[i].birth_year%></td>
       <td ><%=data[i].phone_number%></td>
       <td ><%=data[i].gender%></td>
-      <td><a href="/cast/<%= data[i].id %>/editCast">Edit</a> <a href="/cast/<%= data[i].id %>/deleteCast">Delete</a> <a href="/cast/<%=data[i].id%>/movieCast">See Movies</a></td>
+      <td><a href="/cast/<%= data[i].id %>/editCast">Edit</a> <a href="/cast/<%= data[i].id %>/deleteCast" onclick="return confirm('Are you sure?')">Delete</a> <a href="/cast/<%=data[i].id%>/castMovie">See Movies</a></td>
       <% } %>
 
   </tr>

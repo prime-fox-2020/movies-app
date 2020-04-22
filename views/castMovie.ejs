@@ -5,6 +5,7 @@
     <title>Production House</title>
   </head>
   <body>
+    <h1><%= data.name %></h1>
     <table class="table table-dark">
     <thead>
       <tr>
@@ -14,12 +15,12 @@
         <th scope="col">Role</th>
       </tr>
     </thead>
-    <% for(let i = 0; i < data.Movie.length; i++) {%>
+    <% for(let i = 0; i < data.MM.length; i++) {%>
       <tr>
-        <td ><%=data.Movie[i].name%></td>
-        <td ><%=data.Movie[i].released_year%></td>
-        <td ><%=formatAge(data.birth_year, data.Movie[i].released_year)%></td>
-        <td ><%=data.Movie[i].MovieCast.role%></td>
+        <td ><%=data.MM[i].name%></td>
+        <td ><%=data.MM[i].released_year%></td>
+        <td ><%=formatAge(data.birth_year, data.MM[i].released_year)%></td>
+        <td ><%=data.MM[i].MC.role%></td>
 
 
             <td><a href="/movie/<%= data[i].id %>/edit">Edit</a> <a href="/movie/<%= data[i].id %>/delete">Delete</a></td>

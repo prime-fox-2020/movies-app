@@ -1,7 +1,7 @@
 const MM = require('../models').Movie;
 const CM = require('../models').Cast;
 const MC = require('../models').MovieCast;
-// const formatAge = require('../helpers/formatAge');
+const formatAge = require('../helpers/formatAge');
 
 class CastController {
 

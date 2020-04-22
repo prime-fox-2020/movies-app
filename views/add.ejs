@@ -26,11 +26,12 @@
             <%for(let i= 0; i < data.length; i++) {%>
               <option value="<%=data[i].id%>"><%= data[i].name_prodHouse%></option>
             <% }%>
+            <label>Rating</label>
+            <input name="rating" type="text" class="form-control" placeholder="1-5">
           </select><br>
-          <button type="submit">Save</button>
         </form><br>
-        <label>Rating</label>
-        <input name="rating" type="text" class="form-control" placeholder="1-5">
+          <button type="submit">Save</button>
+
       <a href="/movie"><button type="submit">Cancel</button></a>
 
   </body>

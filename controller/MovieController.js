@@ -119,7 +119,7 @@ class MovieController {
           })
       })
       .then( dataMovieCast => {
-          res.render('addMovieCastForm', {data, dataCast, dataMovieCast, alert})
+          res.render('addMovieCast', {data, dataCast, dataMovieCast})
       })
       .catch( err => {
           res.send(err)

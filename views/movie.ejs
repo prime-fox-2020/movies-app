@@ -27,9 +27,9 @@
               <td><%= data[i].ProductionHouse.name_prodHouse %></td>
             <% } %>
       <td ><%=data[i].Rating%></td>
-            <td><a href="/movie/<%= data[i].id %>/edit">Edit</a> <a href="/movie/<%= data[i].id %>/delete">Delete</a>  <a href="/movie/<%=data[i].id%>/addCast">Add Cast</a></td>
+            <td><a href="/movie/<%= data[i].id %>/edit">Edit</a> <a href="/movie/<%= data[i].id %>/delete" onclick="return confirm('Are you sure?')">Delete</a>  <a href="/movie/<%=data[i].id%>/addCast">Add Cast</a></td>
       </tr>
     <% } %>
-    <a href="/movie/add">Add</a>
+    <a href="/movie//addCast">Add</a>
   </body>
 </html>

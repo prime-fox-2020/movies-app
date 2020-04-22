@@ -1,0 +1,24 @@
+<%- include ('./partials/header', {title: 'Cast List'}) %>
+
+<body>
+    <h2>Cast List</h2>
+    <table>
+        <th>Full Name</th>
+        <th>Birth Year</th>
+        <th>Phone Number</th>
+        <th>Gender</th>
+        <th>Action</th>
+        <% for (let i = 0; i < data.length; i++) { %>
+            <tr>
+                <td><%= data[i].getFullName() %></td>
+                <td><%= data[i].birth_year %></td>
+                <td><%= data[i].phone_number %></td>
+                <td><%= data[i].gender %></td>
+                
+                <td><a href="/cast/<%= data[i].id %>/edit">Edit</a> <a href="/cast/<%= data[i].id %>/delete %>" onclick="return confirm('Apakah anda yakin akan menghapus?')">Delete</a> <a href="/cast/<%= data[i].id %>/seeMovies">See Movies</a> </td>
+            </tr>
+        <% } %>
+    </table>
+    <a href="/cast/addCast">Add Cast</a>
+</body>
+</html>

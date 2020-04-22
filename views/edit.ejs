@@ -1,0 +1,28 @@
+<%- include ('./partials/header', {title: 'Add Movie'}) %>
+
+<body>
+    <form action="/movies/editMovie/<%= movie.id %>" method="POST">
+        <label for="nameInput">Name</label><br>
+        <input type="text" id="nameInput" name="name" value="<%= movie.name %>" autofocus><br>
+        <label for="ryInput">Released Year</label><br>
+        <input type="text" id="ryInput" name="released_year" value="<%= movie.released_year %>"><br>
+        <label for="genreSelect">Genre</label><br>
+        <select name="genre" id="genreSelect">
+            <option value="" disabled>--Genre--</option>
+            <option value="animation" <% (movie.genre == 'animation') ? 'selected' : '' %> >animation</option>
+            <option value="comedy" <% (movie.genre == 'comedy') ? 'selected' : '' %> >comedy</option>
+            <option value="drama" <% (movie.genre == 'drama') ? 'selected' : '' %> >drama</option>
+            <option value="horror" <% (movie.genre == 'horror') ? 'selected' : '' %> >horror</option>
+            <option value="religious" <% (movie.genre == 'religious') ? 'selected' : '' %> >religious</option>
+            <option value="thriller" <% (movie.genre == 'thriller') ? 'selected' : '' %> >thriller</option>
+        </select><br>
+        <label for="phSelect">Production House</label><br>
+        <select name="productionHouse" id="phSelect">
+            <% for (let i = 0; i < data.length; i++) { %>
+                <option value="<%= data[i].id %>" <% (movie.id == data[i].id) ? 'selected' : '' %> ><%= data[i].name_prodHouse %></option>
+            <% } %>
+        </select><br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

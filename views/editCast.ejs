@@ -1,0 +1,39 @@
+<%- include ('./partials/header', {title: 'Add Cast'}) %>
+<body>
+    <form action="/cast/<%= cast.id %>/edit" method="POST">
+        <label>First Name</label><br>
+        <input type="text" id="" name="first_name" value="<%= cast.first_name %>" autofocus><br>
+        <label for="">Last Name</label><br>
+        <input type="text" id="" name="last_name" value="<%= cast.last_name %>"><br>
+        <label for="">Birth Year</label><br>
+        <input type="text" id="" name="birth_year" value="<%= cast.birth_year %>"><br>
+        <label for="">Phone Number</label><br>
+        <input type="text" id="" name="phone_number" value="<%= cast.phone_number %>"><br>
+        <% for (let i = 0; i < data.length; i++) { %>
+            <label for="gender">Gender</label><br>
+            <input type="radio" name="gender" id="gender" value="male" <% (cast.gender == data[i].gender) ? 'selected' : '' %> >
+            <label for="gender">Male</label>
+            <input type="radio" name="gender" id="female" value="female"  <% (cast.gender == data[i].gender) ? 'selected' : '' %> >
+            <label for="female">Female</label><br>
+        <% } %>
+
+        <!-- <select name="genre" id="genreSelect">
+            <option value="" disabled>--Genre--</option>
+            <option value="animation" <% (cast.genre == 'animation') ? 'selected' : '' %> >animation</option>
+            <option value="comedy" <% (cast.genre == 'comedy') ? 'selected' : '' %> >comedy</option>
+            <option value="drama" <% (cast.genre == 'drama') ? 'selected' : '' %> >drama</option>
+            <option value="horror" <% (cast.genre == 'horror') ? 'selected' : '' %> >horror</option>
+            <option value="religious" <% (cast.genre == 'religious') ? 'selected' : '' %> >religious</option>
+            <option value="thriller" <% (cast.genre == 'thriller') ? 'selected' : '' %> >thriller</option>
+        </select><br> -->
+
+        <!-- <label for="phSelect">Production House</label><br>
+        <select name="productionHouse" id="phSelect">
+            <% for (let i = 0; i < data.length; i++) { %>
+                <option value="<%= data[i].id %>" <% (cast.id == data[i].id) ? 'selected' : '' %> ><%= data[i].name_prodHouse %></option>
+            <% } %>
+        </select><br> -->
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>

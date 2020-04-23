@@ -1,0 +1,31 @@
+<% 
+    if (editing && Array.isArray(data)) {
+        data = data[0];
+    } 
+%>
+<form action="<%= editing ? `/casts/update/${data.id}` : `/casts/add` %>" method="POST">
+    <div class="form-group">
+      <label for="exampleInputEmail1">First Name</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" name="first_name" value="<%= editing ? data.first_name : `` %>">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Last Name</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" name="last_name" value="<%= editing ? data.last_name : `` %>">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Birth Year</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" name="birth_year" value="<%= editing ? data.birth_year : `` %>">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Phone Number</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" name="phone_number" value="<%= editing ? data.phone_number : `` %>">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Gender</label>
+        <select name="gender" class="form-control">
+            <option value="Male" <% if (editing && data.gender == 'Male') {%>selected<%}%>>Male</option>
+            <option value="Female" <% if (editing && data.gender == 'Female') {%>selected<%}%>>Female</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>

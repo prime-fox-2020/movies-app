@@ -1,0 +1,18 @@
+<table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Headquarter</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (data) {data.forEach(element => { %>
+      <tr>
+        <th scope="row"><%= element.id %></th>
+        <td><%= element.name %></td>
+        <td><%= element.headquarter %></td>
+      </tr>
+      <% })} %>
+    </tbody>
+  </table>

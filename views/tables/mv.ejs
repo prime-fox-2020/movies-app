@@ -1,0 +1,26 @@
+<table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Ratings</th>
+        <th scope="col">Year</th>
+        <th scope="col">Genre</th>
+        <th scope="col">P.H</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (data) {data.forEach(element => { %>
+      <tr>
+        <th scope="row"><%= element.id %></th>
+        <td><%= element.name %></td>
+        <td><%= element.rating %></td>
+        <td><%= element.releasedYear %></td>
+        <td><%= element.genre %></td>
+        <td><%= element['ProductionHouse.name'] %></td>
+        <td><a href="/movies/edit/<%= element.id %>" class="btn btn-outline-info my-2 my-sm-0">Edit</a> <a href="/movies/delete/<%= element.id %>" onclick="return confirm('Really ???')" class="btn btn-outline-danger my-2 my-sm-0">Remove</a> <a href="/casting/add/<%= element.id %>" class="btn btn-outline-success my-2 my-sm-0">Add Cast</a></td>
+      </tr>
+      <% })} %>
+    </tbody>
+  </table>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>HACKTIV8 - MOVIES APP</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+    <body>
+        <%- include('nav/navbar.ejs') %>
+        <br>
+        <div class="container">
+            <% if (page == 'ph') { %>
+                <%- include('tables/ph.ejs') %>
+            <% } %>
+            <% if (page == 'mv') { %>
+                <%- include('tables/mv.ejs') %>
+            <% } %>
+            <% if (page == 'ct') { %>
+                <%- include('tables/ct.ejs') %>
+            <% } %>
+            <% if (page == 'sm') { %>
+                <%- include('tables/sm.ejs') %>
+            <% } %>
+        </div>
+    </body>
+    <%- include('footer/script-footer.ejs') %>
+</html>

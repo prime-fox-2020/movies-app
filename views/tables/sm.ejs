@@ -1,0 +1,21 @@
+<h2>Actor/Actress : <%= castName %></h2>
+<table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Released Year</th>
+        <th scope="col">Age When Movie Released ?</th>
+        <th scope="col">Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (data) {data.forEach(element => { %>
+      <tr>
+        <th scope="row"><%= element['Movie.name'] %></th>
+        <td><%= element['Movie.releasedYear'] %></td>
+        <td><%= element['Movie.releasedYear'] - element['Cast.birth_year'] + ' Years Old' %></td>
+        <td><%= element.Role %></td>
+      </tr>
+      <% })} %>
+    </tbody>
+  </table>

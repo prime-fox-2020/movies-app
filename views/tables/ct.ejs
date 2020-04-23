@@ -1,0 +1,24 @@
+<table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Birth Year</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (data) {data.forEach(element => { %>
+      <tr>
+        <th scope="row"><%= element.id %></th>
+        <td><%= element.fullName() %></td>
+        <td><%= element.birth_year %></td>
+        <td><%= element.gender %></td>
+        <td><%= element.phone_number %></td>
+        <td><a href="/casts/edit/<%= element.id %>" class="btn btn-outline-info my-2 my-sm-0">Edit</a> <a href="/casts/delete/<%= element.id %>" onclick="return confirm('Are you sure hon?')" class="btn btn-outline-danger my-2 my-sm-0">Remove</a> <a href="/casts/<%= element.id %>/movies" class="btn btn-outline-success my-2 my-sm-0">See Movies</a></td>
+      </tr>
+      <% })} %>
+    </tbody>
+  </table>

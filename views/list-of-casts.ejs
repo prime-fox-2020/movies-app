@@ -1,0 +1,54 @@
+<%- include('partials/header') %>
+
+<a class="btn btn-success" href="/casts/add" role="button">Add Cast</a>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Birth Year</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for( let i = 0; i < data.length; i++ ) { %>
+            <tr>
+                <td><%= data[i].getFullName() %></td>
+                <td><%= data[i].birth_year %></td>
+                <td><%= data[i].phone_number %></td>
+                <td><%= data[i].gender %></td>
+                <td><a class="btn btn-primary" href="/casts/edit/<%= data[i].id %>" role="button">Edit</a> <a class="btn btn-primary" role="button" data-toggle="modal" data-target="#<%= data[i].id %>"> Delete</a> <a class="btn btn-primary" href="/casts/see-movies/<%= data[i].id %>" role="button">See Movies</a></td>
+                </tr>
+        <% } %>
+    </tbody>
+</table>
+
+
+<!-- ============ START MODAL DELETE =============== -->
+<% for(let i = 0; i < data.length; i++){ %>
+<% let id = data[i].id %>
+<!-- Modal -->
+<div class="modal fade" id="<%= id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Are you sure want to delete <%= data[i].getFullName() %>?
+        </div>
+        <div class="modal-footer">
+          <a class="btn btn-primary" href="/casts/delete/<%= id %>" role="button">Yes, Delete</a>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<% } %>
+<!-- ============ END MODAL DELETE =============== -->
+
+<%- include('partials/footer') %>

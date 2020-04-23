@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang=eng>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width , initial-scale=1.0">
+        <title>Movie</title>
+    </head>
+
+    <body>
+        <h1>Add Cast on Movie</h1>
+
+
+        <form action='/mv/<%=FindOneData.id%>/addcast' method='post'>
+            
+            <label for="CastId"> Actor </label><br>
+            <select name="CastId">
+                <% for(let i =0; i < data.length ; i++) { %>
+                    <option value="<%= data[i].id %>"><%= data[i].first_name %> <%= data[i].last_name %></option>
+                  <% } %>
+            </select>
+            <br>
+            <br>
+            <label for="role"> Role </label>
+            <br>
+            <input type="text" name="role" value="eg : lead role"> 
+            <br>
+            <br>
+            <button type = "Submit"> Add this cast </button>
+        </form>
+
+    <br>
+    </br>
+        <table border = "2">
+        <thead>
+            <tr>
+                <th>Actor </th>
+                <th>Role</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% FindOneData.Casts.forEach(el=>{ %>
+                <tr>
+                    <td><%= el.first_name %> <%= el.last_name %></td>
+                    <td><%= el.MovieCast.role %></td>
+                </tr>
+            <% }) %>   
+        </table>
+
+        </tbody>
+
+
+
+
+    </body>
+
+
+
+</html>

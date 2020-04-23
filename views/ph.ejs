@@ -1,0 +1,36 @@
+</select>
+<body>
+    <h1>Production Houses</h1>
+    <%- include('../partials/navbar.ejs') %>
+    
+    <table border = "2">
+        <thead>
+            <tr>
+                <th>ID </th>
+                <th>Name</th>
+                <th>Headquarters</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% data.forEach(el=>{ %>
+            <tr>
+                <td><%= el.id %></td>
+                <td><%= el.name_prodHouse %></td>
+                <td><%= el.headquarters %></td>
+                <td>
+                <a href="/ph/<%= el.id %>/edit"><button>Edit</button></a>
+                <a href="/ph/<%= el.id %>/delete"><Button>Delete</Button></a>
+                <a href="/ph/<%= el.id %>/addcast"><Button>Add</Button></a>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <a href='/ph/add'><button>ADD more Production Houses</button></a>
+</body>
+
+
+
+</html>

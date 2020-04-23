@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang=eng>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width , initial-scale=1.0">
+        <title>Movies</title>
+    </head>
+
+    <body>
+        <h1>Add Movie</h1>
+        <% if (error) { %>
+            <p style="color: red;">cannot add : <%= error %></p>
+          <% } %>
+        <form action='/mv/add' method='post'>
+            <br>
+            <label for = "">Name</label>
+            <br>
+            <input type="text" name="name" value="eg : Boogle 1 " > 
+            <br> 
+            <label for = "">Released Year</label>
+            <br>
+            <input type="text" name="released_year" value="eg : 1995"> 
+            <br> 
+            <label for="genre">Genre</label><br>
+                <select name="genre">
+                  <% const listgenres =['','Animation','Comedy','Drama','Horror','Religious','Thriller'] %>
+                  <% for(let i =0; i < listgenres.length ; i++) { %>
+                      <option value="<%= listgenres[i] %>"><%= listgenres[i] %></option>
+                    <% } %>
+                </select>
+            <br>
+            <br>
+            <br>
+
+            <button type = "Submit"> Submit </button>
+        </form>
+
+
+
+
+
+    </body>
+
+
+
+</html>

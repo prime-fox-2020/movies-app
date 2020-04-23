@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang=eng>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width , initial-scale=1.0">
+        <title>Movies</title>
+    </head>
+
+    <body>
+        <h1>Edit Movie</h1>
+        <form action='/mv/<%=ByPkData.id%>/edit' method='post'>
+            <br>
+            <label for = "">Name</label>
+            <br>
+            <input type="text" name="name" value="<%= ByPkData.name %>"> 
+            <br> 
+            <label for = "">Released Year</label>
+            <br>
+            <input type="text" name="released_year" value="<%= ByPkData.released_year %>"> 
+            <br> 
+            <label for="genre">Genre </label><br>
+                <select name="genre">
+                  <% const listgenres =['','Animation','Comedy','Drama','Horror','Religious','Thriller'] %>
+                  <% for(let i =0; i < listgenres.length ; i++) { %>
+                    <option value="<%= listgenres[i] %>" <%= ByPkData.genre === listgenres[i] ? 'selected' : '' %>><%= listgenres[i] %></option>
+                    <% } %>
+                </select>
+            <br>
+            <label for="production_house">Production House </label><br>
+                <select name="phId">
+                    <option value=""> </option>
+                    <%if(ByPkData.ProductionHouse === null){ %>
+                        <% for(let i =0; i<data.length;i++){ %>
+                        <option value="<%= data[i].id %>"> <%= data[i].name_prodHouse  %></option>
+                        <% } %>
+                    <% }else{ %>
+                    <% for(let i =0; i<data.length;i++){ %>
+                        <option value="<%= data[i].id %>" <%= ByPkData.productionHouseId === data[i].id ? 'selected' : '' %>><%= data[i].name_prodHouse  %></option>
+                      <% } %>
+                    <% } %>
+                </select>
+            <br>
+            <br>
+
+            <button type = "Submit"> Submit </button>
+        </form>
+
+
+
+
+
+    </body>
+
+
+
+</html>

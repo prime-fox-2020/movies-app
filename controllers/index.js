@@ -62,6 +62,11 @@ class Movie {
     }
 
     static saveCasting = (request, response) => {
+        if (request.body.Role.trim() == '') {
+            response.send('Role cannot be empty value');
+            return;
+        }
+
         Backend.casting(request.body, request.params.movieid)
             .then(redir => response.redirect(302, redir))
             .catch(error => response.send(error))

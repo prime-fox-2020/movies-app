@@ -1,0 +1,5 @@
+<div class="alert alert-<%= alert.type %>" role="alert">
+  <% alert.message.forEach(msg => { %>
+    <p><%= Array.isArray(msg) ? msg.join(' ') : msg %></p>
+  <% }) %>
+</div>

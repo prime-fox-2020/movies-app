@@ -1,0 +1,75 @@
+<%- include('../partials/header') %>
+
+  <h3 class="d-inline-block"><%= pageTitle %></h3>
+  <a href="/movies" class="btn btn-primary float-right">Show All Movies</a>
+  
+<% if (alert.type) { %>
+  <%- include('../partials/alert') %>
+<% } %>
+
+  <form action="/movies/edit/<%= movie.id %>" method="post">
+    <div class="form-group">
+      <label for="title">Movie Name</label>
+      <input type="text" name="title" class="form-control" value="<%= movie ? movie.title : '' %>" placeholder="e.g: 12 Angry Man">
+    </div>
+    
+    <div class="form-group">
+      <label for="released_year">Released Year</label>
+      <input type="number" name="released_year" class="form-control" value="<%= movie ? movie.released_year : '' %>" placeholder="e.g: 2010">
+    </div>
+
+    <div class="form-group">
+      <label for="rating">Rating</label>
+      <input type="number" name="rating" class="form-control" value="<%= movie ? movie.rating : '' %>" placeholder="e.g: 1 - 5">
+    </div>
+    
+    <div class="form-group">
+      <label for="genre">Genre</label>
+      <select name="genre" class="form-control">
+        <% if (movie) { %>
+        <option value="" <%= movie.genre == '' ? 'selected' : '' %> disabled>Select genre</option>
+        <option value="action" <%= movie.genre === 'action' ? 'selected' : '' %>>Action</option>
+        <option value="animation" <%= movie.genre === 'animation' ? 'selected' : '' %>>Animation</option>
+        <option value="drama" <%= movie.genre === 'drama' ? 'selected' : '' %>>Drama</option>
+        <option value="comedy" <%= movie.genre === 'comedy' ? 'selected' : '' %>>Comedy</option>
+        <option value="horror" <%= movie.genre === 'horror' ? 'selected' : '' %>>Horror</option>
+        <option value="religius" <%= movie.genre === 'religius' ? 'selected' : '' %>>Religius</option>
+        <option value="thriller" <%= movie.genre === 'thriller' ? 'selected' : '' %>>Thriller</option>
+        
+        <% } else { %>
+        <option value="" selected disabled>Select genre</option>
+        <option value="action" >Action</option>
+        <option value="animation" >Animation</option>
+        <option value="drama" >Drama</option>
+        <option value="comedy" >Comedy</option>
+        <option value="horror" >Horror</option>
+        <option value="religius">Religius</option>
+        <option value="thriller" >Thriller</option>
+        <% } %>
+
+      </select>
+    </div>
+    <% if (prodHouses) { %>
+    <div class="form-group">
+      <label for="ProductionHouseId">Production House</label>
+      <select name="ProductionHouseId" class="form-control">
+        <option value="">---SELECT---</option>
+        <% if (movie) { %>
+          <% prodHouses.forEach(ph => { %>
+            <option value="<%= ph.id %>" <%= ph.id == movie.ProductionHouseId ? 'selected' : '' %>><%= ph.name_prodHouse %></option>
+          <% }) %>
+        <% } else { %>
+          <% prodHouses.forEach(ph => { %>
+            <option value="<%= ph.id %>" ><%= ph.name_prodHouse %></option>
+          <% }) %>
+        <% } %>
+      </select>
+    </div>
+    <% } %>
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit">Update Movie</button>
+    </div>
+  </form>
+</main>
+
+<%- include('../partials/footer') %>

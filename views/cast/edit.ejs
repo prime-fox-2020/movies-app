@@ -1,0 +1,51 @@
+<%- include('../partials/header') %>
+
+  <h3 class="d-inline-block"><%= pageTitle %></h3>
+  <a href="/casts" class="btn btn-primary float-right">Show All Talents</a>
+  
+<% if (alert.type) { %>
+  <%- include('../partials/alert') %>
+<% } %>
+
+  <form action="/casts/edit/<%= cast.id %>" method="post">
+    <div class="form-group">
+      <label for="first_name">First Name</label>
+      <input type="text" name="first_name" class="form-control" value="<%= cast ? cast.first_name : '' %>" placeholder="e.g: Neo">
+    </div>
+    <div class="form-group">
+      <label for="last_name">Last Name</label>
+      <input type="text" name="last_name" class="form-control" value="<%= cast ? cast.last_name : '' %>" placeholder="e.g: Matrix">
+    </div>
+    
+    <div class="form-group">
+      <label for="birth_year">Birth Year</label>
+      <input type="number" name="birth_year" class="form-control" value="<%= cast ? cast.birth_year : '' %>" placeholder="e.g: 1960">
+    </div>
+    <div class="form-group">
+      <label for="phone_number">Phone Number</label>
+      <input type="text" name="phone_number" class="form-control" value="<%= cast ? cast.phone_number : '' %>" placeholder="e.g: 081211112222">
+    </div>
+    
+    <div class="form-group">
+      <label for="gender">Gender</label>
+      <br>
+      <% if (cast) { %>
+      <input type="radio" id="male" name="gender" value="male" <%= cast.gender === 'male' ? 'checked' : '' %>>
+      <label for="male">Male</label><br>
+      <input type="radio" id="female" name="gender" value="female" <%= cast.gender === 'female' ? 'checked' : '' %>>
+      <label for="female">Female</label><br>
+      <% } else { %>
+
+      <input type="radio" id="male" name="gender" value="male" >
+      <label for="male">Male</label><br>
+      <input type="radio" id="female" name="gender" value="female" >
+      <label for="female">Female</label><br>
+      <% } %>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit">Update Data</button>
+    </div>
+  </form>
+</main>
+
+<%- include('../partials/footer') %>

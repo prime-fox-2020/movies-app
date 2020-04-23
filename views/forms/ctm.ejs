@@ -1,0 +1,35 @@
+<form action="/casting/add/<%= movieId %>" method="POST">
+    <div class="form-group">
+        <h2>Movie : <%= movieTitle %></h2>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Role</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" name="Role">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Actor/Actress</label>
+        <select name="CastId" class="form-control">
+            <% if (data) {data.forEach(element => { %>
+            <option value="<%= element.id %>"><%= element.first_name + ' ' + element.last_name %></option>
+            <% })} %>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <br>
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Role</th>
+        <th scope="col">Actor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (castList) {castList.forEach(element => { %>
+      <tr>
+        <th scope="row"><%= element.Role %></th>
+        <td><%= element['Cast.first_name'] + ' ' + element['Cast.last_name'] %></td>
+      </tr>
+      <% })} %>
+    </tbody>
+  </table>

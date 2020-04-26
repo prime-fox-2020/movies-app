@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <%- include('partials/bootstrap') %>
+        <title>casts</title>
+    </head>
+    <body>
+        <%- include('partials/navbar') %> 
+        
+        <h1 style="text-align: center;">Casts</h1>
+        <p style="text-align: right;"><a href="/casts/add">Add Casts</a></p>
+        <table class="table table-sm">
+            <thead class="table-info">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Birth Year</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(let i=0; i<data.length; i++) { %>
+              <tr>
+                    <td><%= data[i].getFullName() %></td>
+                    <td><%= data[i].birth_year%></td>
+                    <td><%= data[i].phone_number %></td>
+                    <td><%= data[i].gender %></td>
+                    <td>
+                        <button ><a href="/casts/edit/<%= data[i].id %>" >Edit</a></button> || 
+                        <button><a href="/casts/delete/<%= data[i].id %>">Delete</a></button> ||
+                        <button><a href="/casts/movies/<%= data[i].id %>">See Movie</a></button>
+                        
+                    </td>
+              </tr>
+            </tbody>
+            <% } %>
+          </table>
+    </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('partials/bootstrap') %>
+        <title>Add Cast to Movie</title>
+    </head>
+    <body style="position: center;"> 
+      <%- include('partials/navbar') %> 
+        <h1 style="text-align: center;">Add Cast to Movie</h1>
+        <form action='/movies/addCast/<%= movies.id %>' method = 'POST'>
+            <div class="form-group">
+                <label for="">Actor</label>
+                <select class="custom-select" name="CastId" id="">
+                    <option selected>Select Actor</option>
+                    <% for(let i=0; i<data.length; i++) { %>
+                    <option value="<%= data[i].id %>"> <%= data[i].getFullName() %> </option>
+                    <% } %>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label >Role :</label>
+                <input type="text" class="form-control" name="role" placeholder="e.g: pemeran utama">
+              </div>
+            <button type="submit" name = "submit"class="btn btn-primary mb-2" >Add movies</button>
+          </form>
+    </body>
+    <foot>
+
+    </foot>
+</html>

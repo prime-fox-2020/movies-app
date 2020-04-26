@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('partials/bootstrap') %>
+        <title>Add casts</title>
+    </head>
+    <body style="position: center;"> 
+      <%- include('partials/navbar') %> 
+        <h1 style="text-align: center;">Add casts</h1>
+        <p style="text-align: center;"><a href="/casts">show all data</a></p>
+        <form action='/casts/add' method = 'POST'>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label > First Name :</label>
+              <input type="text" class="form-control" name="first_name" placeholder="e.g Dark">
+            </div>
+            <div class="form-group col-md-6">
+              <label >Last Name :</label>
+              <input type="text" class="form-control" name="last_name" placeholder="e.g Jhon>">
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+              <label >Birth Year :</label>
+              <input type="text" class="form-control" name="birth_year" placeholder="e.g 2018">
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+              <label >Phone Number :</label>
+              <input type="text" class="form-control" name="phone_number" placeholder="e.g 085774647356">
+            </div>
+          </div>
+          <div class="form-group">
+              <label>Gender :</label>
+              <select name="gender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+             </select><br><br>
+          </div>
+           
+            <button type="submit" name = "submit"class="btn btn-primary mb-2" >Add casts</button>
+          </form>
+    </body>
+    <foot>
+
+    </foot>
+</html>

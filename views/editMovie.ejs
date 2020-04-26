@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('partials/bootstrap') %>
+        <title>Edit Movies</title>
+    </head>
+    <body style="position: center;"> 
+      <%- include('partials/navbar') %> 
+        <h1 style="text-align: center;">Edit Movies</h1>
+        <p style="text-align: center;"><a href="/movies">show all data</a></p>
+        <div class="alert alert-primary" role="alert">
+        </div>
+        <form action="/movies/edit/<%=data.id%>" method = 'POST'>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label >Name :</label>
+                <input type="text" class="form-control" name="name" value="<%=data.name%>">
+              </div>
+              <div class="form-group col-md-6">
+                <label >Released Year :</label>
+                <input type="text" class="form-control" name="released_year" value="<%=data.released_year%>">
+              </div>
+            </div>
+            <div class= "form-check">
+              <label>Genre :</label>
+              <select name="genre" required>
+                <option ><%=data.genre%></option>
+                <option value="animation">Animation</option>
+                <option value="comedy">Comedy</option>
+                <option value="drama">Drama</option>
+                <option value="horor">Horor</option>
+                <option value="religious">Religious</option>
+                <option value="thriller">Thriller</option>
+            </select><br>
+            </div>
+            <div class= "form-check">
+              <label>Production House :</label>
+              <select name="ProductionHouseId" required>
+                <option >Select Production House</option>
+                <% for(let i = 0; i < dataByPk.length; i++){ %>
+                  <option value="<%= dataByPk[i].id %>" <%= data.ProductionHouseId === dataByPk[i].id ? 'selected' : '' %>><%= dataByPk[i].name_prodHouse %></option>
+                <% } %>
+              </select>
+             <br>
+            </div>
+            <div class="form-group col-md-6">
+              <label >rating :</label>
+              <input type="text" class="form-control" name="rating" value="<%=data.rating%>">
+            </div>
+            <button type="submit" name = "submit"class="btn btn-primary mb-2" >Edit movies</button>
+          </form>
+    </body>
+    <foot>
+
+    </foot>
+</html>

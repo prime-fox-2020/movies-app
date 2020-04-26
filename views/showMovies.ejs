@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <%- include('partials/bootstrap' )%>
+        <title> See Movies</title>
+    </head>
+    <body>
+        <%- include('partials/navbar' )%>
+        <h1 style="text-align: center;">Cast Movies</h1>
+        <h2><%= object.getFullName() %></h2>
+        <table class="table table-sm">
+            <thead class="table-info">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Movie</th>
+                    <th scope="col">Released Year</th>
+                    <th scope="col">Age when movie release</th>
+                    <th scope="col">Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0; i< object.Movies.length; i++) { %>
+                   <tr>
+                        <td><%= object.Movies[i].id %></td>
+                        <td><%= object.Movies[i].name %></td>
+                        <td><%= object.Movies[i].released_year %></td>
+                        <td><%= getAgeCast(object.birth_year, object.Movies[i].released_year) %></td>
+                        <td><%= object.Movies[i].MovieCast.role %></td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </body>
+</html>

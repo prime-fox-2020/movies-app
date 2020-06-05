@@ -1,0 +1,57 @@
+<%- include('../partials/header') %>
+
+<div class="container my-5" style="max-width: 600px;">
+  <h2 class="display-4 text-center">Edit Movie</h2>
+  <form action="/movies/<%= movie.id %>/edit" method="POST">
+    <!-- NAME -->
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="e.g: 12 Angry Men" value="<%= movie.name %>">
+      <% if(name){ %>
+        <small id="nameHelper" class="form-text text-danger"><%= name %> </small>
+      <% } %>
+    </div>
+    <!-- RELEASED YEAR -->
+    <div class="form-group">
+      <label for="released_year">Released Year</label>
+      <input type="text" class="form-control" id="released_year" name="released_year" placeholder="e.g: 1957" value="<%= movie.released_year %>">
+      <% if(released_year){ %>
+        <small id="released_yearHelper" class="form-text text-danger"><%= released_year %> </small>
+      <% } %>
+    </div>
+    <!-- GENRE -->
+    <div class="form-group">
+      <label for="genre">Genre</label>
+      <select class="custom-select" id="genre" name="genre">
+        <option selected>Choose...</option>
+      <option value="animation"<% if(movie.genre === 'animation'){ %> selected <% } %>>animation</option>
+        <option value="comedy"<% if(movie.genre === 'comedy'){ %> selected <% } %>>comedy</option>
+        <option value="drama"<% if(movie.genre === 'drama'){ %> selected <% } %>>drama</option>
+        <option value="horor"<% if(movie.genre === 'horor'){ %> selected <% } %>>horor</option>
+        <option value="religious"<% if(movie.genre === 'religious'){ %> selected <% } %>>religious</option>
+        <option value="thriller"<% if(movie.genre === 'thriller'){ %> selected <% } %>>thriller</option>
+      </select>
+      <% if(genre){ %>
+        <small id="genreHelper" class="form-text text-danger"><%= genre %> </small>
+      <% } %>
+    </div>
+    <!-- PRODUCTION HOUSES -->
+    <div class="form-group">
+      <label for="ProductionHouseId">Production House</label>
+      <select class="custom-select" id="ProductionHouseId" name="ProductionHouseId">
+        <option selected>---SELECT---</option>
+        <% for(let prodHouse of productionHouses){ %>
+          <option value="<%= prodHouse.id %>"<% if(movie.ProductionHouseId === prodHouse.id){ %> selected <% } %>><%= prodHouse.name_prodHouse %> </option>  
+        <% } %> 
+      </select>
+      <% if(ProductionHouseId){ %>
+        <small id="ProductionHouseIdHelper" class="form-text text-danger"><%= ProductionHouseId %> </small>
+      <% } %>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="/movies" class="btn btn-danger">Cancel</a>
+  </form>
+</div>
+
+<%- include('../partials/footer') %>

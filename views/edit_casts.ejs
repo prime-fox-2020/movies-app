@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+    <title>Edit Cast</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>Edit Cast Information</h1>
+    <br>
+    <form action="/casts/edit/<%=id%>" method="post">
+    <label> First Name:</label>
+    <br>
+    <input type="text" name="first_name" value="<%=data[0].first_name%>">
+    <br>
+    <label> Last Name:</label>
+    <br>
+    <input type="text" name="last_name" value="<%=data[0].last_name%>">
+    <br>
+    <label> Phone Number:</label>
+    <br>
+    <input type="text" name="phone_number" value="<%=data[0].phone_number%>">
+    <br>
+    <label> Birth Year:</label>
+    <br>
+    <input type="number" name="birth_year" value="<%=data[0].birth_year%>">
+    <br>
+    <label>Gender :</label>
+    <br>
+    <input type="radio" name="gender"value="Male" <% if(data[0].gender == "Male"){%>checked <%}%>>
+    <label>Male</label>
+    <input type="radio" name="gender" value="Female"<% if(data[0].gender == "Female"){%>checked <%}%>>
+    <label>Female</label>
+    <br>
+    <button type="post">Edit</button>
+    </form>
+    <br>
+    <a href="/casts"><button>Cancel</button></a>
+</body>

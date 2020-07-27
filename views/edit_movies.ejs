@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<head>
+    <title> Edit Movie</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <h1>Edit Movie Information</h1>
+    <form action="<%=id%>" method="post">
+        <label>Title :</label>
+        <br>
+        <input type="text" name="name" value="<%=dataMovie[0].name%>">
+        <br>
+        <label> Released Year :</label>
+        <br>
+        <input type="number" name="released_year" value="<%=dataMovie[0].released_year%>">
+        <br>
+        <label> Genre :</label>
+        <br>
+        <select name ="genre">
+            <option  value="Animation" <% dataMovie[0].genre == "Animation" ? "selected" :"" %>>Animation
+            </option>
+            <option  value="Comedy" <% dataMovie[0].genre == "Comedy" ? "selected" : "" %>>Comedy</option>
+            <option  value="Drama" <% dataMovie[0].genre == "Drama" ? "selected" : "" %>>Drama</option>
+            <option  value="Horror" <% dataMovie[0].genre == "Horror"? "selected" : "" %>>Horror</option>
+            <option  value=" Religious" <% dataMovie[0].genre == "Animation" ?"selected" : "" %>>Animation
+            </option>
+            <option  value="Thriller" <% dataMovie[0].genre == "Thriller" ? "selected"  : "" %>>Thriller
+            </option>
+        </select>
+        <br>
+        <br>
+        <select name ="PHid">
+            <option>----SELECT----</option>
+        <% for(let i = 0;i < dataProd.length; i++) { %>
+            <!-- <option  value="<%= dataProd[i].id %>" <% dataMovie[0].ProductionHouseId == dataProd[i].id ? "selected" : "" %>> <%= dataProd[i].prodHouse_name %></option> -->
+            <option value="<%= dataProd[i].id%>"   <% if(dataMovie[0].ProductionHouseId === dataProd[i].id){%> selected <%}%>><%= dataProd[i].prodHouse_name%></option>
+            <% } %>
+        </select>
+        <br>
+        <br>
+        <button type="submit">Save</button>
+    </form>
+    <br>
+    <a href="/movies"><button> Cancel </button></a>
+</body>

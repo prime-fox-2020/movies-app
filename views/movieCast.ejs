@@ -1,0 +1,36 @@
+<%- include('partials/header')%>
+<body>
+    
+    <div class="container mt-5">
+        <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
+    </div>
+    <div class="container-fluid p-5">
+        <h1 class="text-center ">Movies Played</h1> <!-- judul -->
+
+        <div class="container-fluid mb-4">
+            <h2><%= `${data.first_name} ${data.last_name}` %></h2>
+        </div>
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">Movie</th>
+                    <th scope="col">Release Year</th>
+                    <th scope="col">Age when Movie Released</th>
+                    <th scope="col">Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i = 0; i < data.Movies.length; i++){ %>
+                    <tr>
+                        <td><%= data.Movies[i].name %></td>
+                        <td><%= data.Movies[i].released_year %></td>
+                        <td><%= age(data.birth_year, data.Movies[i].released_year) %></td>
+                        <td><%= data.Movies[i].MovieCast.role %></td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+</html>

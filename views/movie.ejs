@@ -1,0 +1,51 @@
+<%- include('partials/header')%>
+
+<body>
+    
+    <div class="container mt-5">
+        <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
+    </div>
+    <div class="container mt-5">
+        <h1 class="text-center">Movies</h1>
+        
+        <div class="container-fluid text-right">
+            <a href="/movies/add"><button type="button" class="btn btn-success">Add Movie</button></a>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Movie</th>
+                <th scope="col">Released Year</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Production House</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+                <% data.forEach(list => { %>
+                    <tr>
+                        <td><%= list.name %></td>
+                        <td><%= list.released_year %></td>
+                        <td><%= list.genre %></td>
+                        <% if(list.ProductionHouseId) {%>
+                            <td><%= list.ProductionHouse.name_prodHouse %></td>
+                        <% }else {%>
+                            <td>unknown</td>
+                        <% } %>
+                        <td>
+                        <a href="/movies/edit/<%=list.id%>"><button type="button" class="btn btn-primary">Edit</button>
+                        </a>
+                        <a href="/movies/delete/<%=list.id%>"onclick="return confirm('Are you sure?')">
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </a>
+                        <a href="/movies/addCast/<%=list.id%>"><button type="button" class="btn btn-success">Add Cast to Movie</button>
+                        </a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

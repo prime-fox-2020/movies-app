@@ -1,0 +1,47 @@
+<%- include('partials/header')%>
+
+<body>
+    
+    <div class="container mt-5">
+        <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
+    </div>
+    <div class="container mt-5">
+        <h1 class="text-center">Casts</h1>
+        
+        <div class="container-fluid text-right">
+            <a href="/casts/add"><button type="button" class="btn btn-success">Add Cast</button></a>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Birth Year</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+                <% data.forEach(list => { %>
+                <tr>
+                    <td><%= list.fullname %></td>
+                    <td><%= list.birth_year %></td>
+                    <td><%= list.phone_number %></td>
+                    <td><%= list.gender %></td>
+                    <td>
+                        <a href="/casts/edit/<%=list.id%>"><button type="button" class="btn btn-primary">Edit</button>
+                        </a>
+                        <a href="/casts/delete/<%=list.id%>"onclick="return confirm('Are you sure?')">
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </a>
+                        <a href="/casts/played/<%=list.id%>"><button type="button" class="btn btn-success">Movies Played</button>
+                        </a>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
